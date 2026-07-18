@@ -11,10 +11,7 @@
       "sizes": "192x192 512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ]
-}
-document.getElementById('csv-file-input').addEventListener('change', function(e) {
+      document.getElementById('csv-file-input').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -40,3 +37,6 @@ document.getElementById('csv-file-input').addEventListener('change', function(e)
     };
     reader.readAsText(file);
 });
+    }
+  ]
+}
