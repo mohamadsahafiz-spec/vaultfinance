@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vault - Smart Finance</title>
-	<title>Vault - Smart Finance</title>
-    <!-- Add these two lines for your icon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FFD600">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,7 +98,6 @@
         <div id="tab-home" class="tab-enter px-5 md:px-8 flex flex-col gap-6">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
-                <!-- NEW FLOATING WALLET -->
                 <div class="col-span-1 lg:col-span-2 bg-panel-light dark:bg-panel-dark p-2 rounded-[32px] shadow-sm dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-gray-200 dark:border-white/10 relative overflow-hidden flex flex-col transition-colors duration-300">
                     <div class="absolute inset-0 rounded-[32px] border-t border-white/50 dark:border-white/10 pointer-events-none z-40"></div>
                     <div class="absolute inset-1.5 border-[1.5px] border-dashed border-[#8BA396]/20 rounded-[26px] pointer-events-none z-30"></div>
@@ -134,7 +131,6 @@
                     </div>
                 </div>
 
-                <!-- Focus Column (Savings & Debt) -->
                 <div class="space-y-6">
                     <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
                         <div class="flex justify-between items-center mb-1">
@@ -228,7 +224,6 @@
                 <div class="w-full h-48 relative"><canvas id="comparisonChart"></canvas></div>
             </div>
 
-            <!-- RESTORED: Master Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">All Transactions</h4>
                 <div class="overflow-x-auto">
@@ -238,7 +233,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 3: FOOD & DINING (Upgraded Graph)      -->
+        <!-- TAB 3: FOOD & DINING                       -->
         <!-- ========================================== -->
         <div id="tab-food" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
@@ -261,7 +256,6 @@
                 </div>
             </div>
 
-            <!-- Dedicated Food Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Food Ledger</h4>
                 <div class="overflow-x-auto">
@@ -271,7 +265,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 4: UTILITIES & BILLS (Upgraded Graph)  -->
+        <!-- TAB 4: UTILITIES & BILLS                   -->
         <!-- ========================================== -->
         <div id="tab-bills" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
@@ -294,7 +288,6 @@
                 </div>
             </div>
 
-            <!-- Dedicated Utilities Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Utility Ledger</h4>
                 <div class="overflow-x-auto">
@@ -384,18 +377,18 @@
                 </div>
             </div>
 
+            <!-- NEW: Fixed 3-Button Layout for Data Management -->
             <div class="bg-panel-light dark:bg-panel-dark border border-red-500/20 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <h4 class="font-bold text-sm mb-4 text-red-500">Data Management</h4>
-                <div class="flex gap-4">
-                    <button onclick="exportCSV()" class="flex-1 bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬇ Export CSV</button>
-					<div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm transition-colors">
- 				   <h4 class="font-bold text-sm mb-4">Bulk Import</h4>
-   				 <input type="file" id="csv-file-input" accept=".csv" class="hidden">
- 			   <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">
-        ⬆ Import CSV Data
-    </button>
-</div>
-                    <button onclick="clearData()" class="flex-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-bold px-4 py-3 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="exportCSV()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬇ Export CSV</button>
+                    
+                    <div>
+                        <input type="file" id="csv-file-input" accept=".csv" class="hidden">
+                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬆ Import CSV</button>
+                    </div>
+
+                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-bold px-4 py-3 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
                 </div>
             </div>
         </div>
@@ -408,7 +401,6 @@
         <button onclick="switchTab('overall')" id="nav-mob-overall" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Overall">📊</button>
         <button onclick="switchTab('food')" id="nav-mob-food" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Food">🍔</button>
         
-        <!-- FAB Center Cutout Effect -->
         <div class="relative w-12 h-10 flex justify-center items-center shrink-0">
             <button onclick="openTxModal()" class="absolute bottom-2 w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.3)] transition-transform hover:scale-105 border-[4px] border-surface-light dark:border-surface-dark z-[100]" title="Add Transaction">
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
@@ -421,7 +413,7 @@
     </nav>
 
     <!-- MODALS -->
-    <!-- Category Graph Modal (For 'Other') -->
+    <!-- Category Graph Modal -->
     <div id="category-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
             <div class="flex justify-between items-start mb-4">
@@ -447,7 +439,7 @@
     <!-- Bill Modal -->
     <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4"><div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter"><h3 class="text-xl font-bold mb-5">Add Bill</h3><form id="bill-form" onsubmit="saveBill(event)" class="space-y-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Bill Name</label><input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label><input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Due Date</label><input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div></div><div class="flex gap-3 pt-4 border-t border-gray-100 dark:border-white/5"><button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-sm px-4 py-2.5 rounded-xl font-bold">Cancel</button><button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md">Add</button></div></form></div></div>
 
-    <!-- JAVASCRIPT ENGINE (FULLY RESTORED & UNABRIDGED) -->
+    <!-- JAVASCRIPT ENGINE -->
     <script>
         let mainChart, comparisonChart, salaryChart, categoryChart, foodChart, utilChart;
         
@@ -460,6 +452,48 @@
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
             name: "Vault User", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7"
         };
+
+        // --- CSV IMPORT LOGIC ---
+        function setupCSVImport() {
+            const fileInput = document.getElementById('csv-file-input');
+            if(!fileInput) return;
+            
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const text = event.target.result;
+                    const rows = text.split('\n').filter(row => row.trim() !== '');
+                    if (rows.length <= 1) {
+                        alert("File is empty or invalid. Make sure it has headers.");
+                        return;
+                    }
+                    
+                    const headers = rows[0].split(',').map(h => h.trim());
+                    
+                    const importedData = rows.slice(1).map(row => {
+                        const values = row.split(',');
+                        let obj = {};
+                        headers.forEach((h, i) => obj[h] = values[i] ? values[i].trim() : '');
+                        
+                        // Clean up numbers
+                        if(obj.amount) obj.amount = parseFloat(obj.amount);
+                        return obj;
+                    });
+
+                    transactions = [...transactions, ...importedData];
+                    localStorage.setItem('vault_transactions', JSON.stringify(transactions));
+                    
+                    alert(`Successfully imported ${importedData.length} transactions!`);
+                    updateDashboard();
+                    
+                    fileInput.value = '';
+                };
+                reader.readAsText(file);
+            });
+        }
 
         // --- THEME TOGGLE LOGIC ---
         function toggleTheme() {
@@ -742,7 +776,13 @@
         function openTxModal() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
         function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
         function saveTransaction(e) { e.preventDefault(); transactions.push({ date: document.getElementById('tx-date').value, desc: document.getElementById('tx-desc').value, type: document.getElementById('tx-type').value, category: document.getElementById('tx-category').value, amount: parseFloat(document.getElementById('tx-amount').value) }); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); updateDashboard(); closeTxModal(); }
-        function exportCSV() { if(transactions.length === 0) return alert("No ledger data present."); let csvContent = "data:text/csv;charset=utf-8,Date,Description,Type,Category,Amount (MYR)\n"; transactions.forEach(t => { csvContent += `${t.date},"${t.desc}",${t.type},"${t.category}",${t.amount}\n`; }); let link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent)); link.setAttribute("download", "vault_transactions.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link); }
+        
+        function exportCSV() { 
+            if(transactions.length === 0) return alert("No ledger data present."); 
+            let csvContent = "data:text/csv;charset=utf-8,date,desc,type,category,amount\n"; 
+            transactions.forEach(t => { csvContent += `${t.date},"${t.desc}",${t.type},"${t.category}",${t.amount}\n`; }); 
+            let link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent)); link.setAttribute("download", "vault_transactions.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link); 
+        }
 
         function renderBills() {
             const list = document.getElementById('bill-list'); list.innerHTML = ''; bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
@@ -806,6 +846,8 @@
         function saveProfile(e) { e.preventDefault(); profile = { name: document.getElementById('prof-name').value, role: document.getElementById('prof-role').value, industry: document.getElementById('prof-industry').value, address: document.getElementById('prof-address').value, tenure: document.getElementById('prof-tenure').value }; localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated securely in local storage."); }
 
         window.onload = function() {
+            setupCSVImport();
+            
             Chart.defaults.font.family = 'Urbanist';
             let isDark = document.documentElement.classList.contains('dark');
             let textColor = isDark ? '#8E8E93' : '#6B7280';
