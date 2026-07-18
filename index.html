@@ -224,6 +224,7 @@
                 <div class="w-full h-48 relative"><canvas id="comparisonChart"></canvas></div>
             </div>
 
+            <!-- Master Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">All Transactions</h4>
                 <div class="overflow-x-auto">
@@ -256,6 +257,7 @@
                 </div>
             </div>
 
+            <!-- Dedicated Food Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Food Ledger</h4>
                 <div class="overflow-x-auto">
@@ -288,6 +290,7 @@
                 </div>
             </div>
 
+            <!-- Dedicated Utilities Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Utility Ledger</h4>
                 <div class="overflow-x-auto">
@@ -364,28 +367,28 @@
                 </form>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-4">Vault Goals (Sinking Funds)</h4>
-                <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-2xl border border-gray-100 dark:border-white/5 transition-colors duration-300">
-                    <div class="flex justify-between items-center mb-2">
-                        <p class="font-bold text-xs">Playschool Education Fund</p>
-                        <p class="text-xs font-bold text-gray-500">MYR 1,200 / 3,000</p>
-                    </div>
-                    <div class="w-full bg-gray-300 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gray-900 dark:bg-white h-full rounded-full" style="width: 40%;"></div>
+            <!-- NEW: Device Sync & Backup Section -->
+            <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <h4 class="font-bold text-sm mb-2 text-brand">Device Sync & Backup</h4>
+                <p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark mb-4 leading-relaxed">Transfer your full Vault data (transactions, bills, savings, and settings) between your PC and phone using a JSON sync file.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-4 py-3 rounded-xl shadow-md hover:brightness-105 transition">📦 Export Sync File</button>
+                    <div>
+                        <input type="file" id="json-file-input" accept=".json" class="hidden">
+                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">📥 Import Sync File</button>
                     </div>
                 </div>
             </div>
 
-            <!-- NEW: Fixed 3-Button Layout for Data Management -->
-            <div class="bg-panel-light dark:bg-panel-dark border border-red-500/20 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-4 text-red-500">Data Management</h4>
+            <!-- Data Management (CSV & Reset) -->
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <h4 class="font-bold text-sm mb-4">Data Management</h4>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <button onclick="exportCSV()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬇ Export CSV</button>
+                    <button onclick="exportCSV()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬇ Export CSV (Ledger)</button>
                     
                     <div>
                         <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬆ Import CSV</button>
+                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬆ Import CSV (Ledger)</button>
                     </div>
 
                     <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-bold px-4 py-3 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
@@ -401,6 +404,7 @@
         <button onclick="switchTab('overall')" id="nav-mob-overall" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Overall">📊</button>
         <button onclick="switchTab('food')" id="nav-mob-food" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Food">🍔</button>
         
+        <!-- FAB Center Cutout Effect -->
         <div class="relative w-12 h-10 flex justify-center items-center shrink-0">
             <button onclick="openTxModal()" class="absolute bottom-2 w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.3)] transition-transform hover:scale-105 border-[4px] border-surface-light dark:border-surface-dark z-[100]" title="Add Transaction">
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
@@ -453,7 +457,53 @@
             name: "Vault User", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7"
         };
 
-        // --- CSV IMPORT LOGIC ---
+        // --- FULL JSON SYNC & BACKUP LOGIC ---
+        function exportBackup() {
+            const backupData = {
+                vault_transactions: localStorage.getItem('vault_transactions'),
+                vault_savings: localStorage.getItem('vault_savings'),
+                vault_debts: localStorage.getItem('vault_debts'),
+                vault_cards: localStorage.getItem('vault_cards'),
+                vault_bills: localStorage.getItem('vault_bills'),
+                vault_profile: localStorage.getItem('vault_profile')
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "vault_sync_backup_" + new Date().toISOString().split('T')[0] + ".json");
+            document.body.appendChild(downloadAnchorNode); 
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        function setupJSONImport() {
+            const fileInput = document.getElementById('json-file-input');
+            if(!fileInput) return;
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const importedData = JSON.parse(event.target.result);
+                        if(importedData.vault_transactions) localStorage.setItem('vault_transactions', importedData.vault_transactions);
+                        if(importedData.vault_savings) localStorage.setItem('vault_savings', importedData.vault_savings);
+                        if(importedData.vault_debts) localStorage.setItem('vault_debts', importedData.vault_debts);
+                        if(importedData.vault_cards) localStorage.setItem('vault_cards', importedData.vault_cards);
+                        if(importedData.vault_bills) localStorage.setItem('vault_bills', importedData.vault_bills);
+                        if(importedData.vault_profile) localStorage.setItem('vault_profile', importedData.vault_profile);
+                        
+                        alert("Sync Backup restored successfully! Refreshing app...");
+                        location.reload(); 
+                    } catch (err) {
+                        alert("Invalid sync file format.");
+                    }
+                };
+                reader.readAsText(file);
+            });
+        }
+
+        // --- CSV IMPORT LOGIC (For raw ledgers) ---
         function setupCSVImport() {
             const fileInput = document.getElementById('csv-file-input');
             if(!fileInput) return;
@@ -477,8 +527,6 @@
                         const values = row.split(',');
                         let obj = {};
                         headers.forEach((h, i) => obj[h] = values[i] ? values[i].trim() : '');
-                        
-                        // Clean up numbers
                         if(obj.amount) obj.amount = parseFloat(obj.amount);
                         return obj;
                     });
@@ -488,7 +536,6 @@
                     
                     alert(`Successfully imported ${importedData.length} transactions!`);
                     updateDashboard();
-                    
                     fileInput.value = '';
                 };
                 reader.readAsText(file);
@@ -698,17 +745,6 @@
 
             let isDark = document.documentElement.classList.contains('dark');
 
-            // Cumulative Pacing Math for specific tabs
-            let currFoodCumul = []; let lastFoodCumul = []; let cfSum = 0; let lfSum = 0;
-            let currUtilCumul = []; let lastUtilCumul = []; let cuSum = 0; let luSum = 0;
-            for(let i = 0; i < 31; i++) {
-                cfSum += dailyFood[i]; lfSum += lastDailyFood[i]; lastFoodCumul.push(lfSum);
-                if (i < todayDay) currFoodCumul.push(cfSum); else currFoodCumul.push(null);
-
-                cuSum += dailyUtil[i]; luSum += lastDailyUtil[i]; lastUtilCumul.push(luSum);
-                if (i < todayDay) currUtilCumul.push(cuSum); else currUtilCumul.push(null);
-            }
-
             if(foodChart) {
                 foodChart.data.labels = Array.from({length: 31}, (_, i) => i + 1);
                 foodChart.data.datasets[0].data = currFoodCumul;
@@ -846,6 +882,7 @@
         function saveProfile(e) { e.preventDefault(); profile = { name: document.getElementById('prof-name').value, role: document.getElementById('prof-role').value, industry: document.getElementById('prof-industry').value, address: document.getElementById('prof-address').value, tenure: document.getElementById('prof-tenure').value }; localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated securely in local storage."); }
 
         window.onload = function() {
+            setupJSONImport();
             setupCSVImport();
             
             Chart.defaults.font.family = 'Urbanist';
