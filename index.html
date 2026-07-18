@@ -86,14 +86,16 @@
     <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-32 md:pb-8 scroll-smooth" id="main-scroll">
         
         <header class="flex justify-between items-center p-5 md:p-8 shrink-0">
-            <div><h2 id="header-title" class="text-xl md:text-2xl font-bold tracking-tight">Hi, Sahafiz</h2></div>
-            <div class="flex items-center gap-3">
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 flex items-center justify-center shadow-sm text-lg transition" id="theme-icon">🌙</button>
+            <div class="flex-1 min-w-0 mr-4"><h2 id="header-title" class="text-xl md:text-2xl font-bold tracking-tight truncate">Hi, Sahafiz</h2></div>
+            <div class="flex items-center gap-2 shrink-0">
+                <!-- NEW: TIME MACHINE DROPDOWN -->
+                <select id="global-month-filter" onchange="changeGlobalMonth()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2.5 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 flex items-center justify-center shadow-sm text-lg transition shrink-0" id="theme-icon">🌙</button>
             </div>
         </header>
 
         <!-- ========================================== -->
-        <!-- TAB 1: HOME DASHBOARD (Clean)              -->
+        <!-- TAB 1: HOME DASHBOARD                      -->
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter px-5 md:px-8 flex flex-col gap-6">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -125,7 +127,7 @@
                     </div>
 
                     <div class="px-5 pt-5 pb-4 relative z-20 mt-1">
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold tracking-wide uppercase">Total Balance</p>
+                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold tracking-wide uppercase">Historical Net Worth</p>
                         <h3 class="text-2xl md:text-3xl font-bold mt-0.5 tracking-tight">MYR <span id="total-net-worth">0.00</span></h3>
                         <p id="wallet-insight" class="text-[11px] mt-2 flex items-center gap-1 font-semibold"></p>
                     </div>
@@ -166,7 +168,7 @@
 
             <!-- Net Worth Main Chart -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 mt-2">
-                <h4 class="font-bold text-sm mb-4">Balance History</h4>
+                <h4 class="font-bold text-sm mb-4">Selected Month Balance History</h4>
                 <div class="w-full h-40 relative"><canvas id="mainChart"></canvas></div>
             </div>
         </div>
@@ -179,12 +181,12 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <h4 class="font-bold text-sm mb-0.5">Spending Footprint</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold" id="footprint-date">Current Month</p>
+                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Selected Month</p>
                     </div>
                 </div>
                 
                 <h3 class="text-2xl font-bold mb-0.5">MYR <span id="monthly-spend">0.00</span></h3>
-                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Total Spendings This Month</p>
+                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Total Spendings for Selection</p>
 
                 <div class="flex h-3 rounded-full overflow-hidden mb-5 w-full bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-transparent">
                     <div id="bar-food" class="bg-brand h-full transition-all duration-1000" style="width: 0%"></div>
@@ -214,19 +216,18 @@
                 <div class="flex justify-between items-end mb-5">
                     <div>
                         <h4 class="font-bold text-sm">Pacing Comparison</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Current vs Last Month</p>
+                        <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected vs Previous Month</p>
                     </div>
                     <div class="text-right flex items-center gap-3 text-[10px] font-bold">
-                        <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Current</div>
-                        <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Last</div>
+                        <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Selected</div>
+                        <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Previous</div>
                     </div>
                 </div>
                 <div class="w-full h-48 relative"><canvas id="comparisonChart"></canvas></div>
             </div>
 
-            <!-- Master Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">All Transactions</h4>
+                <h4 class="font-bold text-sm mb-5">Transactions (Selected Month)</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse min-w-[500px]"><tbody id="overall-transaction-list" class="text-sm"></tbody></table>
                 </div>
@@ -241,7 +242,7 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <h4 class="font-bold text-sm mb-0.5">Food & Dining Analytics</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Cumulative Pacing (Current vs Last Month)</p>
+                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Cumulative Pacing (Selected vs Previous)</p>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center">🍔</div>
                 </div>
@@ -249,17 +250,16 @@
                 <div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
                 
                 <div class="flex items-center gap-3 text-[10px] font-bold justify-end mb-2">
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Current</div>
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Last</div>
+                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Selected</div>
+                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Previous</div>
                 </div>
                 <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5">
                     <canvas id="foodChart"></canvas>
                 </div>
             </div>
 
-            <!-- Dedicated Food Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Food Ledger</h4>
+                <h4 class="font-bold text-sm mb-5">Food Ledger (Selected Month)</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse min-w-[500px]"><tbody id="food-transaction-list" class="text-sm"></tbody></table>
                 </div>
@@ -274,7 +274,7 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <h4 class="font-bold text-sm mb-0.5">Utilities Analytics</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Cumulative Pacing (Current vs Last Month)</p>
+                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Cumulative Pacing (Selected vs Previous)</p>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center">⚡</div>
                 </div>
@@ -282,17 +282,16 @@
                 <div id="util-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
                 
                 <div class="flex items-center gap-3 text-[10px] font-bold justify-end mb-2">
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Current</div>
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Last</div>
+                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Selected</div>
+                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Previous</div>
                 </div>
                 <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5">
                     <canvas id="utilChart"></canvas>
                 </div>
             </div>
 
-            <!-- Dedicated Utilities Ledger -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Utility Ledger</h4>
+                <h4 class="font-bold text-sm mb-5">Utility Ledger (Selected Month)</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse min-w-[500px]"><tbody id="util-transaction-list" class="text-sm"></tbody></table>
                 </div>
@@ -380,7 +379,6 @@
                 </div>
             </div>
 
-            <!-- NEW: Device Sync & Backup Section -->
             <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <h4 class="font-bold text-sm mb-2 text-brand">Device Sync & Backup</h4>
                 <p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark mb-4 leading-relaxed">Transfer your full Vault data (transactions, bills, savings, and settings) between your PC and phone using a JSON sync file.</p>
@@ -393,7 +391,6 @@
                 </div>
             </div>
 
-            <!-- Data Management (CSV & Reset) -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <h4 class="font-bold text-sm mb-4">Data Management</h4>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -459,6 +456,8 @@
     <!-- JAVASCRIPT ENGINE (FULLY RESTORED & UNABRIDGED) -->
     <script>
         let mainChart, comparisonChart, salaryChart, categoryChart, foodChart, utilChart;
+        let selectedMonth = new Date().getMonth();
+        let selectedYear = new Date().getFullYear();
         
         let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
         let savingsData = JSON.parse(localStorage.getItem('vault_savings')) || { current: 1250, target: 10000 };
@@ -477,6 +476,52 @@
             if (parts.length !== 3) return dateStr;
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             return `${months[parseInt(parts[1], 10) - 1]} ${parseInt(parts[2], 10)}, ${parts[0].slice(-2)}`;
+        }
+
+        // --- TIME MACHINE DROPDOWN LOGIC ---
+        function populateMonthFilter() {
+            const filter = document.getElementById('global-month-filter');
+            if(!filter) return;
+            
+            let monthsSet = new Set();
+            const now = new Date();
+            monthsSet.add(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`); // Always include today
+            
+            transactions.forEach(t => {
+                if(t.date) {
+                    const parts = t.date.split('-');
+                    if(parts.length >= 2) monthsSet.add(`${parts[0]}-${parts[1]}`);
+                }
+            });
+            
+            let monthsArr = Array.from(monthsSet).sort().reverse(); // Newest first
+            const currentVal = filter.value || `${selectedYear}-${String(selectedMonth+1).padStart(2, '0')}`;
+            
+            filter.innerHTML = '';
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            monthsArr.forEach(m => {
+                const [y, mo] = m.split('-');
+                const opt = document.createElement('option');
+                opt.value = m;
+                opt.innerText = `${monthNames[parseInt(mo, 10)-1]} ${y}`;
+                filter.appendChild(opt);
+            });
+            
+            if (monthsArr.includes(currentVal)) { filter.value = currentVal; } 
+            else { filter.selectedIndex = 0; }
+            
+            const [y, mo] = filter.value.split('-');
+            selectedYear = parseInt(y, 10);
+            selectedMonth = parseInt(mo, 10) - 1;
+        }
+
+        function changeGlobalMonth() {
+            const filter = document.getElementById('global-month-filter');
+            const [y, mo] = filter.value.split('-');
+            selectedYear = parseInt(y, 10);
+            selectedMonth = parseInt(mo, 10) - 1;
+            updateDashboard();
         }
 
         // --- FULL JSON SYNC & BACKUP LOGIC ---
@@ -557,6 +602,7 @@
                     localStorage.setItem('vault_transactions', JSON.stringify(transactions));
                     
                     alert(`Successfully imported ${importedData.length} transactions!`);
+                    populateMonthFilter();
                     updateDashboard();
                     fileInput.value = '';
                 };
@@ -654,10 +700,21 @@
             if(foodList) foodList.innerHTML = '';
             if(utilList) utilList.innerHTML = '';
             
-            let tableData = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date));
-            let foodTxCount = 0; let utilTxCount = 0;
+            // Map with original indexes so delete works safely after filtering
+            let sortedTxs = transactions.map((t, i) => ({...t, originalIndex: i})).sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let foodTxCount = 0; let utilTxCount = 0; let overallTxCount = 0;
 
-            tableData.forEach((t, index) => {
+            const currM = selectedMonth;
+            const currY = selectedYear;
+
+            sortedTxs.forEach((t) => {
+                const txDate = new Date(t.date);
+                const isSelectedMonth = (txDate.getMonth() === currM && txDate.getFullYear() === currY);
+                
+                // Only show transactions in the lists if they belong to the selected Time Machine month
+                if (!isSelectedMonth) return;
+
                 const isIncome = t.type === 'income'; 
                 const amountColor = isIncome ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
                 const displayDate = formatDisplayDate(t.date);
@@ -667,10 +724,10 @@
                     <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-gray-100 dark:border-transparent">${isIncome ? '💰' : '💳'}</div></td>
                     <td class="py-3 pl-3"><p class="font-bold text-sm">${t.desc}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${displayDate} • ${t.category}</p></td>
                     <td class="py-3 pr-3 text-right font-bold text-sm ${amountColor}">${isIncome ? '+' : '-'}${parseFloat(t.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                    <td class="py-3 text-right w-10"><button onclick="if(confirm('Delete this transaction?')) deleteTx(${index})" class="w-7 h-7 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 font-bold text-xs transition border border-gray-100 dark:border-transparent inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100">✕</button></td>
+                    <td class="py-3 text-right w-10"><button onclick="if(confirm('Delete this transaction?')) deleteTx(${t.originalIndex})" class="w-7 h-7 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 font-bold text-xs transition border border-gray-100 dark:border-transparent inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100">✕</button></td>
                 </tr>`;
                 
-                if(overallList) overallList.innerHTML += rowHtml;
+                if(overallList) { overallList.innerHTML += rowHtml; overallTxCount++; }
 
                 const catMatch = (t.category + " " + t.desc).toLowerCase();
                 const isFood = catMatch.includes('food') || catMatch.includes('lunch') || catMatch.includes('dinner') || catMatch.includes('grocery') || catMatch.includes('breakfast') || catMatch.includes('eat') || catMatch.includes('cafe') || catMatch.includes('restaurant') || catMatch.includes('mcd') || catMatch.includes('kfc') || catMatch.includes('starbucks');
@@ -680,21 +737,23 @@
                 if(isUtil && utilList && !isIncome) { utilList.innerHTML += rowHtml; utilTxCount++; }
             });
 
-            if (tableData.length === 0) {
-                if(overallList) overallList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No transactions yet.</td></tr>`;
-            }
-            if (foodList && foodTxCount === 0) foodList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No food transactions yet.</td></tr>`;
-            if (utilList && utilTxCount === 0) utilList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No utility transactions yet.</td></tr>`;
+            if (overallList && overallTxCount === 0) overallList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No transactions for this month.</td></tr>`;
+            if (foodList && foodTxCount === 0) foodList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No food transactions for this month.</td></tr>`;
+            if (utilList && utilTxCount === 0) utilList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No utility transactions for this month.</td></tr>`;
 
-            let chartData = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
-            let currentBalance = 0; 
-            let monthlySpend = 0; let chartLabels = []; let chartBalances = [];
+            // CHART MATH ENGINE
+            const lastM = currM === 0 ? 11 : currM - 1; 
+            const lastY = currM === 0 ? currY - 1 : currY;
             
-            const now = new Date();
-            const currM = now.getMonth(); const currY = now.getFullYear();
-            const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
-            const todayDay = now.getDate();
+            const realNow = new Date();
+            const isCurrentCalendarMonth = (currM === realNow.getMonth() && currY === realNow.getFullYear());
+            const daysInSelectedMonth = new Date(currY, currM + 1, 0).getDate();
+            const todayDay = isCurrentCalendarMonth ? realNow.getDate() : daysInSelectedMonth;
 
+            let runningBalance = 0; 
+            let monthlySpend = 0; 
+            let chartLabels = []; let chartBalances = [];
+            
             let foodSpend = 0; let utilSpend = 0; let otherSpend = 0;
             let lastMonthSpendToDate = 0;
 
@@ -703,14 +762,28 @@
             let dailyFood = new Array(31).fill(0); let currFoodTotal = 0; let lastFoodTotal = 0; let lastDailyFood = new Array(31).fill(0);
             let dailyUtil = new Array(31).fill(0); let currUtilTotal = 0; let lastUtilTotal = 0; let lastDailyUtil = new Array(31).fill(0);
 
-            chartData.forEach(t => {
-                const txDate = new Date(t.date); const amt = parseFloat(t.amount); const dayIndex = txDate.getDate() - 1;
+            // Sort chronologically for accurate running balance
+            let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            chronoTxs.forEach(t => {
+                const amt = parseFloat(t.amount);
+                const txDate = new Date(t.date);
+                const dayIndex = txDate.getDate() - 1;
                 
-                if (t.type === 'income') {
-                    currentBalance += amt;
-                } else {
-                    currentBalance -= amt;
+                // Track global running balance up to the end of the selected month
+                if (txDate.getFullYear() < currY || (txDate.getFullYear() === currY && txDate.getMonth() <= currM)) {
+                    if (t.type === 'income') runningBalance += amt;
+                    else runningBalance -= amt;
                     
+                    // Only plot points on the Main Chart that happened DURING the selected month
+                    if (txDate.getFullYear() === currY && txDate.getMonth() === currM) {
+                        chartLabels.push(formatDisplayDate(t.date));
+                        chartBalances.push(runningBalance);
+                    }
+                }
+
+                // Analyze Pacing
+                if (t.type !== 'income') {
                     const catMatch = (t.category + " " + t.desc).toLowerCase();
                     const isFood = catMatch.includes('food') || catMatch.includes('lunch') || catMatch.includes('dinner') || catMatch.includes('grocery') || catMatch.includes('breakfast') || catMatch.includes('eat') || catMatch.includes('cafe') || catMatch.includes('restaurant') || catMatch.includes('mcd') || catMatch.includes('kfc') || catMatch.includes('starbucks');
                     const isUtil = catMatch.includes('util') || catMatch.includes('bill') || catMatch.includes('water') || catMatch.includes('electric') || catMatch.includes('tnb') || catMatch.includes('internet') || catMatch.includes('unifi') || catMatch.includes('phone') || catMatch.includes('rent') || catMatch.includes('wifi') || catMatch.includes('maxis') || catMatch.includes('celcom');
@@ -723,21 +796,20 @@
                     } 
                     else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) {
                         lastMonthDailySpend[dayIndex] += amt;
-                        if (txDate.getDate() <= todayDay) { lastMonthSpendToDate += amt; }
+                        if (dayIndex + 1 <= todayDay) { lastMonthSpendToDate += amt; }
                         if (isFood) { lastFoodTotal += amt; lastDailyFood[dayIndex] += amt; }
                         if (isUtil) { lastUtilTotal += amt; lastDailyUtil[dayIndex] += amt; }
                     }
                 }
-                chartLabels.push(t.date); chartBalances.push(currentBalance);
             });
 
-            document.getElementById('total-net-worth').innerText = currentBalance.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('total-net-worth').innerText = runningBalance.toLocaleString(undefined, {minimumFractionDigits: 2});
             
             let insightHtml = '';
             let spendDiff = monthlySpend - lastMonthSpendToDate;
-            if (lastMonthSpendToDate === 0 && monthlySpend === 0) { insightHtml = '<span class="text-textMuted-light dark:text-textMuted-dark">✨ Tracking active. Add ledger data.</span>'; } 
-            else if (spendDiff > 0) { insightHtml = `<span class="text-brand">✨</span> <span>You've Spend +${lastMonthSpendToDate > 0 ? ((spendDiff/lastMonthSpendToDate)*100).toFixed(2) : '100'}% More This Month!</span>`; } 
-            else { insightHtml = `<span class="text-brand">✨ Great pace!</span> <span>Saved MYR ${Math.abs(spendDiff).toLocaleString(undefined, {minimumFractionDigits: 0})} vs last month.</span>`; }
+            if (lastMonthSpendToDate === 0 && monthlySpend === 0) { insightHtml = '<span class="text-textMuted-light dark:text-textMuted-dark">✨ Ready for new data.</span>'; } 
+            else if (spendDiff > 0) { insightHtml = `<span class="text-red-500">⚠️</span> <span>Spent +${lastMonthSpendToDate > 0 ? ((spendDiff/lastMonthSpendToDate)*100).toFixed(0) : '100'}% vs previous month</span>`; } 
+            else { insightHtml = `<span class="text-brand">✨ Great pace!</span> <span>Saved MYR ${Math.abs(spendDiff).toLocaleString(undefined, {minimumFractionDigits: 0})} vs previous month.</span>`; }
             document.getElementById('wallet-insight').innerHTML = insightHtml;
 
             const monthlySpendEl = document.getElementById('monthly-spend');
@@ -756,18 +828,41 @@
             }
 
             if(mainChart) {
-                if (chartLabels.length === 0) { mainChart.data.labels = ['No Data']; mainChart.data.datasets[0].data = [0]; } 
-                else { mainChart.data.labels = chartLabels.slice(-15); mainChart.data.datasets[0].data = chartBalances.slice(-15); }
+                if (chartLabels.length === 0) { 
+                    mainChart.data.labels = ['Start of Month']; 
+                    mainChart.data.datasets[0].data = [runningBalance]; 
+                } else { 
+                    mainChart.data.labels = chartLabels; 
+                    mainChart.data.datasets[0].data = chartBalances; 
+                }
                 mainChart.update();
             }
 
             if(comparisonChart) {
                 let currCumulData = []; let lastCumulData = []; let cSum = 0; let lSum = 0;
-                for(let i = 0; i < 31; i++) { cSum += currMonthDailySpend[i]; lSum += lastMonthDailySpend[i]; lastCumulData.push(lSum); if (i < todayDay) currCumulData.push(cSum); else currCumulData.push(null); }
-                comparisonChart.data.labels = Array.from({length: 31}, (_, i) => i + 1); comparisonChart.data.datasets[0].data = currCumulData; comparisonChart.data.datasets[1].data = lastCumulData; comparisonChart.update();
+                for(let i = 0; i < 31; i++) { 
+                    cSum += currMonthDailySpend[i]; lSum += lastMonthDailySpend[i]; 
+                    lastCumulData.push(lSum); 
+                    if (i < todayDay) currCumulData.push(cSum); else currCumulData.push(null); 
+                }
+                comparisonChart.data.labels = Array.from({length: 31}, (_, i) => i + 1); 
+                comparisonChart.data.datasets[0].data = currCumulData; 
+                comparisonChart.data.datasets[1].data = lastCumulData; 
+                comparisonChart.update();
             }
 
             let isDark = document.documentElement.classList.contains('dark');
+
+            // Cumulative Pacing Math for specific tabs
+            let currFoodCumul = []; let lastFoodCumul = []; let cfSum = 0; let lfSum = 0;
+            let currUtilCumul = []; let lastUtilCumul = []; let cuSum = 0; let luSum = 0;
+            for(let i = 0; i < 31; i++) {
+                cfSum += dailyFood[i]; lfSum += lastDailyFood[i]; lastFoodCumul.push(lfSum);
+                if (i < todayDay) currFoodCumul.push(cfSum); else currFoodCumul.push(null);
+
+                cuSum += dailyUtil[i]; luSum += lastDailyUtil[i]; lastUtilCumul.push(luSum);
+                if (i < todayDay) currUtilCumul.push(cuSum); else currUtilCumul.push(null);
+            }
 
             if(foodChart) {
                 foodChart.data.labels = Array.from({length: 31}, (_, i) => i + 1);
@@ -775,7 +870,7 @@
                 foodChart.data.datasets[1].data = lastFoodCumul;
                 foodChart.update();
                 document.getElementById('food-total-display').innerText = currFoodTotal.toLocaleString(undefined, {minimumFractionDigits: 2});
-                let fHtml = `<div class="text-xs font-bold">Last Month: <span class="font-bold">MYR ${lastFoodTotal.toFixed(0)}</span></div>`;
+                let fHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastFoodTotal.toFixed(0)}</span></div>`;
                 if (currFoodTotal > lastFoodTotal && lastFoodTotal > 0) fHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currFoodTotal - lastFoodTotal).toFixed(0)}</div>`;
                 else if (lastFoodTotal > 0) fHtml += `<div class="${isDark ? 'text-brand' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastFoodTotal - currFoodTotal).toFixed(0)} remaining</div>`;
                 else fHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`;
@@ -788,7 +883,7 @@
                 utilChart.data.datasets[1].data = lastUtilCumul;
                 utilChart.update();
                 document.getElementById('util-total-display').innerText = currUtilTotal.toLocaleString(undefined, {minimumFractionDigits: 2});
-                let uHtml = `<div class="text-xs font-bold">Last Month: <span class="font-bold">MYR ${lastUtilTotal.toFixed(0)}</span></div>`;
+                let uHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastUtilTotal.toFixed(0)}</span></div>`;
                 if (currUtilTotal > lastUtilTotal && lastUtilTotal > 0) uHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currUtilTotal - lastUtilTotal).toFixed(0)}</div>`;
                 else if (lastUtilTotal > 0) uHtml += `<div class="${isDark ? 'text-gray-400' : 'text-gray-500'} font-bold text-xs">✨ MYR ${(lastUtilTotal - currUtilTotal).toFixed(0)} remaining</div>`;
                 else uHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`;
@@ -799,7 +894,7 @@
         function openCategoryModal(type) {
             if (type !== 'other') return; 
             
-            const now = new Date(); const currM = now.getMonth(); const currY = now.getFullYear();
+            const currM = selectedMonth; const currY = selectedYear;
             const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
             let dailySpend = new Array(31).fill(0); let currCatTotal = 0; let lastCatTotal = 0;
 
@@ -818,7 +913,7 @@
             });
 
             let isDark = document.documentElement.classList.contains('dark');
-            let catInsightHtml = `<div class="text-xs font-bold">Last Month: <span class="font-bold">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
+            let catInsightHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
             if (currCatTotal > lastCatTotal && lastCatTotal > 0) { catInsightHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; } 
             else if (lastCatTotal > 0) { catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; } 
             else { catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`; }
@@ -832,10 +927,29 @@
         }
         function closeCategoryModal() { document.getElementById('category-modal').classList.add('hidden'); }
 
-        function deleteTx(index) { let tableData = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date)); transactions.splice(transactions.indexOf(tableData[index]), 1); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); updateDashboard(); }
+        function deleteTx(originalIndex) { 
+            transactions.splice(originalIndex, 1); 
+            localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+            populateMonthFilter();
+            updateDashboard(); 
+        }
+        
         function openTxModal() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
         function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
-        function saveTransaction(e) { e.preventDefault(); transactions.push({ date: document.getElementById('tx-date').value, desc: document.getElementById('tx-desc').value, type: document.getElementById('tx-type').value, category: document.getElementById('tx-category').value, amount: parseFloat(document.getElementById('tx-amount').value) }); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); updateDashboard(); closeTxModal(); }
+        function saveTransaction(e) { 
+            e.preventDefault(); 
+            transactions.push({ 
+                date: document.getElementById('tx-date').value, 
+                desc: document.getElementById('tx-desc').value, 
+                type: document.getElementById('tx-type').value, 
+                category: document.getElementById('tx-category').value, 
+                amount: parseFloat(document.getElementById('tx-amount').value) 
+            }); 
+            localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+            populateMonthFilter();
+            updateDashboard(); 
+            closeTxModal(); 
+        }
         
         function exportCSV() { 
             if(transactions.length === 0) return alert("No ledger data present."); 
@@ -869,7 +983,7 @@
                 </div>`;
             });
         }
-        function payBill(index) { let b = bills[index]; let today = new Date().toISOString().split('T')[0]; transactions.push({ date: today, desc: b.name, type: 'expense', category: 'Utilities', amount: b.amount }); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); let oldDate = new Date(b.dueDate); oldDate.setMonth(oldDate.getMonth() + 1); bills[index].dueDate = oldDate.toISOString().split('T')[0]; localStorage.setItem('vault_bills', JSON.stringify(bills)); updateDashboard(); renderBills(); }
+        function payBill(index) { let b = bills[index]; let today = new Date().toISOString().split('T')[0]; transactions.push({ date: today, desc: b.name, type: 'expense', category: 'Utilities', amount: b.amount }); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); let oldDate = new Date(b.dueDate); oldDate.setMonth(oldDate.getMonth() + 1); bills[index].dueDate = oldDate.toISOString().split('T')[0]; localStorage.setItem('vault_bills', JSON.stringify(bills)); populateMonthFilter(); updateDashboard(); renderBills(); }
         function openBillModal() { document.getElementById('bill-modal').classList.remove('hidden'); }
         function closeBillModal() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
         function saveBill(e) { e.preventDefault(); bills.push({ name: document.getElementById('bill-name').value, amount: parseFloat(document.getElementById('bill-amount').value), dueDate: document.getElementById('bill-date').value }); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); closeBillModal(); }
@@ -926,6 +1040,7 @@
         window.onload = function() {
             setupJSONImport();
             setupCSVImport();
+            populateMonthFilter(); // Initialize time machine
             
             Chart.defaults.font.family = 'Urbanist';
             let isDark = document.documentElement.classList.contains('dark');
@@ -944,17 +1059,17 @@
             categoryChart = new Chart(ctxCat, { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: chartConfig });
 
             const ctxComp = document.getElementById('comparisonChart').getContext('2d');
-            comparisonChart = new Chart(ctxComp, { type: 'line', data: { labels: [], datasets: [ { label: 'Current Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Last Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
+            comparisonChart = new Chart(ctxComp, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Previous Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
 
             const ctxSal = document.getElementById('salaryChart').getContext('2d');
             const gradSal = ctxSal.createLinearGradient(0, 0, 0, 250); gradSal.addColorStop(0, 'rgba(255, 214, 0, 0.3)'); gradSal.addColorStop(1, 'rgba(255, 214, 0, 0)');
             salaryChart = new Chart(ctxSal, { type: 'line', data: { labels: ['2020', '2021', '2022', '2023', '2024', '2025', 'Jan 26', 'Apr 26', 'Current'], datasets: [{ label: 'Base Pay', data: [4500, 4800, 5200, 5600, 6100, 6500, 6700, 7800, 7800], borderColor: '#FFD600', backgroundColor: gradSal, fill: true, borderWidth: 3, tension: 0.2, pointBackgroundColor: '#111827', pointBorderColor: '#FFD600', pointRadius: [0,0,0,0,0,0,0,5,0] }] }, options: lineConfig });
 
             const ctxFood = document.getElementById('foodChart').getContext('2d');
-            foodChart = new Chart(ctxFood, { type: 'line', data: { labels: [], datasets: [ { label: 'Current Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Last Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
+            foodChart = new Chart(ctxFood, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Previous Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
 
             const ctxUtil = document.getElementById('utilChart').getContext('2d');
-            utilChart = new Chart(ctxUtil, { type: 'line', data: { labels: [], datasets: [ { label: 'Current Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Last Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
+            utilChart = new Chart(ctxUtil, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Previous Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
 
             renderCards(); updateDashboard(); renderBills(); renderDebts(); renderSavings(); renderProfile();
             
