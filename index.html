@@ -470,6 +470,15 @@
             name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7"
         };
 
+        // --- DATE FORMATTER LOGIC ---
+        function formatDisplayDate(dateStr) {
+            if (!dateStr) return '';
+            const parts = dateStr.split('-');
+            if (parts.length !== 3) return dateStr;
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${months[parseInt(parts[1], 10) - 1]} ${parseInt(parts[2], 10)}, ${parts[0].slice(-2)}`;
+        }
+
         // --- FULL JSON SYNC & BACKUP LOGIC ---
         function exportBackup() {
             const backupData = {
@@ -651,11 +660,12 @@
             tableData.forEach((t, index) => {
                 const isIncome = t.type === 'income'; 
                 const amountColor = isIncome ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
+                const displayDate = formatDisplayDate(t.date);
                 
                 const rowHtml = `
                 <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
                     <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-gray-100 dark:border-transparent">${isIncome ? '💰' : '💳'}</div></td>
-                    <td class="py-3 pl-3"><p class="font-bold text-sm">${t.desc}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${t.date} • ${t.category}</p></td>
+                    <td class="py-3 pl-3"><p class="font-bold text-sm">${t.desc}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${displayDate} • ${t.category}</p></td>
                     <td class="py-3 pr-3 text-right font-bold text-sm ${amountColor}">${isIncome ? '+' : '-'}${parseFloat(t.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                     <td class="py-3 text-right w-10"><button onclick="if(confirm('Delete this transaction?')) deleteTx(${index})" class="w-7 h-7 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 font-bold text-xs transition border border-gray-100 dark:border-transparent inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100">✕</button></td>
                 </tr>`;
