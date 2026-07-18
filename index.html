@@ -86,7 +86,7 @@
     <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-32 md:pb-8 scroll-smooth" id="main-scroll">
         
         <header class="flex justify-between items-center p-5 md:p-8 shrink-0">
-            <div><h2 id="header-title" class="text-xl md:text-2xl font-bold tracking-tight">Vault Dashboard</h2></div>
+            <div><h2 id="header-title" class="text-xl md:text-2xl font-bold tracking-tight">Hi, Sahafiz</h2></div>
             <div class="flex items-center gap-3">
                 <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 flex items-center justify-center shadow-sm text-lg transition" id="theme-icon">🌙</button>
             </div>
@@ -367,6 +367,19 @@
                 </form>
             </div>
 
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <h4 class="font-bold text-sm mb-4">Vault Goals (Sinking Funds)</h4>
+                <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-2xl border border-gray-100 dark:border-white/5 transition-colors duration-300">
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="font-bold text-xs">Playschool Education Fund</p>
+                        <p class="text-xs font-bold text-gray-500">MYR 1,200 / 3,000</p>
+                    </div>
+                    <div class="w-full bg-gray-300 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
+                        <div class="bg-gray-900 dark:bg-white h-full rounded-full" style="width: 40%;"></div>
+                    </div>
+                </div>
+            </div>
+
             <!-- NEW: Device Sync & Backup Section -->
             <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <h4 class="font-bold text-sm mb-2 text-brand">Device Sync & Backup</h4>
@@ -443,7 +456,7 @@
     <!-- Bill Modal -->
     <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4"><div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter"><h3 class="text-xl font-bold mb-5">Add Bill</h3><form id="bill-form" onsubmit="saveBill(event)" class="space-y-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Bill Name</label><input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label><input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Due Date</label><input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div></div><div class="flex gap-3 pt-4 border-t border-gray-100 dark:border-white/5"><button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-sm px-4 py-2.5 rounded-xl font-bold">Cancel</button><button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md">Add</button></div></form></div></div>
 
-    <!-- JAVASCRIPT ENGINE -->
+    <!-- JAVASCRIPT ENGINE (FULLY RESTORED & UNABRIDGED) -->
     <script>
         let mainChart, comparisonChart, salaryChart, categoryChart, foodChart, utilChart;
         
@@ -454,7 +467,7 @@
         let bills = JSON.parse(localStorage.getItem('vault_bills')) || [{ name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi Broadband", amount: 129, dueDate: "2026-07-28" }];
         
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
-            name: "Vault User", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7"
+            name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7"
         };
 
         // --- FULL JSON SYNC & BACKUP LOGIC ---
@@ -604,7 +617,8 @@
                 activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md');
             }
 
-            const titles = { 'home':'Vault Dashboard', 'overall':'Overall Analytics', 'food':'Food & Dining', 'bills':'Utilities & Bills', 'salary':'Career & Wealth', 'profile':'Profile Settings' };
+            const firstName = profile.name ? profile.name.split(' ')[0] : 'Sahafiz';
+            const titles = { 'home': `Hi, ${firstName}`, 'overall':'Overall Analytics', 'food':'Food & Dining', 'bills':'Utilities & Bills', 'salary':'Career & Wealth', 'profile':'Profile Settings' };
             document.getElementById('header-title').innerText = titles[tabId];
             document.getElementById('main-scroll').scrollTo(0,0);
             
@@ -878,8 +892,26 @@
             document.getElementById('prof-tenure').value = profile.tenure;
             if(document.getElementById('display-role')) document.getElementById('display-role').innerText = profile.role;
             if(document.getElementById('display-industry')) document.getElementById('display-industry').innerText = profile.industry;
+            
+            // Automatically update dashboard greeting if name changed
+            const firstName = profile.name ? profile.name.split(' ')[0] : 'Sahafiz';
+            if (!document.getElementById('tab-home').classList.contains('hidden')) {
+                document.getElementById('header-title').innerText = `Hi, ${firstName}`;
+            }
         }
-        function saveProfile(e) { e.preventDefault(); profile = { name: document.getElementById('prof-name').value, role: document.getElementById('prof-role').value, industry: document.getElementById('prof-industry').value, address: document.getElementById('prof-address').value, tenure: document.getElementById('prof-tenure').value }; localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated securely in local storage."); }
+        function saveProfile(e) { 
+            e.preventDefault(); 
+            profile = { 
+                name: document.getElementById('prof-name').value, 
+                role: document.getElementById('prof-role').value, 
+                industry: document.getElementById('prof-industry').value, 
+                address: document.getElementById('prof-address').value, 
+                tenure: document.getElementById('prof-tenure').value 
+            }; 
+            localStorage.setItem('vault_profile', JSON.stringify(profile)); 
+            renderProfile(); 
+            alert("Profile updated securely in local storage."); 
+        }
 
         window.onload = function() {
             setupJSONImport();
@@ -915,6 +947,10 @@
             utilChart = new Chart(ctxUtil, { type: 'line', data: { labels: [], datasets: [ { label: 'Current Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Last Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
 
             renderCards(); updateDashboard(); renderBills(); renderDebts(); renderSavings(); renderProfile();
+            
+            // Set initial greeting
+            const firstName = profile.name ? profile.name.split(' ')[0] : 'Sahafiz';
+            document.getElementById('header-title').innerText = `Hi, ${firstName}`;
         };
     </script>
 </body>
