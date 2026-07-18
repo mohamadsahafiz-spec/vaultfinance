@@ -1,25 +1,33 @@
-const CACHE_NAME = 'vault-cache-v1';
+const CACHE_NAME = 'vault-cache-v2'; // Bumped version to force a reset
+
 const ASSETS_TO_CACHE = [
-  './',
   './index.html',
   './manifest.json',
   './favicon.png'
 ];
 
-// Install the service worker and cache the core files
 self.addEventListener('install', (event) => {
+  // Force this new worker to take over immediately
+  self.skipWaiting(); 
+  
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      // Forgiving cache: add files one by one. If one fails, it won't crash the install.
+      ASSETS_TO_CACHE.forEach(asset => {
+          cache.add(asset).catch(err => console.error('Skipping cache for:', asset));
+      });
     })
   );
 });
 
-// Intercept network requests and serve from cache if offline
+self.addEventListener('activate', (event) => {
+  // Take control of the page immediately
+  event.waitUntil(self.clients.claim());
+});
+
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      // Return cached version or fetch from the internet
       return response || fetch(event.request);
     })
   );
