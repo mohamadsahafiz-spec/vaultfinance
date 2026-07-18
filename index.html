@@ -388,6 +388,13 @@
                 <h4 class="font-bold text-sm mb-4 text-red-500">Data Management</h4>
                 <div class="flex gap-4">
                     <button onclick="exportCSV()" class="flex-1 bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬇ Export CSV</button>
+					<div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm transition-colors">
+ 				   <h4 class="font-bold text-sm mb-4">Bulk Import</h4>
+   				 <input type="file" id="csv-file-input" accept=".csv" class="hidden">
+ 			   <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">
+        ⬆ Import CSV Data
+    </button>
+</div>
                     <button onclick="clearData()" class="flex-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-bold px-4 py-3 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
                 </div>
             </div>
