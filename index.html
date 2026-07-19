@@ -120,7 +120,7 @@
                         </div>
                     </div>
 
-                <div class="px-5 pt-5 pb-4 relative z-20 mt-1">
+                    <div class="px-5 pt-5 pb-4 relative z-20 mt-1">
                         <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold tracking-wide uppercase">Historical Net Worth</p>
                         <h3 class="text-2xl md:text-3xl font-bold mt-0.5 tracking-tight">MYR <span id="total-net-worth">0.00</span></h3>
                         <div class="mt-3 flex items-center gap-2">
@@ -156,25 +156,12 @@
                         </div>
                         <div id="debt-list" class="space-y-3 flex-1"></div>
                     </div>
-                            <button onclick="openDebtModal()" class="text-brand text-xs font-bold hover:underline transition">+ Add</button>
-                        </div>
-                            <button onclick="openDebtModal()" class="text-brand text-xs font-bold hover:underline transition">+ Add</button>
-                        </div>
-                        <div id="debt-list" class="space-y-3 flex-1"></div>
-                        <div class="mt-5 pt-5 border-t border-gray-100 dark:border-white/5">
-                            <div class="flex gap-2">
-                                <input type="number" id="extra-payment" value="500" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm font-semibold px-3 py-2 rounded-xl w-full outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent">
-                                <button onclick="calculateSnowball()" class="bg-brand text-gray-900 px-4 py-2 rounded-xl font-bold text-sm shadow-md hover:brightness-105">Calc</button>
-                            </div>
-                            <p id="snowball-result" class="font-bold mt-3 text-center text-[11px] hidden"></p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 2: OVERALL ANALYTICS (REAL MYR UPGRADE)-->
+        <!-- TAB 2: OVERALL ANALYTICS                   -->
         <!-- ========================================== -->
         <div id="tab-overall" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
@@ -193,7 +180,6 @@
                     <div id="bar-other" class="bg-gray-900 dark:bg-white h-full transition-all duration-1000" style="width: 0%"></div>
                 </div>
                 
-                <!-- NEW: 3 Grid Layout with Percentages AND Real MYR values -->
                 <div class="grid grid-cols-3 gap-2">
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-brand border border-transparent transition" onclick="switchTab('food')">
                         <div class="text-brand text-base mb-1">🍔</div>
@@ -433,7 +419,6 @@
     <!-- MODALS                                     -->
     <!-- ========================================== -->
 
-    <!-- Update Accounts Modal -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Update Accounts</h3>
@@ -454,7 +439,6 @@
         </div>
     </div>
     
-    <!-- Add Transaction Modal -->
     <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Add Transaction</h3>
@@ -494,7 +478,6 @@
         </div>
     </div>
     
-    <!-- Update Savings Target Modal -->
     <div id="savings-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Update Target</h3>
@@ -515,7 +498,6 @@
         </div>
     </div>
     
-    <!-- Add Debt Modal -->
     <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Add Debt</h3>
@@ -542,7 +524,6 @@
         </div>
     </div>
 
-    <!-- Add Upcoming Bill Reminder Modal -->
     <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Add Reminder</h3>
@@ -569,7 +550,6 @@
         </div>
     </div>
 
-    <!-- Category Detail Graph Modal -->
     <div id="category-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
             <div class="flex justify-between items-start mb-4">
@@ -584,7 +564,6 @@
         </div>
     </div>
 
-    <!-- Log Past Utility Bill Modal -->
     <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Log Past Utility Bill</h3>
@@ -617,7 +596,6 @@
         </div>
     </div>
 
-    <!-- Log Annual Income (Career) Modal -->
     <div id="career-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Log Annual Income</h3>
@@ -648,7 +626,6 @@
         </div>
     </div>
 
-
     <!-- ========================================== -->
     <!-- EXPANDED JAVASCRIPT ENGINE                 -->
     <!-- ========================================== -->
@@ -662,27 +639,18 @@
             { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, 
             { name: "Unifi", amount: 129, dueDate: "2026-07-28" }
         ];
-        
         let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
         let careerHistory = JSON.parse(localStorage.getItem('vault_career')) || [
             { year: 2024, salary: 73200, bonus: 4000, tax: 8000 },
             { year: 2025, salary: 78000, bonus: 5500, tax: 9500 },
             { year: 2026, salary: 93600, bonus: 0, tax: 11000 }
         ];
-        
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
-            name: "Sahafiz", 
-            role: "Field Service Engineer", 
-            industry: "Semiconductor", 
-            address: "Malaysia", 
-            tenure: "7", 
-            skills: "Hardware Diagnostic, Maintenance, Excel Data, System Upgrades", 
-            avatar: "", 
-            cover: ""
+            name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7", skills: "Hardware Diagnostic, Maintenance, Excel Data, System Upgrades", avatar: "", cover: ""
         };
 
-        let mainChart, comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
-
+        // REMOVED `mainChart` entirely to fix fatal null reference crash
+        let comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
 
         // --- 2. INITIALIZATION & UTILITIES ---
         function formatDisplayDate(dateStr) {
@@ -703,7 +671,8 @@
             let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
             Chart.defaults.color = tc;
             
-            [mainChart, categoryChart, comparisonChart, salaryChart, foodChart, utilChart].forEach(c => {
+            // Updates active charts
+            [categoryChart, comparisonChart, salaryChart, foodChart, utilChart].forEach(c => {
                 if(c && c.options.scales) {
                     if(c.options.scales.x) { 
                         if(c.options.scales.x.grid) c.options.scales.x.grid.color = gc; 
@@ -716,57 +685,32 @@
                     c.update();
                 }
             });
-            
-            updateHomeDashboard(); 
-            updateOverallDashboard(); 
-            updateFoodDashboard(); 
-            updateUtilDashboard(); 
-            updateCareerDashboard();
+            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateUtilDashboard(); updateCareerDashboard();
         }
 
         function switchTab(tabId) {
             const tabs = ['home', 'overall', 'food', 'bills', 'salary', 'profile'];
-            
             tabs.forEach(id => {
                 document.getElementById(`tab-${id}`).classList.add('hidden'); 
                 document.getElementById(`tab-${id}`).classList.remove('flex');
                 
                 let mobBtn = document.getElementById(`nav-mob-${id}`); 
-                if(mobBtn) { 
-                    mobBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); 
-                    mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
-                }
+                if(mobBtn) { mobBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
                 
                 let deskBtn = document.getElementById(`nav-desk-${id}`); 
-                if(deskBtn) { 
-                    deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); 
-                    deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
-                }
+                if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
             });
 
             document.getElementById(`tab-${tabId}`).classList.remove('hidden'); 
             document.getElementById(`tab-${tabId}`).classList.add('flex');
             
             let activeMob = document.getElementById(`nav-mob-${tabId}`); 
-            if(activeMob) { 
-                activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
-                activeMob.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); 
-            }
+            if(activeMob) { activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeMob.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
             
             let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
-            if(activeDesk) { 
-                activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
-                activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); 
-            }
+            if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
 
-            const headerTitles = {
-                'home': `Hi, ${profile.name.split(' ')[0]}`,
-                'overall': 'Overall Analytics',
-                'food': 'Food & Dining',
-                'bills': 'Utility History',
-                'salary': 'Career Growth',
-                'profile': 'Profile Settings'
-            };
+            const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'bills': 'Utility History', 'salary': 'Career Growth', 'profile': 'Profile Settings' };
             document.getElementById('header-title').innerText = headerTitles[tabId];
             document.getElementById('main-scroll').scrollTo(0,0);
         }
@@ -777,61 +721,34 @@
             const now = new Date(); 
             txMonths.add(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`);
             
-            transactions.forEach(t => { 
-                if(t.date && t.date.includes('-')) { 
-                    txMonths.add(t.date.split('-').slice(0,2).join('-')); 
-                } 
-            });
-            
+            transactions.forEach(t => { if(t.date && t.date.includes('-')) txMonths.add(t.date.split('-').slice(0,2).join('-')); });
             let txArr = Array.from(txMonths).sort().reverse();
             const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             
-            const dropdownIds = ['home-month-filter', 'overall-month-filter', 'food-month-filter'];
-            dropdownIds.forEach(id => {
+            ['home-month-filter', 'overall-month-filter', 'food-month-filter'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) {
                     const current = el.value || txArr[0];
                     el.innerHTML = '';
-                    txArr.forEach(m => { 
-                        const [y, mo] = m.split('-'); 
-                        el.innerHTML += `<option value="${m}">${mNames[parseInt(mo, 10)-1]} ${y}</option>`; 
-                    });
-                    if(txArr.includes(current)) {
-                        el.value = current; 
-                    } else {
-                        el.selectedIndex = 0;
-                    }
+                    txArr.forEach(m => { const [y, mo] = m.split('-'); el.innerHTML += `<option value="${m}">${mNames[parseInt(mo, 10)-1]} ${y}</option>`; });
+                    if(txArr.includes(current)) el.value = current; else el.selectedIndex = 0;
                 }
             });
 
             let uYears = new Set(); 
             uYears.add(now.getFullYear().toString());
-            
-            utilHistory.forEach(u => { 
-                if(u.month) {
-                    uYears.add(u.month.split('-')[0]); 
-                }
-            });
-            
+            utilHistory.forEach(u => { if(u.month) uYears.add(u.month.split('-')[0]); });
             let uArr = Array.from(uYears).sort().reverse();
             const uEl = document.getElementById('util-year-filter');
             if(uEl) {
-                const curU = uEl.value || uArr[0]; 
-                uEl.innerHTML = '';
-                uArr.forEach(y => {
-                    uEl.innerHTML += `<option value="${y}">${y}</option>`;
-                });
-                if(uArr.includes(curU)) {
-                    uEl.value = curU; 
-                } else {
-                    uEl.selectedIndex = 0;
-                }
+                const curU = uEl.value || uArr[0]; uEl.innerHTML = '';
+                uArr.forEach(y => uEl.innerHTML += `<option value="${y}">${y}</option>`);
+                if(uArr.includes(curU)) uEl.value = curU; else uEl.selectedIndex = 0;
             }
         }
 
         // --- 4. INDEPENDENT TAB DASHBOARD ENGINES ---
-
-function updateHomeDashboard() {
+        function updateHomeDashboard() {
             const filterEl = document.getElementById('home-month-filter');
             if(!filterEl) return;
             const filter = filterEl.value;
@@ -840,7 +757,7 @@ function updateHomeDashboard() {
             const currM = parseInt(mStr, 10) - 1;
             
             let runningBalance = 0; 
-            let monthBalance = 0; // NEW: Tracks just the selected month
+            let monthBalance = 0; // Tracks just the selected month
             
             let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
             
@@ -852,21 +769,17 @@ function updateHomeDashboard() {
                 const amt = parseFloat(t.amount);
                 
                 if (txDate.getFullYear() < currY || (txDate.getFullYear() === currY && txDate.getMonth() <= currM)) {
-                    // 1. Calculate All-Time Net Worth
-                    if (t.type === 'income') runningBalance += amt; 
-                    else runningBalance -= amt;
+                    if (t.type === 'income') runningBalance += amt; else runningBalance -= amt;
                     
-                    // 2. Calculate ONLY the Selected Month's Cash Flow
                     if (txDate.getFullYear() === currY && txDate.getMonth() === currM) { 
-                        if (t.type === 'income') monthBalance += amt;
-                        else monthBalance -= amt;
+                        if (t.type === 'income') monthBalance += amt; else monthBalance -= amt;
                     }
                 }
             });
 
-            document.getElementById('total-net-worth').innerText = runningBalance.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const tnwEl = document.getElementById('total-net-worth');
+            if(tnwEl) tnwEl.innerText = runningBalance.toLocaleString(undefined, {minimumFractionDigits: 2});
             
-            // Format and Display Selected Month Balance
             const selMonthEl = document.getElementById('sel-month-balance');
             if (selMonthEl) {
                 const sign = monthBalance >= 0 ? '+' : '-';
@@ -879,94 +792,57 @@ function updateHomeDashboard() {
             const filterEl = document.getElementById('overall-month-filter');
             if(!filterEl) return;
             const filter = filterEl.value;
-            
             const [yStr, mStr] = filter.split('-'); 
-            const currY = parseInt(yStr, 10); 
-            const currM = parseInt(mStr, 10) - 1;
-            
-            const lastM = currM === 0 ? 11 : currM - 1; 
-            const lastY = currM === 0 ? currY - 1 : currY;
+            const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
             
             const list = document.getElementById('overall-transaction-list'); 
             if(list) list.innerHTML = '';
             
-            let txCount = 0; 
-            let monthlySpend = 0; 
-            let foodSpend = 0; 
-            let utilSpend = 0; 
-            let otherSpend = 0;
-            
-            // 12-Month Arrays for the Annual Trend Chart
-            let currYearMonthly = new Array(12).fill(0); 
-            let lastYearMonthly = new Array(12).fill(0);
+            let txCount = 0; let monthlySpend = 0; let foodSpend = 0; let utilSpend = 0; let otherSpend = 0;
+            let currYearMonthly = new Array(12).fill(0); let lastYearMonthly = new Array(12).fill(0);
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(t => {
                 if(!t.date) return; 
-                const txDate = new Date(t.date); 
-                const amt = parseFloat(t.amount); 
-                const txM = txDate.getMonth();
-                const txY = txDate.getFullYear();
+                const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
                 
                 const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
                 const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
                 const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
                 
                 if(t.type !== 'income') {
-                    // Feed the Annual Graph (Jan-Dec)
                     if(txY === currY) currYearMonthly[txM] += amt;
                     if(txY === currY - 1) lastYearMonthly[txM] += amt;
 
-                    // Feed the specific Selected Month Stats & Ledger
                     if(txM === currM && txY === currY) {
                         monthlySpend += amt; 
-                        if(isFood) foodSpend += amt; 
-                        else if(isUtil) utilSpend += amt; 
-                        else otherSpend += amt;
+                        if(isFood) foodSpend += amt; else if(isUtil) utilSpend += amt; else otherSpend += amt;
                         
                         const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
                         const icon = t.type === 'income' ? '💰' : '💳';
                         const sign = t.type === 'income' ? '+' : '-';
                         
                         if(list) {
-                            list.innerHTML += `
-                            <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
-                                <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">${icon}</div></td>
-                                <td class="py-3 pl-3">
-                                    <p class="font-bold text-sm">${t.desc}</p>
-                                    <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p>
-                                </td>
-                                <td class="py-3 text-right font-bold text-sm ${c}">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                            </tr>`;
+                            list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group"><td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">${icon}</div></td><td class="py-3 pl-3"><p class="font-bold text-sm">${t.desc}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p></td><td class="py-3 text-right font-bold text-sm ${c}">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td></tr>`;
                         }
                         txCount++;
                     }
                 }
             });
             
-            if(txCount === 0 && list) {
-                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No transactions found.</td></tr>`;
-            }
+            if(txCount === 0 && list) list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No transactions found.</td></tr>`;
 
             const msEl = document.getElementById('monthly-spend');
             if(msEl) msEl.innerText = monthlySpend.toLocaleString(undefined, {minimumFractionDigits: 2});
             
-            // Feed the Real MYR Values to the UI Safely
-            const vfEl = document.getElementById('val-food'); 
-            if(vfEl) vfEl.innerText = foodSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
-            const vuEl = document.getElementById('val-util'); 
-            if(vuEl) vuEl.innerText = utilSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
-            const voEl = document.getElementById('val-other'); 
-            if(voEl) voEl.innerText = otherSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const vfEl = document.getElementById('val-food'); if(vfEl) vfEl.innerText = foodSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const vuEl = document.getElementById('val-util'); if(vuEl) vuEl.innerText = utilSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const voEl = document.getElementById('val-other'); if(voEl) voEl.innerText = otherSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
 
             if(monthlySpend > 0) {
-                const pf = Math.round((foodSpend/monthlySpend)*100); 
-                const pu = Math.round((utilSpend/monthlySpend)*100); 
-                const po = 100-pf-pu;
-                
+                const pf = Math.round((foodSpend/monthlySpend)*100); const pu = Math.round((utilSpend/monthlySpend)*100); const po = 100-pf-pu;
                 const bf = document.getElementById('bar-food'); if(bf) bf.style.width = pf+'%'; 
                 const bu = document.getElementById('bar-util'); if(bu) bu.style.width = pu+'%'; 
                 const bo = document.getElementById('bar-other'); if(bo) bo.style.width = po+'%';
-                
                 const pfEl = document.getElementById('pct-food'); if(pfEl) pfEl.innerText = pf; 
                 const puEl = document.getElementById('pct-util'); if(puEl) puEl.innerText = pu; 
                 const poEl = document.getElementById('pct-other'); if(poEl) poEl.innerText = po;
@@ -987,53 +863,30 @@ function updateHomeDashboard() {
             const filterEl = document.getElementById('food-month-filter');
             if(!filterEl) return;
             const filter = filterEl.value;
-            
-            const [yStr, mStr] = filter.split('-'); 
-            const currY = parseInt(yStr, 10); 
-            const currM = parseInt(mStr, 10) - 1;
-            
-            const lastM = currM === 0 ? 11 : currM - 1; 
-            const lastY = currM === 0 ? currY - 1 : currY;
+            const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
+            const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
             
             const list = document.getElementById('food-transaction-list'); 
             if(list) list.innerHTML = '';
             
-            let txCount = 0; 
-            let cSum = 0; 
-            let lSum = 0; 
-            
-            // 12-Month Arrays for Annual Food Trend
-            let currYearFood = new Array(12).fill(0); 
-            let lastYearFood = new Array(12).fill(0);
+            let txCount = 0; let cSum = 0; let lSum = 0; 
+            let currYearFood = new Array(12).fill(0); let lastYearFood = new Array(12).fill(0);
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(t => {
                 if(!t.date || t.type === 'income') return; 
-                const txDate = new Date(t.date); 
-                const amt = parseFloat(t.amount); 
-                const txM = txDate.getMonth();
-                const txY = txDate.getFullYear();
+                const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
                 
                 const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
                 const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
                 if(!isFood) return;
                 
-                // Feed the Annual Graph (Jan-Dec)
                 if(txY === currY) currYearFood[txM] += amt;
                 if(txY === currY - 1) lastYearFood[txM] += amt;
 
-                // Feed the specific Selected Month Stats & Ledger
                 if(txM === currM && txY === currY) {
                     cSum += amt; 
                     if(list) {
-                        list.innerHTML += `
-                        <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
-                            <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">💳</div></td>
-                            <td class="py-3 pl-3">
-                                <p class="font-bold text-sm">${t.desc}</p>
-                                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}</p>
-                            </td>
-                            <td class="py-3 text-right font-bold text-sm">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                        </tr>`;
+                        list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group"><td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">💳</div></td><td class="py-3 pl-3"><p class="font-bold text-sm">${t.desc}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}</p></td><td class="py-3 text-right font-bold text-sm">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td></tr>`;
                     }
                     txCount++;
                 } else if(txM === (currM === 0 ? 11 : currM - 1) && txY === (currM === 0 ? currY - 1 : currY)) { 
@@ -1041,9 +894,7 @@ function updateHomeDashboard() {
                 }
             });
             
-            if(txCount === 0 && list) {
-                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No food logs found.</td></tr>`;
-            }
+            if(txCount === 0 && list) list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No food logs found.</td></tr>`;
 
             const ftEl = document.getElementById('food-total-display');
             if(ftEl) ftEl.innerText = cSum.toLocaleString(undefined, {minimumFractionDigits: 2});
@@ -1051,22 +902,19 @@ function updateHomeDashboard() {
             const fiEl = document.getElementById('food-insight');
             if(fiEl) {
                 let fHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lSum.toFixed(0)}</span></div>`;
-                if (cSum > lSum && lSum > 0) {
-                    fHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
-                } else if (lSum > 0) {
-                    fHtml += `<div class="text-brand font-bold text-xs">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
-                }
+                if (cSum > lSum && lSum > 0) fHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
+                else if (lSum > 0) fHtml += `<div class="text-brand font-bold text-xs">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
                 fiEl.innerHTML = fHtml;
             }
 
             if(foodChart) {
                 foodChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                foodChart.data.datasets[0].data = currYearFood; 
-                foodChart.data.datasets[1].data = lastYearFood;
+                foodChart.data.datasets[0].data = currYearFood; foodChart.data.datasets[1].data = lastYearFood;
                 foodChart.update();
             }
         }
-function updateUtilDashboard() {
+
+        function updateUtilDashboard() {
             const yrEl = document.getElementById('util-year-filter');
             const yr = yrEl ? yrEl.value : new Date().getFullYear().toString();
             
@@ -1075,17 +923,11 @@ function updateUtilDashboard() {
             
             let histThisYear = utilHistory.filter(u => u.month && u.month.startsWith(yr)).sort((a, b) => new Date(b.month) - new Date(a.month));
             
-            // NEW: Updated data arrays to combine Internet and Phone
-            let monthlyElec = new Array(12).fill(0); 
-            let monthlyWater = new Array(12).fill(0); 
-            let monthlyComms = new Array(12).fill(0); // Internet + Phone combined
-            let monthlyOther = new Array(12).fill(0);
+            let monthlyElec = new Array(12).fill(0); let monthlyWater = new Array(12).fill(0); let monthlyComms = new Array(12).fill(0); let monthlyOther = new Array(12).fill(0);
             
             histThisYear.forEach((u, i) => {
-                const amt = parseFloat(u.amount); 
-                const mIdx = parseInt(u.month.split('-')[1]) - 1;
+                const amt = parseFloat(u.amount); const mIdx = parseInt(u.month.split('-')[1]) - 1;
                 
-                // Group the data into the correct arrays
                 if(u.type === 'Electricity') monthlyElec[mIdx] += amt;
                 else if(u.type === 'Water') monthlyWater[mIdx] += amt;
                 else if(u.type === 'Internet' || u.type === 'Phone') monthlyComms[mIdx] += amt;
@@ -1094,693 +936,269 @@ function updateUtilDashboard() {
                 const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 
                 if(list) {
-                    list.innerHTML += `
-                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group">
-                        <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm">📄</div></td>
-                        <td class="py-3 pl-3">
-                            <p class="font-bold text-sm">${u.type}</p>
-                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p>
-                        </td>
-                        <td class="py-3 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                        <td class="py-3 text-right w-10">
-                            <button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button>
-                        </td>
-                    </tr>`;
+                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group"><td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm">📄</div></td><td class="py-3 pl-3"><p class="font-bold text-sm">${u.type}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></td><td class="py-3 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-3 text-right w-10"><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
                 }
             });
             
-            if(histThisYear.length === 0 && list) {
-                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical utility data for ${yr}.</td></tr>`;
-            }
+            if(histThisYear.length === 0 && list) list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical utility data for ${yr}.</td></tr>`;
 
             if(utilChart) {
                 utilChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                // NEW: Assigned the updated colors and combined datasets
                 utilChart.data.datasets = [
-                    { label: 'Electricity', data: monthlyElec, backgroundColor: '#FFD600', borderRadius: 4 }, // Yellow
-                    { label: 'Water', data: monthlyWater, backgroundColor: '#3B82F6', borderRadius: 4 }, // Blue
-                    { label: 'Internet/Phone', data: monthlyComms, backgroundColor: '#10B981', borderRadius: 4 }, // Green
-                    { label: 'Other', data: monthlyOther, backgroundColor: '#9CA3AF', borderRadius: 4 } // Grey
+                    { label: 'Electricity', data: monthlyElec, backgroundColor: '#FFD600', borderRadius: 4 },
+                    { label: 'Water', data: monthlyWater, backgroundColor: '#3B82F6', borderRadius: 4 },
+                    { label: 'Internet/Phone', data: monthlyComms, backgroundColor: '#10B981', borderRadius: 4 },
+                    { label: 'Other', data: monthlyOther, backgroundColor: '#9CA3AF', borderRadius: 4 }
                 ];
                 utilChart.update();
             }
         }
         
         function deleteUtilLog(globalIndex) {
-            if(confirm('Delete this utility log?')) {
-                utilHistory.splice(globalIndex, 1);
-                localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory));
-                populateDropdowns();
-                updateUtilDashboard();
-            }
+            if(confirm('Delete this utility log?')) { utilHistory.splice(globalIndex, 1); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); }
         }
 
-function updateCareerDashboard() {
+        function updateCareerDashboard() {
             const list = document.getElementById('career-history-list'); 
             if(list) list.innerHTML = '';
             
             careerHistory.sort((a,b) => b.year - a.year); 
             
-            let yrs = []; 
-            let sals = []; 
-            let bons = []; 
-            let taxs = [];
-            
+            let yrs = []; let sals = []; let bons = []; let taxs = [];
             let chartHist = [...careerHistory].sort((a,b) => a.year - b.year); 
             
-            chartHist.forEach(c => {
-                yrs.push(c.year); 
-                sals.push(c.salary); 
-                bons.push(c.bonus); 
-                taxs.push(c.tax);
-            });
+            chartHist.forEach(c => { yrs.push(c.year); sals.push(c.salary); bons.push(c.bonus); taxs.push(c.tax); });
 
             careerHistory.forEach((c, i) => {
                 const total = c.salary + c.bonus;
-                
-                // NEW: Year-over-Year Percentage Calculation Engine
                 let prev = careerHistory.find(item => item.year === c.year - 1);
                 let pctSal = '', pctBon = '', pctTax = '';
                 
                 if(prev) {
                     const getPct = (curr, prv, invertColor = false) => {
-                        if (prv === 0) {
-                            return curr > 0 ? `<span class="${invertColor ? 'text-red-500' : 'text-green-500 dark:text-green-400'} font-bold text-[10px] ml-1">(+100%)</span>` : '';
-                        }
+                        if (prv === 0) return curr > 0 ? `<span class="${invertColor ? 'text-red-500' : 'text-green-500 dark:text-green-400'} font-bold text-[10px] ml-1">(+100%)</span>` : '';
                         const diff = ((curr - prv) / prv) * 100;
                         const sign = diff > 0 ? '+' : '';
-                        let color = 'text-gray-500 dark:text-gray-400'; // Neutral for zero change
-                        
+                        let color = 'text-gray-500 dark:text-gray-400'; 
                         if (diff > 0) color = invertColor ? 'text-red-500' : 'text-green-500 dark:text-green-400';
                         else if (diff < 0) color = invertColor ? 'text-green-500 dark:text-green-400' : 'text-red-500';
-                        
                         return `<span class="${color} font-bold text-[10px] ml-1">(${sign}${diff.toFixed(1)}%)</span>`;
                     };
-                    
-                    pctSal = getPct(c.salary, prev.salary);
-                    pctBon = getPct(c.bonus, prev.bonus);
-                    pctTax = getPct(c.tax, prev.tax, true); // True: Tax increase is Red
+                    pctSal = getPct(c.salary, prev.salary); pctBon = getPct(c.bonus, prev.bonus); pctTax = getPct(c.tax, prev.tax, true);
                 }
 
                 if(list) {
-                    list.innerHTML += `
-                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
-                        <td class="py-3"><div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xs">${c.year}</div></td>
-                        <td class="py-3 pl-3">
-                            <p class="font-bold text-sm">MYR ${total.toLocaleString()}</p>
-                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Base: ${c.salary.toLocaleString()}${pctSal} • Bonus: ${c.bonus.toLocaleString()}${pctBon}</p>
-                        </td>
-                        <td class="py-3 pr-3 text-right">
-                            <p class="font-bold text-sm text-red-500">Tax: ${c.tax.toLocaleString()}${pctTax}</p>
-                        </td>
-                        <td class="py-3 text-right w-10">
-                            <button onclick="deleteCareerLog(${i})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button>
-                        </td>
-                    </tr>`;
+                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300"><td class="py-3"><div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xs">${c.year}</div></td><td class="py-3 pl-3"><p class="font-bold text-sm">MYR ${total.toLocaleString()}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Base: ${c.salary.toLocaleString()}${pctSal} • Bonus: ${c.bonus.toLocaleString()}${pctBon}</p></td><td class="py-3 pr-3 text-right"><p class="font-bold text-sm text-red-500">Tax: ${c.tax.toLocaleString()}${pctTax}</p></td><td class="py-3 text-right w-10"><button onclick="deleteCareerLog(${i})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
                 }
             });
             
-            if(careerHistory.length === 0 && list) {
-                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No career logs found.</td></tr>`;
-            }
+            if(careerHistory.length === 0 && list) list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No career logs found.</td></tr>`;
 
             if(salaryChart) {
                 salaryChart.data.labels = yrs;
                 salaryChart.data.datasets = [
-                    { 
-                        type: 'bar', 
-                        label: 'Base Salary', 
-                        data: sals, 
-                        backgroundColor: '#FFD600', 
-                        borderRadius: {topLeft:0, topRight:0, bottomLeft:4, bottomRight:4}, 
-                        stack: 'Stack 0' 
-                    },
-                    { 
-                        type: 'bar', 
-                        label: 'Bonus', 
-                        data: bons, 
-                        backgroundColor: '#34D399', 
-                        borderRadius: {topLeft:4, topRight:4, bottomLeft:0, bottomRight:0}, 
-                        stack: 'Stack 0' 
-                    },
-                    { 
-                        type: 'line', 
-                        label: 'Tax', 
-                        data: taxs, 
-                        borderColor: '#EF4444', 
-                        borderWidth: 2, 
-                        pointBackgroundColor: '#EF4444', 
-                        fill: false 
-                    }
+                    { type: 'bar', label: 'Base Salary', data: sals, backgroundColor: '#FFD600', borderRadius: {topLeft:0, topRight:0, bottomLeft:4, bottomRight:4}, stack: 'Stack 0' },
+                    { type: 'bar', label: 'Bonus', data: bons, backgroundColor: '#34D399', borderRadius: {topLeft:4, topRight:4, bottomLeft:0, bottomRight:0}, stack: 'Stack 0' },
+                    { type: 'line', label: 'Tax', data: taxs, borderColor: '#EF4444', borderWidth: 2, pointBackgroundColor: '#EF4444', fill: false }
                 ];
                 salaryChart.update();
             }
         }
-        
         function deleteCareerLog(index) {
-            if(confirm('Delete this career log?')) {
-                careerHistory.splice(index, 1);
-                localStorage.setItem('vault_career', JSON.stringify(careerHistory));
-                updateCareerDashboard();
-            }
+            if(confirm('Delete this career log?')) { careerHistory.splice(index, 1); localStorage.setItem('vault_career', JSON.stringify(careerHistory)); updateCareerDashboard(); }
         }
 
-
         // --- 5. MODAL CONTROLLERS & DATA SAVING ---
-
         function renderCards() { 
-            const dEl = document.getElementById('debit-display');
-            const cEl = document.getElementById('credit-display');
+            const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display');
             if(dEl) dEl.innerText = cardData.debit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
             if(cEl) cEl.innerText = cardData.credit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
         }
-        function openCardModal() { 
-            document.getElementById('card-debit-input').value = cardData.debit; 
-            document.getElementById('card-credit-input').value = cardData.credit; 
-            document.getElementById('card-modal').classList.remove('hidden'); 
-        }
+        function openCardModal() { document.getElementById('card-debit-input').value = cardData.debit; document.getElementById('card-credit-input').value = cardData.credit; document.getElementById('card-modal').classList.remove('hidden'); }
         function closeCardModal() { document.getElementById('card-modal').classList.add('hidden'); }
-        function saveCards(e) { 
-            e.preventDefault(); 
-            cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; 
-            cardData.credit = parseFloat(document.getElementById('card-credit-input').value) || 0; 
-            localStorage.setItem('vault_cards', JSON.stringify(cardData)); 
-            renderCards(); 
-            closeCardModal(); 
-        }
+        function saveCards(e) { e.preventDefault(); cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; cardData.credit = parseFloat(document.getElementById('card-credit-input').value) || 0; localStorage.setItem('vault_cards', JSON.stringify(cardData)); renderCards(); closeCardModal(); }
 
-        function openTxModal() { 
-            document.getElementById('tx-date').valueAsDate = new Date(); 
-            document.getElementById('tx-modal').classList.remove('hidden'); 
-        }
-        function closeTxModal() { 
-            document.getElementById('tx-modal').classList.add('hidden'); 
-            document.getElementById('tx-form').reset(); 
-        }
-function saveTransaction(e) { 
+        function openTxModal() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
+        function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
+        function saveTransaction(e) { 
             e.preventDefault(); 
-            
-            const date = document.getElementById('tx-date').value;
-            const desc = document.getElementById('tx-desc').value;
-            const type = document.getElementById('tx-type').value;
-            const category = document.getElementById('tx-category').value;
-            const amount = parseFloat(document.getElementById('tx-amount').value);
+            const date = document.getElementById('tx-date').value; const desc = document.getElementById('tx-desc').value; const type = document.getElementById('tx-type').value; const category = document.getElementById('tx-category').value; const amount = parseFloat(document.getElementById('tx-amount').value);
 
-            // AUTO-DEDUCT ENGINE: Check if new expense matches a Debt Name
+            // AUTO-DEDUCT ENGINE for Debt
             if (type === 'expense') {
-                let debtUpdated = false;
-                const searchString = (desc + " " + category).toLowerCase();
-
+                let debtUpdated = false; const searchString = (desc + " " + category).toLowerCase();
                 debts.forEach((debt, index) => {
                     if (searchString.includes(debt.name.toLowerCase())) {
                         debts[index].balance -= amount;
-                        if (debts[index].balance < 0) debts[index].balance = 0; // Prevent negative balances
+                        if (debts[index].balance < 0) debts[index].balance = 0; 
                         debtUpdated = true;
                     }
                 });
-
-                if (debtUpdated) {
-                    localStorage.setItem('vault_debts', JSON.stringify(debts));
-                    renderDebts();
-                    alert("Matched keyword! Debt balance auto-deducted.");
-                }
+                if (debtUpdated) { localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); alert("Matched keyword! Debt balance auto-deducted."); }
             }
 
             transactions.push({ date, desc, type, category, amount }); 
             localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-            
-            populateDropdowns(); 
-            updateHomeDashboard(); 
-            updateOverallDashboard(); 
-            updateFoodDashboard(); 
-            closeTxModal(); 
+            populateDropdowns(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); closeTxModal(); 
         }
 
         function renderSavings() { 
-            const curEl = document.getElementById('current-savings');
-            const tgtEl = document.getElementById('target-savings');
-            const progEl = document.getElementById('savings-progress');
-            
+            const curEl = document.getElementById('current-savings'); const tgtEl = document.getElementById('target-savings'); const progEl = document.getElementById('savings-progress');
             if(curEl) curEl.innerText = savingsData.current.toLocaleString(undefined, {minimumFractionDigits: 0}); 
             if(tgtEl) tgtEl.innerText = savingsData.target.toLocaleString(undefined, {minimumFractionDigits: 0}); 
-            
-            if(progEl) {
-                setTimeout(() => { 
-                    let pct = (savingsData.current / savingsData.target) * 100;
-                    if(pct > 100) pct = 100;
-                    progEl.style.width = pct + '%'; 
-                }, 300); 
-            }
+            if(progEl) { setTimeout(() => { let pct = (savingsData.current / savingsData.target) * 100; if(pct > 100) pct = 100; progEl.style.width = pct + '%'; }, 300); }
         }
-        function openSavingsModal() { 
-            document.getElementById('savings-current-input').value = savingsData.current; 
-            document.getElementById('savings-target-input').value = savingsData.target; 
-            document.getElementById('savings-modal').classList.remove('hidden'); 
-        }
+        function openSavingsModal() { document.getElementById('savings-current-input').value = savingsData.current; document.getElementById('savings-target-input').value = savingsData.target; document.getElementById('savings-modal').classList.remove('hidden'); }
         function closeSavingsModal() { document.getElementById('savings-modal').classList.add('hidden'); }
-        function saveSavings(e) { 
-            e.preventDefault(); 
-            savingsData.current = parseFloat(document.getElementById('savings-current-input').value)||0; 
-            savingsData.target = parseFloat(document.getElementById('savings-target-input').value)||1; 
-            localStorage.setItem('vault_savings', JSON.stringify(savingsData)); 
-            renderSavings(); 
-            closeSavingsModal(); 
-        }
+        function saveSavings(e) { e.preventDefault(); savingsData.current = parseFloat(document.getElementById('savings-current-input').value)||0; savingsData.target = parseFloat(document.getElementById('savings-target-input').value)||1; localStorage.setItem('vault_savings', JSON.stringify(savingsData)); renderSavings(); closeSavingsModal(); }
 
         function renderDebts() {
-            const dl = document.getElementById('debt-list'); 
-            const tdEl = document.getElementById('total-debt-display');
-            if(!dl) return;
-            dl.innerHTML = ''; 
-            debts.sort((a, b) => a.balance - b.balance);
+            const dl = document.getElementById('debt-list'); const tdEl = document.getElementById('total-debt-display');
+            if(!dl) return; dl.innerHTML = ''; debts.sort((a, b) => a.balance - b.balance);
             
-            // Calculate and display Total Debt
             const totalDebt = debts.reduce((sum, d) => sum + d.balance, 0);
             if(tdEl) {
-                if(totalDebt > 0) {
-                    tdEl.innerText = '-MYR ' + totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2});
-                    tdEl.classList.remove('hidden');
-                } else {
-                    tdEl.classList.add('hidden');
-                }
+                if(totalDebt > 0) { tdEl.innerText = '-MYR ' + totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2}); tdEl.classList.remove('hidden'); } 
+                else { tdEl.classList.add('hidden'); }
             }
 
-            if (debts.length === 0) { 
-                dl.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No liabilities tracked.</p>`; 
-                document.getElementById('snowball-result').classList.add('hidden'); 
-                return; 
-            }
+            if (debts.length === 0) { dl.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No liabilities tracked.</p>`; return; }
             
             debts.forEach((d, i) => { 
-                dl.innerHTML += `
-                <div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group">
-                    <div class="flex-1 truncate pr-2">
-                        <p class="font-bold text-xs flex items-center truncate">${d.name}</p>
-                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p>
-                    </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <p class="text-red-500 font-bold text-sm">-MYR ${d.balance.toLocaleString()}</p>
-                        <button onclick="if(confirm('Delete?')) { debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-xs">✕</button>
-                    </div>
-                </div>`; 
+                dl.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group"><div class="flex-1 truncate pr-2"><p class="font-bold text-xs flex items-center truncate">${d.name}</p><p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p></div><div class="flex items-center gap-2 shrink-0"><p class="text-red-500 font-bold text-sm">-MYR ${d.balance.toLocaleString()}</p><button onclick="if(confirm('Delete?')) { debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-xs">✕</button></div></div>`; 
             }); 
-            calculateSnowball();
-        }    
+        }
         function openDebtModal() { document.getElementById('debt-modal').classList.remove('hidden'); }
         function closeDebtModal() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
-        function saveDebt(e) { 
-            e.preventDefault(); 
-            debts.push({
-                name: document.getElementById('debt-name').value, 
-                balance: parseFloat(document.getElementById('debt-balance').value), 
-                minPayment: parseFloat(document.getElementById('debt-min').value)
-            }); 
-            localStorage.setItem('vault_debts', JSON.stringify(debts)); 
-            renderDebts(); 
-            closeDebtModal(); 
-        }
-        function calculateSnowball() { 
-            if (debts.length === 0) return; 
-            const ep = parseFloat(document.getElementById('extra-payment').value) || 0; 
-            const fp = debts.reduce((sum, d) => sum + d.minPayment, 0) + ep; 
-            const resEl = document.getElementById('snowball-result');
-            
-            if(fp <= 0) { 
-                if(resEl) resEl.classList.add('hidden'); 
-                return; 
-            } 
-            const months = Math.ceil(debts.reduce((sum, d) => sum + d.balance, 0) / fp); 
-            if(resEl) {
-                resEl.innerHTML = `Debt free in <span class="bg-brand text-gray-900 px-1.5 py-0.5 rounded shadow-sm">${months} months</span>!`; 
-                resEl.classList.remove('hidden'); 
-            }
-        }
-        
-        const extraPaymentEl = document.getElementById('extra-payment');
-        if(extraPaymentEl) extraPaymentEl.addEventListener('input', calculateSnowball);
+        function saveDebt(e) { e.preventDefault(); debts.push({ name: document.getElementById('debt-name').value, balance: parseFloat(document.getElementById('debt-balance').value), minPayment: parseFloat(document.getElementById('debt-min').value) }); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); closeDebtModal(); }
 
         function renderBills() {
             const list = document.getElementById('bill-list'); 
-            if(!list) return;
-            
-            list.innerHTML = ''; 
-            bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-            
-            if (bills.length === 0) { 
-                list.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No upcoming reminders.</p>`; 
-                return; 
-            }
+            if(!list) return; list.innerHTML = ''; bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            if (bills.length === 0) { list.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No upcoming reminders.</p>`; return; }
             
             const today = new Date();
             bills.forEach((b, i) => {
                 const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
-                let dueText = `Due in ${diffDays} Days`; 
-                let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
+                let dueText = `Due in ${diffDays} Days`; let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
                 
-                if(diffDays === 0) { 
-                    dueText = 'Due Today'; 
-                    dueColor = 'text-brand font-bold'; 
-                } else if (diffDays < 0) { 
-                    dueText = `Overdue by ${Math.abs(diffDays)} Days`; 
-                    dueColor = 'text-red-500 font-bold'; 
-                } else if (diffDays <= 3) { 
-                    dueColor = 'text-red-500 font-bold'; 
-                }
+                if(diffDays === 0) { dueText = 'Due Today'; dueColor = 'text-brand font-bold'; } else if (diffDays < 0) { dueText = `Overdue by ${Math.abs(diffDays)} Days`; dueColor = 'text-red-500 font-bold'; } else if (diffDays <= 3) { dueColor = 'text-red-500 font-bold'; }
                 
-                list.innerHTML += `
-                <div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group">
-                    <div class="flex items-center gap-3 flex-1 truncate pr-2">
-                        <div class="w-9 h-9 rounded-full bg-panel-light dark:bg-panel-dark flex items-center justify-center text-sm shadow-sm border border-gray-100 dark:border-white/5">📄</div>
-                        <div class="truncate">
-                            <p class="font-bold text-xs truncate">${b.name}</p>
-                            <p class="text-[10px] font-semibold ${dueColor} mt-0.5">${dueText}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <p class="font-bold text-sm">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
-                        <div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition">
-                            <button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-xs">✕</button>
-                        </div>
-                    </div>
-                </div>`;
+                list.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group"><div class="flex items-center gap-3 flex-1 truncate pr-2"><div class="w-9 h-9 rounded-full bg-panel-light dark:bg-panel-dark flex items-center justify-center text-sm shadow-sm border border-gray-100 dark:border-white/5">📄</div><div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[10px] font-semibold ${dueColor} mt-0.5">${dueText}</p></div></div><div class="flex items-center gap-2 shrink-0"><p class="font-bold text-sm">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition"><button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-xs">✕</button></div></div></div>`;
             });
         }
         function openBillModal() { document.getElementById('bill-modal').classList.remove('hidden'); }
         function closeBillModal() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
-        function saveBill(e) { 
-            e.preventDefault(); 
-            bills.push({ 
-                name: document.getElementById('bill-name').value, 
-                amount: parseFloat(document.getElementById('bill-amount').value), 
-                dueDate: document.getElementById('bill-date').value 
-            }); 
-            localStorage.setItem('vault_bills', JSON.stringify(bills)); 
-            renderBills(); 
-            closeBillModal(); 
-        }
+        function saveBill(e) { e.preventDefault(); bills.push({ name: document.getElementById('bill-name').value, amount: parseFloat(document.getElementById('bill-amount').value), dueDate: document.getElementById('bill-date').value }); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); closeBillModal(); }
 
-        function openUtilHistoryModal() { 
-            const now = new Date();
-            document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
-            document.getElementById('util-history-modal').classList.remove('hidden'); 
-        }
+        function openUtilHistoryModal() { const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; document.getElementById('util-history-modal').classList.remove('hidden'); }
         function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
-        function saveUtilHistory(e) { 
-            e.preventDefault(); 
-            utilHistory.push({ 
-                month: document.getElementById('util-hist-month').value, 
-                type: document.getElementById('util-hist-type').value, 
-                amount: parseFloat(document.getElementById('util-hist-amount').value) 
-            }); 
-            localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); 
-            populateDropdowns(); 
-            updateUtilDashboard(); 
-            closeUtilHistoryModal(); 
-        }
+        function saveUtilHistory(e) { e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); closeUtilHistoryModal(); }
 
-        function openCareerModal() { 
-            document.getElementById('career-year').value = new Date().getFullYear(); 
-            document.getElementById('career-modal').classList.remove('hidden'); 
-        }
+        function openCareerModal() { document.getElementById('career-year').value = new Date().getFullYear(); document.getElementById('career-modal').classList.remove('hidden'); }
         function closeCareerModal() { document.getElementById('career-modal').classList.add('hidden'); document.getElementById('career-form').reset(); }
-        function saveCareerRecord(e) {
-            e.preventDefault();
-            const yearInput = parseInt(document.getElementById('career-year').value);
-            careerHistory = careerHistory.filter(c => c.year !== yearInput); 
-            careerHistory.push({ 
-                year: yearInput, 
-                salary: parseFloat(document.getElementById('career-salary').value), 
-                bonus: parseFloat(document.getElementById('career-bonus').value), 
-                tax: parseFloat(document.getElementById('career-tax').value) 
-            });
-            localStorage.setItem('vault_career', JSON.stringify(careerHistory));
-            updateCareerDashboard(); 
-            closeCareerModal();
-        }
+        function saveCareerRecord(e) { e.preventDefault(); const yearInput = parseInt(document.getElementById('career-year').value); careerHistory = careerHistory.filter(c => c.year !== yearInput); careerHistory.push({ year: yearInput, salary: parseFloat(document.getElementById('career-salary').value), bonus: parseFloat(document.getElementById('career-bonus').value), tax: parseFloat(document.getElementById('career-tax').value) }); localStorage.setItem('vault_career', JSON.stringify(careerHistory)); updateCareerDashboard(); closeCareerModal(); }
 
         function openCategoryModal(type) {
             if (type !== 'other') return; 
+            const filterEl = document.getElementById('overall-month-filter'); if(!filterEl) return;
+            const [yStr, mStr] = filterEl.value.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
+            const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
             
-            const filterEl = document.getElementById('overall-month-filter');
-            if(!filterEl) return;
-            
-            const [yStr, mStr] = filterEl.value.split('-'); 
-            const currY = parseInt(yStr, 10); 
-            const currM = parseInt(mStr, 10) - 1;
-            
-            const lastM = currM === 0 ? 11 : currM - 1; 
-            const lastY = currM === 0 ? currY - 1 : currY;
-            
-            let dailySpend = new Array(31).fill(0); 
-            let currCatTotal = 0; 
-            let lastCatTotal = 0;
+            let dailySpend = new Array(31).fill(0); let currCatTotal = 0; let lastCatTotal = 0;
 
             transactions.forEach(t => {
-                if (t.type !== 'expense' || !t.date) return;
-                const txDate = new Date(t.date); 
-                if (isNaN(txDate.getTime())) return;
-                
-                const amt = parseFloat(t.amount); 
-                const dayIndex = txDate.getDate() - 1;
-                
+                if (t.type !== 'expense' || !t.date) return; const txDate = new Date(t.date); if (isNaN(txDate.getTime())) return;
+                const amt = parseFloat(t.amount); const dayIndex = txDate.getDate() - 1;
                 const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
-                const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
-                const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
+                const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/); const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
                 
                 if (!isFood && !isUtil) {
-                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) { 
-                        dailySpend[dayIndex] += amt; 
-                        currCatTotal += amt; 
-                    } else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { 
-                        lastCatTotal += amt; 
-                    }
+                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) { dailySpend[dayIndex] += amt; currCatTotal += amt; } 
+                    else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { lastCatTotal += amt; }
                 }
             });
 
             let isDark = document.documentElement.classList.contains('dark');
             let catInsightHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
-            
-            if (currCatTotal > lastCatTotal && lastCatTotal > 0) { 
-                catInsightHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
-            } else if (lastCatTotal > 0) { 
-                catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
-            } else { 
-                catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`; 
-            }
+            if (currCatTotal > lastCatTotal && lastCatTotal > 0) catInsightHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
+            else if (lastCatTotal > 0) catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
+            else catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`; 
 
             document.getElementById('category-modal-insight').innerHTML = catInsightHtml;
-            
-            if(categoryChart) {
-                categoryChart.data.datasets[0].data = dailySpend; 
-                categoryChart.data.datasets[0].backgroundColor = isDark ? '#FFFFFF' : '#111827'; 
-                categoryChart.update();
-            }
-            
+            if(categoryChart) { categoryChart.data.datasets[0].data = dailySpend; categoryChart.data.datasets[0].backgroundColor = isDark ? '#FFFFFF' : '#111827'; categoryChart.update(); }
             document.getElementById('category-modal').classList.remove('hidden');
         }
         function closeCategoryModal() { document.getElementById('category-modal').classList.add('hidden'); }
 
         function renderProfile() {
-            document.getElementById('prof-name').value = profile.name; 
-            document.getElementById('prof-role').value = profile.role;
-            document.getElementById('prof-industry').value = profile.industry; 
-            document.getElementById('prof-address').value = profile.address;
-            document.getElementById('prof-tenure').value = profile.tenure; 
-            document.getElementById('prof-skills').value = profile.skills || "";
+            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
+            document.getElementById('li-name').innerText = profile.name; document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`; document.getElementById('li-location').innerText = profile.address;
             
-            document.getElementById('li-name').innerText = profile.name;
-            document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`;
-            document.getElementById('li-location').innerText = profile.address;
-            
-            const skillsDiv = document.getElementById('li-skills'); 
-            skillsDiv.innerHTML = '';
-            
-            if(profile.skills) {
-                profile.skills.split(',').forEach(s => { 
-                    if(s.trim()) {
-                        skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[10px] font-bold px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; 
-                    }
-                });
-            }
+            const skillsDiv = document.getElementById('li-skills'); skillsDiv.innerHTML = '';
+            if(profile.skills) profile.skills.split(',').forEach(s => { if(s.trim()) skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[10px] font-bold px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; });
 
-            if(profile.avatar) { 
-                document.getElementById('profile-avatar-img').src = profile.avatar; 
-                document.getElementById('profile-avatar-img').classList.remove('hidden'); 
-                document.getElementById('profile-avatar-initial').classList.add('hidden'); 
-            } else { 
-                document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); 
-            }
+            if(profile.avatar) { document.getElementById('profile-avatar-img').src = profile.avatar; document.getElementById('profile-avatar-img').classList.remove('hidden'); document.getElementById('profile-avatar-initial').classList.add('hidden'); } 
+            else { document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); }
             
-            if(profile.cover) { 
-                document.getElementById('profile-cover-img').src = profile.cover; 
-                document.getElementById('profile-cover-img').classList.remove('hidden'); 
-            }
-            
-            if (!document.getElementById('tab-home').classList.contains('hidden')) { 
-                document.getElementById('header-title').innerText = `Hi, ${profile.name.split(' ')[0]}`; 
-            }
+            if(profile.cover) { document.getElementById('profile-cover-img').src = profile.cover; document.getElementById('profile-cover-img').classList.remove('hidden'); }
+            if (!document.getElementById('tab-home').classList.contains('hidden')) document.getElementById('header-title').innerText = `Hi, ${profile.name.split(' ')[0]}`; 
         }
         
         function saveProfile(e) { 
             e.preventDefault(); 
-            profile.name = document.getElementById('prof-name').value; 
-            profile.role = document.getElementById('prof-role').value;
-            profile.industry = document.getElementById('prof-industry').value; 
-            profile.address = document.getElementById('prof-address').value;
-            profile.tenure = document.getElementById('prof-tenure').value; 
-            profile.skills = document.getElementById('prof-skills').value;
-            
-            localStorage.setItem('vault_profile', JSON.stringify(profile)); 
-            renderProfile(); 
-            alert("Profile updated successfully!"); 
+            profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
+            localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
         }
         
         function handleImageUpload(e, type) {
-            const file = e.target.files[0]; 
-            if(!file) return;
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                if(type === 'avatar') {
-                    profile.avatar = event.target.result; 
-                } else {
-                    profile.cover = event.target.result;
-                }
-                localStorage.setItem('vault_profile', JSON.stringify(profile)); 
-                renderProfile();
-            };
+            const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
+            reader.onload = function(event) { if(type === 'avatar') profile.avatar = event.target.result; else profile.cover = event.target.result; localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); };
             reader.readAsDataURL(file);
         }
 
         // --- 6. DATA MANAGEMENT ---
-        
         function exportBackup() { 
-            const backupData = { 
-                vault_transactions: localStorage.getItem('vault_transactions'), 
-                vault_savings: localStorage.getItem('vault_savings'), 
-                vault_debts: localStorage.getItem('vault_debts'), 
-                vault_cards: localStorage.getItem('vault_cards'), 
-                vault_bills: localStorage.getItem('vault_bills'), 
-                vault_profile: localStorage.getItem('vault_profile'), 
-                vault_util_hist: localStorage.getItem('vault_util_hist'), 
-                vault_career: localStorage.getItem('vault_career') 
-            }; 
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); 
-            const a = document.createElement('a'); 
-            a.setAttribute("href", dataStr); 
-            a.setAttribute("download", "vault_backup.json"); 
-            document.body.appendChild(a); 
-            a.click(); 
-            a.remove(); 
+            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_savings: localStorage.getItem('vault_savings'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_career: localStorage.getItem('vault_career') }; 
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
         }
 
         document.getElementById('json-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; 
-            if(!file) return; 
-            const reader = new FileReader(); 
-            reader.onload = function(event) { 
-                try { 
-                    const data = JSON.parse(event.target.result); 
-                    Object.keys(data).forEach(key => { 
-                        if(data[key]) localStorage.setItem(key, data[key]); 
-                    }); 
-                    alert("Sync Backup restored successfully! Refreshing app..."); 
-                    location.reload(); 
-                } catch(err) { 
-                    alert("Invalid backup file."); 
-                } 
-            }; 
-            reader.readAsText(file); 
+            const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
+            reader.onload = function(event) { try { const data = JSON.parse(event.target.result); Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); } catch(err) { alert("Invalid backup file."); } }; reader.readAsText(file); 
         });
 
         document.getElementById('csv-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; 
-            if (!file) return; 
-            
-            const reader = new FileReader(); 
+            const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
             reader.onload = function(event) { 
-                const rawText = event.target.result;
-                const cleanText = rawText.replace(/"/g, ''); 
-                
-                const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
+                const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
                 if (rows.length <= 1) return alert("File is empty or invalid. Make sure it has headers."); 
                 
                 const headers = rows[0].split(',').map(h => h.trim().toLowerCase()); 
                 const monthMap = { 'jan':'01', 'feb':'02', 'mar':'03', 'apr':'04', 'may':'05', 'jun':'06', 'jul':'07', 'aug':'08', 'sep':'09', 'oct':'10', 'nov':'11', 'dec':'12' }; 
                 
                 const importedData = rows.slice(1).map(row => { 
-                    const values = row.split(','); 
-                    let obj = {}; 
+                    const values = row.split(','); let obj = {}; 
                     headers.forEach((h, i) => { 
                         let val = values[i] ? values[i].trim() : ''; 
-                        
                         if (h === 'type') val = val.toLowerCase(); 
-                        
                         if (h === 'date') { 
-                            if (val.includes('/')) { 
-                                const parts = val.split('/'); 
-                                if (parts.length === 3) { 
-                                    let d = parts[0].padStart(2, '0'); 
-                                    let m = parts[1].padStart(2, '0'); 
-                                    let y = parts[2]; 
-                                    if (parts[0].length === 4) { 
-                                        y = parts[0]; m = parts[1]; d = parts[2]; 
-                                    } else if (y.length === 2) { 
-                                        y = '20' + y; 
-                                    } 
-                                    val = `${y}-${m}-${d}`; 
-                                } 
-                            } else if (val.includes('-')) { 
-                                const parts = val.split('-'); 
-                                if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { 
-                                    let m = monthMap[parts[0].toLowerCase()]; 
-                                    let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; 
-                                    val = `${y}-${m}-01`; 
-                                } else if (parts.length === 3) { 
-                                    if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { 
-                                        let d = parts[0].padStart(2, '0'); 
-                                        let m = monthMap[parts[1].toLowerCase()]; 
-                                        let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; 
-                                        val = `${y}-${m}-${d}`; 
-                                    } else if (parts[0].length === 4) { 
-                                        val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; 
-                                    } 
-                                } 
-                            } 
+                            if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
+                            else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
                         } 
                         obj[h] = val; 
                     }); 
-                    
-                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); 
-                    return obj; 
+                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); return obj; 
                 }); 
                 
                 const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
-                
-                transactions = transactions.filter(t => { 
-                    if (!t.date || typeof t.date !== 'string') return false; 
-                    return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); 
-                }); 
-                
-                transactions = [...transactions, ...validData]; 
-                localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-                
-                alert(`Successfully imported ${validData.length} records!`); 
-                populateDropdowns(); 
-                updateHomeDashboard(); 
-                updateOverallDashboard(); 
-                updateFoodDashboard(); 
-                
-                e.target.value = ''; 
-            }; 
-            reader.readAsText(file); 
+                transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
+                transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+                alert(`Successfully imported ${validData.length} records!`); populateDropdowns(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); e.target.value = ''; 
+            }; reader.readAsText(file); 
         });
         
-        function clearData() { 
-            if(confirm("Delete ALL app data? This cannot be undone.")) { 
-                localStorage.clear(); 
-                location.reload(); 
-            } 
-        }
+        function clearData() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
 
         // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
@@ -1792,100 +1210,24 @@ function saveTransaction(e) {
             let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
             Chart.defaults.color = tc;
             
-            const lineConfig = { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: { legend: { display: false } }, 
-                scales: { 
-                    y: { display: false }, 
-                    x: { grid: { color: gc }, ticks: { color: tc } } 
-                } 
-            };
+            const lineConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { color: gc }, ticks: { color: tc } } } };
 
-            const ctxMain = document.getElementById('mainChart').getContext('2d'); 
-            const gradMain = ctxMain.createLinearGradient(0, 0, 0, 200); 
-            gradMain.addColorStop(0, 'rgba(255, 214, 0, 0.3)'); 
-            gradMain.addColorStop(1, 'rgba(255, 214, 0, 0)');
-            
-            mainChart = new Chart(ctxMain, { 
-                type: 'line', 
-                data: { labels: [], datasets: [{ data: [], borderColor: '#FFD600', backgroundColor: gradMain, fill: true, borderWidth: 3, tension: 0.4, pointRadius: 0 }] }, 
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { display: false } } } 
-            });
+            categoryChart = new Chart(document.getElementById('categoryChart'), { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } });
 
-            categoryChart = new Chart(document.getElementById('categoryChart'), { 
-                type: 'bar', 
-                data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, 
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } 
-            });
-
-            // UPDATED: Added Point Radius & Background Fill to ensure visibility with low data amounts
-            comparisonChart = new Chart(document.getElementById('comparisonChart'), { 
-                type: 'line', 
-                data: { labels: [], datasets: [ 
-                    { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, 
-                    { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } 
-                ] }, 
-                options: lineConfig 
-            });
+            comparisonChart = new Chart(document.getElementById('comparisonChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
             
-            foodChart = new Chart(document.getElementById('foodChart'), { 
-                type: 'line', 
-                data: { labels: [], datasets: [ 
-                    { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, 
-                    { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } 
-                ] }, 
-                options: lineConfig 
-            });
+            foodChart = new Chart(document.getElementById('foodChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
             
-            utilChart = new Chart(document.getElementById('utilChart'), { 
-                type: 'bar', 
-                data: { labels: [], datasets: [] }, 
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { legend: { display: false } }, 
-                    scales: { 
-                        x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, 
-                        y: { stacked: true, display: false } 
-                    } 
-                } 
-            });
+            utilChart = new Chart(document.getElementById('utilChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: true, display: false } } } });
             
-            salaryChart = new Chart(document.getElementById('salaryChart'), { 
-                type: 'bar', 
-                data: { labels: [], datasets: [] }, 
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, 
-                    scales: { 
-                        x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, 
-                        y: { stacked: true, display: false } 
-                    } 
-                } 
-            });
+            salaryChart = new Chart(document.getElementById('salaryChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: true, display: false } } } });
 
             // Trigger updates
-            renderCards(); 
-            renderBills(); 
-            renderDebts(); 
-            renderSavings(); 
-            renderProfile();
-            
-            updateHomeDashboard(); 
-            updateOverallDashboard(); 
-            updateFoodDashboard(); 
-            updateUtilDashboard(); 
-            updateCareerDashboard();
+            renderCards(); renderBills(); renderDebts(); renderSavings(); renderProfile();
+            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateUtilDashboard(); updateCareerDashboard();
         };
     </script>
     
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) { 
-            window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); 
-        }
-    </script>
+    <script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); }</script>
 </body>
 </html>
