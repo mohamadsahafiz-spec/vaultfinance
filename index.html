@@ -831,7 +831,7 @@
 
         // --- 4. INDEPENDENT TAB DASHBOARD ENGINES ---
 
-        function updateHomeDashboard() {
+function updateHomeDashboard() {
             const filterEl = document.getElementById('home-month-filter');
             if(!filterEl) return;
             const filter = filterEl.value;
@@ -840,8 +840,7 @@
             const currM = parseInt(mStr, 10) - 1;
             
             let runningBalance = 0; 
-            let chartLabels = []; 
-            let chartBalances = [];
+            let monthBalance = 0; // NEW: Tracks just the selected month
             
             let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
             
@@ -853,30 +852,26 @@
                 const amt = parseFloat(t.amount);
                 
                 if (txDate.getFullYear() < currY || (txDate.getFullYear() === currY && txDate.getMonth() <= currM)) {
-                    if (t.type === 'income') {
-                        runningBalance += amt; 
-                    } else {
-                        runningBalance -= amt;
-                    }
+                    // 1. Calculate All-Time Net Worth
+                    if (t.type === 'income') runningBalance += amt; 
+                    else runningBalance -= amt;
                     
+                    // 2. Calculate ONLY the Selected Month's Cash Flow
                     if (txDate.getFullYear() === currY && txDate.getMonth() === currM) { 
-                        chartLabels.push(formatDisplayDate(t.date)); 
-                        chartBalances.push(runningBalance); 
+                        if (t.type === 'income') monthBalance += amt;
+                        else monthBalance -= amt;
                     }
                 }
             });
 
             document.getElementById('total-net-worth').innerText = runningBalance.toLocaleString(undefined, {minimumFractionDigits: 2});
             
-            if(mainChart) {
-                if (chartLabels.length === 0) { 
-                    mainChart.data.labels = ['Start']; 
-                    mainChart.data.datasets[0].data = [runningBalance]; 
-                } else { 
-                    mainChart.data.labels = chartLabels; 
-                    mainChart.data.datasets[0].data = chartBalances; 
-                }
-                mainChart.update();
+            // Format and Display Selected Month Balance
+            const selMonthEl = document.getElementById('sel-month-balance');
+            if (selMonthEl) {
+                const sign = monthBalance >= 0 ? '+' : '-';
+                const color = monthBalance >= 0 ? 'text-green-500 dark:text-green-400' : 'text-red-500';
+                selMonthEl.innerHTML = `<span class="${color}">${sign}MYR ${Math.abs(monthBalance).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>`;
             }
         }
 
