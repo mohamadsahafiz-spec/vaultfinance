@@ -1063,8 +1063,7 @@
                 foodChart.update();
             }
         }
-
-        function updateUtilDashboard() {
+function updateUtilDashboard() {
             const yrEl = document.getElementById('util-year-filter');
             const yr = yrEl ? yrEl.value : new Date().getFullYear().toString();
             
@@ -1073,18 +1072,20 @@
             
             let histThisYear = utilHistory.filter(u => u.month && u.month.startsWith(yr)).sort((a, b) => new Date(b.month) - new Date(a.month));
             
+            // NEW: Updated data arrays to combine Internet and Phone
             let monthlyElec = new Array(12).fill(0); 
             let monthlyWater = new Array(12).fill(0); 
-            let monthlyInt = new Array(12).fill(0); 
+            let monthlyComms = new Array(12).fill(0); // Internet + Phone combined
             let monthlyOther = new Array(12).fill(0);
             
             histThisYear.forEach((u, i) => {
                 const amt = parseFloat(u.amount); 
                 const mIdx = parseInt(u.month.split('-')[1]) - 1;
                 
+                // Group the data into the correct arrays
                 if(u.type === 'Electricity') monthlyElec[mIdx] += amt;
                 else if(u.type === 'Water') monthlyWater[mIdx] += amt;
-                else if(u.type === 'Internet') monthlyInt[mIdx] += amt;
+                else if(u.type === 'Internet' || u.type === 'Phone') monthlyComms[mIdx] += amt;
                 else monthlyOther[mIdx] += amt;
 
                 const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -1111,11 +1112,12 @@
 
             if(utilChart) {
                 utilChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                // NEW: Assigned the updated colors and combined datasets
                 utilChart.data.datasets = [
-                    { label: 'Electricity', data: monthlyElec, backgroundColor: '#FFD600', borderRadius: 4 },
-                    { label: 'Internet', data: monthlyInt, backgroundColor: '#3B82F6', borderRadius: 4 },
-                    { label: 'Water', data: monthlyWater, backgroundColor: '#10B981', borderRadius: 4 },
-                    { label: 'Other', data: monthlyOther, backgroundColor: '#9CA3AF', borderRadius: 4 }
+                    { label: 'Electricity', data: monthlyElec, backgroundColor: '#FFD600', borderRadius: 4 }, // Yellow
+                    { label: 'Water', data: monthlyWater, backgroundColor: '#3B82F6', borderRadius: 4 }, // Blue
+                    { label: 'Internet/Phone', data: monthlyComms, backgroundColor: '#10B981', borderRadius: 4 }, // Green
+                    { label: 'Other', data: monthlyOther, backgroundColor: '#9CA3AF', borderRadius: 4 } // Grey
                 ];
                 utilChart.update();
             }
