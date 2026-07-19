@@ -1137,7 +1137,7 @@ function updateUtilDashboard() {
             }
         }
 
-        function updateCareerDashboard() {
+function updateCareerDashboard() {
             const list = document.getElementById('career-history-list'); 
             if(list) list.innerHTML = '';
             
@@ -1159,16 +1159,41 @@ function updateUtilDashboard() {
 
             careerHistory.forEach((c, i) => {
                 const total = c.salary + c.bonus;
+                
+                // NEW: Year-over-Year Percentage Calculation Engine
+                let prev = careerHistory.find(item => item.year === c.year - 1);
+                let pctSal = '', pctBon = '', pctTax = '';
+                
+                if(prev) {
+                    const getPct = (curr, prv, invertColor = false) => {
+                        if (prv === 0) {
+                            return curr > 0 ? `<span class="${invertColor ? 'text-red-500' : 'text-green-500 dark:text-green-400'} font-bold text-[10px] ml-1">(+100%)</span>` : '';
+                        }
+                        const diff = ((curr - prv) / prv) * 100;
+                        const sign = diff > 0 ? '+' : '';
+                        let color = 'text-gray-500 dark:text-gray-400'; // Neutral for zero change
+                        
+                        if (diff > 0) color = invertColor ? 'text-red-500' : 'text-green-500 dark:text-green-400';
+                        else if (diff < 0) color = invertColor ? 'text-green-500 dark:text-green-400' : 'text-red-500';
+                        
+                        return `<span class="${color} font-bold text-[10px] ml-1">(${sign}${diff.toFixed(1)}%)</span>`;
+                    };
+                    
+                    pctSal = getPct(c.salary, prev.salary);
+                    pctBon = getPct(c.bonus, prev.bonus);
+                    pctTax = getPct(c.tax, prev.tax, true); // True: Tax increase is Red
+                }
+
                 if(list) {
                     list.innerHTML += `
-                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group">
+                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
                         <td class="py-3"><div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xs">${c.year}</div></td>
                         <td class="py-3 pl-3">
                             <p class="font-bold text-sm">MYR ${total.toLocaleString()}</p>
-                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Base: ${c.salary.toLocaleString()} • Bonus: ${c.bonus.toLocaleString()}</p>
+                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Base: ${c.salary.toLocaleString()}${pctSal} • Bonus: ${c.bonus.toLocaleString()}${pctBon}</p>
                         </td>
                         <td class="py-3 pr-3 text-right">
-                            <p class="font-bold text-sm text-red-500">Tax: ${c.tax.toLocaleString()}</p>
+                            <p class="font-bold text-sm text-red-500">Tax: ${c.tax.toLocaleString()}${pctTax}</p>
                         </td>
                         <td class="py-3 text-right w-10">
                             <button onclick="deleteCareerLog(${i})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button>
