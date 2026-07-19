@@ -34,7 +34,6 @@
     </style>
 
     <script>
-        // Dark Mode Initialization
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
         } else {
@@ -98,7 +97,6 @@
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter px-5 md:px-8 flex flex-col gap-6">
             
-            <!-- INDEPENDENT DROPDOWN -->
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-lg">Dashboard</h3>
                 <select id="home-month-filter" onchange="updateHomeDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
@@ -174,11 +172,10 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 2: OVERALL ANALYTICS                   -->
+        <!-- TAB 2: OVERALL ANALYTICS (12-MONTH UPGRADE)-->
         <!-- ========================================== -->
         <div id="tab-overall" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <!-- INDEPENDENT DROPDOWN -->
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-lg">Overall Footprint</h3>
                 <select id="overall-month-filter" onchange="updateOverallDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
@@ -215,8 +212,9 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <div class="flex justify-between items-end mb-5">
                     <div>
-                        <h4 class="font-bold text-sm">Pacing Comparison</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected vs Previous Month</p>
+                        <!-- UPDATED ANNUAL TITLE -->
+                        <h4 class="font-bold text-sm">Annual Spending Trend</h4>
+                        <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected Year vs Previous Year</p>
                     </div>
                 </div>
                 <div class="w-full h-48 relative"><canvas id="comparisonChart"></canvas></div>
@@ -225,24 +223,29 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Ledger (Selected Month)</h4>
                 <div class="overflow-x-auto">
-                    <!-- FIXED: Removed min-w-[500px] to allow mobile scaling -->
                     <table class="w-full text-left border-collapse"><tbody id="overall-transaction-list" class="text-sm"></tbody></table>
                 </div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 3: FOOD & DINING                       -->
+        <!-- TAB 3: FOOD & DINING (12-MONTH UPGRADE)    -->
         <!-- ========================================== -->
         <div id="tab-food" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <!-- INDEPENDENT DROPDOWN -->
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-lg">Food & Dining</h3>
                 <select id="food-month-filter" onchange="updateFoodDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <div class="flex justify-between items-end mb-4">
+                    <div>
+                        <!-- UPDATED ANNUAL TITLE -->
+                        <h4 class="font-bold text-sm">Annual Spending Trend</h4>
+                        <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected Year vs Previous Year</p>
+                    </div>
+                </div>
                 <h3 class="text-2xl font-bold mb-4">MYR <span id="food-total-display">0.00</span></h3>
                 <div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
                 <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5"><canvas id="foodChart"></canvas></div>
@@ -251,18 +254,16 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Food Ledger (Selected Month)</h4>
                 <div class="overflow-x-auto">
-                    <!-- FIXED: Removed min-w-[500px] to allow mobile scaling -->
                     <table class="w-full text-left border-collapse"><tbody id="food-transaction-list" class="text-sm"></tbody></table>
                 </div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 4: UTILITIES & BILLS (UPGRADED)        -->
+        <!-- TAB 4: UTILITIES & BILLS                   -->
         <!-- ========================================== -->
         <div id="tab-bills" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <!-- INDEPENDENT YEAR DROPDOWN -->
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-lg">Utility History</h3>
                 <select id="util-year-filter" onchange="updateUtilDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
@@ -282,7 +283,6 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Historical Ledger (Selected Year)</h4>
                 <div class="overflow-x-auto">
-                    <!-- FIXED: Removed min-w-[500px] to allow mobile scaling -->
                     <table class="w-full text-left border-collapse"><tbody id="util-history-list" class="text-sm"></tbody></table>
                 </div>
             </div>
@@ -297,11 +297,10 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 5: CAREER & WEALTH (UPGRADED)          -->
+        <!-- TAB 5: CAREER & WEALTH                     -->
         <!-- ========================================== -->
         <div id="tab-salary" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <!-- HEADER AREA -->
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-lg">Career Growth</h3>
                 <button onclick="openCareerModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Income</button>
@@ -322,20 +321,18 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 6: PROFILE (LINKEDIN STYLE)            -->
+        <!-- TAB 6: PROFILE                             -->
         <!-- ========================================== -->
         <div id="tab-profile" class="tab-enter px-5 md:px-8 hidden flex-col gap-6 pb-20">
             
             <!-- LinkedIn Style Identity Card -->
             <div class="relative bg-panel-light dark:bg-panel-dark rounded-3xl overflow-hidden shadow-sm dark:shadow-none border border-gray-200 dark:border-white/5 transition-colors duration-300">
-                <!-- Cover Photo Area -->
                 <div class="h-32 bg-gradient-to-r from-gray-700 to-brand relative">
                     <button onclick="document.getElementById('cover-upload').click()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition text-xs shadow-md">✏️</button>
                     <input type="file" id="cover-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'cover')">
                     <img id="profile-cover-img" src="" class="w-full h-full object-cover hidden">
                 </div>
                 
-                <!-- Avatar Area -->
                 <div class="absolute top-16 left-6 z-10">
                     <div class="w-24 h-24 rounded-full border-[4px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-lg transition-colors duration-300" onclick="document.getElementById('avatar-upload').click()">
                         <img id="profile-avatar-img" src="" class="w-full h-full object-cover hidden">
@@ -345,7 +342,6 @@
                     <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'avatar')">
                 </div>
                 
-                <!-- Info Area -->
                 <div class="pt-12 px-6 pb-6">
                     <h3 class="text-2xl font-bold" id="li-name">Name</h3>
                     <p class="text-sm font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5" id="li-role">Role • Industry</p>
@@ -354,7 +350,6 @@
                 </div>
             </div>
 
-            <!-- Profile Edit Form -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <h4 class="font-bold text-sm mb-4">Edit Profile Information</h4>
                 <form id="profile-form" onsubmit="saveProfile(event)" class="space-y-4">
@@ -416,7 +411,6 @@
         <button onclick="switchTab('overall')" id="nav-mob-overall" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">📊</button>
         <button onclick="switchTab('food')" id="nav-mob-food" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">🍔</button>
         
-        <!-- FAB Center Cutout Effect -->
         <div class="relative w-12 h-10 flex justify-center items-center shrink-0">
             <button onclick="openTxModal()" class="absolute bottom-2 w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.3)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
@@ -428,9 +422,8 @@
         <button onclick="switchTab('profile')" id="nav-mob-profile" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">👤</button>
     </nav>
 
-
     <!-- ========================================== -->
-    <!-- MODALS (Fully Expanded)                    -->
+    <!-- MODALS                                     -->
     <!-- ========================================== -->
 
     <!-- Update Accounts Modal -->
@@ -663,7 +656,6 @@
             { name: "Unifi", amount: 129, dueDate: "2026-07-28" }
         ];
         
-        // New Independent Storages for Utility & Career
         let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
         let careerHistory = JSON.parse(localStorage.getItem('vault_career')) || [
             { year: 2024, salary: 73200, bonus: 4000, tax: 8000 },
@@ -682,7 +674,6 @@
             cover: ""
         };
 
-        // Chart References
         let mainChart, comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
 
 
@@ -775,7 +766,6 @@
 
         // --- 3. INDEPENDENT TIME MACHINES ---
         function populateDropdowns() {
-            // Group 1: Month/Year Dropdowns (Home, Overall, Food)
             let txMonths = new Set();
             const now = new Date(); 
             txMonths.add(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`);
@@ -807,7 +797,6 @@
                 }
             });
 
-            // Group 2: Year-Only Dropdown (Utilities)
             let uYears = new Set(); 
             uYears.add(now.getFullYear().toString());
             
@@ -893,9 +882,6 @@
             const currY = parseInt(yStr, 10); 
             const currM = parseInt(mStr, 10) - 1;
             
-            const lastM = currM === 0 ? 11 : currM - 1; 
-            const lastY = currM === 0 ? currY - 1 : currY;
-            
             const list = document.getElementById('overall-transaction-list'); 
             if(list) list.innerHTML = '';
             
@@ -905,50 +891,50 @@
             let utilSpend = 0; 
             let otherSpend = 0;
             
-            let cDaily = new Array(31).fill(0); 
-            let lDaily = new Array(31).fill(0);
+            // 12-Month Arrays for the Annual Trend Chart
+            let currYearMonthly = new Array(12).fill(0); 
+            let lastYearMonthly = new Array(12).fill(0);
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(t => {
                 if(!t.date) return; 
                 const txDate = new Date(t.date); 
                 const amt = parseFloat(t.amount); 
-                const dIdx = txDate.getDate() - 1;
+                const txM = txDate.getMonth();
+                const txY = txDate.getFullYear();
                 
                 const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
                 const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
                 const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
                 
-                if(txDate.getMonth() === currM && txDate.getFullYear() === currY) {
-                    if(t.type !== 'income') {
+                if(t.type !== 'income') {
+                    // Feed the Annual Graph (Jan-Dec)
+                    if(txY === currY) currYearMonthly[txM] += amt;
+                    if(txY === currY - 1) lastYearMonthly[txM] += amt;
+
+                    // Feed the specific Selected Month Stats & Ledger
+                    if(txM === currM && txY === currY) {
                         monthlySpend += amt; 
-                        cDaily[dIdx] += amt;
-                        if(isFood) {
-                            foodSpend += amt; 
-                        } else if(isUtil) {
-                            utilSpend += amt; 
-                        } else {
-                            otherSpend += amt;
+                        if(isFood) foodSpend += amt; 
+                        else if(isUtil) utilSpend += amt; 
+                        else otherSpend += amt;
+                        
+                        const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
+                        const icon = t.type === 'income' ? '💰' : '💳';
+                        const sign = t.type === 'income' ? '+' : '-';
+                        
+                        if(list) {
+                            list.innerHTML += `
+                            <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
+                                <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">${icon}</div></td>
+                                <td class="py-3 pl-3">
+                                    <p class="font-bold text-sm">${t.desc}</p>
+                                    <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p>
+                                </td>
+                                <td class="py-3 text-right font-bold text-sm ${c}">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                            </tr>`;
                         }
+                        txCount++;
                     }
-                    
-                    const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
-                    const icon = t.type === 'income' ? '💰' : '💳';
-                    const sign = t.type === 'income' ? '+' : '-';
-                    
-                    if(list) {
-                        list.innerHTML += `
-                        <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
-                            <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">${icon}</div></td>
-                            <td class="py-3 pl-3">
-                                <p class="font-bold text-sm">${t.desc}</p>
-                                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p>
-                            </td>
-                            <td class="py-3 text-right font-bold text-sm ${c}">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                        </tr>`;
-                    }
-                    txCount++;
-                } else if(txDate.getMonth() === lastM && txDate.getFullYear() === lastY && t.type !== 'income') {
-                    lDaily[dIdx] += amt;
                 }
             });
             
@@ -972,38 +958,14 @@
                 document.getElementById('pct-util').innerText = pu; 
                 document.getElementById('pct-other').innerText = po;
             } else {
-                ['bar-food','bar-util','bar-other'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if(el) el.style.width='0%';
-                });
-                ['pct-food','pct-util','pct-other'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if(el) el.innerText='0';
-                });
+                ['bar-food','bar-util','bar-other'].forEach(id => { const el = document.getElementById(id); if(el) el.style.width='0%'; });
+                ['pct-food','pct-util','pct-other'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText='0'; });
             }
 
             if(comparisonChart) {
-                let cCumul = []; 
-                let lCumul = []; 
-                let cSum = 0; 
-                let lSum = 0; 
-                const today = new Date().getDate(); 
-                const isCurrCal = (currM === new Date().getMonth() && currY === new Date().getFullYear());
-                
-                for(let i=0; i<31; i++) {
-                    cSum += cDaily[i]; 
-                    lSum += lDaily[i]; 
-                    lCumul.push(lSum);
-                    if(!isCurrCal || i < today) {
-                        cCumul.push(cSum); 
-                    } else {
-                        cCumul.push(null);
-                    }
-                }
-                
-                comparisonChart.data.labels = Array.from({length: 31}, (_, i) => i + 1);
-                comparisonChart.data.datasets[0].data = cCumul; 
-                comparisonChart.data.datasets[1].data = lCumul;
+                comparisonChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                comparisonChart.data.datasets[0].data = currYearMonthly; 
+                comparisonChart.data.datasets[1].data = lastYearMonthly;
                 comparisonChart.update();
             }
         }
@@ -1017,31 +979,35 @@
             const currY = parseInt(yStr, 10); 
             const currM = parseInt(mStr, 10) - 1;
             
-            const lastM = currM === 0 ? 11 : currM - 1; 
-            const lastY = currM === 0 ? currY - 1 : currY;
-            
             const list = document.getElementById('food-transaction-list'); 
             if(list) list.innerHTML = '';
             
             let txCount = 0; 
             let cSum = 0; 
             let lSum = 0; 
-            let cDaily = new Array(31).fill(0); 
-            let lDaily = new Array(31).fill(0);
+            
+            // 12-Month Arrays for Annual Food Trend
+            let currYearFood = new Array(12).fill(0); 
+            let lastYearFood = new Array(12).fill(0);
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(t => {
                 if(!t.date || t.type === 'income') return; 
                 const txDate = new Date(t.date); 
                 const amt = parseFloat(t.amount); 
-                const dIdx = txDate.getDate() - 1;
+                const txM = txDate.getMonth();
+                const txY = txDate.getFullYear();
                 
                 const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
                 const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
                 if(!isFood) return;
                 
-                if(txDate.getMonth() === currM && txDate.getFullYear() === currY) {
+                // Feed the Annual Graph (Jan-Dec)
+                if(txY === currY) currYearFood[txM] += amt;
+                if(txY === currY - 1) lastYearFood[txM] += amt;
+
+                // Feed the specific Selected Month Stats & Ledger
+                if(txM === currM && txY === currY) {
                     cSum += amt; 
-                    cDaily[dIdx] += amt;
                     if(list) {
                         list.innerHTML += `
                         <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
@@ -1054,9 +1020,8 @@
                         </tr>`;
                     }
                     txCount++;
-                } else if(txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { 
+                } else if(txM === (currM === 0 ? 11 : currM - 1) && txY === (currM === 0 ? currY - 1 : currY)) { 
                     lSum += amt; 
-                    lDaily[dIdx] += amt; 
                 }
             });
             
@@ -1079,27 +1044,9 @@
             }
 
             if(foodChart) {
-                let cCumul = []; 
-                let lCumul = []; 
-                let tC = 0; 
-                let tL = 0; 
-                const today = new Date().getDate(); 
-                const isCurrCal = (currM === new Date().getMonth() && currY === new Date().getFullYear());
-                
-                for(let i=0; i<31; i++) {
-                    tC += cDaily[i]; 
-                    tL += lDaily[i]; 
-                    lCumul.push(tL);
-                    if(!isCurrCal || i < today) {
-                        cCumul.push(tC); 
-                    } else {
-                        cCumul.push(null);
-                    }
-                }
-                
-                foodChart.data.labels = Array.from({length: 31}, (_, i) => i + 1);
-                foodChart.data.datasets[0].data = cCumul; 
-                foodChart.data.datasets[1].data = lCumul;
+                foodChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                foodChart.data.datasets[0].data = currYearFood; 
+                foodChart.data.datasets[1].data = lastYearFood;
                 foodChart.update();
             }
         }
@@ -1258,7 +1205,6 @@
 
         // --- 5. MODAL CONTROLLERS & DATA SAVING ---
 
-        // Cards
         function renderCards() { 
             const dEl = document.getElementById('debit-display');
             const cEl = document.getElementById('credit-display');
@@ -1270,9 +1216,7 @@
             document.getElementById('card-credit-input').value = cardData.credit; 
             document.getElementById('card-modal').classList.remove('hidden'); 
         }
-        function closeCardModal() { 
-            document.getElementById('card-modal').classList.add('hidden'); 
-        }
+        function closeCardModal() { document.getElementById('card-modal').classList.add('hidden'); }
         function saveCards(e) { 
             e.preventDefault(); 
             cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; 
@@ -1282,7 +1226,6 @@
             closeCardModal(); 
         }
 
-        // Transactions
         function openTxModal() { 
             document.getElementById('tx-date').valueAsDate = new Date(); 
             document.getElementById('tx-modal').classList.remove('hidden'); 
@@ -1308,7 +1251,6 @@
             closeTxModal(); 
         }
 
-        // Savings
         function renderSavings() { 
             const curEl = document.getElementById('current-savings');
             const tgtEl = document.getElementById('target-savings');
@@ -1330,9 +1272,7 @@
             document.getElementById('savings-target-input').value = savingsData.target; 
             document.getElementById('savings-modal').classList.remove('hidden'); 
         }
-        function closeSavingsModal() { 
-            document.getElementById('savings-modal').classList.add('hidden'); 
-        }
+        function closeSavingsModal() { document.getElementById('savings-modal').classList.add('hidden'); }
         function saveSavings(e) { 
             e.preventDefault(); 
             savingsData.current = parseFloat(document.getElementById('savings-current-input').value)||0; 
@@ -1342,7 +1282,6 @@
             closeSavingsModal(); 
         }
 
-        // Debts
         function renderDebts() {
             const dl = document.getElementById('debt-list'); 
             if(!dl) return;
@@ -1370,13 +1309,8 @@
             }); 
             calculateSnowball();
         }
-        function openDebtModal() { 
-            document.getElementById('debt-modal').classList.remove('hidden'); 
-        }
-        function closeDebtModal() { 
-            document.getElementById('debt-modal').classList.add('hidden'); 
-            document.getElementById('debt-form').reset(); 
-        }
+        function openDebtModal() { document.getElementById('debt-modal').classList.remove('hidden'); }
+        function closeDebtModal() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
         function saveDebt(e) { 
             e.preventDefault(); 
             debts.push({
@@ -1408,7 +1342,6 @@
         const extraPaymentEl = document.getElementById('extra-payment');
         if(extraPaymentEl) extraPaymentEl.addEventListener('input', calculateSnowball);
 
-        // Upcoming Bills
         function renderBills() {
             const list = document.getElementById('bill-list'); 
             if(!list) return;
@@ -1455,13 +1388,8 @@
                 </div>`;
             });
         }
-        function openBillModal() { 
-            document.getElementById('bill-modal').classList.remove('hidden'); 
-        }
-        function closeBillModal() { 
-            document.getElementById('bill-modal').classList.add('hidden'); 
-            document.getElementById('bill-form').reset(); 
-        }
+        function openBillModal() { document.getElementById('bill-modal').classList.remove('hidden'); }
+        function closeBillModal() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
         function saveBill(e) { 
             e.preventDefault(); 
             bills.push({ 
@@ -1474,16 +1402,12 @@
             closeBillModal(); 
         }
 
-        // Utility History Modal (NEW)
         function openUtilHistoryModal() { 
             const now = new Date();
             document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
             document.getElementById('util-history-modal').classList.remove('hidden'); 
         }
-        function closeUtilHistoryModal() { 
-            document.getElementById('util-history-modal').classList.add('hidden'); 
-            document.getElementById('util-hist-form').reset(); 
-        }
+        function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
         function saveUtilHistory(e) { 
             e.preventDefault(); 
             utilHistory.push({ 
@@ -1497,35 +1421,26 @@
             closeUtilHistoryModal(); 
         }
 
-        // Career History Modal (NEW)
         function openCareerModal() { 
             document.getElementById('career-year').value = new Date().getFullYear(); 
             document.getElementById('career-modal').classList.remove('hidden'); 
         }
-        function closeCareerModal() { 
-            document.getElementById('career-modal').classList.add('hidden'); 
-            document.getElementById('career-form').reset(); 
-        }
+        function closeCareerModal() { document.getElementById('career-modal').classList.add('hidden'); document.getElementById('career-form').reset(); }
         function saveCareerRecord(e) {
             e.preventDefault();
             const yearInput = parseInt(document.getElementById('career-year').value);
-            
-            // Remove existing record for that year if it exists to prevent duplicates
             careerHistory = careerHistory.filter(c => c.year !== yearInput); 
-            
             careerHistory.push({ 
                 year: yearInput, 
                 salary: parseFloat(document.getElementById('career-salary').value), 
                 bonus: parseFloat(document.getElementById('career-bonus').value), 
                 tax: parseFloat(document.getElementById('career-tax').value) 
             });
-            
             localStorage.setItem('vault_career', JSON.stringify(careerHistory));
             updateCareerDashboard(); 
             closeCareerModal();
         }
 
-        // Category Detail Modal
         function openCategoryModal(type) {
             if (type !== 'other') return; 
             
@@ -1586,11 +1501,8 @@
             
             document.getElementById('category-modal').classList.remove('hidden');
         }
-        function closeCategoryModal() { 
-            document.getElementById('category-modal').classList.add('hidden'); 
-        }
+        function closeCategoryModal() { document.getElementById('category-modal').classList.add('hidden'); }
 
-        // Profile Controller
         function renderProfile() {
             document.getElementById('prof-name').value = profile.name; 
             document.getElementById('prof-role').value = profile.role;
@@ -1662,7 +1574,7 @@
             reader.readAsDataURL(file);
         }
 
-        // --- 6. DATA MANAGEMENT (BACKUP, CSV, FACTORY RESET) ---
+        // --- 6. DATA MANAGEMENT ---
         
         function exportBackup() { 
             const backupData = { 
@@ -1703,7 +1615,6 @@
             reader.readAsText(file); 
         });
 
-        // Expanded Smart CSV Importer (Ghost-Buster & Date Translator)
         document.getElementById('csv-file-input').addEventListener('change', function(e) { 
             const file = e.target.files[0]; 
             if (!file) return; 
@@ -1727,7 +1638,6 @@
                         
                         if (h === 'type') val = val.toLowerCase(); 
                         
-                        // Date Translator Engine
                         if (h === 'date') { 
                             if (val.includes('/')) { 
                                 const parts = val.split('/'); 
@@ -1769,7 +1679,6 @@
                 
                 const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
                 
-                // Ghost Buster
                 transactions = transactions.filter(t => { 
                     if (!t.date || typeof t.date !== 'string') return false; 
                     return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); 
@@ -1800,7 +1709,6 @@
         window.onload = function() {
             populateDropdowns();
             
-            // Chart Defaults
             Chart.defaults.font.family = 'Urbanist'; 
             let isDark = document.documentElement.classList.contains('dark'); 
             let tc = isDark ? '#8E8E93' : '#6B7280'; 
@@ -1817,7 +1725,6 @@
                 } 
             };
 
-            // Main Line Chart (Dashboard)
             const ctxMain = document.getElementById('mainChart').getContext('2d'); 
             const gradMain = ctxMain.createLinearGradient(0, 0, 0, 200); 
             gradMain.addColorStop(0, 'rgba(255, 214, 0, 0.3)'); 
@@ -1829,26 +1736,26 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { display: false } } } 
             });
 
-            // Secondary Charts
             categoryChart = new Chart(document.getElementById('categoryChart'), { 
                 type: 'bar', 
                 data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, 
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } 
             });
 
+            // UPDATED: Now initialized with empty data (populated automatically on load)
             comparisonChart = new Chart(document.getElementById('comparisonChart'), { 
                 type: 'line', 
                 data: { labels: [], datasets: [ { borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0 }, { borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, 
                 options: lineConfig 
             });
             
+            // UPDATED: Now initialized with empty data (populated automatically on load)
             foodChart = new Chart(document.getElementById('foodChart'), { 
                 type: 'line', 
                 data: { labels: [], datasets: [ { borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0 }, { borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, 
                 options: lineConfig 
             });
             
-            // New Util Bar Chart
             utilChart = new Chart(document.getElementById('utilChart'), { 
                 type: 'bar', 
                 data: { labels: [], datasets: [] }, 
@@ -1863,7 +1770,6 @@
                 } 
             });
             
-            // New Career Mixed Chart
             salaryChart = new Chart(document.getElementById('salaryChart'), { 
                 type: 'bar', 
                 data: { labels: [], datasets: [] }, 
@@ -1878,7 +1784,7 @@
                 } 
             });
 
-            // Initialize all data
+            // Trigger updates
             renderCards(); 
             renderBills(); 
             renderDebts(); 
@@ -1893,7 +1799,7 @@
         };
     </script>
     
-    <!-- Service Worker -->
+    <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) { 
             window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); 
