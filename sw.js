@@ -1,5 +1,4 @@
-const CACHE_NAME = 'vault-cache-v2'; // Bumped version to force a reset
-
+const CACHE_NAME = 'vault-cache-v3';
 const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',
@@ -7,28 +6,42 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  // Force this new worker to take over immediately
-  self.skipWaiting(); 
-  
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      // Forgiving cache: add files one by one. If one fails, it won't crash the install.
-      ASSETS_TO_CACHE.forEach(asset => {
-          cache.add(asset).catch(err => console.error('Skipping cache for:', asset));
-      });
+      ASSETS_TO_CACHE.forEach(asset => cache.add(asset).catch(err => console.log('Skipped:', asset)));
     })
   );
 });
 
+// Delete old caches when the new one takes over
 self.addEventListener('activate', (event) => {
-  // Take control of the page immediately
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== CACHE_NAME) {
+          return caches.delete(key);
+        }
+      }));
+    }).then(() => self.clients.claim())
+  );
 });
 
+// NETWORK-FIRST STRATEGY: Always get the freshest code if online
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    fetch(event.request)
+      .then((networkResponse) => {
+        // Save the fresh code to the offline cache silently
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        // If offline, use the saved cache
+        return caches.match(event.request);
+      })
   );
 });
