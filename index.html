@@ -570,7 +570,7 @@
             });
         }
 
-        // --- CSV IMPORT LOGIC (For raw ledgers) ---
+// --- SMART CSV IMPORT LOGIC ---
         function setupCSVImport() {
             const fileInput = document.getElementById('csv-file-input');
             if(!fileInput) return;
@@ -588,20 +588,59 @@
                         return;
                     }
                     
-                    const headers = rows[0].split(',').map(h => h.trim());
+                    const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
                     
                     const importedData = rows.slice(1).map(row => {
                         const values = row.split(',');
                         let obj = {};
-                        headers.forEach((h, i) => obj[h] = values[i] ? values[i].trim() : '');
-                        if(obj.amount) obj.amount = parseFloat(obj.amount);
+                        headers.forEach((h, i) => {
+                            let val = values[i] ? values[i].trim() : '';
+                            
+                            // Fix 1: Force type to lowercase (e.g. 'Expense' -> 'expense')
+                            if (h === 'type') val = val.toLowerCase();
+                            
+                            // Fix 2: Translate Regional Excel Dates
+                            if (h === 'date') {
+                                // Convert slashes to dashes
+                                if (val.includes('/')) {
+                                    const parts = val.split('/');
+                                    if (parts.length === 3) {
+                                        if (parts[0].length === 4) {
+                                            // Format: YYYY/MM/DD
+                                            val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
+                                        } else {
+                                            // Format: DD/MM/YYYY (Regional standard)
+                                            let d = parts[0].padStart(2, '0');
+                                            let m = parts[1].padStart(2, '0');
+                                            let y = parts[2];
+                                            if (y.length === 2) y = '20' + y;
+                                            val = `${y}-${m}-${d}`;
+                                        }
+                                    }
+                                }
+                            }
+                            obj[h] = val;
+                        });
+                        
+                        // Fix 3: Strip any letters/symbols from amounts (like MYR or spaces)
+                        if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,""));
+                        
                         return obj;
                     });
 
-                    transactions = [...transactions, ...importedData];
+                    // Filter out truly empty rows
+                    const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-'));
+
+                    // Ghost-Buster: Remove any existing invisible corrupted data from previous bad imports
+                    transactions = transactions.filter(t => {
+                        const d = new Date(t.date);
+                        return !isNaN(d.getTime());
+                    });
+
+                    transactions = [...transactions, ...validData];
                     localStorage.setItem('vault_transactions', JSON.stringify(transactions));
                     
-                    alert(`Successfully imported ${importedData.length} transactions!`);
+                    alert(`Successfully cleaned and imported ${validData.length} transactions!`);
                     populateMonthFilter();
                     updateDashboard();
                     fileInput.value = '';
@@ -609,7 +648,6 @@
                 reader.readAsText(file);
             });
         }
-
         // --- THEME TOGGLE LOGIC ---
         function toggleTheme() {
             document.documentElement.classList.toggle('dark');
