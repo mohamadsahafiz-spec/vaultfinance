@@ -115,8 +115,11 @@
                             <div class="flex items-center gap-2 font-bold text-[14px]">
                                 <span>💳</span>
                                 <span>Credit Card</span>
+                                <span class="text-[10px] font-black bg-black/10 text-gray-900 px-2 py-0.5 rounded-full ml-1"><span id="credit-pct">0</span>% Used</span>
                             </div>
-                            <div class="font-bold text-[15px] tracking-tight">MYR <span id="credit-display">0.00</span></div>
+                            <div class="font-bold text-[14px] tracking-tight text-right">
+                                MYR <span id="credit-display">0.00</span> <span class="text-[11px] font-bold opacity-60">/ 10,000</span>
+                            </div>
                         </div>
                     </div>
 
@@ -1010,9 +1013,20 @@
 
         // --- 5. MODAL CONTROLLERS & DATA SAVING ---
         function renderCards() { 
-            const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display');
+            const dEl = document.getElementById('debit-display'); 
+            const cEl = document.getElementById('credit-display');
+            const cpEl = document.getElementById('credit-pct');
+            
             if(dEl) dEl.innerText = cardData.debit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
             if(cEl) cEl.innerText = cardData.credit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+            
+            // DYNAMIC UTILIZATION RATE
+            if(cpEl) {
+                const maxLimit = 10000;
+                const currentBalance = cardData.credit;
+                const usedPercentage = Math.round((currentBalance / maxLimit) * 100);
+                cpEl.innerText = usedPercentage;
+            }
         }
         function openCardModal() { document.getElementById('card-debit-input').value = cardData.debit; document.getElementById('card-credit-input').value = cardData.credit; document.getElementById('card-modal').classList.remove('hidden'); }
         function closeCardModal() { document.getElementById('card-modal').classList.add('hidden'); }
