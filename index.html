@@ -18,10 +18,14 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
-        .dark ::-webkit-scrollbar-thumb { background: #374151; }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        ::-webkit-scrollbar { display: none; }
+        
+        /* Hide scrollbar for IE, Edge and Firefox */
+        * {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
         
         .modal-enter { animation: fadeIn 0.2s ease-out forwards; }
         .tab-enter { animation: slideIn 0.3s ease-out forwards; }
