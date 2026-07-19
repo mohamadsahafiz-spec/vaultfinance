@@ -12,7 +12,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -108,76 +108,87 @@
                 <div id="home-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
+            <!-- HORIZONTAL SWIPE CARDS -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
-                <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 card-debit-bg text-white rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-110 transition shadow-lg relative overflow-hidden border border-white/10" onclick="openCardModal('debit')">
-                    <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-400/30 to-transparent mix-blend-overlay pointer-events-none"></div>
-                    <div class="relative z-10 flex flex-col h-full justify-between">
-                        <div class="flex justify-between items-start">
-                            <div class="font-bold text-base text-yellow-400 drop-shadow-md tracking-tight bg-black/20 px-1.5 py-0.5 rounded backdrop-blur-sm">Maybank</div>
-                            <div class="text-white text-[9px] font-medium italic tracking-wide drop-shadow-md mt-0.5">platinum</div>
-                        </div>
-                        <div class="mt-3">
-                            <div class="w-9 h-6 bg-gradient-to-br from-yellow-100 to-yellow-500 rounded border border-yellow-600 mb-1.5 opacity-90 shadow-sm"></div>
-                            <div class="font-mono text-sm tracking-[0.1em] text-white/90 drop-shadow-sm">**** **** **** <span id="debit-last4">1234</span></div>
-                        </div>
-                        <div class="flex justify-between items-end text-white mt-1">
-                            <div>
-                                <div class="text-[8px] uppercase tracking-wider opacity-80 font-semibold" id="debit-name">Debit Card</div>
-                                <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="debit-display">0.00</span></div>
-                            </div>
-                            <div class="flex -space-x-2 drop-shadow-md pb-0.5">
-                                <div class="w-6 h-6 rounded-full bg-[#EB001B] opacity-90 mix-blend-screen"></div>
-                                <div class="w-6 h-6 rounded-full bg-[#F79E1B] opacity-90 mix-blend-screen"></div>
-                            </div>
-                        </div>
-                    </div>
+                
+                <!-- DEBIT CARD -->
+                <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('debit')">
+                   <div class="card-debit-bg w-full h-full p-4 flex flex-col justify-between relative">
+                       <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-400/30 to-transparent mix-blend-overlay pointer-events-none"></div>
+                       <div class="relative z-10 flex flex-col h-full justify-between">
+                           <div class="flex justify-between items-start">
+                               <div class="font-bold text-base text-yellow-400 drop-shadow-md tracking-tight bg-black/20 px-1.5 py-0.5 rounded backdrop-blur-sm">Maybank</div>
+                               <div class="text-white text-[9px] font-medium italic tracking-wide drop-shadow-md mt-0.5">platinum</div>
+                           </div>
+                           <div class="mt-3">
+                               <div class="w-9 h-6 bg-gradient-to-br from-yellow-100 to-yellow-500 rounded border border-yellow-600 mb-1.5 opacity-90 shadow-sm"></div>
+                               <div class="font-mono text-sm tracking-[0.1em] text-white/90 drop-shadow-sm">**** **** **** <span id="debit-last4">1234</span></div>
+                           </div>
+                           <div class="flex justify-between items-end text-white mt-1">
+                               <div>
+                                   <div class="text-[8px] uppercase tracking-wider opacity-80 font-semibold" id="debit-name">Debit Card</div>
+                                   <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="debit-display">0.00</span></div>
+                               </div>
+                               <div class="flex -space-x-2 drop-shadow-md pb-0.5">
+                                   <div class="w-6 h-6 rounded-full bg-[#EB001B] opacity-90 mix-blend-screen"></div>
+                                   <div class="w-6 h-6 rounded-full bg-[#F79E1B] opacity-90 mix-blend-screen"></div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 card-gold-bg text-gray-900 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-105 transition shadow-[0_8px_20px_rgba(217,119,6,0.25)] relative overflow-hidden border border-yellow-300/50" onclick="openCardModal('credit')">
-                    <div class="absolute bottom-8 left-[-20%] right-[-20%] h-4 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-80 transform -skew-y-6 drop-shadow-sm"></div>
-                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
-                    <div class="relative z-10 flex flex-col h-full justify-between">
-                        <div class="flex justify-between items-start">
-                            <div class="font-bold text-base drop-shadow-sm tracking-tight bg-white/40 px-1.5 py-0.5 rounded backdrop-blur-sm">Maybank <span class="text-[9px] font-semibold ml-0.5">Islamic</span></div>
-                            <div class="text-[9px] font-bold opacity-80 uppercase tracking-wider mt-0.5">gold</div>
-                        </div>
-                        <div class="mt-3">
-                            <div class="w-9 h-6 bg-gradient-to-br from-yellow-100 to-yellow-300 rounded border border-yellow-600 mb-1.5 shadow-sm"></div>
-                            <div class="font-mono text-sm tracking-[0.1em] text-gray-800 drop-shadow-sm">**** **** **** <span id="credit-last4">8888</span></div>
-                        </div>
-                        <div class="flex justify-between items-end mt-1">
-                            <div>
-                                <div class="text-[8px] uppercase tracking-wider font-semibold opacity-80" id="credit-name">Ikhwan CC</div>
-                                <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="credit-display">0.00</span></div>
+                <!-- CREDIT CARD -->
+                <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('credit')">
+                    <div class="card-gold-bg w-full h-full p-4 flex flex-col justify-between relative shadow-[0_8px_20px_rgba(217,119,6,0.25)]">
+                        <div class="absolute bottom-8 left-[-20%] right-[-20%] h-4 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-80 transform -skew-y-6 drop-shadow-sm"></div>
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
+                        <div class="relative z-10 flex flex-col h-full justify-between">
+                            <div class="flex justify-between items-start">
+                                <div class="font-bold text-base drop-shadow-sm tracking-tight bg-white/40 px-1.5 py-0.5 rounded backdrop-blur-sm">Maybank <span class="text-[9px] font-semibold ml-0.5">Islamic</span></div>
+                                <div class="text-[9px] font-bold opacity-80 uppercase tracking-wider mt-0.5">gold</div>
                             </div>
-                            <div class="flex flex-col items-end drop-shadow-sm pb-0.5">
-                                <span class="text-[7px] font-bold bg-white/60 backdrop-blur-sm text-gray-900 px-1.5 py-0.5 rounded-sm mb-1 border border-white/50"><span id="credit-pct">0</span>% Used</span>
-                                <div class="flex -space-x-2">
-                                    <div class="w-6 h-6 rounded-full bg-[#EB001B] opacity-95"></div>
-                                    <div class="w-6 h-6 rounded-full bg-[#F79E1B] opacity-95"></div>
+                            <div class="mt-3">
+                                <div class="w-9 h-6 bg-gradient-to-br from-yellow-100 to-yellow-300 rounded border border-yellow-600 mb-1.5 shadow-sm"></div>
+                                <div class="font-mono text-sm tracking-[0.1em] text-gray-800 drop-shadow-sm">**** **** **** <span id="credit-last4">8888</span></div>
+                            </div>
+                            <div class="flex justify-between items-end mt-1">
+                                <div>
+                                    <div class="text-[8px] uppercase tracking-wider font-semibold opacity-80" id="credit-name">Ikhwan CC</div>
+                                    <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-sm"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="credit-display">0.00</span></div>
+                                </div>
+                                <div class="flex flex-col items-end drop-shadow-sm pb-0.5">
+                                    <span class="text-[7px] font-bold bg-white/60 backdrop-blur-sm text-gray-900 px-1.5 py-0.5 rounded-sm mb-1 border border-white/50"><span id="credit-pct">0</span>% Used</span>
+                                    <div class="flex -space-x-2">
+                                        <div class="w-6 h-6 rounded-full bg-[#EB001B] opacity-95"></div>
+                                        <div class="w-6 h-6 rounded-full bg-[#F79E1B] opacity-95"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-gradient-to-br from-white via-gray-50 to-gray-200 text-gray-900 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-95 transition shadow-[0_8px_20px_rgba(0,0,0,0.08)] relative overflow-hidden border border-gray-300" onclick="openCardModal('kwsp')">
-                    <div class="absolute -right-8 -top-8 w-32 h-32 bg-white rounded-full blur-xl pointer-events-none"></div>
-                    <div class="relative z-10 flex flex-col h-full justify-between">
-                        <div class="flex justify-between items-start">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-[#002868] flex items-center justify-center border-2 border-[#ED1A3B] shadow-sm"><span class="text-yellow-400 font-bold text-[7px] tracking-tighter">KWSP</span></div>
-                                <div class="font-bold text-lg text-[#002868] tracking-tight leading-none border-l-2 border-[#ED1A3B] pl-1.5">KWSP<br><span class="text-[#ED1A3B] text-[10px]">EPF</span></div>
+                <!-- KWSP CARD -->
+                <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('kwsp')">
+                    <div class="bg-gradient-to-br from-white via-gray-50 to-gray-200 w-full h-full p-4 flex flex-col justify-between border border-gray-300 shadow-md">
+                        <div class="absolute -right-8 -top-8 w-32 h-32 bg-white rounded-full blur-xl pointer-events-none"></div>
+                        <div class="relative z-10 flex flex-col h-full justify-between">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-[#002868] flex items-center justify-center border-2 border-[#ED1A3B] shadow-sm"><span class="text-yellow-400 font-bold text-[7px] tracking-tighter">KWSP</span></div>
+                                    <div class="font-bold text-lg text-[#002868] tracking-tight leading-none border-l-2 border-[#ED1A3B] pl-1.5">KWSP<br><span class="text-[#ED1A3B] text-[10px]">EPF</span></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mt-3">
-                            <div class="text-[8px] text-gray-500 font-semibold uppercase tracking-wider mb-0.5 ml-0.5">Member Number</div>
-                            <div class="font-mono text-sm tracking-[0.1em] text-gray-600">**** **** <span id="kwsp-last4">0000</span></div>
-                        </div>
-                        <div class="flex justify-between items-end mt-1">
-                            <div>
-                                <div class="text-[8px] uppercase tracking-wider font-semibold text-gray-500 ml-0.5" id="kwsp-name">Retirement Fund</div>
-                                <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
+                            <div class="mt-3">
+                                <div class="text-[8px] text-gray-500 font-semibold uppercase tracking-wider mb-0.5 ml-0.5">Member Number</div>
+                                <div class="font-mono text-sm tracking-[0.1em] text-gray-600">**** **** <span id="kwsp-last4">0000</span></div>
+                            </div>
+                            <div class="flex justify-between items-end mt-1">
+                                <div>
+                                    <div class="text-[8px] uppercase tracking-wider font-semibold text-gray-500 ml-0.5" id="kwsp-name">Retirement Fund</div>
+                                    <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-0.5 drop-shadow-sm"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -198,8 +209,8 @@
                     <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                         <div class="flex justify-between items-center mb-1">
                             <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold tracking-wider uppercase">Emergency Fund</p>
-                            <button onclick="openSavingsModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Set Target">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                            <button onclick="openSavingsModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                             </button>
                         </div>
                         <div class="mt-0.5">
@@ -369,7 +380,7 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Gross vs Net vs Deductions</p>
                 <h4 class="font-bold text-sm mb-5">Income Trajectory</h4>
-                <div class="w-full h-56 relative drop-shadow-[0_4px_6px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
+                <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -476,7 +487,7 @@
                 </form>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-sm transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📦 Export Backup</button>
@@ -520,13 +531,9 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
         </button>
         <button onclick="switchTab('profile')" id="nav-mob-profile" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </button>
     </nav>
-
-    <!-- ========================================== -->
-    <!-- MODALS                                     -->
-    <!-- ========================================== -->
 
     <!-- DYNAMIC CARD EDIT MODAL -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
@@ -670,119 +677,7 @@
         </div>
     </div>
 
-    <div id="category-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
-            <div class="flex justify-between items-start mb-3">
-                <div>
-                    <h3 class="text-xl font-bold tracking-tight">Category Graph</h3>
-                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Daily Breakdown</p>
-                </div>
-                <button onclick="closeCategoryModal()" class="w-7 h-7 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:bg-red-500 hover:text-white transition font-bold text-xs">✕</button>
-            </div>
-            <div id="category-modal-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-200 dark:border-transparent"></div>
-            <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-xl p-2 border border-gray-200 dark:border-transparent"><canvas id="categoryChart"></canvas></div>
-        </div>
-    </div>
-
-    <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-5">Log Past Bill</h3>
-            <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Month Paid</label>
-                    <input type="month" id="util-hist-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Bill Type</label>
-                        <select id="util-hist-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                            <option value="Electricity">Electricity (TNB)</option>
-                            <option value="Water">Water</option>
-                            <option value="Internet">Internet/Wifi</option>
-                            <option value="Phone">Phone/Mobile</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
-                        <input type="number" id="util-hist-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Log</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh] hide-scrollbar">
-            <h3 class="text-xl font-bold tracking-tight mb-0.5">Smart Payroll</h3>
-            <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Auto-calculates EPF & SOCSO</p>
-            
-            <form id="payroll-form" onsubmit="savePayrollRecord(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Payslip Month</label>
-                    <input type="month" id="pay-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                
-                <div class="p-3 bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-white/5">
-                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-brand">Gross Earnings</h4>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Basic</label>
-                            <input type="number" id="pay-basic" step="0.01" oninput="autoCalcPayroll()" required class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Allow.</label>
-                            <input type="number" id="pay-allow" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Bonus</label>
-                            <input type="number" id="pay-bonus" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-3 bg-red-50 dark:bg-red-900/10 rounded-xl border border-red-100 dark:border-red-900/30">
-                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-red-500">Statutory Deductions</h4>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EPF (11%)</label>
-                            <input type="number" id="pay-epf" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">Tax (PCB)</label>
-                            <input type="number" id="pay-tax" step="0.01" value="0" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">SOCSO (~0.5%)</label>
-                            <input type="number" id="pay-socso" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EIS (~0.2%)</label>
-                            <input type="number" id="pay-eis" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center px-2 pt-2 border-t border-gray-200 dark:border-white/10">
-                    <p class="font-semibold text-xs uppercase tracking-wider">Net Pay</p>
-                    <p class="text-xl font-bold text-green-500 tracking-tight drop-shadow-sm">MYR <span id="pay-net-display">0.00</span></p>
-                </div>
-
-                <div class="flex gap-2.5 pt-1">
-                    <button type="button" onclick="closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- EXPANDED JAVASCRIPT ENGINE                 -->
-    <!-- ========================================== -->
+    <!-- EXPANDED JAVASCRIPT ENGINE -->
     <script>
         let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
         let savingsData = JSON.parse(localStorage.getItem('vault_savings')) || { current: 1250, target: 10000 };
@@ -795,12 +690,13 @@
             name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: ""
         };
 
+        // EXTREMELY DEFENSIVE STORAGE CLEANER FOR CRASHES
         let cardData = JSON.parse(localStorage.getItem('vault_cards')) || {};
-        if (typeof cardData.debit === 'number' || cardData.debit === undefined) {
+        if (!cardData.debit || typeof cardData.debit !== 'object' || !cardData.kwsp) {
             cardData = {
-                debit: { balance: typeof cardData.debit === 'number' ? cardData.debit : 2500, name: "Debit Card", last4: "1234" },
-                credit: { balance: typeof cardData.credit === 'number' ? cardData.credit : 5000, name: "Ikhwan CC", last4: "8888", limit: 10000 },
-                kwsp: { balance: typeof cardData.kwsp === 'number' ? cardData.kwsp : 0, name: "Retirement Fund", last4: "0000" }
+                debit: { balance: (cardData.debit && typeof cardData.debit === 'object') ? cardData.debit.balance : (parseFloat(cardData.debit) || 2500), name: (cardData.debit && cardData.debit.name) || "Debit Card", last4: (cardData.debit && cardData.debit.last4) || "1234" },
+                credit: { balance: (cardData.credit && typeof cardData.credit === 'object') ? cardData.credit.balance : (parseFloat(cardData.credit) || 5000), name: (cardData.credit && cardData.credit.name) || "Ikhwan CC", last4: (cardData.credit && cardData.credit.last4) || "8888", limit: (cardData.credit && cardData.credit.limit) || 10000 },
+                kwsp: { balance: (cardData.kwsp && typeof cardData.kwsp === 'object') ? cardData.kwsp.balance : (parseFloat(cardData.kwsp) || 0), name: (cardData.kwsp && cardData.kwsp.name) || "Retirement Fund", last4: "0000" }
             };
             localStorage.setItem('vault_cards', JSON.stringify(cardData));
         }
@@ -810,54 +706,6 @@
 
         window.selectedMonth = "";
         window.selectedYear = "";
-
-        function formatDisplayDate(dateStr) {
-            if (!dateStr) return ''; 
-            const parts = dateStr.split('-'); 
-            if (parts.length !== 3) return dateStr;
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            return `${months[parseInt(parts[1], 10) - 1]} ${parseInt(parts[2], 10)}, ${parts[0].slice(-2)}`;
-        }
-
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-            let isDark = document.documentElement.classList.contains('dark');
-            localStorage.theme = isDark ? 'dark' : 'light';
-            document.getElementById('theme-icon').innerText = isDark ? '☀️' : '🌙';
-            
-            let tc = isDark ? '#8E8E93' : '#6B7280'; 
-            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-            Chart.defaults.color = tc;
-            
-            [categoryChart, comparisonChart, salaryChart, foodChart, utilChart].forEach(c => {
-                if(c && c.options.scales) {
-                    if(c.options.scales.x) { if(c.options.scales.x.grid) c.options.scales.x.grid.color = gc; if(c.options.scales.x.ticks) c.options.scales.x.ticks.color = tc; }
-                    if(c.options.scales.y) { if(c.options.scales.y.grid) c.options.scales.y.grid.color = gc; if(c.options.scales.y.ticks) c.options.scales.y.ticks.color = tc; }
-                    c.update();
-                }
-            });
-            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateUtilDashboard(); updateCareerDashboard();
-        }
-
-        function switchTab(tabId) {
-            const tabs = ['home', 'overall', 'food', 'bills', 'salary', 'profile'];
-            tabs.forEach(id => {
-                document.getElementById(`tab-${id}`).classList.add('hidden'); 
-                document.getElementById(`tab-${id}`).classList.remove('flex');
-                let mobBtn = document.getElementById(`nav-mob-${id}`); if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark'); }
-                let deskBtn = document.getElementById(`nav-desk-${id}`); if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
-            });
-
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden'); 
-            document.getElementById(`tab-${tabId}`).classList.add('flex');
-            
-            let activeMob = document.getElementById(`nav-mob-${tabId}`); if(activeMob) { activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
-            let activeDesk = document.getElementById(`nav-desk-${tabId}`); if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
-
-            const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'bills': 'Utility History', 'salary': 'Payroll & Wealth', 'profile': 'Profile Settings' };
-            document.getElementById('header-title').innerText = headerTitles[tabId];
-            document.getElementById('main-scroll').scrollTo(0,0);
-        }
 
         function populateTimelines() {
             let txMonths = new Set();
@@ -950,7 +798,7 @@
                 }
             });
 
-            let totalKwsp = cardData.kwsp.balance || 0;
+            let totalKwsp = (cardData.kwsp && cardData.kwsp.balance) ? cardData.kwsp.balance : 0;
             payrollHistory.forEach(p => { 
                 let gross = p.basic + p.allowance + p.bonus;
                 let empEpf = 0;
@@ -1117,7 +965,7 @@
                 const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 
                 if(list) {
-                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group"><td class="py-2.5"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-xs">📄</div></td><td class="py-2.5 pl-3"><p class="font-bold text-xs">${u.type}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></td><td class="py-2.5 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-2.5 text-right w-8"><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
+                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group"><td class="py-2.5"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-xs">📄</div></td><td class="py-2.5 pl-3"><p class="font-bold text-xs">${u.type}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></td><td class="py-2.5 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-2.5 text-right w-8"><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
                 }
             });
             
@@ -1133,10 +981,6 @@
                 ];
                 utilChart.update();
             }
-        }
-        
-        function deleteUtilLog(globalIndex) {
-            if(confirm('Delete this utility log?')) { utilHistory.splice(globalIndex, 1); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); }
         }
 
         function updateCareerDashboard() {
@@ -1191,21 +1035,20 @@
             }
         }
 
-        // --- 5. MODAL CONTROLLERS & DATA SAVING ---
         function renderCards() { 
             const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct'); const kEl = document.getElementById('kwsp-display');
             
-            if(dEl) {
+            if(dEl && cardData.debit) {
                 dEl.innerText = cardData.debit.balance.toLocaleString(undefined, {minimumFractionDigits: 2}); 
                 document.getElementById('debit-name').innerText = cardData.debit.name;
                 document.getElementById('debit-last4').innerText = cardData.debit.last4;
             }
-            if(cEl) {
+            if(cEl && cardData.credit) {
                 cEl.innerText = cardData.credit.balance.toLocaleString(undefined, {minimumFractionDigits: 2}); 
                 document.getElementById('credit-name').innerText = cardData.credit.name;
                 document.getElementById('credit-last4').innerText = cardData.credit.last4;
             }
-            if(kEl) {
+            if(kEl && cardData.kwsp) {
                 let totalKwsp = cardData.kwsp.balance || 0;
                 payrollHistory.forEach(p => { 
                     let gross = p.basic + p.allowance + p.bonus;
@@ -1219,7 +1062,7 @@
                 document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4;
             }
             
-            if(cpEl) {
+            if(cpEl && cardData.credit) {
                 const maxLimit = cardData.credit.limit || 10000; const currentBalance = cardData.credit.balance;
                 const usedPercentage = Math.round((currentBalance / maxLimit) * 100);
                 cpEl.innerText = usedPercentage;
@@ -1229,10 +1072,11 @@
         function openCardModal(type) { 
             currentEditCard = type;
             const data = cardData[type];
+            if (!data) return;
             document.getElementById('edit-card-title').innerText = `Update Card`;
-            document.getElementById('edit-card-name').value = data.name;
-            document.getElementById('edit-card-last4').value = data.last4;
-            document.getElementById('edit-card-balance').value = data.balance;
+            document.getElementById('edit-card-name').value = data.name || '';
+            document.getElementById('edit-card-last4').value = data.last4 || '';
+            document.getElementById('edit-card-balance').value = data.balance || 0;
             
             const limitContainer = document.getElementById('edit-card-limit-container');
             if (type === 'credit') {
@@ -1249,6 +1093,7 @@
         function closeCardModal() { document.getElementById('card-modal').classList.add('hidden'); }
         function saveCardEdit(e) { 
             e.preventDefault(); 
+            if (!cardData[currentEditCard]) return;
             cardData[currentEditCard].name = document.getElementById('edit-card-name').value;
             cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value;
             cardData[currentEditCard].balance = parseFloat(document.getElementById('edit-card-balance').value) || 0;
@@ -1263,8 +1108,6 @@
             closeCardModal(); 
         }
 
-        function openTxModal() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
-        function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
         function saveTransaction(e) { 
             e.preventDefault(); 
             const date = document.getElementById('tx-date').value; const desc = document.getElementById('tx-desc').value; const type = document.getElementById('tx-type').value; const category = document.getElementById('tx-category').value; const amount = parseFloat(document.getElementById('tx-amount').value);
@@ -1286,90 +1129,30 @@
             populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); closeTxModal(); 
         }
 
-        function renderSavings() { 
-            const curEl = document.getElementById('current-savings'); const tgtEl = document.getElementById('target-savings'); const progEl = document.getElementById('savings-progress');
-            if(curEl) curEl.innerText = savingsData.current.toLocaleString(undefined, {minimumFractionDigits: 0}); 
-            if(tgtEl) tgtEl.innerText = savingsData.target.toLocaleString(undefined, {minimumFractionDigits: 0}); 
-            if(progEl) { setTimeout(() => { let pct = (savingsData.current / savingsData.target) * 100; if(pct > 100) pct = 100; progEl.style.width = pct + '%'; }, 300); }
-        }
-        function openSavingsModal() { document.getElementById('savings-current-input').value = savingsData.current; document.getElementById('savings-target-input').value = savingsData.target; document.getElementById('savings-modal').classList.remove('hidden'); }
-        function closeSavingsModal() { document.getElementById('savings-modal').classList.add('hidden'); }
         function saveSavings(e) { e.preventDefault(); savingsData.current = parseFloat(document.getElementById('savings-current-input').value)||0; savingsData.target = parseFloat(document.getElementById('savings-target-input').value)||1; localStorage.setItem('vault_savings', JSON.stringify(savingsData)); renderSavings(); closeSavingsModal(); }
-
-        function renderDebts() {
-            const dl = document.getElementById('debt-list'); const tdEl = document.getElementById('total-debt-display');
-            if(!dl) return; dl.innerHTML = ''; debts.sort((a, b) => a.balance - b.balance);
-            
-            const totalDebt = debts.reduce((sum, d) => sum + d.balance, 0);
-            if(tdEl) {
-                if(totalDebt > 0) { tdEl.innerText = '-MYR ' + totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2}); tdEl.classList.remove('hidden'); } 
-                else { tdEl.classList.add('hidden'); }
-            }
-
-            if (debts.length === 0) { dl.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4 uppercase tracking-wider">No liabilities tracked.</p>`; return; }
-            
-            debts.forEach((d, i) => { 
-                const isCC = d.name.toLowerCase().includes('credit card');
-                const badge = isCC ? `<span class="px-1.5 py-0.5 bg-red-500/10 text-red-500 border border-red-500/30 rounded text-[7px] uppercase font-bold tracking-widest whitespace-nowrap shadow-sm">Priority: 18% APR</span>` : '';
-                const borderClass = isCC ? 'border border-red-500/40 shadow-[0_0_8px_rgba(220,38,38,0.15)]' : 'border border-transparent';
-
-                dl.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark ${borderClass} p-3 rounded-xl flex justify-between items-center group transition-all duration-300"><div class="flex-1 min-w-0 pr-2"><div class="flex items-center flex-wrap gap-1.5"><p class="font-bold text-xs truncate max-w-[80%]">${d.name}</p>${badge}</div><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p></div><div class="flex items-center gap-2 shrink-0"><p class="text-red-500 font-bold text-xs">-MYR ${d.balance.toLocaleString()}</p><button onclick="if(confirm('Delete this debt?')) { debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0">✕</button></div></div>`; 
-            }); 
-        }
-        function openDebtModal() { document.getElementById('debt-modal').classList.remove('hidden'); }
-        function closeDebtModal() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
         function saveDebt(e) { e.preventDefault(); debts.push({ name: document.getElementById('debt-name').value, balance: parseFloat(document.getElementById('debt-balance').value), minPayment: parseFloat(document.getElementById('debt-min').value) }); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); closeDebtModal(); }
-
-        function renderBills() {
-            const list = document.getElementById('bill-list'); 
-            if(!list) return; list.innerHTML = ''; bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-            if (bills.length === 0) { list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4 uppercase tracking-wider">No upcoming reminders.</p>`; return; }
-            
-            const today = new Date();
-            bills.forEach((b, i) => {
-                const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
-                let dueText = `Due in ${diffDays} Days`; let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
-                
-                if(diffDays === 0) { dueText = 'Due Today'; dueColor = 'text-brand font-bold'; } else if (diffDays < 0) { dueText = `Overdue by ${Math.abs(diffDays)} Days`; dueColor = 'text-red-500 font-bold'; } else if (diffDays <= 3) { dueColor = 'text-red-500 font-bold'; }
-                
-                list.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl flex justify-between items-center group"><div class="flex items-center gap-2.5 flex-1 truncate pr-2"><div class="w-7 h-7 rounded-full bg-panel-light dark:bg-panel-dark flex items-center justify-center text-[10px] shadow-sm border border-gray-100 dark:border-white/5">📄</div><div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[9px] font-medium ${dueColor} mt-0.5">${dueText}</p></div></div><div class="flex items-center gap-2 shrink-0"><p class="font-bold text-xs">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition"><button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-[10px] flex items-center justify-center">✕</button></div></div></div>`;
-            });
-        }
-        function openBillModal() { document.getElementById('bill-modal').classList.remove('hidden'); }
-        function closeBillModal() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
         function saveBill(e) { e.preventDefault(); bills.push({ name: document.getElementById('bill-name').value, amount: parseFloat(document.getElementById('bill-amount').value), dueDate: document.getElementById('bill-date').value }); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); closeBillModal(); }
-
-        function openUtilHistoryModal() { const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; document.getElementById('util-history-modal').classList.remove('hidden'); }
-        function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
         function saveUtilHistory(e) { e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); closeUtilHistoryModal(); }
 
-        // RE-ENGINEERED COMPLIANT STATUTORY METHOD
         function autoCalcPayroll() {
             let basic = parseFloat(document.getElementById('pay-basic').value) || 0;
             let allow = parseFloat(document.getElementById('pay-allow').value) || 0;
             let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             
-            let gross = basic + allow + bonus;
-            let socsoEisBase = basic + allow; // FIXED ALLOWANCE + BASIC EXCLUDES BONUS
+            let epfBase = basic + allow + bonus; 
+            let socsoEisBase = basic + allow; 
             
-            let epf = 0;
-            let socso = 0;
-            let eis = 0;
+            let epf = 0; let socso = 0; let eis = 0;
 
-            if (gross > 0) {
-                if (gross <= 5000) {
-                    epf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.11);
-                } else if (gross <= 20000) {
-                    epf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.11);
-                } else {
-                    epf = Math.ceil(gross * 0.11);
-                }
+            if (epfBase > 0) {
+                if (epfBase <= 5000) epf = Math.ceil((Math.ceil(epfBase / 20) * 20) * 0.11);
+                else if (epfBase <= 20000) epf = Math.ceil((Math.ceil(epfBase / 100) * 100) * 0.11);
+                else epf = Math.ceil(epfBase * 0.11);
             }
             
             if (socsoEisBase > 0) {
                 let socsoGross = Math.min(socsoEisBase, 6000); 
                 let socsoBase = Math.ceil(socsoGross / 100) * 100 - 50;
-                
                 socso = socsoBase * 0.005;
                 eis = socsoBase * 0.002;
             }
@@ -1377,14 +1160,7 @@
             document.getElementById('pay-epf').value = epf > 0 ? epf : '';
             document.getElementById('pay-socso').value = socso > 0 ? socso.toFixed(2) : '';
             document.getElementById('pay-eis').value = eis > 0 ? eis.toFixed(2) : '';
-            
             calcNetPay();
-        }
-
-        function calcNetPay() {
-            let gross = (parseFloat(document.getElementById('pay-basic').value) || 0) + (parseFloat(document.getElementById('pay-allow').value) || 0) + (parseFloat(document.getElementById('pay-bonus').value) || 0);
-            let deds = (parseFloat(document.getElementById('pay-epf').value) || 0) + (parseFloat(document.getElementById('pay-socso').value) || 0) + (parseFloat(document.getElementById('pay-eis').value) || 0) + (parseFloat(document.getElementById('pay-tax').value) || 0);
-            document.getElementById('pay-net-display').innerText = (gross - deds).toFixed(2);
         }
 
         function savePayrollRecord(e) { 
@@ -1407,141 +1183,30 @@
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
 
             updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closePayrollModal();
-            alert("Payslip Saved! Net Pay injected to Cash Flow & EPF injected to KWSP.");
+            alert("Payslip Saved! Calculations updated successfully.");
         }
 
-        function openCategoryModal(type) {
-            if (type !== 'other') return; 
-            const filter = window.selectedMonth; if(!filter) return;
-            const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
-            const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
-            
-            let dailySpend = new Array(31).fill(0); let currCatTotal = 0; let lastCatTotal = 0;
-
-            transactions.forEach(t => {
-                if (t.type !== 'expense' || !t.date) return; const txDate = new Date(t.date); if (isNaN(txDate.getTime())) return;
-                const amt = parseFloat(t.amount); const dayIndex = txDate.getDate() - 1;
-                const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
-                const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/); const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
-                
-                if (!isFood && !isUtil) {
-                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) { dailySpend[dayIndex] += amt; currCatTotal += amt; } 
-                    else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { lastCatTotal += amt; }
-                }
-            });
-
-            let isDark = document.documentElement.classList.contains('dark');
-            let catInsightHtml = `<div class="text-[9px] font-semibold uppercase tracking-wider">Previous: <span class="font-bold text-xs">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
-            if (currCatTotal > lastCatTotal && lastCatTotal > 0) catInsightHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
-            else if (lastCatTotal > 0) catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-[10px]">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
-            else catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold">No historical data</div>`; 
-
-            document.getElementById('category-modal-insight').innerHTML = catInsightHtml;
-            if(categoryChart) { categoryChart.data.datasets[0].data = dailySpend; categoryChart.data.datasets[0].backgroundColor = isDark ? '#FFFFFF' : '#111827'; categoryChart.update(); }
-            document.getElementById('category-modal').classList.remove('hidden');
-        }
-        function closeCategoryModal() { document.getElementById('category-modal').classList.add('hidden'); }
-
-        function renderProfile() {
-            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-email').value = profile.email || ""; document.getElementById('prof-phone').value = profile.phone || ""; document.getElementById('prof-emergency').value = profile.emergency || ""; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
-            
-            document.getElementById('li-name').innerText = profile.name; document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`; document.getElementById('li-location').innerText = profile.address;
-            document.getElementById('li-email').innerText = profile.email || "email@example.com";
-            document.getElementById('li-phone').innerText = profile.phone || "+60 00-000 0000";
-            document.getElementById('li-emergency').innerText = profile.emergency || "Emergency Ctc";
-            
-            const skillsDiv = document.getElementById('li-skills'); skillsDiv.innerHTML = '';
-            if(profile.skills) profile.skills.split(',').forEach(s => { if(s.trim()) skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[9px] font-bold px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; });
-
-            if(profile.avatar) { document.getElementById('profile-avatar-img').src = profile.avatar; document.getElementById('profile-avatar-img').classList.remove('hidden'); document.getElementById('profile-avatar-initial').classList.add('hidden'); } 
-            else { document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); }
-            
-            if(profile.cover) { document.getElementById('profile-cover-img').src = profile.cover; document.getElementById('profile-cover-img').classList.remove('hidden'); }
-            if (!document.getElementById('tab-home').classList.contains('hidden')) document.getElementById('header-title').innerText = `Hi, ${profile.name.split(' ')[0]}`; 
-        }
-        
         function saveProfile(e) { 
             e.preventDefault(); 
             profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.email = document.getElementById('prof-email').value; profile.phone = document.getElementById('prof-phone').value; profile.emergency = document.getElementById('prof-emergency').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
             localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
         }
-        
-        function handleImageUpload(e, type) {
-            const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
-            reader.onload = function(event) { if(type === 'avatar') profile.avatar = event.target.result; else profile.cover = event.target.result; localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); };
-            reader.readAsDataURL(file);
-        }
 
-        // --- 6. DATA MANAGEMENT ---
-        function exportBackup() { 
-            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_savings: localStorage.getItem('vault_savings'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_payroll: localStorage.getItem('vault_payroll') }; 
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
-        }
-
-        document.getElementById('json-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { try { const data = JSON.parse(event.target.result); Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); } catch(err) { alert("Invalid backup file."); } }; reader.readAsText(file); 
-        });
-
-        document.getElementById('csv-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { 
-                const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
-                if (rows.length <= 1) return alert("File is empty or invalid. Make sure it has headers."); 
-                
-                const headers = rows[0].split(',').map(h => h.trim().toLowerCase()); 
-                const monthMap = { 'jan':'01', 'feb':'02', 'mar':'03', 'apr':'04', 'may':'05', 'jun':'06', 'jul':'07', 'aug':'08', 'sep':'09', 'oct':'10', 'nov':'11', 'dec':'12' }; 
-                
-                const importedData = rows.slice(1).map(row => { 
-                    const values = row.split(','); let obj = {}; 
-                    headers.forEach((h, i) => { 
-                        let val = values[i] ? values[i].trim() : ''; 
-                        if (h === 'type') val = val.toLowerCase(); 
-                        if (h === 'date') { 
-                            if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
-                            else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
-                        } 
-                        obj[h] = val; 
-                    }); 
-                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); return obj; 
-                }); 
-                
-                const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
-                transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
-                transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-                alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); e.target.value = ''; 
-            }; reader.readAsText(file); 
-        });
-        
-        function clearData() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
-
-        // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
             populateTimelines();
-            
             Chart.defaults.font.family = 'Inter'; 
-            let isDark = document.documentElement.classList.contains('dark'); 
-            let tc = isDark ? '#8E8E93' : '#6B7280'; 
-            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
-            Chart.defaults.color = tc;
-            
+            let isDark = document.documentElement.classList.contains('dark'); let tc = isDark ? '#8E8E93' : '#6B7280'; let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; Chart.defaults.color = tc;
             const lineConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { color: gc }, ticks: { color: tc } } } };
 
             categoryChart = new Chart(document.getElementById('categoryChart'), { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } });
-
             comparisonChart = new Chart(document.getElementById('comparisonChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
-            
             foodChart = new Chart(document.getElementById('foodChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
-            
             utilChart = new Chart(document.getElementById('utilChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: true, display: false } } } });
-            
             salaryChart = new Chart(document.getElementById('salaryChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { stacked: false, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: false, display: false } } } });
 
             renderCards(); renderBills(); renderDebts(); renderSavings(); renderProfile();
             updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateUtilDashboard(); updateCareerDashboard();
         };
     </script>
-    
-    <script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); }</script>
 </body>
 </html>
