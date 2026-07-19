@@ -65,7 +65,7 @@
             <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>📊</span> Overall Analytics</button>
             <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>🍔</span> Food & Dining</button>
             <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>⚡</span> Utilities & Bills</button>
-            <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>🏦</span> Career & Wealth</button>
+            <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>🏦</span> Payroll & Wealth</button>
             <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>👤</span> Profile</button>
             
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
@@ -100,34 +100,35 @@
                 <div class="col-span-1 lg:col-span-2 bg-panel-light dark:bg-panel-dark p-2 rounded-[32px] shadow-sm dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-gray-200 dark:border-white/10 relative overflow-hidden flex flex-col transition-colors duration-300">
                     <div class="absolute inset-0 rounded-[32px] border-t border-white/50 dark:border-white/10 pointer-events-none z-40"></div>
 
+                    <!-- DEBIT CARD -->
                     <div class="bg-gray-900 text-white rounded-[20px] mx-3 mt-3 px-5 pt-4 pb-10 cursor-pointer hover:brightness-110 transition relative z-0 shadow-lg" onclick="openCardModal()">
                         <div class="flex justify-between items-center pr-1">
-                            <div class="flex items-center gap-2 font-bold text-[14px]">
-                                <span class="text-brand">💳</span>
-                                <span>Debit Card</span>
-                            </div>
+                            <div class="flex items-center gap-2 font-bold text-[14px]"><span class="text-brand">💳</span><span>Debit Card</span></div>
                             <div class="font-bold text-[15px] tracking-tight">MYR <span id="debit-display">0.00</span></div>
                         </div>
                     </div>
 
-                    <div class="bg-brand text-gray-900 rounded-[20px] mx-3 px-5 pt-4 pb-5 relative z-10 shadow-[0_-4px_12px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.2)] border border-gray-900/5 -mt-5 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
+                    <!-- CREDIT CARD -->
+                    <div class="bg-brand text-gray-900 rounded-[20px] mx-3 px-5 pt-4 pb-10 relative z-10 shadow-[0_-4px_12px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.2)] border border-gray-900/5 -mt-5 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
                         <div class="flex justify-between items-center pr-1">
-                            <div class="flex items-center gap-2 font-bold text-[14px]">
-                                <span>💳</span>
-                                <span>Credit Card</span>
-                                <span class="text-[10px] font-black bg-black/10 text-gray-900 px-2 py-0.5 rounded-full ml-1"><span id="credit-pct">0</span>% Used</span>
-                            </div>
-                            <div class="font-bold text-[14px] tracking-tight text-right">
-                                MYR <span id="credit-display">0.00</span> <span class="text-[11px] font-bold opacity-60">/ 10,000</span>
-                            </div>
+                            <div class="flex items-center gap-2 font-bold text-[14px]"><span>💳</span><span>Credit Card</span><span class="text-[10px] font-black bg-black/10 text-gray-900 px-2 py-0.5 rounded-full ml-1"><span id="credit-pct">0</span>% Used</span></div>
+                            <div class="font-bold text-[14px] tracking-tight text-right">MYR <span id="credit-display">0.00</span> <span class="text-[11px] font-bold opacity-60">/ 10,000</span></div>
                         </div>
                     </div>
 
-                    <div class="px-5 pt-5 pb-4 relative z-20 mt-1">
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold tracking-wide uppercase">Historical Net Worth</p>
+                    <!-- KWSP CARD (NEW) -->
+                    <div class="bg-green-500 text-white rounded-[20px] mx-3 px-5 pt-4 pb-5 relative z-20 shadow-[0_-4px_12px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.2)] border border-gray-900/5 -mt-5 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
+                        <div class="flex justify-between items-center pr-1">
+                            <div class="flex items-center gap-2 font-bold text-[14px]"><span>🏦</span><span>KWSP (EPF)</span></div>
+                            <div class="font-bold text-[14px] tracking-tight text-right">MYR <span id="kwsp-display">0.00</span></div>
+                        </div>
+                    </div>
+
+                    <div class="px-5 pt-5 pb-4 relative z-30 mt-1">
+                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold tracking-wide uppercase">Historical Net Worth (Cash + EPF)</p>
                         <h3 class="text-2xl md:text-3xl font-bold mt-0.5 tracking-tight">MYR <span id="total-net-worth">0.00</span></h3>
                         <div class="mt-3 flex items-center gap-2">
-                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark">Balance (Sel Month):</p>
+                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark">Cash Flow (Sel Month):</p>
                             <p id="sel-month-balance" class="text-sm font-bold tracking-tight">MYR 0.00</p>
                         </div>
                     </div>
@@ -294,25 +295,29 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 5: CAREER & WEALTH                     -->
+        <!-- TAB 5: PAYROLL & WEALTH (NEW ENGINE)       -->
         <!-- ========================================== -->
         <div id="tab-salary" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
             <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg">Career Growth</h3>
-                <button onclick="openCareerModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Income</button>
+                <h3 class="font-bold text-lg">Payroll & Wealth</h3>
+                <button onclick="openPayrollModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Payslip</button>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-1">Income vs Tax Trajectory</h4>
-                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Historical Compensation Overview</p>
+                <div class="flex justify-between items-end mb-4">
+                    <div>
+                        <h4 class="font-bold text-sm">Income Trajectory</h4>
+                        <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Gross vs Net Pay vs Deductions</p>
+                    </div>
+                </div>
                 <div class="w-full h-64 relative"><canvas id="salaryChart"></canvas></div>
             </div>
             
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Career Ledger</h4>
+                <h4 class="font-bold text-sm mb-5">Payslip Ledger</h4>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse"><tbody id="career-history-list" class="text-sm"></tbody></table>
+                    <table class="w-full text-left border-collapse"><tbody id="payroll-history-list" class="text-sm"></tbody></table>
                 </div>
             </div>
         </div>
@@ -421,6 +426,7 @@
     <!-- MODALS                                     -->
     <!-- ========================================== -->
 
+    <!-- Update Accounts Modal (Now includes KWSP Initial Balance) -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Update Accounts</h3>
@@ -432,6 +438,10 @@
                 <div>
                     <label class="block text-[11px] font-bold text-brand mb-1 uppercase tracking-wider">Credit Card</label>
                     <input type="number" id="card-credit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-green-500 mb-1 uppercase tracking-wider">Starting KWSP Balance</label>
+                    <input type="number" id="card-kwsp-input" step="0.01" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-green-500 transition">
                 </div>
                 <div class="flex gap-3 pt-3">
                     <button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl font-bold transition">Cancel</button>
@@ -598,35 +608,71 @@
         </div>
     </div>
 
-    <div id="career-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold mb-5">Log Annual Income</h3>
-            <form id="career-form" onsubmit="saveCareerRecord(event)" class="space-y-3">
+    <!-- NEW SMART PAYROLL ENGINE MODAL -->
+    <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh]">
+            <h3 class="text-xl font-bold mb-1">Smart Payroll Engine</h3>
+            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-4">Auto-calculates EPF, SOCSO & EIS</p>
+            
+            <form id="payroll-form" onsubmit="savePayrollRecord(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Year</label>
-                    <input type="number" id="career-year" min="2000" max="2100" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Payslip Month</label>
+                    <input type="month" id="pay-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Total Base Salary</label>
-                        <input type="number" id="career-salary" step="1" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                
+                <div class="p-3 bg-surface-light dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-white/5">
+                    <h4 class="text-xs font-bold mb-3 text-brand">Gross Earnings</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <label class="w-24 text-xs font-bold text-textMuted-light dark:text-textMuted-dark">Basic Salary</label>
+                            <input type="number" id="pay-basic" step="0.01" oninput="autoCalcPayroll()" required class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="w-24 text-xs font-bold text-textMuted-light dark:text-textMuted-dark">Fixed Allow.</label>
+                            <input type="number" id="pay-allow" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="w-24 text-xs font-bold text-textMuted-light dark:text-textMuted-dark">Bonus</label>
+                            <input type="number" id="pay-bonus" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Total Bonuses</label>
-                        <input type="number" id="career-bonus" step="1" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+
+                <div class="p-3 bg-red-50 dark:bg-red-900/10 rounded-2xl border border-red-100 dark:border-red-900/30">
+                    <h4 class="text-xs font-bold mb-3 text-red-500">Statutory Deductions</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">EPF (11%)</label>
+                            <input type="number" id="pay-epf" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">Tax (PCB)</label>
+                            <input type="number" id="pay-tax" step="0.01" value="0" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">SOCSO (~0.5%)</label>
+                            <input type="number" id="pay-socso" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">EIS (~0.2%)</label>
+                            <input type="number" id="pay-eis" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Total Tax Paid</label>
-                    <input type="number" id="career-tax" step="1" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+
+                <div class="flex justify-between items-center px-2 pt-2 border-t border-gray-200 dark:border-white/10">
+                    <p class="font-bold text-sm">Total Net Pay</p>
+                    <p class="text-xl font-black text-green-500">MYR <span id="pay-net-display">0.00</span></p>
                 </div>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="closeCareerModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save Log</button>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save Payslip</button>
                 </div>
             </form>
         </div>
     </div>
+
 
     <!-- ========================================== -->
     <!-- EXPANDED JAVASCRIPT ENGINE                 -->
@@ -636,22 +682,20 @@
         let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
         let savingsData = JSON.parse(localStorage.getItem('vault_savings')) || { current: 1250, target: 10000 };
         let debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
-        let cardData = JSON.parse(localStorage.getItem('vault_cards')) || { debit: 2500, credit: 5000 };
+        let cardData = JSON.parse(localStorage.getItem('vault_cards')) || { debit: 2500, credit: 5000, kwsp: 0 };
         let bills = JSON.parse(localStorage.getItem('vault_bills')) || [
             { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, 
             { name: "Unifi", amount: 129, dueDate: "2026-07-28" }
         ];
         let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
-        let careerHistory = JSON.parse(localStorage.getItem('vault_career')) || [
-            { year: 2024, salary: 73200, bonus: 4000, tax: 8000 },
-            { year: 2025, salary: 78000, bonus: 5500, tax: 9500 },
-            { year: 2026, salary: 93600, bonus: 0, tax: 11000 }
-        ];
+        
+        // NEW SMART PAYROLL STORE
+        let payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
+        
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
             name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7", skills: "Hardware Diagnostic, Maintenance, Excel Data, System Upgrades", avatar: "", cover: ""
         };
 
-        // mainChart has been completely eliminated to prevent crashes
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
 
         // --- 2. INITIALIZATION & UTILITIES ---
@@ -711,7 +755,7 @@
             let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
             if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
 
-            const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'bills': 'Utility History', 'salary': 'Career Growth', 'profile': 'Profile Settings' };
+            const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'bills': 'Utility History', 'salary': 'Payroll & Wealth', 'profile': 'Profile Settings' };
             document.getElementById('header-title').innerText = headerTitles[tabId];
             document.getElementById('main-scroll').scrollTo(0,0);
         }
@@ -778,8 +822,16 @@
                 }
             });
 
+            // NEW: Add KWSP to Total Net Worth!
+            let totalKwsp = cardData.kwsp || 0;
+            payrollHistory.forEach(p => {
+                // KWSP receives 11% from employee + 13% from employer automatically
+                totalKwsp += p.epf + (p.basic + p.bonus) * 0.13;
+            });
+            
+            const totalNetWealth = runningBalance + totalKwsp;
             const tnwEl = document.getElementById('total-net-worth');
-            if(tnwEl) tnwEl.innerText = runningBalance.toLocaleString(undefined, {minimumFractionDigits: 2});
+            if(tnwEl) tnwEl.innerText = totalNetWealth.toLocaleString(undefined, {minimumFractionDigits: 2});
             
             const selMonthEl = document.getElementById('sel-month-balance');
             if (selMonthEl) {
@@ -959,59 +1011,64 @@
             if(confirm('Delete this utility log?')) { utilHistory.splice(globalIndex, 1); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); }
         }
 
+        // NEW SMART PAYROLL DASHBOARD ENGINE
         function updateCareerDashboard() {
-            const list = document.getElementById('career-history-list'); 
+            const list = document.getElementById('payroll-history-list'); 
             if(list) list.innerHTML = '';
             
-            careerHistory.sort((a,b) => b.year - a.year); 
+            payrollHistory.sort((a,b) => new Date(b.month) - new Date(a.month)); 
             
-            let yrs = []; let sals = []; let bons = []; let taxs = [];
-            let chartHist = [...careerHistory].sort((a,b) => a.year - b.year); 
+            let mos = []; let grossArr = []; let netArr = []; let dedArr = [];
+            let chartHist = [...payrollHistory].sort((a,b) => new Date(a.month) - new Date(b.month)); 
             
-            chartHist.forEach(c => { yrs.push(c.year); sals.push(c.salary); bons.push(c.bonus); taxs.push(c.tax); });
+            chartHist.forEach(c => { 
+                mos.push(c.month); 
+                grossArr.push(c.basic + c.allowance + c.bonus); 
+                netArr.push(c.net); 
+                dedArr.push(c.epf + c.socso + c.eis + c.tax); 
+            });
 
-            careerHistory.forEach((c, i) => {
-                const total = c.salary + c.bonus;
-                let prev = careerHistory.find(item => item.year === c.year - 1);
-                let pctSal = '', pctBon = '', pctTax = '';
-                
-                if(prev) {
-                    const getPct = (curr, prv, invertColor = false) => {
-                        if (prv === 0) return curr > 0 ? `<span class="${invertColor ? 'text-red-500' : 'text-green-500 dark:text-green-400'} font-bold text-[10px] ml-1">(+100%)</span>` : '';
-                        const diff = ((curr - prv) / prv) * 100;
-                        const sign = diff > 0 ? '+' : '';
-                        let color = 'text-gray-500 dark:text-gray-400'; 
-                        if (diff > 0) color = invertColor ? 'text-red-500' : 'text-green-500 dark:text-green-400';
-                        else if (diff < 0) color = invertColor ? 'text-green-500 dark:text-green-400' : 'text-red-500';
-                        return `<span class="${color} font-bold text-[10px] ml-1">(${sign}${diff.toFixed(1)}%)</span>`;
-                    };
-                    pctSal = getPct(c.salary, prev.salary); pctBon = getPct(c.bonus, prev.bonus); pctTax = getPct(c.tax, prev.tax, true);
-                }
+            payrollHistory.forEach((c, i) => {
+                const totalGross = c.basic + c.allowance + c.bonus;
+                const totalDeds = c.epf + c.socso + c.eis + c.tax;
 
                 if(list) {
-                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300"><td class="py-3"><div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xs">${c.year}</div></td><td class="py-3 pl-3"><p class="font-bold text-sm">MYR ${total.toLocaleString()}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Base: ${c.salary.toLocaleString()}${pctSal} • Bonus: ${c.bonus.toLocaleString()}${pctBon}</p></td><td class="py-3 pr-3 text-right"><p class="font-bold text-sm text-red-500">Tax: ${c.tax.toLocaleString()}${pctTax}</p></td><td class="py-3 text-right w-10"><button onclick="deleteCareerLog(${i})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
+                    list.innerHTML += `
+                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
+                        <td class="py-3"><div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 text-sm">📄</div></td>
+                        <td class="py-3 pl-3">
+                            <p class="font-bold text-sm">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p>
+                        </td>
+                        <td class="py-3 pr-3 text-right">
+                            <p class="font-bold text-[10px] text-red-500 bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded border border-red-100 dark:border-red-900/50 inline-block">-MYR ${totalDeds.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+                            <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark mt-1">EPF: ${c.epf} | Tax: ${c.tax}</p>
+                        </td>
+                        <td class="py-3 text-right w-10"><button onclick="if(confirm('Delete this payslip?')) { payrollHistory.splice(${i}, 1); localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); updateCareerDashboard(); updateHomeDashboard(); renderCards(); }" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td>
+                    </tr>`;
                 }
             });
             
-            if(careerHistory.length === 0 && list) list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No career logs found.</td></tr>`;
+            if(payrollHistory.length === 0 && list) list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No payslips logged yet.</td></tr>`;
 
             if(salaryChart) {
-                salaryChart.data.labels = yrs;
+                salaryChart.data.labels = mos;
                 salaryChart.data.datasets = [
-                    { type: 'bar', label: 'Base Salary', data: sals, backgroundColor: '#FFD600', borderRadius: {topLeft:0, topRight:0, bottomLeft:4, bottomRight:4}, stack: 'Stack 0' },
-                    { type: 'bar', label: 'Bonus', data: bons, backgroundColor: '#34D399', borderRadius: {topLeft:4, topRight:4, bottomLeft:0, bottomRight:0}, stack: 'Stack 0' },
-                    { type: 'line', label: 'Tax', data: taxs, borderColor: '#EF4444', borderWidth: 2, pointBackgroundColor: '#EF4444', fill: false }
+                    { type: 'bar', label: 'Gross Income', data: grossArr, backgroundColor: '#FFD600', borderRadius: 4 },
+                    { type: 'line', label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 3, tension: 0.3, pointBackgroundColor: '#10B981', fill: false },
+                    { type: 'line', label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointBackgroundColor: '#EF4444', fill: false }
                 ];
+                // Disable stacking for this new combo chart
+                salaryChart.options.scales.x.stacked = false;
+                salaryChart.options.scales.y.stacked = false;
                 salaryChart.update();
             }
         }
-        function deleteCareerLog(index) {
-            if(confirm('Delete this career log?')) { careerHistory.splice(index, 1); localStorage.setItem('vault_career', JSON.stringify(careerHistory)); updateCareerDashboard(); }
-        }
+
 
         // --- 5. MODAL CONTROLLERS & DATA SAVING ---
         function renderCards() { 
-            const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct');
+            const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct'); const kEl = document.getElementById('kwsp-display');
             if(dEl) dEl.innerText = cardData.debit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
             if(cEl) cEl.innerText = cardData.credit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
             
@@ -1020,10 +1077,16 @@
                 const usedPercentage = Math.round((currentBalance / maxLimit) * 100);
                 cpEl.innerText = usedPercentage;
             }
+
+            if(kEl) {
+                let totalKwsp = cardData.kwsp || 0;
+                payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.bonus) * 0.13; });
+                kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2});
+            }
         }
-        function openCardModal() { document.getElementById('card-debit-input').value = cardData.debit; document.getElementById('card-credit-input').value = cardData.credit; document.getElementById('card-modal').classList.remove('hidden'); }
+        function openCardModal() { document.getElementById('card-debit-input').value = cardData.debit; document.getElementById('card-credit-input').value = cardData.credit; document.getElementById('card-kwsp-input').value = cardData.kwsp || 0; document.getElementById('card-modal').classList.remove('hidden'); }
         function closeCardModal() { document.getElementById('card-modal').classList.add('hidden'); }
-        function saveCards(e) { e.preventDefault(); cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; cardData.credit = parseFloat(document.getElementById('card-credit-input').value) || 0; localStorage.setItem('vault_cards', JSON.stringify(cardData)); renderCards(); closeCardModal(); }
+        function saveCards(e) { e.preventDefault(); cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; cardData.credit = parseFloat(document.getElementById('card-credit-input').value) || 0; cardData.kwsp = parseFloat(document.getElementById('card-kwsp-input').value) || 0; localStorage.setItem('vault_cards', JSON.stringify(cardData)); renderCards(); updateHomeDashboard(); closeCardModal(); }
 
         function openTxModal() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
         function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
@@ -1105,9 +1168,67 @@
         function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
         function saveUtilHistory(e) { e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); closeUtilHistoryModal(); }
 
-        function openCareerModal() { document.getElementById('career-year').value = new Date().getFullYear(); document.getElementById('career-modal').classList.remove('hidden'); }
-        function closeCareerModal() { document.getElementById('career-modal').classList.add('hidden'); document.getElementById('career-form').reset(); }
-        function saveCareerRecord(e) { e.preventDefault(); const yearInput = parseInt(document.getElementById('career-year').value); careerHistory = careerHistory.filter(c => c.year !== yearInput); careerHistory.push({ year: yearInput, salary: parseFloat(document.getElementById('career-salary').value), bonus: parseFloat(document.getElementById('career-bonus').value), tax: parseFloat(document.getElementById('career-tax').value) }); localStorage.setItem('vault_career', JSON.stringify(careerHistory)); updateCareerDashboard(); closeCareerModal(); }
+        // NEW PAYROLL MODAL FUNCTIONS
+        function openPayrollModal() { 
+            const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
+            document.getElementById('payroll-modal').classList.remove('hidden'); 
+        }
+        function closePayrollModal() { document.getElementById('payroll-modal').classList.add('hidden'); document.getElementById('payroll-form').reset(); document.getElementById('pay-net-display').innerText = '0.00'; }
+        
+        function autoCalcPayroll() {
+            let basic = parseFloat(document.getElementById('pay-basic').value) || 0;
+            let allow = parseFloat(document.getElementById('pay-allow').value) || 0;
+            let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
+            
+            let gross = basic + allow + bonus;
+            let epfBase = basic + bonus; 
+            
+            let epf = epfBase * 0.11;
+            let socsoBase = Math.min(gross, 6000); // Malaysian Statutory Cap
+            let socso = socsoBase * 0.005; 
+            let eis = socsoBase * 0.002;  
+            
+            document.getElementById('pay-epf').value = epf.toFixed(2);
+            document.getElementById('pay-socso').value = socso.toFixed(2);
+            document.getElementById('pay-eis').value = eis.toFixed(2);
+            
+            calcNetPay();
+        }
+
+        function calcNetPay() {
+            let gross = (parseFloat(document.getElementById('pay-basic').value) || 0) + (parseFloat(document.getElementById('pay-allow').value) || 0) + (parseFloat(document.getElementById('pay-bonus').value) || 0);
+            let deds = (parseFloat(document.getElementById('pay-epf').value) || 0) + (parseFloat(document.getElementById('pay-socso').value) || 0) + (parseFloat(document.getElementById('pay-eis').value) || 0) + (parseFloat(document.getElementById('pay-tax').value) || 0);
+            document.getElementById('pay-net-display').innerText = (gross - deds).toFixed(2);
+        }
+
+        function savePayrollRecord(e) { 
+            e.preventDefault(); 
+            const month = document.getElementById('pay-month').value;
+            const basic = parseFloat(document.getElementById('pay-basic').value) || 0;
+            const allow = parseFloat(document.getElementById('pay-allow').value) || 0;
+            const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
+            const epf = parseFloat(document.getElementById('pay-epf').value) || 0;
+            const socso = parseFloat(document.getElementById('pay-socso').value) || 0;
+            const eis = parseFloat(document.getElementById('pay-eis').value) || 0;
+            const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
+            const net = (basic + allow + bonus) - (epf + socso + eis + tax);
+
+            // Overwrite if same month exists
+            payrollHistory = payrollHistory.filter(p => p.month !== month); 
+            payrollHistory.push({ month, basic, allowance: allow, bonus, epf, socso, eis, tax, net }); 
+            localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
+            
+            // Auto-Inject to main transactions ledger
+            transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
+            localStorage.setItem('vault_transactions', JSON.stringify(transactions));
+
+            updateCareerDashboard(); 
+            populateDropdowns();
+            updateHomeDashboard();
+            renderCards();
+            closePayrollModal();
+            alert("Payslip Saved! Net Pay injected to Cash Flow & EPF injected to KWSP.");
+        }
 
         function openCategoryModal(type) {
             if (type !== 'other') return; 
@@ -1169,7 +1290,7 @@
 
         // --- 6. DATA MANAGEMENT ---
         function exportBackup() { 
-            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_savings: localStorage.getItem('vault_savings'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_career: localStorage.getItem('vault_career') }; 
+            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_savings: localStorage.getItem('vault_savings'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_payroll: localStorage.getItem('vault_payroll') }; 
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
         }
 
@@ -1230,9 +1351,8 @@
             
             utilChart = new Chart(document.getElementById('utilChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: true, display: false } } } });
             
-            salaryChart = new Chart(document.getElementById('salaryChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: true, display: false } } } });
+            salaryChart = new Chart(document.getElementById('salaryChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { stacked: false, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: false, display: false } } } });
 
-            // Trigger updates
             renderCards(); renderBills(); renderDebts(); renderSavings(); renderProfile();
             updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateUtilDashboard(); updateCareerDashboard();
         };
