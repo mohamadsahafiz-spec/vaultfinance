@@ -10,20 +10,21 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     
+    <!-- UPGRADED FONT: Inter (Premium Native App Font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
-        /* Hidden Native Scrollbars for App-Like Feel */
+        /* Hidden Native Scrollbars */
         ::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
         
         .modal-enter { animation: fadeIn 0.2s ease-out forwards; }
-        .tab-enter { animation: slideIn 0.3s ease-out forwards; }
+        .tab-enter { animation: slideIn 0.2s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -39,7 +40,7 @@
             darkMode: 'class', 
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Urbanist', 'sans-serif'] },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
                         brand: '#FFD600', 
                         surface: { light: '#F4F5F7', dark: '#000000' },
@@ -54,11 +55,11 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
-    <!-- DESKTOP Sidebar (Upgraded to Minimalist SVG Icons) -->
+    <!-- DESKTOP Sidebar -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-10">
             <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-md">V</div>
-            <h1 class="text-xl font-bold tracking-wide">Vault</h1>
+            <h1 class="text-xl font-black tracking-tight">Vault</h1>
         </div>
         <nav class="flex-1 space-y-3 text-sm font-semibold flex flex-col">
             <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-4 py-3 bg-brand text-gray-900 shadow-md rounded-xl transition">
@@ -97,11 +98,9 @@
 
     <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-32 md:pb-8 scroll-smooth" id="main-scroll">
         
+        <!-- Header (Theme Button Removed, Moved to Profile) -->
         <header class="flex justify-between items-center p-5 md:p-8 shrink-0">
-            <div class="flex-1 min-w-0 mr-4"><h2 id="header-title" class="text-xl md:text-2xl font-bold tracking-tight truncate">Hi, Sahafiz</h2></div>
-            <div class="flex items-center gap-2 shrink-0">
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 flex items-center justify-center shadow-sm text-lg transition shrink-0" id="theme-icon">🌙</button>
-            </div>
+            <div class="flex-1 min-w-0"><h2 id="header-title" class="text-2xl font-black tracking-tight truncate">Hi, Sahafiz</h2></div>
         </header>
 
         <!-- ========================================== -->
@@ -109,8 +108,7 @@
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter px-5 md:px-8 flex flex-col gap-6">
             
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg">Dashboard</h3>
+            <div class="flex justify-end items-center -mt-2 mb-2">
                 <select id="home-month-filter" onchange="updateHomeDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
@@ -118,24 +116,24 @@
                 <div class="col-span-1 lg:col-span-2 bg-panel-light dark:bg-panel-dark p-2 rounded-[32px] shadow-sm dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-gray-200 dark:border-white/10 relative overflow-hidden flex flex-col transition-colors duration-300">
                     <div class="absolute inset-0 rounded-[32px] border-t border-white/50 dark:border-white/10 pointer-events-none z-40"></div>
 
-                    <!-- DEBIT CARD -->
-                    <div class="bg-gray-900 text-white rounded-[20px] mx-3 mt-3 px-5 pt-4 pb-10 cursor-pointer hover:brightness-110 transition relative z-0 shadow-lg" onclick="openCardModal()">
+                    <!-- REBALANCED DEBIT CARD -->
+                    <div class="bg-gray-900 text-white rounded-3xl mx-2 mt-2 px-5 pt-5 pb-11 cursor-pointer hover:brightness-110 transition relative z-0 shadow-md" onclick="openCardModal()">
                         <div class="flex justify-between items-center pr-1">
                             <div class="flex items-center gap-2 font-bold text-[14px]"><span class="text-brand">💳</span><span>Debit Card</span></div>
                             <div class="font-bold text-[15px] tracking-tight">MYR <span id="debit-display">0.00</span></div>
                         </div>
                     </div>
 
-                    <!-- CREDIT CARD -->
-                    <div class="bg-brand text-gray-900 rounded-[20px] mx-3 px-5 pt-4 pb-10 relative z-10 shadow-[0_-4px_12px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.2)] border border-gray-900/5 -mt-5 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
+                    <!-- REBALANCED CREDIT CARD -->
+                    <div class="bg-brand text-gray-900 rounded-3xl mx-2 px-5 pt-5 pb-11 relative z-10 shadow-[0_-8px_15px_rgba(0,0,0,0.1)] border border-black/5 -mt-6 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
                         <div class="flex justify-between items-center pr-1">
                             <div class="flex items-center gap-2 font-bold text-[14px]"><span>💳</span><span>Credit Card</span><span class="text-[10px] font-black bg-black/10 text-gray-900 px-2 py-0.5 rounded-full ml-1"><span id="credit-pct">0</span>% Used</span></div>
                             <div class="font-bold text-[14px] tracking-tight text-right">MYR <span id="credit-display">0.00</span> <span class="text-[11px] font-bold opacity-60">/ 10,000</span></div>
                         </div>
                     </div>
 
-                    <!-- KWSP CARD (NEW) -->
-                    <div class="bg-green-500 text-white rounded-[20px] mx-3 px-5 pt-4 pb-5 relative z-20 shadow-[0_-4px_12px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.2)] border border-gray-900/5 -mt-5 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
+                    <!-- REBALANCED KWSP CARD -->
+                    <div class="bg-[#10B981] text-white rounded-3xl mx-2 px-5 pt-5 pb-6 relative z-20 shadow-[0_-8px_15px_rgba(0,0,0,0.1)] border border-black/5 dark:border-white/10 -mt-6 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
                         <div class="flex justify-between items-center pr-1">
                             <div class="flex items-center gap-2 font-bold text-[14px]"><span>🏦</span><span>KWSP (EPF)</span></div>
                             <div class="font-bold text-[14px] tracking-tight text-right">MYR <span id="kwsp-display">0.00</span></div>
@@ -143,10 +141,10 @@
                     </div>
 
                     <div class="px-5 pt-5 pb-4 relative z-30 mt-1">
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold tracking-wide uppercase">Historical Net Worth (Cash + EPF)</p>
-                        <h3 class="text-2xl md:text-3xl font-bold mt-0.5 tracking-tight">MYR <span id="total-net-worth">0.00</span></h3>
+                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-bold tracking-wide uppercase">Historical Net Worth (Cash + EPF)</p>
+                        <h3 class="text-2xl md:text-3xl font-black mt-0.5 tracking-tight">MYR <span id="total-net-worth">0.00</span></h3>
                         <div class="mt-3 flex items-center gap-2">
-                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark">Cash Flow (Sel Month):</p>
+                            <p class="text-[11px] font-bold text-textMuted-light dark:text-textMuted-dark">Cash Flow (Sel Month):</p>
                             <p id="sel-month-balance" class="text-sm font-bold tracking-tight">MYR 0.00</p>
                         </div>
                     </div>
@@ -159,7 +157,7 @@
                             <button onclick="openSavingsModal()" class="text-textMuted-light dark:text-textMuted-dark hover:text-brand transition p-1.5 rounded-full" title="Set Target">🎯</button>
                         </div>
                         <div class="mt-2">
-                            <h4 class="text-2xl font-bold">MYR <span id="current-savings">0</span></h4>
+                            <h4 class="text-2xl font-black">MYR <span id="current-savings">0</span></h4>
                             <p class="text-xs text-textMuted-light dark:text-textMuted-dark font-semibold mt-0.5">Target: MYR <span id="target-savings">0</span></p>
                         </div>
                         <div class="w-full bg-surface-light dark:bg-surface-dark h-4 rounded-full mt-5 p-1 border border-gray-100 dark:border-white/5">
@@ -186,13 +184,12 @@
         <!-- ========================================== -->
         <div id="tab-overall" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg">Overall Footprint</h3>
+            <div class="flex justify-end items-center -mt-2 mb-2">
                 <select id="overall-month-filter" onchange="updateOverallDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h3 class="text-2xl font-bold mb-0.5">MYR <span id="monthly-spend">0.00</span></h3>
+                <h3 class="text-3xl font-black mb-0.5 tracking-tight">MYR <span id="monthly-spend">0.00</span></h3>
                 <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Total Spendings for Selection</p>
 
                 <div class="flex h-3 rounded-full overflow-hidden mb-5 w-full bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-transparent">
@@ -204,19 +201,19 @@
                 <div class="grid grid-cols-3 gap-2">
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-brand border border-transparent transition" onclick="switchTab('food')">
                         <div class="text-brand text-base mb-1">🍔</div>
-                        <p class="font-bold text-sm leading-none mb-1"><span id="pct-food">0</span>%</p>
+                        <p class="font-black text-sm leading-none mb-1"><span id="pct-food">0</span>%</p>
                         <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-food">0.00</span></p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Food</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-600 border border-transparent transition" onclick="switchTab('bills')">
                         <div class="text-gray-500 dark:text-gray-400 text-base mb-1">⚡</div>
-                        <p class="font-bold text-sm leading-none mb-1"><span id="pct-util">0</span>%</p>
+                        <p class="font-black text-sm leading-none mb-1"><span id="pct-util">0</span>%</p>
                         <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-util">0.00</span></p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Utilities</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-900 dark:hover:border-white border border-transparent transition" onclick="openCategoryModal('other')">
                         <div class="text-gray-900 dark:text-white text-base mb-1">📦</div>
-                        <p class="font-bold text-sm leading-none mb-1"><span id="pct-other">0</span>%</p>
+                        <p class="font-black text-sm leading-none mb-1"><span id="pct-other">0</span>%</p>
                         <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-other">0.00</span></p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Other</p>
                     </div>
@@ -234,7 +231,8 @@
                         <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-gray-400"></span> Previous</div>
                     </div>
                 </div>
-                <div class="w-full h-48 relative"><canvas id="comparisonChart"></canvas></div>
+                <!-- ADDED GLOW STYLE via drop-shadow -->
+                <div class="w-full h-48 relative drop-shadow-[0_4px_8px_rgba(255,214,0,0.3)]"><canvas id="comparisonChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
@@ -250,8 +248,7 @@
         <!-- ========================================== -->
         <div id="tab-food" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg">Food & Dining</h3>
+            <div class="flex justify-end items-center -mt-2 mb-2">
                 <select id="food-month-filter" onchange="updateFoodDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
@@ -262,9 +259,10 @@
                         <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected Year vs Previous Year</p>
                     </div>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">MYR <span id="food-total-display">0.00</span></h3>
+                <h3 class="text-3xl font-black tracking-tight mb-4">MYR <span id="food-total-display">0.00</span></h3>
                 <div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
-                <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5"><canvas id="foodChart"></canvas></div>
+                <!-- ADDED GLOW STYLE via drop-shadow -->
+                <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5 drop-shadow-[0_4px_6px_rgba(255,214,0,0.2)]"><canvas id="foodChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
@@ -280,8 +278,7 @@
         <!-- ========================================== -->
         <div id="tab-bills" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg">Utility History</h3>
+            <div class="flex justify-end items-center -mt-2 mb-2">
                 <select id="util-year-filter" onchange="updateUtilDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
@@ -313,12 +310,11 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 5: PAYROLL & WEALTH (NEW ENGINE)       -->
+        <!-- TAB 5: PAYROLL & WEALTH                    -->
         <!-- ========================================== -->
         <div id="tab-salary" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
             
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg">Payroll & Wealth</h3>
+            <div class="flex justify-end items-center -mt-2 mb-2">
                 <button onclick="openPayrollModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Payslip</button>
             </div>
 
@@ -362,10 +358,22 @@
                 </div>
                 
                 <div class="pt-12 px-6 pb-6">
-                    <h3 class="text-2xl font-bold" id="li-name">Name</h3>
+                    <h3 class="text-2xl font-black" id="li-name">Name</h3>
                     <p class="text-sm font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5" id="li-role">Role • Industry</p>
                     <p class="text-xs text-textMuted-light dark:text-textMuted-dark mt-1" id="li-location">Location</p>
                     <div class="mt-5 flex flex-wrap gap-2" id="li-skills"></div>
+                </div>
+            </div>
+
+            <!-- NEW: THEME SETTINGS MOVED HERE -->
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <h4 class="font-bold text-sm mb-4">App Settings</h4>
+                <div class="flex justify-between items-center bg-surface-light dark:bg-surface-dark p-4 rounded-2xl border border-gray-200 dark:border-transparent transition-colors duration-300">
+                    <div>
+                        <p class="font-bold text-sm">Appearance Mode</p>
+                        <p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Toggle light and dark theme</p>
+                    </div>
+                    <button onclick="toggleTheme()" class="w-12 h-12 rounded-full bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/10 flex items-center justify-center shadow-md text-xl transition hover:scale-105 shrink-0" id="theme-icon">🌙</button>
                 </div>
             </div>
 
@@ -456,7 +464,7 @@
     <!-- MODALS                                     -->
     <!-- ========================================== -->
 
-    <!-- Update Accounts Modal (Now includes KWSP Initial Balance) -->
+    <!-- Update Accounts Modal -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold mb-5">Update Accounts</h3>
@@ -766,7 +774,6 @@
                 document.getElementById(`tab-${id}`).classList.add('hidden'); 
                 document.getElementById(`tab-${id}`).classList.remove('flex');
                 
-                // Remove Active Status (SVG CSS changes)
                 let mobBtn = document.getElementById(`nav-mob-${id}`); 
                 if(mobBtn) { 
                     mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); 
@@ -783,7 +790,6 @@
             document.getElementById(`tab-${tabId}`).classList.remove('hidden'); 
             document.getElementById(`tab-${tabId}`).classList.add('flex');
             
-            // Add Active Status (Glowing SVG effect)
             let activeMob = document.getElementById(`nav-mob-${tabId}`); 
             if(activeMob) { 
                 activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); 
@@ -1363,7 +1369,7 @@
         window.onload = function() {
             populateDropdowns();
             
-            Chart.defaults.font.family = 'Urbanist'; 
+            Chart.defaults.font.family = 'Inter'; 
             let isDark = document.documentElement.classList.contains('dark'); 
             let tc = isDark ? '#8E8E93' : '#6B7280'; 
             let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
@@ -1373,9 +1379,9 @@
 
             categoryChart = new Chart(document.getElementById('categoryChart'), { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } });
 
-            comparisonChart = new Chart(document.getElementById('comparisonChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
+            comparisonChart = new Chart(document.getElementById('comparisonChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
             
-            foodChart = new Chart(document.getElementById('foodChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
+            foodChart = new Chart(document.getElementById('foodChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
             
             utilChart = new Chart(document.getElementById('utilChart'), { type: 'bar', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: true, display: false } } } });
             
