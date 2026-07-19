@@ -103,7 +103,6 @@
             
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">My Cards</p>
-                <!-- NEW GLOWING HORIZONTAL TIMELINE -->
                 <div id="home-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
@@ -807,7 +806,6 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
         let currentEditCard = ''; 
 
-        // GLOBAL TIMELINE STATE
         window.selectedMonth = "";
         window.selectedYear = "";
 
@@ -859,7 +857,6 @@
             document.getElementById('main-scroll').scrollTo(0,0);
         }
 
-        // NEW GLOWING TIMELINE RENDERER
         function populateTimelines() {
             let txMonths = new Set();
             const now = new Date(); 
@@ -912,7 +909,6 @@
             if(uEl) uEl.innerHTML = yearHTML;
         }
 
-        // TRIGGER TIMELINE SELECTIONS
         window.selectMonth = function(m) {
             window.selectedMonth = m;
             populateTimelines();
@@ -924,7 +920,6 @@
             updateUtilDashboard();
         }
 
-        // --- 4. INDEPENDENT TAB DASHBOARD ENGINES ---
         function updateHomeDashboard() {
             const filter = window.selectedMonth;
             if(!filter) return;
@@ -954,7 +949,13 @@
             });
 
             let totalKwsp = cardData.kwsp.balance || 0;
-            payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.allowance + p.bonus) * 0.13; });
+            payrollHistory.forEach(p => { 
+                let gross = p.basic + p.allowance + p.bonus;
+                let empEpf = 0;
+                if(gross > 0 && gross <= 5000) empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13);
+                else if(gross > 5000) empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12);
+                totalKwsp += p.epf + empEpf; 
+            });
             
             const totalNetWealth = runningBalance + totalKwsp;
             const tnwEl = document.getElementById('total-net-worth');
@@ -1188,7 +1189,6 @@
             }
         }
 
-
         // --- 5. MODAL CONTROLLERS & DATA SAVING ---
         function renderCards() { 
             const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct'); const kEl = document.getElementById('kwsp-display');
@@ -1205,7 +1205,13 @@
             }
             if(kEl) {
                 let totalKwsp = cardData.kwsp.balance || 0;
-                payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.allowance + p.bonus) * 0.13; });
+                payrollHistory.forEach(p => { 
+                    let gross = p.basic + p.allowance + p.bonus;
+                    let empEpf = 0;
+                    if(gross > 0 && gross <= 5000) empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13);
+                    else if(gross > 5000) empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12);
+                    totalKwsp += p.epf + empEpf; 
+                });
                 kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('kwsp-name').innerText = cardData.kwsp.name;
                 document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4;
@@ -1347,17 +1353,32 @@
             let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             
             let gross = basic + allow + bonus;
-            // UPGRADED EPF BASE (Basic + Allowance + Bonus)
-            let epfBase = basic + allow + bonus; 
             
-            let epf = epfBase * 0.11;
-            let socsoBase = Math.min(gross, 6000); 
-            let socso = socsoBase * 0.005; 
-            let eis = socsoBase * 0.002;  
+            let epf = 0;
+            let socso = 0;
+            let eis = 0;
+
+            if (gross > 0) {
+                // MALAYSIAN EPF BRACKET LOGIC (RM20 / RM100 Increments)
+                if (gross <= 5000) {
+                    epf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.11);
+                } else if (gross <= 20000) {
+                    epf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.11);
+                } else {
+                    epf = Math.ceil(gross * 0.11);
+                }
+
+                // MALAYSIAN SOCSO & EIS BRACKET LOGIC (RM100 Increments, Midpoint base)
+                let socsoGross = Math.min(gross, 6000); 
+                let socsoBase = Math.ceil(socsoGross / 100) * 100 - 50;
+                
+                socso = socsoBase * 0.005;
+                eis = socsoBase * 0.002;
+            }
             
-            document.getElementById('pay-epf').value = epf.toFixed(2);
-            document.getElementById('pay-socso').value = socso.toFixed(2);
-            document.getElementById('pay-eis').value = eis.toFixed(2);
+            document.getElementById('pay-epf').value = epf > 0 ? epf : '';
+            document.getElementById('pay-socso').value = socso > 0 ? socso.toFixed(2) : '';
+            document.getElementById('pay-eis').value = eis > 0 ? eis.toFixed(2) : '';
             
             calcNetPay();
         }
