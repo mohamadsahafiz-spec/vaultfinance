@@ -144,8 +144,11 @@
                     
                     <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
                         <div class="flex justify-between items-center mb-4">
-                            <h4 class="font-bold text-sm">Debt Snowball</h4>
-                            <button onclick="openDebtModal()" class="text-brand text-xs font-bold hover:underline">+ Add</button>
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-bold text-sm">Debt Snowball</h4>
+                                <span id="total-debt-display" class="text-[10px] font-bold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-full border border-red-100 dark:border-red-500/20 hidden"></span>
+                            </div>
+                            <button onclick="openDebtModal()" class="text-brand text-xs font-bold hover:underline transition">+ Add</button>
                         </div>
                         <div id="debt-list" class="space-y-3 flex-1"></div>
                         <div class="mt-5 pt-5 border-t border-gray-100 dark:border-white/5">
@@ -1249,16 +1252,38 @@ function updateUtilDashboard() {
             document.getElementById('tx-modal').classList.add('hidden'); 
             document.getElementById('tx-form').reset(); 
         }
-        function saveTransaction(e) { 
+function saveTransaction(e) { 
             e.preventDefault(); 
-            transactions.push({ 
-                date: document.getElementById('tx-date').value, 
-                desc: document.getElementById('tx-desc').value, 
-                type: document.getElementById('tx-type').value, 
-                category: document.getElementById('tx-category').value, 
-                amount: parseFloat(document.getElementById('tx-amount').value) 
-            }); 
+            
+            const date = document.getElementById('tx-date').value;
+            const desc = document.getElementById('tx-desc').value;
+            const type = document.getElementById('tx-type').value;
+            const category = document.getElementById('tx-category').value;
+            const amount = parseFloat(document.getElementById('tx-amount').value);
+
+            // AUTO-DEDUCT ENGINE: Check if new expense matches a Debt Name
+            if (type === 'expense') {
+                let debtUpdated = false;
+                const searchString = (desc + " " + category).toLowerCase();
+
+                debts.forEach((debt, index) => {
+                    if (searchString.includes(debt.name.toLowerCase())) {
+                        debts[index].balance -= amount;
+                        if (debts[index].balance < 0) debts[index].balance = 0; // Prevent negative balances
+                        debtUpdated = true;
+                    }
+                });
+
+                if (debtUpdated) {
+                    localStorage.setItem('vault_debts', JSON.stringify(debts));
+                    renderDebts();
+                    alert("Matched keyword! Debt balance auto-deducted.");
+                }
+            }
+
+            transactions.push({ date, desc, type, category, amount }); 
             localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+            
             populateDropdowns(); 
             updateHomeDashboard(); 
             updateOverallDashboard(); 
@@ -1299,10 +1324,22 @@ function updateUtilDashboard() {
 
         function renderDebts() {
             const dl = document.getElementById('debt-list'); 
+            const tdEl = document.getElementById('total-debt-display');
             if(!dl) return;
             dl.innerHTML = ''; 
             debts.sort((a, b) => a.balance - b.balance);
             
+            // Calculate and display Total Debt
+            const totalDebt = debts.reduce((sum, d) => sum + d.balance, 0);
+            if(tdEl) {
+                if(totalDebt > 0) {
+                    tdEl.innerText = '-MYR ' + totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2});
+                    tdEl.classList.remove('hidden');
+                } else {
+                    tdEl.classList.add('hidden');
+                }
+            }
+
             if (debts.length === 0) { 
                 dl.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No liabilities tracked.</p>`; 
                 document.getElementById('snowball-result').classList.add('hidden'); 
@@ -1323,7 +1360,7 @@ function updateUtilDashboard() {
                 </div>`; 
             }); 
             calculateSnowball();
-        }
+        }    
         function openDebtModal() { document.getElementById('debt-modal').classList.remove('hidden'); }
         function closeDebtModal() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
         function saveDebt(e) { 
