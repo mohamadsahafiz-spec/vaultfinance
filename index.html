@@ -1067,39 +1067,50 @@
         function saveSavings(e) { e.preventDefault(); savingsData.current = parseFloat(document.getElementById('savings-current-input').value)||0; savingsData.target = parseFloat(document.getElementById('savings-target-input').value)||1; localStorage.setItem('vault_savings', JSON.stringify(savingsData)); renderSavings(); closeSavingsModal(); }
 
         function renderDebts() {
-            const dl = document.getElementById('debt-list'); const tdEl = document.getElementById('total-debt-display');
-            if(!dl) return; dl.innerHTML = ''; debts.sort((a, b) => a.balance - b.balance);
+            const dl = document.getElementById('debt-list'); 
+            const tdEl = document.getElementById('total-debt-display');
+            if(!dl) return; 
+            dl.innerHTML = ''; 
+            
+            // Keeps lowest balance at the top (Snowball), but you'll see the priority badge clearly
+            debts.sort((a, b) => a.balance - b.balance);
             
             const totalDebt = debts.reduce((sum, d) => sum + d.balance, 0);
             if(tdEl) {
-                if(totalDebt > 0) { tdEl.innerText = '-MYR ' + totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2}); tdEl.classList.remove('hidden'); } 
-                else { tdEl.classList.add('hidden'); }
+                if(totalDebt > 0) { 
+                    tdEl.innerText = '-MYR ' + totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                    tdEl.classList.remove('hidden'); 
+                } else { 
+                    tdEl.classList.add('hidden'); 
+                }
             }
 
-            if (debts.length === 0) { dl.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No liabilities tracked.</p>`; return; }
+            if (debts.length === 0) { 
+                dl.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No liabilities tracked.</p>`; 
+                return; 
+            }
             
             debts.forEach((d, i) => { 
-                dl.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group"><div class="flex-1 truncate pr-2"><p class="font-bold text-xs flex items-center truncate">${d.name}</p><p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p></div><div class="flex items-center gap-2 shrink-0"><p class="text-red-500 font-bold text-sm">-MYR ${d.balance.toLocaleString()}</p><button onclick="if(confirm('Delete?')) { debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-xs">✕</button></div></div>`; 
-            }); 
-        }
-        function openDebtModal() { document.getElementById('debt-modal').classList.remove('hidden'); }
-        function closeDebtModal() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
-        function saveDebt(e) { e.preventDefault(); debts.push({ name: document.getElementById('debt-name').value, balance: parseFloat(document.getElementById('debt-balance').value), minPayment: parseFloat(document.getElementById('debt-min').value) }); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); closeDebtModal(); }
+                // SMART DETECTOR: Look for "Credit Card" and trigger the priority UI
+                const isCC = d.name.toLowerCase().includes('credit card');
+                const badge = isCC ? `<span class="px-1.5 py-0.5 bg-red-500/10 text-red-500 border border-red-500/30 rounded-md text-[8px] uppercase font-black tracking-widest whitespace-nowrap shadow-sm">Priority: 18% APR</span>` : '';
+                const borderClass = isCC ? 'border border-red-500/40 shadow-[0_0_12px_rgba(220,38,38,0.15)]' : 'border border-transparent';
 
-        function renderBills() {
-            const list = document.getElementById('bill-list'); 
-            if(!list) return; list.innerHTML = ''; bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-            if (bills.length === 0) { list.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No upcoming reminders.</p>`; return; }
-            
-            const today = new Date();
-            bills.forEach((b, i) => {
-                const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
-                let dueText = `Due in ${diffDays} Days`; let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
-                
-                if(diffDays === 0) { dueText = 'Due Today'; dueColor = 'text-brand font-bold'; } else if (diffDays < 0) { dueText = `Overdue by ${Math.abs(diffDays)} Days`; dueColor = 'text-red-500 font-bold'; } else if (diffDays <= 3) { dueColor = 'text-red-500 font-bold'; }
-                
-                list.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group"><div class="flex items-center gap-3 flex-1 truncate pr-2"><div class="w-9 h-9 rounded-full bg-panel-light dark:bg-panel-dark flex items-center justify-center text-sm shadow-sm border border-gray-100 dark:border-white/5">📄</div><div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[10px] font-semibold ${dueColor} mt-0.5">${dueText}</p></div></div><div class="flex items-center gap-2 shrink-0"><p class="font-bold text-sm">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition"><button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-xs">✕</button></div></div></div>`;
-            });
+                dl.innerHTML += `
+                <div class="bg-surface-light dark:bg-surface-dark ${borderClass} p-3.5 rounded-2xl flex justify-between items-center group transition-all duration-300">
+                    <div class="flex-1 min-w-0 pr-2">
+                        <div class="flex items-center flex-wrap gap-2">
+                            <p class="font-bold text-xs truncate max-w-[80%]">${d.name}</p>
+                            ${badge}
+                        </div>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-1">Min: MYR ${d.minPayment}</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <p class="text-red-500 font-bold text-sm">-MYR ${d.balance.toLocaleString()}</p>
+                        <button onclick="if(confirm('Delete this debt?')) { debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-xs flex items-center justify-center shrink-0">✕</button>
+                    </div>
+                </div>`; 
+            }); 
         }
         function openBillModal() { document.getElementById('bill-modal').classList.remove('hidden'); }
         function closeBillModal() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
