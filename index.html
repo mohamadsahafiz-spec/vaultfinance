@@ -12,7 +12,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -38,7 +38,6 @@
         } else {
             document.documentElement.classList.remove('dark')
         }
-
         tailwind.config = {
             darkMode: 'class', 
             theme: {
@@ -103,14 +102,12 @@
         <div id="tab-home" class="tab-enter px-5 md:px-6 flex flex-col gap-4">
             
             <div class="flex justify-between items-center mt-1">
-                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">My Cards</p>
-                <select id="home-month-filter" onchange="updateHomeDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-xs px-2.5 py-1 rounded-md border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">My Cards</p>
+                <!-- NEW GLOWING HORIZONTAL TIMELINE -->
+                <div id="home-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
-            <!-- COMPACT NATIVE SWIPE CARDS -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
-                
-                <!-- DEBIT CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 card-debit-bg text-white rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-110 transition shadow-lg relative overflow-hidden border border-white/10" onclick="openCardModal('debit')">
                     <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-400/30 to-transparent mix-blend-overlay pointer-events-none"></div>
                     <div class="relative z-10 flex flex-col h-full justify-between">
@@ -135,7 +132,6 @@
                     </div>
                 </div>
 
-                <!-- CREDIT CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 card-gold-bg text-gray-900 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-105 transition shadow-[0_8px_20px_rgba(217,119,6,0.25)] relative overflow-hidden border border-yellow-300/50" onclick="openCardModal('credit')">
                     <div class="absolute bottom-8 left-[-20%] right-[-20%] h-4 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-80 transform -skew-y-6 drop-shadow-sm"></div>
                     <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
@@ -164,7 +160,6 @@
                     </div>
                 </div>
 
-                <!-- KWSP CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-gradient-to-br from-white via-gray-50 to-gray-200 text-gray-900 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-95 transition shadow-[0_8px_20px_rgba(0,0,0,0.08)] relative overflow-hidden border border-gray-300" onclick="openCardModal('kwsp')">
                     <div class="absolute -right-8 -top-8 w-32 h-32 bg-white rounded-full blur-xl pointer-events-none"></div>
                     <div class="relative z-10 flex flex-col h-full justify-between">
@@ -189,7 +184,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-1">
-                
                 <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-sm border border-gray-200 dark:border-white/5 flex flex-col transition-colors duration-300">
                     <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold tracking-wider uppercase">Historical Net Worth (Cash + EPF)</p>
                     <h3 class="text-2xl font-bold mt-1 tracking-tight"><span class="text-sm font-medium opacity-70 pr-1">MYR</span><span id="total-net-worth">0.00</span></h3>
@@ -238,8 +232,8 @@
         <div id="tab-overall" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
             
             <div class="flex justify-between items-center mt-1">
-                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Analytics</p>
-                <select id="overall-month-filter" onchange="updateOverallDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-xs px-2.5 py-1 rounded-md border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Analytics</p>
+                <div id="overall-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
@@ -302,8 +296,8 @@
         <div id="tab-food" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
             
             <div class="flex justify-between items-center mt-1">
-                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Food Insight</p>
-                <select id="food-month-filter" onchange="updateFoodDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-xs px-2.5 py-1 rounded-md border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Food Insight</p>
+                <div id="food-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
@@ -327,8 +321,8 @@
         <div id="tab-bills" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
             
             <div class="flex justify-between items-center mt-1">
-                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Utilities</p>
-                <select id="util-year-filter" onchange="updateUtilDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-xs px-2.5 py-1 rounded-md border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Utilities</p>
+                <div id="util-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
@@ -366,7 +360,7 @@
             
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Income Tracker</p>
-                <button onclick="openPayrollModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Log Payslip">
+                <button onclick="openPayrollModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center font-bold shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Log Payslip">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </button>
             </div>
@@ -374,7 +368,7 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Gross vs Net vs Deductions</p>
                 <h4 class="font-bold text-sm mb-5">Income Trajectory</h4>
-                <div class="w-full h-56 relative drop-shadow-[0_4px_6px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
+                <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -813,6 +807,10 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
         let currentEditCard = ''; 
 
+        // GLOBAL TIMELINE STATE
+        window.selectedMonth = "";
+        window.selectedYear = "";
+
         function formatDisplayDate(dateStr) {
             if (!dateStr) return ''; 
             const parts = dateStr.split('-'); 
@@ -861,41 +859,75 @@
             document.getElementById('main-scroll').scrollTo(0,0);
         }
 
-        function populateDropdowns() {
+        // NEW GLOWING TIMELINE RENDERER
+        function populateTimelines() {
             let txMonths = new Set();
             const now = new Date(); 
-            txMonths.add(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`);
+            const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`;
+            txMonths.add(currentMonthStr);
             
             transactions.forEach(t => { if(t.date && t.date.includes('-')) txMonths.add(t.date.split('-').slice(0,2).join('-')); });
             let txArr = Array.from(txMonths).sort().reverse();
             const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             
-            ['home-month-filter', 'overall-month-filter', 'food-month-filter'].forEach(id => {
+            if (!window.selectedMonth || !txArr.includes(window.selectedMonth)) {
+                window.selectedMonth = txArr[0];
+            }
+
+            let monthHTML = '';
+            txArr.forEach(m => {
+                const [y, mo] = m.split('-');
+                const display = `${mNames[parseInt(mo, 10)-1]} ${y}`;
+                const isActive = (m === window.selectedMonth);
+                const activeClass = isActive 
+                    ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' 
+                    : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                monthHTML += `<button onclick="selectMonth('${m}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${display}</button>`;
+            });
+
+            ['home-timeline', 'overall-timeline', 'food-timeline'].forEach(id => {
                 const el = document.getElementById(id);
-                if(el) {
-                    const current = el.value || txArr[0];
-                    el.innerHTML = '';
-                    txArr.forEach(m => { const [y, mo] = m.split('-'); el.innerHTML += `<option value="${m}">${mNames[parseInt(mo, 10)-1]} ${y}</option>`; });
-                    if(txArr.includes(current)) el.value = current; else el.selectedIndex = 0;
-                }
+                if(el) el.innerHTML = monthHTML;
             });
 
             let uYears = new Set(); 
             uYears.add(now.getFullYear().toString());
             utilHistory.forEach(u => { if(u.month) uYears.add(u.month.split('-')[0]); });
             let uArr = Array.from(uYears).sort().reverse();
-            const uEl = document.getElementById('util-year-filter');
-            if(uEl) {
-                const curU = uEl.value || uArr[0]; uEl.innerHTML = '';
-                uArr.forEach(y => uEl.innerHTML += `<option value="${y}">${y}</option>`);
-                if(uArr.includes(curU)) uEl.value = curU; else uEl.selectedIndex = 0;
+            
+            if (!window.selectedYear || !uArr.includes(window.selectedYear)) {
+                window.selectedYear = uArr[0];
             }
+
+            let yearHTML = '';
+            uArr.forEach(y => {
+                const isActive = (y === window.selectedYear);
+                const activeClass = isActive 
+                    ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' 
+                    : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                yearHTML += `<button onclick="selectYear('${y}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${y}</button>`;
+            });
+
+            const uEl = document.getElementById('util-timeline');
+            if(uEl) uEl.innerHTML = yearHTML;
         }
 
+        // TRIGGER TIMELINE SELECTIONS
+        window.selectMonth = function(m) {
+            window.selectedMonth = m;
+            populateTimelines();
+            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard();
+        }
+        window.selectYear = function(y) {
+            window.selectedYear = y;
+            populateTimelines();
+            updateUtilDashboard();
+        }
+
+        // --- 4. INDEPENDENT TAB DASHBOARD ENGINES ---
         function updateHomeDashboard() {
-            const filterEl = document.getElementById('home-month-filter');
-            if(!filterEl) return;
-            const filter = filterEl.value;
+            const filter = window.selectedMonth;
+            if(!filter) return;
             const [yStr, mStr] = filter.split('-'); 
             const currY = parseInt(yStr, 10); 
             const currM = parseInt(mStr, 10) - 1;
@@ -922,7 +954,7 @@
             });
 
             let totalKwsp = cardData.kwsp.balance || 0;
-            payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.bonus) * 0.13; });
+            payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.allowance + p.bonus) * 0.13; });
             
             const totalNetWealth = runningBalance + totalKwsp;
             const tnwEl = document.getElementById('total-net-worth');
@@ -937,9 +969,8 @@
         }
 
         function updateOverallDashboard() {
-            const filterEl = document.getElementById('overall-month-filter');
-            if(!filterEl) return;
-            const filter = filterEl.value;
+            const filter = window.selectedMonth;
+            if(!filter) return;
             const [yStr, mStr] = filter.split('-'); 
             const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
             
@@ -1008,9 +1039,8 @@
         }
 
         function updateFoodDashboard() {
-            const filterEl = document.getElementById('food-month-filter');
-            if(!filterEl) return;
-            const filter = filterEl.value;
+            const filter = window.selectedMonth;
+            if(!filter) return;
             const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
             const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
             
@@ -1063,8 +1093,8 @@
         }
 
         function updateUtilDashboard() {
-            const yrEl = document.getElementById('util-year-filter');
-            const yr = yrEl ? yrEl.value : new Date().getFullYear().toString();
+            const yr = window.selectedYear;
+            if(!yr) return;
             
             const list = document.getElementById('util-history-list'); 
             if(list) list.innerHTML = '';
@@ -1103,7 +1133,7 @@
         }
         
         function deleteUtilLog(globalIndex) {
-            if(confirm('Delete this utility log?')) { utilHistory.splice(globalIndex, 1); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); }
+            if(confirm('Delete this utility log?')) { utilHistory.splice(globalIndex, 1); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); }
         }
 
         function updateCareerDashboard() {
@@ -1158,6 +1188,8 @@
             }
         }
 
+
+        // --- 5. MODAL CONTROLLERS & DATA SAVING ---
         function renderCards() { 
             const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct'); const kEl = document.getElementById('kwsp-display');
             
@@ -1173,7 +1205,7 @@
             }
             if(kEl) {
                 let totalKwsp = cardData.kwsp.balance || 0;
-                payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.bonus) * 0.13; });
+                payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.allowance + p.bonus) * 0.13; });
                 kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('kwsp-name').innerText = cardData.kwsp.name;
                 document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4;
@@ -1243,7 +1275,7 @@
 
             transactions.push({ date, desc, type, category, amount }); 
             localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-            populateDropdowns(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); closeTxModal(); 
+            populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); closeTxModal(); 
         }
 
         function renderSavings() { 
@@ -1301,7 +1333,7 @@
 
         function openUtilHistoryModal() { const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; document.getElementById('util-history-modal').classList.remove('hidden'); }
         function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
-        function saveUtilHistory(e) { e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); closeUtilHistoryModal(); }
+        function saveUtilHistory(e) { e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); closeUtilHistoryModal(); }
 
         function openPayrollModal() { 
             const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
@@ -1315,7 +1347,8 @@
             let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             
             let gross = basic + allow + bonus;
-            let epfBase = basic + bonus; 
+            // UPGRADED EPF BASE (Basic + Allowance + Bonus)
+            let epfBase = basic + allow + bonus; 
             
             let epf = epfBase * 0.11;
             let socsoBase = Math.min(gross, 6000); 
@@ -1354,14 +1387,14 @@
             transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
 
-            updateCareerDashboard(); populateDropdowns(); updateHomeDashboard(); renderCards(); closePayrollModal();
+            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closePayrollModal();
             alert("Payslip Saved! Net Pay injected to Cash Flow & EPF injected to KWSP.");
         }
 
         function openCategoryModal(type) {
             if (type !== 'other') return; 
-            const filterEl = document.getElementById('overall-month-filter'); if(!filterEl) return;
-            const [yStr, mStr] = filterEl.value.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
+            const filter = window.selectedMonth; if(!filter) return;
+            const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
             const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
             
             let dailySpend = new Array(31).fill(0); let currCatTotal = 0; let lastCatTotal = 0;
@@ -1457,7 +1490,7 @@
                 const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
                 transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
                 transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-                alert(`Successfully imported ${validData.length} records!`); populateDropdowns(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); e.target.value = ''; 
+                alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); e.target.value = ''; 
             }; reader.readAsText(file); 
         });
         
@@ -1465,7 +1498,7 @@
 
         // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
-            populateDropdowns();
+            populateTimelines();
             
             Chart.defaults.font.family = 'Inter'; 
             let isDark = document.documentElement.classList.contains('dark'); 
