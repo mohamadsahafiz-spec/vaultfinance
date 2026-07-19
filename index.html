@@ -30,6 +30,7 @@
     </style>
 
     <script>
+        // Dark Mode Initialization
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
         } else {
@@ -67,7 +68,7 @@
             <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>🍔</span> Food & Dining</button>
             <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>⚡</span> Utilities & Bills</button>
             <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>🏦</span> Career & Wealth</button>
-            <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>👤</span> Settings</button>
+            <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>👤</span> Profile</button>
             
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
                 <button onclick="openTxModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-md rounded-xl font-bold transition hover:brightness-105">
@@ -84,8 +85,6 @@
         <header class="flex justify-between items-center p-5 md:p-8 shrink-0">
             <div class="flex-1 min-w-0 mr-4"><h2 id="header-title" class="text-xl md:text-2xl font-bold tracking-tight truncate">Hi, Sahafiz</h2></div>
             <div class="flex items-center gap-2 shrink-0">
-                <!-- TIME MACHINE DROPDOWN -->
-                <select id="global-month-filter" onchange="changeGlobalMonth()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2.5 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
                 <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 flex items-center justify-center shadow-sm text-lg transition shrink-0" id="theme-icon">🌙</button>
             </div>
         </header>
@@ -94,28 +93,31 @@
         <!-- TAB 1: HOME DASHBOARD                      -->
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter px-5 md:px-8 flex flex-col gap-6">
+            
+            <!-- INDEPENDENT DROPDOWN -->
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg">Dashboard</h3>
+                <select id="home-month-filter" onchange="updateHomeDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
                 <div class="col-span-1 lg:col-span-2 bg-panel-light dark:bg-panel-dark p-2 rounded-[32px] shadow-sm dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-gray-200 dark:border-white/10 relative overflow-hidden flex flex-col transition-colors duration-300">
                     <div class="absolute inset-0 rounded-[32px] border-t border-white/50 dark:border-white/10 pointer-events-none z-40"></div>
-                    <div class="absolute inset-1.5 border-[1.5px] border-dashed border-[#8BA396]/20 rounded-[26px] pointer-events-none z-30"></div>
 
-                    <!-- Top Card (Debit) -->
                     <div class="bg-gray-900 text-white rounded-[20px] mx-3 mt-3 px-5 pt-4 pb-10 cursor-pointer hover:brightness-110 transition relative z-0 shadow-lg" onclick="openCardModal()">
                         <div class="flex justify-between items-center pr-1">
                             <div class="flex items-center gap-2 font-bold text-[14px]">
-                                <svg class="w-4 h-4 fill-current text-brand" viewBox="0 0 24 24"><path d="M4 22V20H20V22H4ZM2 18V13H22V18H2ZM1 11L12 2L23 11H1ZM5.3 9H18.7L12 4.1L5.3 9Z"/></svg>
+                                <span class="text-brand">💳</span>
                                 <span>Debit Card</span>
                             </div>
                             <div class="font-bold text-[15px] tracking-tight">MYR <span id="debit-display">0.00</span></div>
                         </div>
                     </div>
 
-                    <!-- Middle Card (Credit) -->
                     <div class="bg-brand text-gray-900 rounded-[20px] mx-3 px-5 pt-4 pb-5 relative z-10 shadow-[0_-4px_12px_rgba(0,0,0,0.1),0_8px_16px_rgba(0,0,0,0.2)] border border-gray-900/5 -mt-5 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
                         <div class="flex justify-between items-center pr-1">
                             <div class="flex items-center gap-2 font-bold text-[14px]">
-                                <svg class="w-4 h-4 fill-current text-gray-900" viewBox="0 0 24 24"><path d="M20 7V5C20 3.9 19.1 3 18 3H6C4.9 3 4 3.9 4 5V19C4 20.1 4.9 21 6 21H18C19.1 21 20 20.1 20 19V17H22V7H20ZM18 19H6V5H18V7H12C10.9 7 10 7.9 10 9V15C10 16.1 10.9 17 12 17H18V19ZM12 15V9H20V15H12ZM14 13.5C13.2 13.5 12.5 12.8 12.5 12C12.5 11.2 13.2 10.5 14 10.5C14.8 10.5 15.5 11.2 15.5 12C15.5 12.8 14.8 13.5 14 13.5Z"/></svg>
+                                <span>💳</span>
                                 <span>Credit Card</span>
                             </div>
                             <div class="font-bold text-[15px] tracking-tight">MYR <span id="credit-display">0.00</span></div>
@@ -133,7 +135,7 @@
                     <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
                         <div class="flex justify-between items-center mb-1">
                             <p class="text-textMuted-light dark:text-textMuted-dark text-xs font-bold tracking-wide uppercase">Emergency Fund</p>
-                            <button onclick="openSavingsModal()" class="text-textMuted-light dark:text-textMuted-dark hover:text-brand transition p-1.5 rounded-full hover:bg-surface-light dark:hover:bg-surface-dark" title="Set Target">🎯</button>
+                            <button onclick="openSavingsModal()" class="text-textMuted-light dark:text-textMuted-dark hover:text-brand transition p-1.5 rounded-full" title="Set Target">🎯</button>
                         </div>
                         <div class="mt-2">
                             <h4 class="text-2xl font-bold">MYR <span id="current-savings">0</span></h4>
@@ -151,9 +153,8 @@
                         </div>
                         <div id="debt-list" class="space-y-3 flex-1"></div>
                         <div class="mt-5 pt-5 border-t border-gray-100 dark:border-white/5">
-                            <p class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">Extra Snowball Payment</p>
-                            <div class="flex gap-2 mt-2">
-                                <input type="number" id="extra-payment" value="500" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm font-semibold px-3 py-2 rounded-xl w-full outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent transition-colors duration-300">
+                            <div class="flex gap-2">
+                                <input type="number" id="extra-payment" value="500" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm font-semibold px-3 py-2 rounded-xl w-full outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent">
                                 <button onclick="calculateSnowball()" class="bg-brand text-gray-900 px-4 py-2 rounded-xl font-bold text-sm shadow-md hover:brightness-105">Calc</button>
                             </div>
                             <p id="snowball-result" class="font-bold mt-3 text-center text-[11px] hidden"></p>
@@ -163,7 +164,7 @@
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 mt-2">
-                <h4 class="font-bold text-sm mb-4">Selected Month Balance History</h4>
+                <h4 class="font-bold text-sm mb-4">Balance History (Selected Month)</h4>
                 <div class="w-full h-40 relative"><canvas id="mainChart"></canvas></div>
             </div>
         </div>
@@ -172,14 +173,14 @@
         <!-- TAB 2: OVERALL ANALYTICS                   -->
         <!-- ========================================== -->
         <div id="tab-overall" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+            
+            <!-- INDEPENDENT DROPDOWN -->
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg">Overall Footprint</h3>
+                <select id="overall-month-filter" onchange="updateOverallDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            </div>
+
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h4 class="font-bold text-sm mb-0.5">Spending Footprint</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Selected Month</p>
-                    </div>
-                </div>
-                
                 <h3 class="text-2xl font-bold mb-0.5">MYR <span id="monthly-spend">0.00</span></h3>
                 <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Total Spendings for Selection</p>
 
@@ -189,17 +190,17 @@
                     <div id="bar-other" class="bg-gray-900 dark:bg-white h-full transition-all duration-1000" style="width: 0%"></div>
                 </div>
                 <div class="grid grid-cols-3 gap-2">
-                    <div onclick="switchTab('food')" class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-brand border border-transparent transition">
+                    <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-brand border border-transparent transition" onclick="switchTab('food')">
                         <div class="text-brand text-base mb-1">🍔</div>
                         <p class="font-bold text-sm leading-none mb-1"><span id="pct-food">0</span>%</p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Food</p>
                     </div>
-                    <div onclick="switchTab('bills')" class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-600 border border-transparent transition">
+                    <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-600 border border-transparent transition" onclick="switchTab('bills')">
                         <div class="text-gray-500 dark:text-gray-400 text-base mb-1">⚡</div>
                         <p class="font-bold text-sm leading-none mb-1"><span id="pct-util">0</span>%</p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Utilities</p>
                     </div>
-                    <div onclick="openCategoryModal('other')" class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-900 dark:hover:border-white border border-transparent transition">
+                    <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-900 dark:hover:border-white border border-transparent transition" onclick="openCategoryModal('other')">
                         <div class="text-gray-900 dark:text-white text-base mb-1">📦</div>
                         <p class="font-bold text-sm leading-none mb-1"><span id="pct-other">0</span>%</p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Other</p>
@@ -213,18 +214,15 @@
                         <h4 class="font-bold text-sm">Pacing Comparison</h4>
                         <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected vs Previous Month</p>
                     </div>
-                    <div class="text-right flex items-center gap-3 text-[10px] font-bold">
-                        <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Selected</div>
-                        <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Previous</div>
-                    </div>
                 </div>
                 <div class="w-full h-48 relative"><canvas id="comparisonChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Transactions (Selected Month)</h4>
+                <h4 class="font-bold text-sm mb-5">Ledger (Selected Month)</h4>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse "><tbody id="overall-transaction-list" class="text-sm"></tbody></table>
+                    <!-- FIXED: Removed min-w-[500px] to allow mobile scaling -->
+                    <table class="w-full text-left border-collapse"><tbody id="overall-transaction-list" class="text-sm"></tbody></table>
                 </div>
             </div>
         </div>
@@ -233,156 +231,174 @@
         <!-- TAB 3: FOOD & DINING                       -->
         <!-- ========================================== -->
         <div id="tab-food" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+            
+            <!-- INDEPENDENT DROPDOWN -->
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg">Food & Dining</h3>
+                <select id="food-month-filter" onchange="updateFoodDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            </div>
+
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h4 class="font-bold text-sm mb-0.5">Food & Dining Analytics</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Cumulative Pacing (Selected vs Previous)</p>
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center">🍔</div>
-                </div>
                 <h3 class="text-2xl font-bold mb-4">MYR <span id="food-total-display">0.00</span></h3>
                 <div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
-                
-                <div class="flex items-center gap-3 text-[10px] font-bold justify-end mb-2">
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Selected</div>
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Previous</div>
-                </div>
-                <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5">
-                    <canvas id="foodChart"></canvas>
-                </div>
+                <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5"><canvas id="foodChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
                 <h4 class="font-bold text-sm mb-5">Food Ledger (Selected Month)</h4>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse "><tbody id="food-transaction-list" class="text-sm"></tbody></table>
+                    <!-- FIXED: Removed min-w-[500px] to allow mobile scaling -->
+                    <table class="w-full text-left border-collapse"><tbody id="food-transaction-list" class="text-sm"></tbody></table>
                 </div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 4: UTILITIES & BILLS                   -->
+        <!-- TAB 4: UTILITIES & BILLS (UPGRADED)        -->
         <!-- ========================================== -->
         <div id="tab-bills" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+            
+            <!-- INDEPENDENT YEAR DROPDOWN -->
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg">Utility History</h3>
+                <select id="util-year-filter" onchange="updateUtilDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            </div>
+
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <div class="flex justify-between items-start mb-4">
+                <div class="flex justify-between items-end mb-5">
                     <div>
-                        <h4 class="font-bold text-sm mb-0.5">Utilities Analytics</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-semibold">Cumulative Pacing (Selected vs Previous)</p>
+                        <h4 class="font-bold text-sm">Monthly Breakdown</h4>
+                        <p class="text-textMuted-light font-semibold text-[11px] mt-0.5">Selected Year Pacing</p>
                     </div>
-                    <div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center">⚡</div>
+                    <button onclick="openUtilHistoryModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Past Bill</button>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">MYR <span id="util-total-display">0.00</span></h3>
-                <div id="util-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
-                
-                <div class="flex items-center gap-3 text-[10px] font-bold justify-end mb-2">
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-brand"></span> Selected</div>
-                    <div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 border border-surface-light border-dashed"></span> Previous</div>
-                </div>
-                <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5">
-                    <canvas id="utilChart"></canvas>
-                </div>
+                <div class="w-full h-56 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5"><canvas id="utilChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Utility Ledger (Selected Month)</h4>
+                <h4 class="font-bold text-sm mb-5">Historical Ledger (Selected Year)</h4>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse "><tbody id="util-transaction-list" class="text-sm"></tbody></table>
+                    <!-- FIXED: Removed min-w-[500px] to allow mobile scaling -->
+                    <table class="w-full text-left border-collapse"><tbody id="util-history-list" class="text-sm"></tbody></table>
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-5">
-                    <h4 class="font-bold text-sm">Bill Command Center</h4>
-                    <button onclick="openBillModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Add Bill</button>
+                    <h4 class="font-bold text-sm text-brand">Upcoming Reminders</h4>
+                    <button onclick="openBillModal()" class="text-xs font-bold text-brand hover:underline transition">+ Add Reminder</button>
                 </div>
                 <div id="bill-list" class="space-y-3 flex-1 overflow-y-auto max-h-[400px] pr-1"></div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 5: SALARY & WEALTH TRACKER             -->
+        <!-- TAB 5: CAREER & WEALTH (UPGRADED)          -->
         <!-- ========================================== -->
         <div id="tab-salary" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+            
+            <!-- HEADER AREA -->
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg">Career Growth</h3>
+                <button onclick="openCareerModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Income</button>
+            </div>
+
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-1">Career Growth Trajectory</h4>
-                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Tracking Base Compensation (Past 7 Years)</p>
+                <h4 class="font-bold text-sm mb-1">Income vs Tax Trajectory</h4>
+                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Historical Compensation Overview</p>
                 <div class="w-full h-64 relative"><canvas id="salaryChart"></canvas></div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                    <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Last Increment</p>
-                    <h3 class="text-xl font-bold mt-1">April 2026</h3>
-                    <p class="text-[11px] font-bold text-brand mt-2">✨ Market Adjusted</p>
-                </div>
-                <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                    <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Current Role</p>
-                    <h3 class="text-xl font-bold mt-1" id="display-role">Field Engineer</h3>
-                    <p class="text-[11px] font-bold text-gray-500 dark:text-gray-400 mt-2" id="display-industry">Semiconductor</p>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
+                <h4 class="font-bold text-sm mb-5">Career Ledger</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse"><tbody id="career-history-list" class="text-sm"></tbody></table>
                 </div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 6: PROFILE & SETTINGS                  -->
+        <!-- TAB 6: PROFILE (LINKEDIN STYLE)            -->
         <!-- ========================================== -->
-        <div id="tab-profile" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+        <div id="tab-profile" class="tab-enter px-5 md:px-8 hidden flex-col gap-6 pb-20">
             
+            <!-- LinkedIn Style Identity Card -->
+            <div class="relative bg-panel-light dark:bg-panel-dark rounded-3xl overflow-hidden shadow-sm dark:shadow-none border border-gray-200 dark:border-white/5 transition-colors duration-300">
+                <!-- Cover Photo Area -->
+                <div class="h-32 bg-gradient-to-r from-gray-700 to-brand relative">
+                    <button onclick="document.getElementById('cover-upload').click()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition text-xs shadow-md">✏️</button>
+                    <input type="file" id="cover-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'cover')">
+                    <img id="profile-cover-img" src="" class="w-full h-full object-cover hidden">
+                </div>
+                
+                <!-- Avatar Area -->
+                <div class="absolute top-16 left-6 z-10">
+                    <div class="w-24 h-24 rounded-full border-[4px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-lg transition-colors duration-300" onclick="document.getElementById('avatar-upload').click()">
+                        <img id="profile-avatar-img" src="" class="w-full h-full object-cover hidden">
+                        <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-400" id="profile-avatar-initial"></div>
+                        <div class="absolute inset-0 bg-black/40 hidden group-hover:flex items-center justify-center text-white text-xs font-bold transition">Edit</div>
+                    </div>
+                    <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'avatar')">
+                </div>
+                
+                <!-- Info Area -->
+                <div class="pt-12 px-6 pb-6">
+                    <h3 class="text-2xl font-bold" id="li-name">Name</h3>
+                    <p class="text-sm font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5" id="li-role">Role • Industry</p>
+                    <p class="text-xs text-textMuted-light dark:text-textMuted-dark mt-1" id="li-location">Location</p>
+                    <div class="mt-5 flex flex-wrap gap-2" id="li-skills"></div>
+                </div>
+            </div>
+
+            <!-- Profile Edit Form -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-4">Professional Identity</h4>
+                <h4 class="font-bold text-sm mb-4">Edit Profile Information</h4>
                 <form id="profile-form" onsubmit="saveProfile(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Full Name</label>
-                        <input type="text" id="prof-name" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent transition-colors duration-300">
+                        <input type="text" id="prof-name" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Current Job Title</label>
-                            <input type="text" id="prof-role" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent transition-colors duration-300">
+                            <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Job Title</label>
+                            <input type="text" id="prof-role" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Industry</label>
-                            <input type="text" id="prof-industry" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent transition-colors duration-300">
+                            <input type="text" id="prof-industry" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Location</label>
-                            <input type="text" id="prof-address" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent transition-colors duration-300">
+                            <input type="text" id="prof-address" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Tenure (Years)</label>
-                            <input type="number" id="prof-tenure" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl outline-none focus:ring-1 focus:ring-brand border border-gray-200 dark:border-transparent transition-colors duration-300">
+                            <input type="number" id="prof-tenure" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-brand text-gray-900 px-4 py-3 rounded-xl font-bold text-sm shadow-md mt-2 hover:brightness-105">Update Profile</button>
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Core Skills (Comma separated)</label>
+                        <input type="text" id="prof-skills" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300" placeholder="e.g. Troubleshooting, Analytics, Leadership">
+                    </div>
+                    <button type="submit" class="w-full bg-brand text-gray-900 px-4 py-3 rounded-xl font-bold text-sm shadow-md mt-2 hover:brightness-105 transition">Save Profile</button>
                 </form>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-2 text-brand">Device Sync & Backup</h4>
-                <p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark mb-4 leading-relaxed">Transfer your full Vault data (transactions, bills, savings, and settings) between your PC and phone using a JSON sync file.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-4 py-3 rounded-xl shadow-md hover:brightness-105 transition">📦 Export Sync File</button>
-                    <div>
-                        <input type="file" id="json-file-input" accept=".json" class="hidden">
-                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">📥 Import Sync File</button>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Data Management (Backup, CSV, Factory Reset) -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <h4 class="font-bold text-sm mb-4">Data Management</h4>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <button onclick="exportCSV()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬇ Export CSV (Ledger)</button>
-                    
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-4 py-3 rounded-xl shadow-md transition hover:brightness-105">📦 Export Sync Backup</button>
+                    <div>
+                        <input type="file" id="json-file-input" accept=".json" class="hidden">
+                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">📥 Import Sync Backup</button>
+                    </div>
                     <div>
                         <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark border border-gray-200 dark:border-transparent text-xs font-bold px-4 py-3 rounded-xl shadow-sm hover:text-brand transition">⬆ Import CSV (Ledger)</button>
+                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">⬆ Import CSV Ledger</button>
                     </div>
-
                     <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-bold px-4 py-3 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
                 </div>
             </div>
@@ -390,254 +406,289 @@
 
     </main>
 
-    <!-- MOBILE NAVIGATION (6 Tabs + Center FAB) -->
+    <!-- MOBILE FAB NAVIGATION -->
     <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[95%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-full flex justify-between items-center px-2 py-2 shadow-xl z-[90] transition-colors duration-300">
-        <button onclick="switchTab('home')" id="nav-mob-home" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-900 bg-brand shadow-md text-lg transition" title="Home">🏠</button>
-        <button onclick="switchTab('overall')" id="nav-mob-overall" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Overall">📊</button>
-        <button onclick="switchTab('food')" id="nav-mob-food" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Food">🍔</button>
+        <button onclick="switchTab('home')" id="nav-mob-home" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-900 bg-brand shadow-md text-lg transition">🏠</button>
+        <button onclick="switchTab('overall')" id="nav-mob-overall" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">📊</button>
+        <button onclick="switchTab('food')" id="nav-mob-food" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">🍔</button>
         
         <!-- FAB Center Cutout Effect -->
         <div class="relative w-12 h-10 flex justify-center items-center shrink-0">
-            <button onclick="openTxModal()" class="absolute bottom-2 w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.3)] transition-transform hover:scale-105 border-[4px] border-surface-light dark:border-surface-dark z-[100]" title="Add Transaction">
+            <button onclick="openTxModal()" class="absolute bottom-2 w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.3)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
             </button>
         </div>
 
-        <button onclick="switchTab('bills')" id="nav-mob-bills" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Bills">⚡</button>
-        <button onclick="switchTab('salary')" id="nav-mob-salary" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Salary">🏦</button>
-        <button onclick="switchTab('profile')" id="nav-mob-profile" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark" title="Profile">👤</button>
+        <button onclick="switchTab('bills')" id="nav-mob-bills" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">⚡</button>
+        <button onclick="switchTab('salary')" id="nav-mob-salary" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">🏦</button>
+        <button onclick="switchTab('profile')" id="nav-mob-profile" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">👤</button>
     </nav>
 
-    <!-- MODALS -->
+
+    <!-- ========================================== -->
+    <!-- MODALS (Fully Expanded)                    -->
+    <!-- ========================================== -->
+
+    <!-- Update Accounts Modal -->
+    <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold mb-5">Update Accounts</h3>
+            <form onsubmit="saveCards(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Debit Card</label>
+                    <input type="number" id="card-debit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-brand mb-1 uppercase tracking-wider">Credit Card</label>
+                    <input type="number" id="card-credit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="flex gap-3 pt-3">
+                    <button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl font-bold transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md hover:brightness-105 transition">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add Transaction Modal -->
+    <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold mb-5">Add Transaction</h3>
+            <form id="tx-form" onsubmit="saveTransaction(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Description</label>
+                    <input type="text" id="tx-desc" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label>
+                        <input type="number" id="tx-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Date</label>
+                        <input type="date" id="tx-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Type</label>
+                        <select id="tx-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Category</label>
+                        <input type="text" id="tx-category" required placeholder="Food, Utility..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl font-bold transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md hover:brightness-105 transition">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Update Savings Target Modal -->
+    <div id="savings-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold mb-5">Update Target</h3>
+            <form onsubmit="saveSavings(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Current Saved</label>
+                    <input type="number" id="savings-current-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Target</label>
+                    <input type="number" id="savings-target-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="closeSavingsModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add Debt Modal -->
+    <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold mb-5">Add Debt</h3>
+            <form id="debt-form" onsubmit="saveDebt(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Debt Name</label>
+                    <input type="text" id="debt-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Balance</label>
+                        <input type="number" id="debt-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Min Payment</label>
+                        <input type="number" id="debt-min" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="closeDebtModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Upcoming Bill Reminder Modal -->
+    <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold mb-5">Add Reminder</h3>
+            <form id="bill-form" onsubmit="saveBill(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Bill Name</label>
+                    <input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label>
+                        <input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Due Date</label>
+                        <input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Detail Graph Modal -->
     <div id="category-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
             <div class="flex justify-between items-start mb-4">
                 <div>
-                    <h3 id="category-modal-title" class="text-xl font-bold">Category Graph</h3>
+                    <h3 class="text-xl font-bold">Category Graph</h3>
                     <p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Daily Breakdown</p>
                 </div>
-                <button onclick="closeCategoryModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-red-500 font-bold text-sm transition flex items-center justify-center">✕</button>
+                <button onclick="closeCategoryModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:bg-red-500 hover:text-white transition font-bold text-sm">✕</button>
             </div>
-            <div id="category-modal-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
-            <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5"><canvas id="categoryChart"></canvas></div>
+            <div id="category-modal-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-200 dark:border-transparent"></div>
+            <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-200 dark:border-transparent"><canvas id="categoryChart"></canvas></div>
         </div>
     </div>
 
-    <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4"><div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter"><h3 class="text-xl font-bold mb-5">Update Accounts</h3><form id="card-form" onsubmit="saveCards(event)" class="space-y-4"><div><label class="block text-[11px] font-bold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Debit Card (Top)</label><input type="number" id="card-debit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div><label class="block text-[11px] font-bold text-brand mb-1 uppercase tracking-wider">Credit Card (Middle)</label><input type="number" id="card-credit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div class="flex gap-3 pt-3 border-t border-gray-100 dark:border-white/5"><button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-sm px-4 py-2.5 rounded-xl font-bold">Cancel</button><button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md">Save</button></div></form></div></div>
-    
-    <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4"><div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter"><h3 class="text-xl font-bold mb-5">Add Transaction</h3><form id="tx-form" onsubmit="saveTransaction(event)" class="space-y-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Description</label><input type="text" id="tx-desc" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label><input type="number" id="tx-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Date</label><input type="date" id="tx-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Type</label><select id="tx-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"><option value="expense">Expense</option><option value="income">Income</option></select></div><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Category</label><input type="text" id="tx-category" required placeholder="Food, Utility..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div></div><div class="flex gap-3 pt-4 border-t border-gray-100 dark:border-white/5"><button type="button" onclick="closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-sm px-4 py-2.5 rounded-xl font-bold">Cancel</button><button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md">Save</button></div></form></div></div>
-    
-    <div id="savings-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4"><div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter"><h3 class="text-xl font-bold mb-5">Update Target</h3><form id="savings-form" onsubmit="saveSavings(event)" class="space-y-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Current Saved</label><input type="number" id="savings-current-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Target Goal</label><input type="number" id="savings-target-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div class="flex gap-3 pt-4 border-t border-gray-100 dark:border-white/5"><button type="button" onclick="closeSavingsModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-sm px-4 py-2.5 rounded-xl font-bold">Cancel</button><button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md">Save</button></div></form></div></div>
-    
-    <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4"><div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter"><h3 class="text-xl font-bold mb-5">Add Debt</h3><form id="debt-form" onsubmit="saveDebt(event)" class="space-y-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Debt Name</label><input type="text" id="debt-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Balance</label><input type="number" id="debt-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Min Payment</label><input type="number" id="debt-min" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div></div><div class="flex gap-3 pt-4 border-t border-gray-100 dark:border-white/5"><button type="button" onclick="closeDebtModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-sm px-4 py-2.5 rounded-xl font-bold">Cancel</button><button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md">Add</button></div></form></div></div>
-    
-    <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4"><div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter"><h3 class="text-xl font-bold mb-5">Add Bill</h3><form id="bill-form" onsubmit="saveBill(event)" class="space-y-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Bill Name</label><input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label><input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div><div><label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Due Date</label><input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand"></div></div><div class="flex gap-3 pt-4 border-t border-gray-100 dark:border-white/5"><button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-sm px-4 py-2.5 rounded-xl font-bold">Cancel</button><button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md">Add</button></div></form></div></div>
+    <!-- Log Past Utility Bill Modal -->
+    <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold mb-5">Log Past Utility Bill</h3>
+            <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Month Paid</label>
+                    <input type="month" id="util-hist-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Bill Type</label>
+                        <select id="util-hist-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                            <option value="Electricity">Electricity (TNB)</option>
+                            <option value="Water">Water</option>
+                            <option value="Internet">Internet/Wifi</option>
+                            <option value="Phone">Phone/Mobile</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label>
+                        <input type="number" id="util-hist-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save Log</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-    <!-- JAVASCRIPT ENGINE -->
+    <!-- Log Annual Income (Career) Modal -->
+    <div id="career-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold mb-5">Log Annual Income</h3>
+            <form id="career-form" onsubmit="saveCareerRecord(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Year</label>
+                    <input type="number" id="career-year" min="2000" max="2100" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Total Base Salary</label>
+                        <input type="number" id="career-salary" step="1" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Total Bonuses</label>
+                        <input type="number" id="career-bonus" step="1" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Total Tax Paid</label>
+                    <input type="number" id="career-tax" step="1" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="closeCareerModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save Log</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- EXPANDED JAVASCRIPT ENGINE                 -->
+    <!-- ========================================== -->
     <script>
-        let mainChart, comparisonChart, salaryChart, categoryChart, foodChart, utilChart;
-        let selectedMonth = new Date().getMonth();
-        let selectedYear = new Date().getFullYear();
-        
+        // --- 1. DATA STORES ---
         let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
         let savingsData = JSON.parse(localStorage.getItem('vault_savings')) || { current: 1250, target: 10000 };
         let debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
         let cardData = JSON.parse(localStorage.getItem('vault_cards')) || { debit: 2500, credit: 5000 };
-        let bills = JSON.parse(localStorage.getItem('vault_bills')) || [{ name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi Broadband", amount: 129, dueDate: "2026-07-28" }];
+        let bills = JSON.parse(localStorage.getItem('vault_bills')) || [
+            { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, 
+            { name: "Unifi", amount: 129, dueDate: "2026-07-28" }
+        ];
+        
+        // New Independent Storages for Utility & Career
+        let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
+        let careerHistory = JSON.parse(localStorage.getItem('vault_career')) || [
+            { year: 2024, salary: 73200, bonus: 4000, tax: 8000 },
+            { year: 2025, salary: 78000, bonus: 5500, tax: 9500 },
+            { year: 2026, salary: 93600, bonus: 0, tax: 11000 }
+        ];
         
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
-            name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7"
+            name: "Sahafiz", 
+            role: "Field Service Engineer", 
+            industry: "Semiconductor", 
+            address: "Malaysia", 
+            tenure: "7", 
+            skills: "Hardware Diagnostic, Maintenance, Excel Data, System Upgrades", 
+            avatar: "", 
+            cover: ""
         };
 
+        // Chart References
+        let mainChart, comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
+
+
+        // --- 2. INITIALIZATION & UTILITIES ---
         function formatDisplayDate(dateStr) {
-            if (!dateStr) return '';
-            const parts = dateStr.split('-');
+            if (!dateStr) return ''; 
+            const parts = dateStr.split('-'); 
             if (parts.length !== 3) return dateStr;
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             return `${months[parseInt(parts[1], 10) - 1]} ${parseInt(parts[2], 10)}, ${parts[0].slice(-2)}`;
-        }
-
-        function populateMonthFilter() {
-            const filter = document.getElementById('global-month-filter');
-            if(!filter) return;
-            
-            let monthsSet = new Set();
-            const now = new Date();
-            monthsSet.add(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`);
-            
-            transactions.forEach(t => {
-                if(t.date && typeof t.date === 'string') {
-                    const parts = t.date.split('-');
-                    if(parts.length >= 2) monthsSet.add(`${parts[0]}-${parts[1]}`);
-                }
-            });
-            
-            let monthsArr = Array.from(monthsSet).sort().reverse(); 
-            const currentVal = filter.value || `${selectedYear}-${String(selectedMonth+1).padStart(2, '0')}`;
-            
-            filter.innerHTML = '';
-            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            
-            monthsArr.forEach(m => {
-                const [y, mo] = m.split('-');
-                const opt = document.createElement('option');
-                opt.value = m;
-                opt.innerText = `${monthNames[parseInt(mo, 10)-1]} ${y}`;
-                filter.appendChild(opt);
-            });
-            
-            if (monthsArr.includes(currentVal)) { filter.value = currentVal; } 
-            else { filter.selectedIndex = 0; }
-            
-            const [y, mo] = filter.value.split('-');
-            selectedYear = parseInt(y, 10);
-            selectedMonth = parseInt(mo, 10) - 1;
-        }
-
-        function changeGlobalMonth() {
-            const filter = document.getElementById('global-month-filter');
-            const [y, mo] = filter.value.split('-');
-            selectedYear = parseInt(y, 10);
-            selectedMonth = parseInt(mo, 10) - 1;
-            updateDashboard();
-        }
-
-        function exportBackup() {
-            const backupData = {
-                vault_transactions: localStorage.getItem('vault_transactions'),
-                vault_savings: localStorage.getItem('vault_savings'),
-                vault_debts: localStorage.getItem('vault_debts'),
-                vault_cards: localStorage.getItem('vault_cards'),
-                vault_bills: localStorage.getItem('vault_bills'),
-                vault_profile: localStorage.getItem('vault_profile')
-            };
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData));
-            const downloadAnchorNode = document.createElement('a');
-            downloadAnchorNode.setAttribute("href", dataStr);
-            downloadAnchorNode.setAttribute("download", "vault_sync_backup_" + new Date().toISOString().split('T')[0] + ".json");
-            document.body.appendChild(downloadAnchorNode); 
-            downloadAnchorNode.click();
-            downloadAnchorNode.remove();
-        }
-
-        function setupJSONImport() {
-            const fileInput = document.getElementById('json-file-input');
-            if(!fileInput) return;
-            fileInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    try {
-                        const importedData = JSON.parse(event.target.result);
-                        if(importedData.vault_transactions) localStorage.setItem('vault_transactions', importedData.vault_transactions);
-                        if(importedData.vault_savings) localStorage.setItem('vault_savings', importedData.vault_savings);
-                        if(importedData.vault_debts) localStorage.setItem('vault_debts', importedData.vault_debts);
-                        if(importedData.vault_cards) localStorage.setItem('vault_cards', importedData.vault_cards);
-                        if(importedData.vault_bills) localStorage.setItem('vault_bills', importedData.vault_bills);
-                        if(importedData.vault_profile) localStorage.setItem('vault_profile', importedData.vault_profile);
-                        
-                        alert("Sync Backup restored successfully! Refreshing app...");
-                        location.reload(); 
-                    } catch (err) {
-                        alert("Invalid sync file format.");
-                    }
-                };
-                reader.readAsText(file);
-            });
-        }
-
-        // --- SMART CSV IMPORT LOGIC & GHOST BUSTER ---
-        function setupCSVImport() {
-            const fileInput = document.getElementById('csv-file-input');
-            if(!fileInput) return;
-            
-            fileInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (!file) return;
-
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    // Strip every single double-quote that wraps the rows or cells
-                    const rawText = event.target.result;
-                    const cleanText = rawText.replace(/"/g, ''); 
-                    
-                    const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== '');
-                    if (rows.length <= 1) {
-                        alert("File is empty or invalid. Make sure it has headers.");
-                        return;
-                    }
-                    
-                    const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
-                    const monthMap = { 'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06', 'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12' };
-                    
-                    const importedData = rows.slice(1).map(row => {
-                        const values = row.split(',');
-                        let obj = {};
-                        headers.forEach((h, i) => {
-                            let val = values[i] ? values[i].trim() : '';
-                            
-                            if (h === 'type') val = val.toLowerCase();
-                            
-                            // Date Translator Engine
-                            if (h === 'date') {
-                                if (val.includes('/')) {
-                                    const parts = val.split('/');
-                                    if (parts.length === 3) {
-                                        let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2];
-                                        if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } 
-                                        else if (y.length === 2) { y = '20' + y; }
-                                        val = `${y}-${m}-${d}`;
-                                    }
-                                } else if (val.includes('-')) {
-                                    const parts = val.split('-');
-                                    // Handle "Sep-25" formatting perfectly
-                                    if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) {
-                                        let m = monthMap[parts[0].toLowerCase()];
-                                        let y = parts[1].length === 2 ? '20' + parts[1] : parts[1];
-                                        val = `${y}-${m}-01`; 
-                                    } else if (parts.length === 3) {
-                                        // Handle "01-Sep-25" format
-                                        if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) {
-                                            let d = parts[0].padStart(2, '0');
-                                            let m = monthMap[parts[1].toLowerCase()];
-                                            let y = parts[2].length === 2 ? '20' + parts[2] : parts[2];
-                                            val = `${y}-${m}-${d}`;
-                                        } else if (parts[0].length === 4) {
-                                            // Handle standard YYYY-MM-DD
-                                            val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
-                                        }
-                                    }
-                                }
-                            }
-                            obj[h] = val;
-                        });
-                        
-                        // Strip currency letters/spaces from amounts
-                        if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,""));
-                        return obj;
-                    });
-
-                    // Strictly filter valid data rows
-                    const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3);
-
-                    // Ghost-Buster: Remove any existing invisible corrupted data from earlier bad imports
-                    transactions = transactions.filter(t => {
-                        if (!t.date || typeof t.date !== 'string') return false;
-                        const pts = t.date.split('-');
-                        return pts.length === 3 && !isNaN(new Date(t.date).getTime());
-                    });
-
-                    transactions = [...transactions, ...validData];
-                    localStorage.setItem('vault_transactions', JSON.stringify(transactions));
-                    
-                    alert(`Successfully cleaned and imported ${validData.length} transactions!`);
-                    populateMonthFilter();
-                    updateDashboard();
-                    fileInput.value = '';
-                };
-                reader.readAsText(file);
-            });
         }
 
         function toggleTheme() {
@@ -646,213 +697,180 @@
             localStorage.theme = isDark ? 'dark' : 'light';
             document.getElementById('theme-icon').innerText = isDark ? '☀️' : '🌙';
             
-            let textColor = isDark ? '#8E8E93' : '#6B7280';
-            let gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-            Chart.defaults.color = textColor;
+            let tc = isDark ? '#8E8E93' : '#6B7280'; 
+            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+            Chart.defaults.color = tc;
             
             [mainChart, categoryChart, comparisonChart, salaryChart, foodChart, utilChart].forEach(c => {
-                if(c) {
-                    if(c.options.scales.x) {
-                        if(c.options.scales.x.grid) c.options.scales.x.grid.color = gridColor;
-                        if(c.options.scales.x.ticks) c.options.scales.x.ticks.color = textColor;
+                if(c && c.options.scales) {
+                    if(c.options.scales.x) { 
+                        if(c.options.scales.x.grid) c.options.scales.x.grid.color = gc; 
+                        if(c.options.scales.x.ticks) c.options.scales.x.ticks.color = tc; 
                     }
-                    if(c.options.scales.y) {
-                        if(c.options.scales.y.grid) c.options.scales.y.grid.color = gridColor;
-                        if(c.options.scales.y.ticks) c.options.scales.y.ticks.color = textColor;
+                    if(c.options.scales.y) { 
+                        if(c.options.scales.y.grid) c.options.scales.y.grid.color = gc; 
+                        if(c.options.scales.y.ticks) c.options.scales.y.ticks.color = tc; 
                     }
                     c.update();
                 }
             });
-            updateDashboard();
+            
+            updateHomeDashboard(); 
+            updateOverallDashboard(); 
+            updateFoodDashboard(); 
+            updateUtilDashboard(); 
+            updateCareerDashboard();
         }
-        if(document.getElementById('theme-icon')) { document.getElementById('theme-icon').innerText = document.documentElement.classList.contains('dark') ? '☀️' : '🌙'; }
 
         function switchTab(tabId) {
-            ['home', 'overall', 'food', 'bills', 'salary', 'profile'].forEach(id => {
-                document.getElementById(`tab-${id}`).classList.add('hidden');
+            const tabs = ['home', 'overall', 'food', 'bills', 'salary', 'profile'];
+            
+            tabs.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden'); 
                 document.getElementById(`tab-${id}`).classList.remove('flex');
                 
-                let mobBtn = document.getElementById(`nav-mob-${id}`);
-                if(mobBtn) {
-                    mobBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md');
-                    mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark');
+                let mobBtn = document.getElementById(`nav-mob-${id}`); 
+                if(mobBtn) { 
+                    mobBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); 
+                    mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
                 }
                 
-                let deskBtn = document.getElementById(`nav-desk-${id}`);
-                if(deskBtn) {
-                    deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md');
-                    deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark');
+                let deskBtn = document.getElementById(`nav-desk-${id}`); 
+                if(deskBtn) { 
+                    deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); 
+                    deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
                 }
             });
 
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden'); 
             document.getElementById(`tab-${tabId}`).classList.add('flex');
             
-            let activeMob = document.getElementById(`nav-mob-${tabId}`);
-            if(activeMob) {
-                activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark');
-                activeMob.classList.add('bg-brand', 'text-gray-900', 'shadow-md');
+            let activeMob = document.getElementById(`nav-mob-${tabId}`); 
+            if(activeMob) { 
+                activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
+                activeMob.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); 
             }
             
-            let activeDesk = document.getElementById(`nav-desk-${tabId}`);
-            if(activeDesk) {
-                activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark');
-                activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md');
+            let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
+            if(activeDesk) { 
+                activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
+                activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); 
             }
 
-            const firstName = profile.name ? profile.name.split(' ')[0] : 'Sahafiz';
-            const titles = { 'home': `Hi, ${firstName}`, 'overall':'Overall Analytics', 'food':'Food & Dining', 'bills':'Utilities & Bills', 'salary':'Career & Wealth', 'profile':'Profile Settings' };
-            document.getElementById('header-title').innerText = titles[tabId];
+            const headerTitles = {
+                'home': `Hi, ${profile.name.split(' ')[0]}`,
+                'overall': 'Overall Analytics',
+                'food': 'Food & Dining',
+                'bills': 'Utility History',
+                'salary': 'Career Growth',
+                'profile': 'Profile Settings'
+            };
+            document.getElementById('header-title').innerText = headerTitles[tabId];
             document.getElementById('main-scroll').scrollTo(0,0);
-            
-            if(tabId === 'home' && mainChart) mainChart.update();
-            if(tabId === 'overall' && comparisonChart) comparisonChart.update();
-            if(tabId === 'salary' && salaryChart) salaryChart.update();
-            if(tabId === 'food' && foodChart) foodChart.update();
-            if(tabId === 'bills' && utilChart) utilChart.update();
         }
 
-        function clearData() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
-        function renderCards() { document.getElementById('debit-display').innerText = cardData.debit.toLocaleString(undefined, {minimumFractionDigits: 2}); document.getElementById('credit-display').innerText = cardData.credit.toLocaleString(undefined, {minimumFractionDigits: 2}); }
-        function openCardModal() { document.getElementById('card-debit-input').value = cardData.debit; document.getElementById('card-credit-input').value = cardData.credit; document.getElementById('card-modal').classList.remove('hidden'); }
-        function closeCardModal() { document.getElementById('card-modal').classList.add('hidden'); }
-        function saveCards(e) { e.preventDefault(); cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; cardData.credit = parseFloat(document.getElementById('card-credit-input').value) || 0; localStorage.setItem('vault_cards', JSON.stringify(cardData)); renderCards(); closeCardModal(); updateDashboard(); }
-
-        function updateDashboard() {
-            const overallList = document.getElementById('overall-transaction-list');
-            const foodList = document.getElementById('food-transaction-list');
-            const utilList = document.getElementById('util-transaction-list');
+        // --- 3. INDEPENDENT TIME MACHINES ---
+        function populateDropdowns() {
+            // Group 1: Month/Year Dropdowns (Home, Overall, Food)
+            let txMonths = new Set();
+            const now = new Date(); 
+            txMonths.add(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`);
             
-            if(overallList) overallList.innerHTML = '';
-            if(foodList) foodList.innerHTML = '';
-            if(utilList) utilList.innerHTML = '';
+            transactions.forEach(t => { 
+                if(t.date && t.date.includes('-')) { 
+                    txMonths.add(t.date.split('-').slice(0,2).join('-')); 
+                } 
+            });
             
-            let sortedTxs = transactions.map((t, i) => ({...t, originalIndex: i})).sort((a, b) => new Date(b.date) - new Date(a.date));
-            let foodTxCount = 0; let utilTxCount = 0; let overallTxCount = 0;
-
-            const currM = selectedMonth;
-            const currY = selectedYear;
-
-            sortedTxs.forEach((t) => {
-                if (!t.date) return;
-                const txDate = new Date(t.date);
-                const isSelectedMonth = (txDate.getMonth() === currM && txDate.getFullYear() === currY);
-                
-                if (!isSelectedMonth) return;
-
-                const isIncome = t.type === 'income'; 
-                const amountColor = isIncome ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
-                const displayDate = formatDisplayDate(t.date);
-                
-                const rowHtml = `
-                <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
-                    <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-gray-100 dark:border-transparent">${isIncome ? '💰' : '💳'}</div></td>
-                    <td class="py-3 pl-3"><p class="font-bold text-sm">${t.desc}</p><p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${displayDate} • ${t.category}</p></td>
-                    <td class="py-3 pr-3 text-right font-bold text-sm ${amountColor}">${isIncome ? '+' : '-'}${parseFloat(t.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                    <td class="py-3 text-right w-10"><button onclick="if(confirm('Delete this transaction?')) deleteTx(${t.originalIndex})" class="w-7 h-7 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 font-bold text-xs transition border border-gray-100 dark:border-transparent inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100">✕</button></td>
-                </tr>`;
-                
-                if(overallList) { overallList.innerHTML += rowHtml; overallTxCount++; }
-
-                const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
-                const isFood = catMatch.includes('food') || catMatch.includes('lunch') || catMatch.includes('dinner') || catMatch.includes('grocery') || catMatch.includes('breakfast') || catMatch.includes('eat') || catMatch.includes('cafe') || catMatch.includes('restaurant') || catMatch.includes('mcd') || catMatch.includes('kfc') || catMatch.includes('starbucks');
-                const isUtil = catMatch.includes('util') || catMatch.includes('bill') || catMatch.includes('water') || catMatch.includes('electric') || catMatch.includes('tnb') || catMatch.includes('internet') || catMatch.includes('unifi') || catMatch.includes('phone') || catMatch.includes('rent') || catMatch.includes('wifi') || catMatch.includes('maxis') || catMatch.includes('celcom');
-
-                if(isFood && foodList && !isIncome) { foodList.innerHTML += rowHtml; foodTxCount++; }
-                if(isUtil && utilList && !isIncome) { utilList.innerHTML += rowHtml; utilTxCount++; }
+            let txArr = Array.from(txMonths).sort().reverse();
+            const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            const dropdownIds = ['home-month-filter', 'overall-month-filter', 'food-month-filter'];
+            dropdownIds.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    const current = el.value || txArr[0];
+                    el.innerHTML = '';
+                    txArr.forEach(m => { 
+                        const [y, mo] = m.split('-'); 
+                        el.innerHTML += `<option value="${m}">${mNames[parseInt(mo, 10)-1]} ${y}</option>`; 
+                    });
+                    if(txArr.includes(current)) {
+                        el.value = current; 
+                    } else {
+                        el.selectedIndex = 0;
+                    }
+                }
             });
 
-            if (overallList && overallTxCount === 0) overallList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No transactions for this month.</td></tr>`;
-            if (foodList && foodTxCount === 0) foodList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No food transactions for this month.</td></tr>`;
-            if (utilList && utilTxCount === 0) utilList.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No utility transactions for this month.</td></tr>`;
-
-            const lastM = currM === 0 ? 11 : currM - 1; 
-            const lastY = currM === 0 ? currY - 1 : currY;
+            // Group 2: Year-Only Dropdown (Utilities)
+            let uYears = new Set(); 
+            uYears.add(now.getFullYear().toString());
             
-            const realNow = new Date();
-            const isCurrentCalendarMonth = (currM === realNow.getMonth() && currY === realNow.getFullYear());
-            const daysInSelectedMonth = new Date(currY, currM + 1, 0).getDate();
-            const todayDay = isCurrentCalendarMonth ? realNow.getDate() : daysInSelectedMonth;
+            utilHistory.forEach(u => { 
+                if(u.month) {
+                    uYears.add(u.month.split('-')[0]); 
+                }
+            });
+            
+            let uArr = Array.from(uYears).sort().reverse();
+            const uEl = document.getElementById('util-year-filter');
+            if(uEl) {
+                const curU = uEl.value || uArr[0]; 
+                uEl.innerHTML = '';
+                uArr.forEach(y => {
+                    uEl.innerHTML += `<option value="${y}">${y}</option>`;
+                });
+                if(uArr.includes(curU)) {
+                    uEl.value = curU; 
+                } else {
+                    uEl.selectedIndex = 0;
+                }
+            }
+        }
 
+        // --- 4. INDEPENDENT TAB DASHBOARD ENGINES ---
+
+        function updateHomeDashboard() {
+            const filterEl = document.getElementById('home-month-filter');
+            if(!filterEl) return;
+            const filter = filterEl.value;
+            const [yStr, mStr] = filter.split('-'); 
+            const currY = parseInt(yStr, 10); 
+            const currM = parseInt(mStr, 10) - 1;
+            
             let runningBalance = 0; 
-            let monthlySpend = 0; 
-            let chartLabels = []; let chartBalances = [];
+            let chartLabels = []; 
+            let chartBalances = [];
             
-            let foodSpend = 0; let utilSpend = 0; let otherSpend = 0;
-            let lastMonthSpendToDate = 0;
-
-            let currMonthDailySpend = new Array(31).fill(0);
-            let lastMonthDailySpend = new Array(31).fill(0);
-            let dailyFood = new Array(31).fill(0); let currFoodTotal = 0; let lastFoodTotal = 0; let lastDailyFood = new Array(31).fill(0);
-            let dailyUtil = new Array(31).fill(0); let currUtilTotal = 0; let lastUtilTotal = 0; let lastDailyUtil = new Array(31).fill(0);
-
             let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
             
             chronoTxs.forEach(t => {
-                if (!t.date) return;
-                const amt = parseFloat(t.amount);
-                const txDate = new Date(t.date);
+                if (!t.date) return; 
+                const txDate = new Date(t.date); 
                 if (isNaN(txDate.getTime())) return;
                 
-                const dayIndex = txDate.getDate() - 1;
+                const amt = parseFloat(t.amount);
                 
                 if (txDate.getFullYear() < currY || (txDate.getFullYear() === currY && txDate.getMonth() <= currM)) {
-                    if (t.type === 'income') runningBalance += amt;
-                    else runningBalance -= amt;
-                    
-                    if (txDate.getFullYear() === currY && txDate.getMonth() === currM) {
-                        chartLabels.push(formatDisplayDate(t.date));
-                        chartBalances.push(runningBalance);
+                    if (t.type === 'income') {
+                        runningBalance += amt; 
+                    } else {
+                        runningBalance -= amt;
                     }
-                }
-
-                if (t.type !== 'income') {
-                    const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
-                    const isFood = catMatch.includes('food') || catMatch.includes('lunch') || catMatch.includes('dinner') || catMatch.includes('grocery') || catMatch.includes('breakfast') || catMatch.includes('eat') || catMatch.includes('cafe') || catMatch.includes('restaurant') || catMatch.includes('mcd') || catMatch.includes('kfc') || catMatch.includes('starbucks');
-                    const isUtil = catMatch.includes('util') || catMatch.includes('bill') || catMatch.includes('water') || catMatch.includes('electric') || catMatch.includes('tnb') || catMatch.includes('internet') || catMatch.includes('unifi') || catMatch.includes('phone') || catMatch.includes('rent') || catMatch.includes('wifi') || catMatch.includes('maxis') || catMatch.includes('celcom');
-
-                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) {
-                        monthlySpend += amt; currMonthDailySpend[dayIndex] += amt;
-                        if (isFood) { foodSpend += amt; dailyFood[dayIndex] += amt; currFoodTotal += amt; } 
-                        else if (isUtil) { utilSpend += amt; dailyUtil[dayIndex] += amt; currUtilTotal += amt; } 
-                        else { otherSpend += amt; }
-                    } 
-                    else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) {
-                        lastMonthDailySpend[dayIndex] += amt;
-                        if (dayIndex + 1 <= todayDay) { lastMonthSpendToDate += amt; }
-                        if (isFood) { lastFoodTotal += amt; lastDailyFood[dayIndex] += amt; }
-                        if (isUtil) { lastUtilTotal += amt; lastDailyUtil[dayIndex] += amt; }
+                    
+                    if (txDate.getFullYear() === currY && txDate.getMonth() === currM) { 
+                        chartLabels.push(formatDisplayDate(t.date)); 
+                        chartBalances.push(runningBalance); 
                     }
                 }
             });
 
             document.getElementById('total-net-worth').innerText = runningBalance.toLocaleString(undefined, {minimumFractionDigits: 2});
             
-            let insightHtml = '';
-            let spendDiff = monthlySpend - lastMonthSpendToDate;
-            if (lastMonthSpendToDate === 0 && monthlySpend === 0) { insightHtml = '<span class="text-textMuted-light dark:text-textMuted-dark">✨ Ready for new data.</span>'; } 
-            else if (spendDiff > 0) { insightHtml = `<span class="text-red-500">⚠️</span> <span>Spent +${lastMonthSpendToDate > 0 ? ((spendDiff/lastMonthSpendToDate)*100).toFixed(0) : '100'}% vs previous month</span>`; } 
-            else { insightHtml = `<span class="text-brand">✨ Great pace!</span> <span>Saved MYR ${Math.abs(spendDiff).toLocaleString(undefined, {minimumFractionDigits: 0})} vs previous month.</span>`; }
-            document.getElementById('wallet-insight').innerHTML = insightHtml;
-
-            const monthlySpendEl = document.getElementById('monthly-spend');
-            if(monthlySpendEl) monthlySpendEl.innerText = monthlySpend.toLocaleString(undefined, {minimumFractionDigits: 2});
-
-            const elFoodBar = document.getElementById('bar-food');
-            if(elFoodBar) {
-                if(monthlySpend > 0) {
-                    const pFood = Math.round((foodSpend / monthlySpend) * 100); const pUtil = Math.round((utilSpend / monthlySpend) * 100); const pOther = 100 - pFood - pUtil;
-                    elFoodBar.style.width = pFood + '%'; document.getElementById('bar-util').style.width = pUtil + '%'; document.getElementById('bar-other').style.width = pOther + '%';
-                    document.getElementById('pct-food').innerText = pFood; document.getElementById('pct-util').innerText = pUtil; document.getElementById('pct-other').innerText = pOther;
-                } else {
-                    elFoodBar.style.width = '0%'; document.getElementById('bar-util').style.width = '0%'; document.getElementById('bar-other').style.width = '0%';
-                    document.getElementById('pct-food').innerText = '0'; document.getElementById('pct-util').innerText = '0'; document.getElementById('pct-other').innerText = '0';
-                }
-            }
-
             if(mainChart) {
                 if (chartLabels.length === 0) { 
-                    mainChart.data.labels = ['Start of Month']; 
+                    mainChart.data.labels = ['Start']; 
                     mainChart.data.datasets[0].data = [runningBalance]; 
                 } else { 
                     mainChart.data.labels = chartLabels; 
@@ -860,107 +878,415 @@
                 }
                 mainChart.update();
             }
+        }
 
-            if(comparisonChart) {
-                let currCumulData = []; let lastCumulData = []; let cSum = 0; let lSum = 0;
-                for(let i = 0; i < 31; i++) { 
-                    cSum += currMonthDailySpend[i]; lSum += lastMonthDailySpend[i]; 
-                    lastCumulData.push(lSum); 
-                    if (i < todayDay) currCumulData.push(cSum); else currCumulData.push(null); 
+        function updateOverallDashboard() {
+            const filterEl = document.getElementById('overall-month-filter');
+            if(!filterEl) return;
+            const filter = filterEl.value;
+            
+            const [yStr, mStr] = filter.split('-'); 
+            const currY = parseInt(yStr, 10); 
+            const currM = parseInt(mStr, 10) - 1;
+            
+            const lastM = currM === 0 ? 11 : currM - 1; 
+            const lastY = currM === 0 ? currY - 1 : currY;
+            
+            const list = document.getElementById('overall-transaction-list'); 
+            if(list) list.innerHTML = '';
+            
+            let txCount = 0; 
+            let monthlySpend = 0; 
+            let foodSpend = 0; 
+            let utilSpend = 0; 
+            let otherSpend = 0;
+            
+            let cDaily = new Array(31).fill(0); 
+            let lDaily = new Array(31).fill(0);
+
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(t => {
+                if(!t.date) return; 
+                const txDate = new Date(t.date); 
+                const amt = parseFloat(t.amount); 
+                const dIdx = txDate.getDate() - 1;
+                
+                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
+                const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
+                const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
+                
+                if(txDate.getMonth() === currM && txDate.getFullYear() === currY) {
+                    if(t.type !== 'income') {
+                        monthlySpend += amt; 
+                        cDaily[dIdx] += amt;
+                        if(isFood) {
+                            foodSpend += amt; 
+                        } else if(isUtil) {
+                            utilSpend += amt; 
+                        } else {
+                            otherSpend += amt;
+                        }
+                    }
+                    
+                    const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
+                    const icon = t.type === 'income' ? '💰' : '💳';
+                    const sign = t.type === 'income' ? '+' : '-';
+                    
+                    if(list) {
+                        list.innerHTML += `
+                        <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
+                            <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">${icon}</div></td>
+                            <td class="py-3 pl-3">
+                                <p class="font-bold text-sm">${t.desc}</p>
+                                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p>
+                            </td>
+                            <td class="py-3 text-right font-bold text-sm ${c}">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        </tr>`;
+                    }
+                    txCount++;
+                } else if(txDate.getMonth() === lastM && txDate.getFullYear() === lastY && t.type !== 'income') {
+                    lDaily[dIdx] += amt;
                 }
-                comparisonChart.data.labels = Array.from({length: 31}, (_, i) => i + 1); 
-                comparisonChart.data.datasets[0].data = currCumulData; 
-                comparisonChart.data.datasets[1].data = lastCumulData; 
-                comparisonChart.update();
+            });
+            
+            if(txCount === 0 && list) {
+                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No transactions found.</td></tr>`;
             }
 
-            let isDark = document.documentElement.classList.contains('dark');
+            const msEl = document.getElementById('monthly-spend');
+            if(msEl) msEl.innerText = monthlySpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+            
+            if(monthlySpend > 0) {
+                const pf = Math.round((foodSpend/monthlySpend)*100); 
+                const pu = Math.round((utilSpend/monthlySpend)*100); 
+                const po = 100-pf-pu;
+                
+                document.getElementById('bar-food').style.width = pf+'%'; 
+                document.getElementById('bar-util').style.width = pu+'%'; 
+                document.getElementById('bar-other').style.width = po+'%';
+                
+                document.getElementById('pct-food').innerText = pf; 
+                document.getElementById('pct-util').innerText = pu; 
+                document.getElementById('pct-other').innerText = po;
+            } else {
+                ['bar-food','bar-util','bar-other'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) el.style.width='0%';
+                });
+                ['pct-food','pct-util','pct-other'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) el.innerText='0';
+                });
+            }
 
-            let currFoodCumul = []; let lastFoodCumul = []; let cfSum = 0; let lfSum = 0;
-            let currUtilCumul = []; let lastUtilCumul = []; let cuSum = 0; let luSum = 0;
-            for(let i = 0; i < 31; i++) {
-                cfSum += dailyFood[i]; lfSum += lastDailyFood[i]; lastFoodCumul.push(lfSum);
-                if (i < todayDay) currFoodCumul.push(cfSum); else currFoodCumul.push(null);
+            if(comparisonChart) {
+                let cCumul = []; 
+                let lCumul = []; 
+                let cSum = 0; 
+                let lSum = 0; 
+                const today = new Date().getDate(); 
+                const isCurrCal = (currM === new Date().getMonth() && currY === new Date().getFullYear());
+                
+                for(let i=0; i<31; i++) {
+                    cSum += cDaily[i]; 
+                    lSum += lDaily[i]; 
+                    lCumul.push(lSum);
+                    if(!isCurrCal || i < today) {
+                        cCumul.push(cSum); 
+                    } else {
+                        cCumul.push(null);
+                    }
+                }
+                
+                comparisonChart.data.labels = Array.from({length: 31}, (_, i) => i + 1);
+                comparisonChart.data.datasets[0].data = cCumul; 
+                comparisonChart.data.datasets[1].data = lCumul;
+                comparisonChart.update();
+            }
+        }
 
-                cuSum += dailyUtil[i]; luSum += lastDailyUtil[i]; lastUtilCumul.push(luSum);
-                if (i < todayDay) currUtilCumul.push(cuSum); else currUtilCumul.push(null);
+        function updateFoodDashboard() {
+            const filterEl = document.getElementById('food-month-filter');
+            if(!filterEl) return;
+            const filter = filterEl.value;
+            
+            const [yStr, mStr] = filter.split('-'); 
+            const currY = parseInt(yStr, 10); 
+            const currM = parseInt(mStr, 10) - 1;
+            
+            const lastM = currM === 0 ? 11 : currM - 1; 
+            const lastY = currM === 0 ? currY - 1 : currY;
+            
+            const list = document.getElementById('food-transaction-list'); 
+            if(list) list.innerHTML = '';
+            
+            let txCount = 0; 
+            let cSum = 0; 
+            let lSum = 0; 
+            let cDaily = new Array(31).fill(0); 
+            let lDaily = new Array(31).fill(0);
+
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(t => {
+                if(!t.date || t.type === 'income') return; 
+                const txDate = new Date(t.date); 
+                const amt = parseFloat(t.amount); 
+                const dIdx = txDate.getDate() - 1;
+                
+                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
+                const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
+                if(!isFood) return;
+                
+                if(txDate.getMonth() === currM && txDate.getFullYear() === currY) {
+                    cSum += amt; 
+                    cDaily[dIdx] += amt;
+                    if(list) {
+                        list.innerHTML += `
+                        <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
+                            <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm border border-transparent">💳</div></td>
+                            <td class="py-3 pl-3">
+                                <p class="font-bold text-sm">${t.desc}</p>
+                                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}</p>
+                            </td>
+                            <td class="py-3 text-right font-bold text-sm">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        </tr>`;
+                    }
+                    txCount++;
+                } else if(txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { 
+                    lSum += amt; 
+                    lDaily[dIdx] += amt; 
+                }
+            });
+            
+            if(txCount === 0 && list) {
+                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No food logs found.</td></tr>`;
+            }
+
+            const ftEl = document.getElementById('food-total-display');
+            if(ftEl) ftEl.innerText = cSum.toLocaleString(undefined, {minimumFractionDigits: 2});
+            
+            const fiEl = document.getElementById('food-insight');
+            if(fiEl) {
+                let fHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lSum.toFixed(0)}</span></div>`;
+                if (cSum > lSum && lSum > 0) {
+                    fHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
+                } else if (lSum > 0) {
+                    fHtml += `<div class="text-brand font-bold text-xs">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
+                }
+                fiEl.innerHTML = fHtml;
             }
 
             if(foodChart) {
+                let cCumul = []; 
+                let lCumul = []; 
+                let tC = 0; 
+                let tL = 0; 
+                const today = new Date().getDate(); 
+                const isCurrCal = (currM === new Date().getMonth() && currY === new Date().getFullYear());
+                
+                for(let i=0; i<31; i++) {
+                    tC += cDaily[i]; 
+                    tL += lDaily[i]; 
+                    lCumul.push(tL);
+                    if(!isCurrCal || i < today) {
+                        cCumul.push(tC); 
+                    } else {
+                        cCumul.push(null);
+                    }
+                }
+                
                 foodChart.data.labels = Array.from({length: 31}, (_, i) => i + 1);
-                foodChart.data.datasets[0].data = currFoodCumul;
-                foodChart.data.datasets[1].data = lastFoodCumul;
+                foodChart.data.datasets[0].data = cCumul; 
+                foodChart.data.datasets[1].data = lCumul;
                 foodChart.update();
-                document.getElementById('food-total-display').innerText = currFoodTotal.toLocaleString(undefined, {minimumFractionDigits: 2});
-                let fHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastFoodTotal.toFixed(0)}</span></div>`;
-                if (currFoodTotal > lastFoodTotal && lastFoodTotal > 0) fHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currFoodTotal - lastFoodTotal).toFixed(0)}</div>`;
-                else if (lastFoodTotal > 0) fHtml += `<div class="${isDark ? 'text-brand' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastFoodTotal - currFoodTotal).toFixed(0)} remaining</div>`;
-                else fHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`;
-                document.getElementById('food-insight').innerHTML = fHtml;
+            }
+        }
+
+        function updateUtilDashboard() {
+            const yrEl = document.getElementById('util-year-filter');
+            const yr = yrEl ? yrEl.value : new Date().getFullYear().toString();
+            
+            const list = document.getElementById('util-history-list'); 
+            if(list) list.innerHTML = '';
+            
+            let histThisYear = utilHistory.filter(u => u.month && u.month.startsWith(yr)).sort((a, b) => new Date(b.month) - new Date(a.month));
+            
+            let monthlyElec = new Array(12).fill(0); 
+            let monthlyWater = new Array(12).fill(0); 
+            let monthlyInt = new Array(12).fill(0); 
+            let monthlyOther = new Array(12).fill(0);
+            
+            histThisYear.forEach((u, i) => {
+                const amt = parseFloat(u.amount); 
+                const mIdx = parseInt(u.month.split('-')[1]) - 1;
+                
+                if(u.type === 'Electricity') monthlyElec[mIdx] += amt;
+                else if(u.type === 'Water') monthlyWater[mIdx] += amt;
+                else if(u.type === 'Internet') monthlyInt[mIdx] += amt;
+                else monthlyOther[mIdx] += amt;
+
+                const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                
+                if(list) {
+                    list.innerHTML += `
+                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group">
+                        <td class="py-3"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-sm">📄</div></td>
+                        <td class="py-3 pl-3">
+                            <p class="font-bold text-sm">${u.type}</p>
+                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p>
+                        </td>
+                        <td class="py-3 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        <td class="py-3 text-right w-10">
+                            <button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button>
+                        </td>
+                    </tr>`;
+                }
+            });
+            
+            if(histThisYear.length === 0 && list) {
+                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical utility data for ${yr}.</td></tr>`;
             }
 
             if(utilChart) {
-                utilChart.data.labels = Array.from({length: 31}, (_, i) => i + 1);
-                utilChart.data.datasets[0].data = currUtilCumul;
-                utilChart.data.datasets[1].data = lastUtilCumul;
+                utilChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                utilChart.data.datasets = [
+                    { label: 'Electricity', data: monthlyElec, backgroundColor: '#FFD600', borderRadius: 4 },
+                    { label: 'Internet', data: monthlyInt, backgroundColor: '#3B82F6', borderRadius: 4 },
+                    { label: 'Water', data: monthlyWater, backgroundColor: '#10B981', borderRadius: 4 },
+                    { label: 'Other', data: monthlyOther, backgroundColor: '#9CA3AF', borderRadius: 4 }
+                ];
                 utilChart.update();
-                document.getElementById('util-total-display').innerText = currUtilTotal.toLocaleString(undefined, {minimumFractionDigits: 2});
-                let uHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastUtilTotal.toFixed(0)}</span></div>`;
-                if (currUtilTotal > lastUtilTotal && lastUtilTotal > 0) uHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currUtilTotal - lastUtilTotal).toFixed(0)}</div>`;
-                else if (lastUtilTotal > 0) uHtml += `<div class="${isDark ? 'text-gray-400' : 'text-gray-500'} font-bold text-xs">✨ MYR ${(lastUtilTotal - currUtilTotal).toFixed(0)} remaining</div>`;
-                else uHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`;
-                document.getElementById('util-insight').innerHTML = uHtml;
+            }
+        }
+        
+        function deleteUtilLog(globalIndex) {
+            if(confirm('Delete this utility log?')) {
+                utilHistory.splice(globalIndex, 1);
+                localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory));
+                populateDropdowns();
+                updateUtilDashboard();
             }
         }
 
-        function openCategoryModal(type) {
-            if (type !== 'other') return; 
+        function updateCareerDashboard() {
+            const list = document.getElementById('career-history-list'); 
+            if(list) list.innerHTML = '';
             
-            const currM = selectedMonth; const currY = selectedYear;
-            const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
-            let dailySpend = new Array(31).fill(0); let currCatTotal = 0; let lastCatTotal = 0;
-
-            transactions.forEach(t => {
-                if (t.type !== 'expense' || !t.date) return;
-                const txDate = new Date(t.date); 
-                if (isNaN(txDate.getTime())) return;
-                
-                const amt = parseFloat(t.amount); const dayIndex = txDate.getDate() - 1;
-                
-                const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
-                const isFood = catMatch.includes('food') || catMatch.includes('lunch') || catMatch.includes('dinner') || catMatch.includes('grocery') || catMatch.includes('breakfast') || catMatch.includes('eat') || catMatch.includes('cafe') || catMatch.includes('restaurant') || catMatch.includes('mcd') || catMatch.includes('kfc') || catMatch.includes('starbucks');
-                const isUtil = catMatch.includes('util') || catMatch.includes('bill') || catMatch.includes('water') || catMatch.includes('electric') || catMatch.includes('tnb') || catMatch.includes('internet') || catMatch.includes('unifi') || catMatch.includes('phone') || catMatch.includes('rent') || catMatch.includes('wifi') || catMatch.includes('maxis') || catMatch.includes('celcom');
-                
-                if (!isFood && !isUtil) {
-                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) { dailySpend[dayIndex] += amt; currCatTotal += amt; } 
-                    else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { lastCatTotal += amt; }
-                }
+            careerHistory.sort((a,b) => b.year - a.year); 
+            
+            let yrs = []; 
+            let sals = []; 
+            let bons = []; 
+            let taxs = [];
+            
+            let chartHist = [...careerHistory].sort((a,b) => a.year - b.year); 
+            
+            chartHist.forEach(c => {
+                yrs.push(c.year); 
+                sals.push(c.salary); 
+                bons.push(c.bonus); 
+                taxs.push(c.tax);
             });
 
-            let isDark = document.documentElement.classList.contains('dark');
-            let catInsightHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
-            if (currCatTotal > lastCatTotal && lastCatTotal > 0) { catInsightHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; } 
-            else if (lastCatTotal > 0) { catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; } 
-            else { catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`; }
-
-            document.getElementById('category-modal-insight').innerHTML = catInsightHtml;
-            categoryChart.data.datasets[0].data = dailySpend; 
-            categoryChart.data.datasets[0].backgroundColor = isDark ? '#FFFFFF' : '#111827'; 
-            categoryChart.update();
+            careerHistory.forEach((c, i) => {
+                const total = c.salary + c.bonus;
+                if(list) {
+                    list.innerHTML += `
+                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group">
+                        <td class="py-3"><div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xs">${c.year}</div></td>
+                        <td class="py-3 pl-3">
+                            <p class="font-bold text-sm">MYR ${total.toLocaleString()}</p>
+                            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Base: ${c.salary.toLocaleString()} • Bonus: ${c.bonus.toLocaleString()}</p>
+                        </td>
+                        <td class="py-3 pr-3 text-right">
+                            <p class="font-bold text-sm text-red-500">Tax: ${c.tax.toLocaleString()}</p>
+                        </td>
+                        <td class="py-3 text-right w-10">
+                            <button onclick="deleteCareerLog(${i})" class="w-7 h-7 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-xs inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button>
+                        </td>
+                    </tr>`;
+                }
+            });
             
-            document.getElementById('category-modal').classList.remove('hidden');
-        }
-        function closeCategoryModal() { document.getElementById('category-modal').classList.add('hidden'); }
+            if(careerHistory.length === 0 && list) {
+                list.innerHTML = `<tr><td class="py-6 text-center text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No career logs found.</td></tr>`;
+            }
 
-        function deleteTx(originalIndex) { 
-            transactions.splice(originalIndex, 1); 
-            localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-            populateMonthFilter();
-            updateDashboard(); 
+            if(salaryChart) {
+                salaryChart.data.labels = yrs;
+                salaryChart.data.datasets = [
+                    { 
+                        type: 'bar', 
+                        label: 'Base Salary', 
+                        data: sals, 
+                        backgroundColor: '#FFD600', 
+                        borderRadius: {topLeft:0, topRight:0, bottomLeft:4, bottomRight:4}, 
+                        stack: 'Stack 0' 
+                    },
+                    { 
+                        type: 'bar', 
+                        label: 'Bonus', 
+                        data: bons, 
+                        backgroundColor: '#34D399', 
+                        borderRadius: {topLeft:4, topRight:4, bottomLeft:0, bottomRight:0}, 
+                        stack: 'Stack 0' 
+                    },
+                    { 
+                        type: 'line', 
+                        label: 'Tax', 
+                        data: taxs, 
+                        borderColor: '#EF4444', 
+                        borderWidth: 2, 
+                        pointBackgroundColor: '#EF4444', 
+                        fill: false 
+                    }
+                ];
+                salaryChart.update();
+            }
         }
         
-        function openTxModal() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
-        function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
+        function deleteCareerLog(index) {
+            if(confirm('Delete this career log?')) {
+                careerHistory.splice(index, 1);
+                localStorage.setItem('vault_career', JSON.stringify(careerHistory));
+                updateCareerDashboard();
+            }
+        }
+
+
+        // --- 5. MODAL CONTROLLERS & DATA SAVING ---
+
+        // Cards
+        function renderCards() { 
+            const dEl = document.getElementById('debit-display');
+            const cEl = document.getElementById('credit-display');
+            if(dEl) dEl.innerText = cardData.debit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+            if(cEl) cEl.innerText = cardData.credit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+        }
+        function openCardModal() { 
+            document.getElementById('card-debit-input').value = cardData.debit; 
+            document.getElementById('card-credit-input').value = cardData.credit; 
+            document.getElementById('card-modal').classList.remove('hidden'); 
+        }
+        function closeCardModal() { 
+            document.getElementById('card-modal').classList.add('hidden'); 
+        }
+        function saveCards(e) { 
+            e.preventDefault(); 
+            cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; 
+            cardData.credit = parseFloat(document.getElementById('card-credit-input').value) || 0; 
+            localStorage.setItem('vault_cards', JSON.stringify(cardData)); 
+            renderCards(); 
+            closeCardModal(); 
+        }
+
+        // Transactions
+        function openTxModal() { 
+            document.getElementById('tx-date').valueAsDate = new Date(); 
+            document.getElementById('tx-modal').classList.remove('hidden'); 
+        }
+        function closeTxModal() { 
+            document.getElementById('tx-modal').classList.add('hidden'); 
+            document.getElementById('tx-form').reset(); 
+        }
         function saveTransaction(e) { 
             e.preventDefault(); 
             transactions.push({ 
@@ -971,144 +1297,602 @@
                 amount: parseFloat(document.getElementById('tx-amount').value) 
             }); 
             localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-            populateMonthFilter();
-            updateDashboard(); 
+            populateDropdowns(); 
+            updateHomeDashboard(); 
+            updateOverallDashboard(); 
+            updateFoodDashboard(); 
             closeTxModal(); 
         }
-        
-        function exportCSV() { 
-            if(transactions.length === 0) return alert("No ledger data present."); 
-            let csvContent = "data:text/csv;charset=utf-8,date,desc,type,category,amount\n"; 
-            transactions.forEach(t => { csvContent += `${t.date},"${t.desc}",${t.type},"${t.category}",${t.amount}\n`; }); 
-            let link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent)); link.setAttribute("download", "vault_transactions.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link); 
+
+        // Savings
+        function renderSavings() { 
+            const curEl = document.getElementById('current-savings');
+            const tgtEl = document.getElementById('target-savings');
+            const progEl = document.getElementById('savings-progress');
+            
+            if(curEl) curEl.innerText = savingsData.current.toLocaleString(undefined, {minimumFractionDigits: 0}); 
+            if(tgtEl) tgtEl.innerText = savingsData.target.toLocaleString(undefined, {minimumFractionDigits: 0}); 
+            
+            if(progEl) {
+                setTimeout(() => { 
+                    let pct = (savingsData.current / savingsData.target) * 100;
+                    if(pct > 100) pct = 100;
+                    progEl.style.width = pct + '%'; 
+                }, 300); 
+            }
+        }
+        function openSavingsModal() { 
+            document.getElementById('savings-current-input').value = savingsData.current; 
+            document.getElementById('savings-target-input').value = savingsData.target; 
+            document.getElementById('savings-modal').classList.remove('hidden'); 
+        }
+        function closeSavingsModal() { 
+            document.getElementById('savings-modal').classList.add('hidden'); 
+        }
+        function saveSavings(e) { 
+            e.preventDefault(); 
+            savingsData.current = parseFloat(document.getElementById('savings-current-input').value)||0; 
+            savingsData.target = parseFloat(document.getElementById('savings-target-input').value)||1; 
+            localStorage.setItem('vault_savings', JSON.stringify(savingsData)); 
+            renderSavings(); 
+            closeSavingsModal(); 
         }
 
+        // Debts
+        function renderDebts() {
+            const dl = document.getElementById('debt-list'); 
+            if(!dl) return;
+            dl.innerHTML = ''; 
+            debts.sort((a, b) => a.balance - b.balance);
+            
+            if (debts.length === 0) { 
+                dl.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No liabilities tracked.</p>`; 
+                document.getElementById('snowball-result').classList.add('hidden'); 
+                return; 
+            }
+            
+            debts.forEach((d, i) => { 
+                dl.innerHTML += `
+                <div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group">
+                    <div class="flex-1 truncate pr-2">
+                        <p class="font-bold text-xs flex items-center truncate">${d.name}</p>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <p class="text-red-500 font-bold text-sm">-MYR ${d.balance.toLocaleString()}</p>
+                        <button onclick="if(confirm('Delete?')) { debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-xs">✕</button>
+                    </div>
+                </div>`; 
+            }); 
+            calculateSnowball();
+        }
+        function openDebtModal() { 
+            document.getElementById('debt-modal').classList.remove('hidden'); 
+        }
+        function closeDebtModal() { 
+            document.getElementById('debt-modal').classList.add('hidden'); 
+            document.getElementById('debt-form').reset(); 
+        }
+        function saveDebt(e) { 
+            e.preventDefault(); 
+            debts.push({
+                name: document.getElementById('debt-name').value, 
+                balance: parseFloat(document.getElementById('debt-balance').value), 
+                minPayment: parseFloat(document.getElementById('debt-min').value)
+            }); 
+            localStorage.setItem('vault_debts', JSON.stringify(debts)); 
+            renderDebts(); 
+            closeDebtModal(); 
+        }
+        function calculateSnowball() { 
+            if (debts.length === 0) return; 
+            const ep = parseFloat(document.getElementById('extra-payment').value) || 0; 
+            const fp = debts.reduce((sum, d) => sum + d.minPayment, 0) + ep; 
+            const resEl = document.getElementById('snowball-result');
+            
+            if(fp <= 0) { 
+                if(resEl) resEl.classList.add('hidden'); 
+                return; 
+            } 
+            const months = Math.ceil(debts.reduce((sum, d) => sum + d.balance, 0) / fp); 
+            if(resEl) {
+                resEl.innerHTML = `Debt free in <span class="bg-brand text-gray-900 px-1.5 py-0.5 rounded shadow-sm">${months} months</span>!`; 
+                resEl.classList.remove('hidden'); 
+            }
+        }
+        
+        const extraPaymentEl = document.getElementById('extra-payment');
+        if(extraPaymentEl) extraPaymentEl.addEventListener('input', calculateSnowball);
+
+        // Upcoming Bills
         function renderBills() {
-            const list = document.getElementById('bill-list'); list.innerHTML = ''; bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-            if (bills.length === 0) { list.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No upcoming accounts tracked.</p>`; return; }
+            const list = document.getElementById('bill-list'); 
+            if(!list) return;
+            
+            list.innerHTML = ''; 
+            bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            
+            if (bills.length === 0) { 
+                list.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No upcoming reminders.</p>`; 
+                return; 
+            }
+            
             const today = new Date();
             bills.forEach((b, i) => {
                 const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
-                let dueText = `Due in ${diffDays} Days`; let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
-                if(diffDays === 0) { dueText = 'Due Today'; dueColor = 'text-brand font-bold'; } else if (diffDays < 0) { dueText = `Overdue by ${Math.abs(diffDays)} Days`; dueColor = 'text-red-500 font-bold'; } else if (diffDays <= 3) { dueColor = 'text-red-500 font-bold'; }
+                let dueText = `Due in ${diffDays} Days`; 
+                let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
+                
+                if(diffDays === 0) { 
+                    dueText = 'Due Today'; 
+                    dueColor = 'text-brand font-bold'; 
+                } else if (diffDays < 0) { 
+                    dueText = `Overdue by ${Math.abs(diffDays)} Days`; 
+                    dueColor = 'text-red-500 font-bold'; 
+                } else if (diffDays <= 3) { 
+                    dueColor = 'text-red-500 font-bold'; 
+                }
                 
                 list.innerHTML += `
-                <div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center border border-gray-100 dark:border-transparent group">
+                <div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center group">
                     <div class="flex items-center gap-3 flex-1 truncate pr-2">
                         <div class="w-9 h-9 rounded-full bg-panel-light dark:bg-panel-dark flex items-center justify-center text-sm shadow-sm border border-gray-100 dark:border-white/5">📄</div>
-                        <div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[10px] font-semibold ${dueColor} mt-0.5">${dueText}</p></div>
+                        <div class="truncate">
+                            <p class="font-bold text-xs truncate">${b.name}</p>
+                            <p class="text-[10px] font-semibold ${dueColor} mt-0.5">${dueText}</p>
+                        </div>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
                         <p class="font-bold text-sm">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
-                        <div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="payBill(${i})" class="w-7 h-7 flex items-center justify-center rounded-full bg-brand text-gray-900 shadow-md text-xs hover:brightness-105">✓</button>
-                            <button onclick="if(confirm('Delete this bill track?')) deleteBill(${i})" class="w-7 h-7 flex items-center justify-center rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition text-xs">✕</button>
+                        <div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-7 h-7 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-xs">✕</button>
                         </div>
                     </div>
                 </div>`;
             });
         }
-        function payBill(index) { let b = bills[index]; let today = new Date().toISOString().split('T')[0]; transactions.push({ date: today, desc: b.name, type: 'expense', category: 'Utilities', amount: b.amount }); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); let oldDate = new Date(b.dueDate); oldDate.setMonth(oldDate.getMonth() + 1); bills[index].dueDate = oldDate.toISOString().split('T')[0]; localStorage.setItem('vault_bills', JSON.stringify(bills)); populateMonthFilter(); updateDashboard(); renderBills(); }
-        function openBillModal() { document.getElementById('bill-modal').classList.remove('hidden'); }
-        function closeBillModal() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
-        function saveBill(e) { e.preventDefault(); bills.push({ name: document.getElementById('bill-name').value, amount: parseFloat(document.getElementById('bill-amount').value), dueDate: document.getElementById('bill-date').value }); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); closeBillModal(); }
-        function deleteBill(index) { bills.splice(index, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }
-
-        function renderSavings() { document.getElementById('current-savings').innerText = savingsData.current.toLocaleString(undefined, {minimumFractionDigits: 0}); document.getElementById('target-savings').innerText = savingsData.target.toLocaleString(undefined, {minimumFractionDigits: 0}); setTimeout(() => { document.getElementById('savings-progress').style.width = ((savingsData.current / savingsData.target) * 100 > 100 ? 100 : (savingsData.current / savingsData.target) * 100) + '%'; }, 300); }
-        function openSavingsModal() { document.getElementById('savings-current-input').value = savingsData.current; document.getElementById('savings-target-input').value = savingsData.target; document.getElementById('savings-modal').classList.remove('hidden'); }
-        function closeSavingsModal() { document.getElementById('savings-modal').classList.add('hidden'); }
-        function saveSavings(e) { e.preventDefault(); savingsData.current = parseFloat(document.getElementById('savings-current-input').value)||0; savingsData.target = parseFloat(document.getElementById('savings-target-input').value)||1; localStorage.setItem('vault_savings', JSON.stringify(savingsData)); renderSavings(); closeSavingsModal(); }
-
-        function renderDebts() {
-            const dl = document.getElementById('debt-list'); dl.innerHTML = ''; debts.sort((a, b) => a.balance - b.balance);
-            if (debts.length === 0) { dl.innerHTML = `<p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4">No liabilities tracked.</p>`; document.getElementById('snowball-result').classList.add('hidden'); return; }
-            debts.forEach((d, i) => { 
-                dl.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl flex justify-between items-center border border-gray-100 dark:border-transparent group"><div class="flex-1 truncate pr-2"><p class="font-bold text-xs flex items-center truncate">${d.name} ${i===0?`<span class="text-[9px] bg-brand text-gray-900 px-2 py-0.5 rounded-full font-bold ml-2 shrink-0 uppercase tracking-wide shadow-sm">TARGET</span>`:''}</p><p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p></div><div class="flex items-center gap-2 shrink-0"><p class="text-red-500 font-bold text-sm">-MYR ${d.balance.toLocaleString()}</p><div class="opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity"><button onclick="if(confirm('Delete this account line?')) deleteDebt(${i})" class="w-7 h-7 flex items-center justify-center rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition text-xs">✕</button></div></div></div>`; 
-            }); calculateSnowball();
+        function openBillModal() { 
+            document.getElementById('bill-modal').classList.remove('hidden'); 
         }
-        function openDebtModal() { document.getElementById('debt-modal').classList.remove('hidden'); }
-        function closeDebtModal() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
-        function saveDebt(e) { e.preventDefault(); debts.push({name: document.getElementById('debt-name').value, balance: parseFloat(document.getElementById('debt-balance').value), minPayment: parseFloat(document.getElementById('debt-min').value)}); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); closeDebtModal(); }
-        function deleteDebt(index) { debts.splice(index, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); }
-        function calculateSnowball() { if (debts.length === 0) return; const extraPayment = parseFloat(document.getElementById('extra-payment').value) || 0; const totalMonthlyFirepower = debts.reduce((sum, d) => sum + d.minPayment, 0) + extraPayment; if(totalMonthlyFirepower <= 0) { document.getElementById('snowball-result').classList.add('hidden'); return; } const months = Math.ceil(debts.reduce((sum, d) => sum + d.balance, 0) / totalMonthlyFirepower); document.getElementById('snowball-result').innerHTML = `Debt free in <span class="text-gray-900 bg-brand px-1.5 py-0.5 rounded shadow-sm">${months} months</span>!`; document.getElementById('snowball-result').classList.remove('hidden'); }
-        document.getElementById('extra-payment').addEventListener('input', calculateSnowball);
+        function closeBillModal() { 
+            document.getElementById('bill-modal').classList.add('hidden'); 
+            document.getElementById('bill-form').reset(); 
+        }
+        function saveBill(e) { 
+            e.preventDefault(); 
+            bills.push({ 
+                name: document.getElementById('bill-name').value, 
+                amount: parseFloat(document.getElementById('bill-amount').value), 
+                dueDate: document.getElementById('bill-date').value 
+            }); 
+            localStorage.setItem('vault_bills', JSON.stringify(bills)); 
+            renderBills(); 
+            closeBillModal(); 
+        }
 
-        function renderProfile() {
-            document.getElementById('prof-name').value = profile.name;
-            document.getElementById('prof-role').value = profile.role;
-            document.getElementById('prof-industry').value = profile.industry;
-            document.getElementById('prof-address').value = profile.address;
-            document.getElementById('prof-tenure').value = profile.tenure;
-            if(document.getElementById('display-role')) document.getElementById('display-role').innerText = profile.role;
-            if(document.getElementById('display-industry')) document.getElementById('display-industry').innerText = profile.industry;
+        // Utility History Modal (NEW)
+        function openUtilHistoryModal() { 
+            const now = new Date();
+            document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
+            document.getElementById('util-history-modal').classList.remove('hidden'); 
+        }
+        function closeUtilHistoryModal() { 
+            document.getElementById('util-history-modal').classList.add('hidden'); 
+            document.getElementById('util-hist-form').reset(); 
+        }
+        function saveUtilHistory(e) { 
+            e.preventDefault(); 
+            utilHistory.push({ 
+                month: document.getElementById('util-hist-month').value, 
+                type: document.getElementById('util-hist-type').value, 
+                amount: parseFloat(document.getElementById('util-hist-amount').value) 
+            }); 
+            localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); 
+            populateDropdowns(); 
+            updateUtilDashboard(); 
+            closeUtilHistoryModal(); 
+        }
+
+        // Career History Modal (NEW)
+        function openCareerModal() { 
+            document.getElementById('career-year').value = new Date().getFullYear(); 
+            document.getElementById('career-modal').classList.remove('hidden'); 
+        }
+        function closeCareerModal() { 
+            document.getElementById('career-modal').classList.add('hidden'); 
+            document.getElementById('career-form').reset(); 
+        }
+        function saveCareerRecord(e) {
+            e.preventDefault();
+            const yearInput = parseInt(document.getElementById('career-year').value);
             
-            const firstName = profile.name ? profile.name.split(' ')[0] : 'Sahafiz';
-            if (!document.getElementById('tab-home').classList.contains('hidden')) {
-                document.getElementById('header-title').innerText = `Hi, ${firstName}`;
+            // Remove existing record for that year if it exists to prevent duplicates
+            careerHistory = careerHistory.filter(c => c.year !== yearInput); 
+            
+            careerHistory.push({ 
+                year: yearInput, 
+                salary: parseFloat(document.getElementById('career-salary').value), 
+                bonus: parseFloat(document.getElementById('career-bonus').value), 
+                tax: parseFloat(document.getElementById('career-tax').value) 
+            });
+            
+            localStorage.setItem('vault_career', JSON.stringify(careerHistory));
+            updateCareerDashboard(); 
+            closeCareerModal();
+        }
+
+        // Category Detail Modal
+        function openCategoryModal(type) {
+            if (type !== 'other') return; 
+            
+            const filterEl = document.getElementById('overall-month-filter');
+            if(!filterEl) return;
+            
+            const [yStr, mStr] = filterEl.value.split('-'); 
+            const currY = parseInt(yStr, 10); 
+            const currM = parseInt(mStr, 10) - 1;
+            
+            const lastM = currM === 0 ? 11 : currM - 1; 
+            const lastY = currM === 0 ? currY - 1 : currY;
+            
+            let dailySpend = new Array(31).fill(0); 
+            let currCatTotal = 0; 
+            let lastCatTotal = 0;
+
+            transactions.forEach(t => {
+                if (t.type !== 'expense' || !t.date) return;
+                const txDate = new Date(t.date); 
+                if (isNaN(txDate.getTime())) return;
+                
+                const amt = parseFloat(t.amount); 
+                const dayIndex = txDate.getDate() - 1;
+                
+                const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
+                const isFood = catMatch.match(/food|lunch|dinner|grocery|eat|cafe/);
+                const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
+                
+                if (!isFood && !isUtil) {
+                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) { 
+                        dailySpend[dayIndex] += amt; 
+                        currCatTotal += amt; 
+                    } else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { 
+                        lastCatTotal += amt; 
+                    }
+                }
+            });
+
+            let isDark = document.documentElement.classList.contains('dark');
+            let catInsightHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
+            
+            if (currCatTotal > lastCatTotal && lastCatTotal > 0) { 
+                catInsightHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
+            } else if (lastCatTotal > 0) { 
+                catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
+            } else { 
+                catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`; 
+            }
+
+            document.getElementById('category-modal-insight').innerHTML = catInsightHtml;
+            
+            if(categoryChart) {
+                categoryChart.data.datasets[0].data = dailySpend; 
+                categoryChart.data.datasets[0].backgroundColor = isDark ? '#FFFFFF' : '#111827'; 
+                categoryChart.update();
+            }
+            
+            document.getElementById('category-modal').classList.remove('hidden');
+        }
+        function closeCategoryModal() { 
+            document.getElementById('category-modal').classList.add('hidden'); 
+        }
+
+        // Profile Controller
+        function renderProfile() {
+            document.getElementById('prof-name').value = profile.name; 
+            document.getElementById('prof-role').value = profile.role;
+            document.getElementById('prof-industry').value = profile.industry; 
+            document.getElementById('prof-address').value = profile.address;
+            document.getElementById('prof-tenure').value = profile.tenure; 
+            document.getElementById('prof-skills').value = profile.skills || "";
+            
+            document.getElementById('li-name').innerText = profile.name;
+            document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`;
+            document.getElementById('li-location').innerText = profile.address;
+            
+            const skillsDiv = document.getElementById('li-skills'); 
+            skillsDiv.innerHTML = '';
+            
+            if(profile.skills) {
+                profile.skills.split(',').forEach(s => { 
+                    if(s.trim()) {
+                        skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[10px] font-bold px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; 
+                    }
+                });
+            }
+
+            if(profile.avatar) { 
+                document.getElementById('profile-avatar-img').src = profile.avatar; 
+                document.getElementById('profile-avatar-img').classList.remove('hidden'); 
+                document.getElementById('profile-avatar-initial').classList.add('hidden'); 
+            } else { 
+                document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); 
+            }
+            
+            if(profile.cover) { 
+                document.getElementById('profile-cover-img').src = profile.cover; 
+                document.getElementById('profile-cover-img').classList.remove('hidden'); 
+            }
+            
+            if (!document.getElementById('tab-home').classList.contains('hidden')) { 
+                document.getElementById('header-title').innerText = `Hi, ${profile.name.split(' ')[0]}`; 
             }
         }
+        
         function saveProfile(e) { 
             e.preventDefault(); 
-            profile = { 
-                name: document.getElementById('prof-name').value, 
-                role: document.getElementById('prof-role').value, 
-                industry: document.getElementById('prof-industry').value, 
-                address: document.getElementById('prof-address').value, 
-                tenure: document.getElementById('prof-tenure').value 
-            }; 
+            profile.name = document.getElementById('prof-name').value; 
+            profile.role = document.getElementById('prof-role').value;
+            profile.industry = document.getElementById('prof-industry').value; 
+            profile.address = document.getElementById('prof-address').value;
+            profile.tenure = document.getElementById('prof-tenure').value; 
+            profile.skills = document.getElementById('prof-skills').value;
+            
             localStorage.setItem('vault_profile', JSON.stringify(profile)); 
             renderProfile(); 
-            alert("Profile updated securely in local storage."); 
+            alert("Profile updated successfully!"); 
+        }
+        
+        function handleImageUpload(e, type) {
+            const file = e.target.files[0]; 
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                if(type === 'avatar') {
+                    profile.avatar = event.target.result; 
+                } else {
+                    profile.cover = event.target.result;
+                }
+                localStorage.setItem('vault_profile', JSON.stringify(profile)); 
+                renderProfile();
+            };
+            reader.readAsDataURL(file);
         }
 
+        // --- 6. DATA MANAGEMENT (BACKUP, CSV, FACTORY RESET) ---
+        
+        function exportBackup() { 
+            const backupData = { 
+                vault_transactions: localStorage.getItem('vault_transactions'), 
+                vault_savings: localStorage.getItem('vault_savings'), 
+                vault_debts: localStorage.getItem('vault_debts'), 
+                vault_cards: localStorage.getItem('vault_cards'), 
+                vault_bills: localStorage.getItem('vault_bills'), 
+                vault_profile: localStorage.getItem('vault_profile'), 
+                vault_util_hist: localStorage.getItem('vault_util_hist'), 
+                vault_career: localStorage.getItem('vault_career') 
+            }; 
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); 
+            const a = document.createElement('a'); 
+            a.setAttribute("href", dataStr); 
+            a.setAttribute("download", "vault_backup.json"); 
+            document.body.appendChild(a); 
+            a.click(); 
+            a.remove(); 
+        }
+
+        document.getElementById('json-file-input').addEventListener('change', function(e) { 
+            const file = e.target.files[0]; 
+            if(!file) return; 
+            const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                try { 
+                    const data = JSON.parse(event.target.result); 
+                    Object.keys(data).forEach(key => { 
+                        if(data[key]) localStorage.setItem(key, data[key]); 
+                    }); 
+                    alert("Sync Backup restored successfully! Refreshing app..."); 
+                    location.reload(); 
+                } catch(err) { 
+                    alert("Invalid backup file."); 
+                } 
+            }; 
+            reader.readAsText(file); 
+        });
+
+        // Expanded Smart CSV Importer (Ghost-Buster & Date Translator)
+        document.getElementById('csv-file-input').addEventListener('change', function(e) { 
+            const file = e.target.files[0]; 
+            if (!file) return; 
+            
+            const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                const rawText = event.target.result;
+                const cleanText = rawText.replace(/"/g, ''); 
+                
+                const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
+                if (rows.length <= 1) return alert("File is empty or invalid. Make sure it has headers."); 
+                
+                const headers = rows[0].split(',').map(h => h.trim().toLowerCase()); 
+                const monthMap = { 'jan':'01', 'feb':'02', 'mar':'03', 'apr':'04', 'may':'05', 'jun':'06', 'jul':'07', 'aug':'08', 'sep':'09', 'oct':'10', 'nov':'11', 'dec':'12' }; 
+                
+                const importedData = rows.slice(1).map(row => { 
+                    const values = row.split(','); 
+                    let obj = {}; 
+                    headers.forEach((h, i) => { 
+                        let val = values[i] ? values[i].trim() : ''; 
+                        
+                        if (h === 'type') val = val.toLowerCase(); 
+                        
+                        // Date Translator Engine
+                        if (h === 'date') { 
+                            if (val.includes('/')) { 
+                                const parts = val.split('/'); 
+                                if (parts.length === 3) { 
+                                    let d = parts[0].padStart(2, '0'); 
+                                    let m = parts[1].padStart(2, '0'); 
+                                    let y = parts[2]; 
+                                    if (parts[0].length === 4) { 
+                                        y = parts[0]; m = parts[1]; d = parts[2]; 
+                                    } else if (y.length === 2) { 
+                                        y = '20' + y; 
+                                    } 
+                                    val = `${y}-${m}-${d}`; 
+                                } 
+                            } else if (val.includes('-')) { 
+                                const parts = val.split('-'); 
+                                if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { 
+                                    let m = monthMap[parts[0].toLowerCase()]; 
+                                    let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; 
+                                    val = `${y}-${m}-01`; 
+                                } else if (parts.length === 3) { 
+                                    if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { 
+                                        let d = parts[0].padStart(2, '0'); 
+                                        let m = monthMap[parts[1].toLowerCase()]; 
+                                        let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; 
+                                        val = `${y}-${m}-${d}`; 
+                                    } else if (parts[0].length === 4) { 
+                                        val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; 
+                                    } 
+                                } 
+                            } 
+                        } 
+                        obj[h] = val; 
+                    }); 
+                    
+                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); 
+                    return obj; 
+                }); 
+                
+                const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
+                
+                // Ghost Buster
+                transactions = transactions.filter(t => { 
+                    if (!t.date || typeof t.date !== 'string') return false; 
+                    return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); 
+                }); 
+                
+                transactions = [...transactions, ...validData]; 
+                localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+                
+                alert(`Successfully imported ${validData.length} records!`); 
+                populateDropdowns(); 
+                updateHomeDashboard(); 
+                updateOverallDashboard(); 
+                updateFoodDashboard(); 
+                
+                e.target.value = ''; 
+            }; 
+            reader.readAsText(file); 
+        });
+        
+        function clearData() { 
+            if(confirm("Delete ALL app data? This cannot be undone.")) { 
+                localStorage.clear(); 
+                location.reload(); 
+            } 
+        }
+
+        // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
-            setupJSONImport();
-            setupCSVImport();
-            populateMonthFilter();
+            populateDropdowns();
             
-            Chart.defaults.font.family = 'Urbanist';
-            let isDark = document.documentElement.classList.contains('dark');
-            let textColor = isDark ? '#8E8E93' : '#6B7280';
-            let gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-            Chart.defaults.color = textColor;
-
-            const chartConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } };
-            const lineConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { y: { display: false }, x: { grid: { color: gridColor }, ticks: { maxTicksLimit: 10, color: textColor } } } };
-
-            const ctxMain = document.getElementById('mainChart').getContext('2d');
-            const gradMain = ctxMain.createLinearGradient(0, 0, 0, 200); gradMain.addColorStop(0, 'rgba(255, 214, 0, 0.3)'); gradMain.addColorStop(1, 'rgba(255, 214, 0, 0)');
-            mainChart = new Chart(ctxMain, { type: 'line', data: { labels: [], datasets: [{ label: 'Balance', data: [], borderColor: '#FFD600', backgroundColor: gradMain, fill: true, borderWidth: 3, tension: 0.4, pointRadius: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { display: false } } } });
-
-            const ctxCat = document.getElementById('categoryChart').getContext('2d');
-            categoryChart = new Chart(ctxCat, { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: chartConfig });
-
-            const ctxComp = document.getElementById('comparisonChart').getContext('2d');
-            comparisonChart = new Chart(ctxComp, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Previous Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
-
-            const ctxSal = document.getElementById('salaryChart').getContext('2d');
-            const gradSal = ctxSal.createLinearGradient(0, 0, 0, 250); gradSal.addColorStop(0, 'rgba(255, 214, 0, 0.3)'); gradSal.addColorStop(1, 'rgba(255, 214, 0, 0)');
-            salaryChart = new Chart(ctxSal, { type: 'line', data: { labels: ['2020', '2021', '2022', '2023', '2024', '2025', 'Jan 26', 'Apr 26', 'Current'], datasets: [{ label: 'Base Pay', data: [4500, 4800, 5200, 5600, 6100, 6500, 6700, 7800, 7800], borderColor: '#FFD600', backgroundColor: gradSal, fill: true, borderWidth: 3, tension: 0.2, pointBackgroundColor: '#111827', pointBorderColor: '#FFD600', pointRadius: [0,0,0,0,0,0,0,5,0] }] }, options: lineConfig });
-
-            const ctxFood = document.getElementById('foodChart').getContext('2d');
-            foodChart = new Chart(ctxFood, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Previous Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
-
-            const ctxUtil = document.getElementById('utilChart').getContext('2d');
-            utilChart = new Chart(ctxUtil, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Month', data: [], borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0, spanGaps: false }, { label: 'Previous Month', data: [], borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, options: lineConfig });
-
-            renderCards(); updateDashboard(); renderBills(); renderDebts(); renderSavings(); renderProfile();
+            // Chart Defaults
+            Chart.defaults.font.family = 'Urbanist'; 
+            let isDark = document.documentElement.classList.contains('dark'); 
+            let tc = isDark ? '#8E8E93' : '#6B7280'; 
+            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
+            Chart.defaults.color = tc;
             
-            const firstName = profile.name ? profile.name.split(' ')[0] : 'Sahafiz';
-            document.getElementById('header-title').innerText = `Hi, ${firstName}`;
+            const lineConfig = { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { legend: { display: false } }, 
+                scales: { 
+                    y: { display: false }, 
+                    x: { grid: { color: gc }, ticks: { color: tc } } 
+                } 
+            };
+
+            // Main Line Chart (Dashboard)
+            const ctxMain = document.getElementById('mainChart').getContext('2d'); 
+            const gradMain = ctxMain.createLinearGradient(0, 0, 0, 200); 
+            gradMain.addColorStop(0, 'rgba(255, 214, 0, 0.3)'); 
+            gradMain.addColorStop(1, 'rgba(255, 214, 0, 0)');
+            
+            mainChart = new Chart(ctxMain, { 
+                type: 'line', 
+                data: { labels: [], datasets: [{ data: [], borderColor: '#FFD600', backgroundColor: gradMain, fill: true, borderWidth: 3, tension: 0.4, pointRadius: 0 }] }, 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { display: false } } } 
+            });
+
+            // Secondary Charts
+            categoryChart = new Chart(document.getElementById('categoryChart'), { 
+                type: 'bar', 
+                data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } 
+            });
+
+            comparisonChart = new Chart(document.getElementById('comparisonChart'), { 
+                type: 'line', 
+                data: { labels: [], datasets: [ { borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0 }, { borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, 
+                options: lineConfig 
+            });
+            
+            foodChart = new Chart(document.getElementById('foodChart'), { 
+                type: 'line', 
+                data: { labels: [], datasets: [ { borderColor: '#FFD600', borderWidth: 3, tension: 0.3, pointRadius: 0 }, { borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointRadius: 0 } ] }, 
+                options: lineConfig 
+            });
+            
+            // New Util Bar Chart
+            utilChart = new Chart(document.getElementById('utilChart'), { 
+                type: 'bar', 
+                data: { labels: [], datasets: [] }, 
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    plugins: { legend: { display: false } }, 
+                    scales: { 
+                        x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, 
+                        y: { stacked: true, display: false } 
+                    } 
+                } 
+            });
+            
+            // New Career Mixed Chart
+            salaryChart = new Chart(document.getElementById('salaryChart'), { 
+                type: 'bar', 
+                data: { labels: [], datasets: [] }, 
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, 
+                    scales: { 
+                        x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, 
+                        y: { stacked: true, display: false } 
+                    } 
+                } 
+            });
+
+            // Initialize all data
+            renderCards(); 
+            renderBills(); 
+            renderDebts(); 
+            renderSavings(); 
+            renderProfile();
+            
+            updateHomeDashboard(); 
+            updateOverallDashboard(); 
+            updateFoodDashboard(); 
+            updateUtilDashboard(); 
+            updateCareerDashboard();
         };
     </script>
-    <!-- PWA Service Worker Registration -->
+    
+    <!-- Service Worker -->
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then((reg) => console.log('Service Worker Registered!'))
-                    .catch((err) => console.log('Service Worker Failed:', err));
-            });
+        if ('serviceWorker' in navigator) { 
+            window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); 
         }
     </script>
 </body>
