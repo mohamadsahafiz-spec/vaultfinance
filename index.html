@@ -38,6 +38,7 @@
         } else {
             document.documentElement.classList.remove('dark')
         }
+
         tailwind.config = {
             darkMode: 'class', 
             theme: {
@@ -51,6 +52,7 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
+    <!-- DESKTOP Sidebar -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-8">
             <div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-lg shadow-[0_0_10px_rgba(255,214,0,0.5)]">V</div>
@@ -146,7 +148,7 @@
                         <div class="flex justify-between items-end mt-1">
                             <div>
                                 <div class="text-[8px] uppercase tracking-wider font-semibold opacity-80" id="credit-name">Ikhwan CC</div>
-                                <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-sm"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="credit-display">0.00</span></div>
+                                <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="credit-display">0.00</span></div>
                             </div>
                             <div class="flex flex-col items-end drop-shadow-sm pb-0.5">
                                 <span class="text-[7px] font-bold bg-white/60 backdrop-blur-sm text-gray-900 px-1.5 py-0.5 rounded-sm mb-1 border border-white/50"><span id="credit-pct">0</span>% Used</span>
@@ -175,7 +177,7 @@
                         <div class="flex justify-between items-end mt-1">
                             <div>
                                 <div class="text-[8px] uppercase tracking-wider font-semibold text-gray-500 ml-0.5" id="kwsp-name">Retirement Fund</div>
-                                <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-0.5 drop-shadow-sm"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
+                                <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
                             </div>
                         </div>
                     </div>
@@ -359,7 +361,7 @@
             
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Income Tracker</p>
-                <button onclick="openPayrollModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center font-bold shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Log Payslip">
+                <button onclick="openPayrollModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Log Payslip">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </button>
             </div>
@@ -367,7 +369,7 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Gross vs Net vs Deductions</p>
                 <h4 class="font-bold text-sm mb-5">Income Trajectory</h4>
-                <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
+                <div class="w-full h-56 relative drop-shadow-[0_4px_6px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -474,7 +476,7 @@
                 </form>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📦 Export Backup</button>
@@ -684,7 +686,7 @@
 
     <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4">Log Past Bill</h3>
+            <h3 class="text-xl font-bold tracking-tight mb-5">Log Past Bill</h3>
             <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
                 <div>
                     <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Month Paid</label>
@@ -843,14 +845,14 @@
                 document.getElementById(`tab-${id}`).classList.add('hidden'); 
                 document.getElementById(`tab-${id}`).classList.remove('flex');
                 let mobBtn = document.getElementById(`nav-mob-${id}`); if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark'); }
-                let deskBtn = document.getElementById(`nav-desk-${id}`); if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-sm'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
+                let deskBtn = document.getElementById(`nav-desk-${id}`); if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
             });
 
             document.getElementById(`tab-${tabId}`).classList.remove('hidden'); 
             document.getElementById(`tab-${tabId}`).classList.add('flex');
             
             let activeMob = document.getElementById(`nav-mob-${tabId}`); if(activeMob) { activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
-            let activeDesk = document.getElementById(`nav-desk-${tabId}`); if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-sm'); }
+            let activeDesk = document.getElementById(`nav-desk-${tabId}`); if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
 
             const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'bills': 'Utility History', 'salary': 'Payroll & Wealth', 'profile': 'Profile Settings' };
             document.getElementById('header-title').innerText = headerTitles[tabId];
@@ -1115,7 +1117,7 @@
                 const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 
                 if(list) {
-                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group"><td class="py-2.5"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-xs">📄</div></td><td class="py-2.5 pl-3"><p class="font-bold text-xs">${u.type}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></td><td class="py-2.5 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-2.5 text-right w-8"><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
+                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group"><td class="py-2.5"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-xs">📄</div></td><td class="py-2.5 pl-3"><p class="font-bold text-xs">${u.type}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></td><td class="py-2.5 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-2.5 text-right w-8"><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
                 }
             });
             
@@ -1341,25 +1343,20 @@
         function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
         function saveUtilHistory(e) { e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); closeUtilHistoryModal(); }
 
-        function openPayrollModal() { 
-            const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
-            document.getElementById('payroll-modal').classList.remove('hidden'); 
-        }
-        function closePayrollModal() { document.getElementById('payroll-modal').classList.add('hidden'); document.getElementById('payroll-form').reset(); document.getElementById('pay-net-display').innerText = '0.00'; }
-        
+        // RE-ENGINEERED COMPLIANT STATUTORY METHOD
         function autoCalcPayroll() {
             let basic = parseFloat(document.getElementById('pay-basic').value) || 0;
             let allow = parseFloat(document.getElementById('pay-allow').value) || 0;
             let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             
             let gross = basic + allow + bonus;
+            let socsoEisBase = basic + allow; // FIXED ALLOWANCE + BASIC EXCLUDES BONUS
             
             let epf = 0;
             let socso = 0;
             let eis = 0;
 
             if (gross > 0) {
-                // MALAYSIAN EPF BRACKET LOGIC (RM20 / RM100 Increments)
                 if (gross <= 5000) {
                     epf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.11);
                 } else if (gross <= 20000) {
@@ -1367,9 +1364,10 @@
                 } else {
                     epf = Math.ceil(gross * 0.11);
                 }
-
-                // MALAYSIAN SOCSO & EIS BRACKET LOGIC (RM100 Increments, Midpoint base)
-                let socsoGross = Math.min(gross, 6000); 
+            }
+            
+            if (socsoEisBase > 0) {
+                let socsoGross = Math.min(socsoEisBase, 6000); 
                 let socsoBase = Math.ceil(socsoGross / 100) * 100 - 50;
                 
                 socso = socsoBase * 0.005;
