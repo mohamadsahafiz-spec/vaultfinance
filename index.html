@@ -10,7 +10,6 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     
-    <!-- UPGRADED FONT: Inter (Premium Native App Font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -19,7 +18,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
-        /* Hidden Native Scrollbars for App-Like Feel */
         ::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -29,6 +27,10 @@
         .tab-enter { animation: slideIn 0.2s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Custom Custom Patterns for Native Cards */
+        .card-debit-bg { background: linear-gradient(105deg, #9ca3af 35%, #9f1239 35.1%, #e11d48 70%, #be123c 100%); }
+        .card-gold-bg { background: linear-gradient(135deg, #fef08a 0%, #d97706 45%, #f59e0b 100%); }
     </style>
 
     <script>
@@ -37,19 +39,12 @@
         } else {
             document.documentElement.classList.remove('dark')
         }
-
         tailwind.config = {
             darkMode: 'class', 
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: '#FFD600', 
-                        surface: { light: '#F4F5F7', dark: '#000000' },
-                        panel: { light: '#FFFFFF', dark: '#1C1C1E' },
-                        textMain: { light: '#111827', dark: '#FFFFFF' },
-                        textMuted: { light: '#6B7280', dark: '#8E8E93' }
-                    }
+                    colors: { brand: '#FFD600', surface: { light: '#F4F5F7', dark: '#000000' }, panel: { light: '#FFFFFF', dark: '#1C1C1E' }, textMain: { light: '#111827', dark: '#FFFFFF' }, textMuted: { light: '#6B7280', dark: '#8E8E93' } }
                 }
             }
         }
@@ -57,7 +52,6 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
-    <!-- DESKTOP Sidebar (Minimalist SVG Icons) -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-10">
             <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-[0_0_12px_rgba(255,214,0,0.5)]">V</div>
@@ -88,10 +82,9 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span>Profile</span>
             </button>
-            
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
                 <button onclick="openTxModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3.5 bg-brand text-gray-900 shadow-[0_0_15px_rgba(255,214,0,0.4)] rounded-xl font-black transition hover:scale-105">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
                     New Transaction
                 </button>
             </div>
@@ -100,7 +93,6 @@
 
     <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-32 md:pb-8 scroll-smooth hide-scrollbar" id="main-scroll">
         
-        <!-- HIGHLY OPTIMIZED HEADER -->
         <header class="flex justify-between items-end px-5 pt-8 pb-3 md:px-8 shrink-0">
             <div class="flex-1 min-w-0 mr-4"><h2 id="header-title" class="text-3xl font-black tracking-tight truncate drop-shadow-sm">Hi, Sahafiz</h2></div>
         </header>
@@ -115,50 +107,94 @@
                 <select id="home-month-filter" onchange="updateHomeDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
-            <!-- NATIVE HORIZONTAL SWIPE CARDS -->
+            <!-- NATIVE HORIZONTAL SWIPE CARDS (MAYBANK / KWSP THEMED) -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-5 px-5 hide-scrollbar">
                 
-                <!-- DEBIT -->
-                <div class="snap-center shrink-0 w-[85vw] max-w-[320px] h-48 bg-gradient-to-br from-gray-800 to-black text-white rounded-[28px] p-6 flex flex-col justify-between cursor-pointer hover:brightness-110 transition shadow-xl relative overflow-hidden" onclick="openCardModal()">
-                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
-                    <div class="absolute bottom-0 right-0 w-24 h-24 bg-brand/10 rounded-tl-full blur-xl"></div>
-                    <div class="flex justify-between items-start relative z-10">
-                        <div class="flex items-center gap-2 font-bold text-sm"><span class="text-brand text-lg">💳</span><span>Debit Card</span></div>
-                    </div>
-                    <div class="relative z-10">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Available Balance</p>
-                        <div class="font-black text-3xl tracking-tight">MYR <span id="debit-display">0.00</span></div>
+                <!-- DEBIT CARD (Maybank Cherry Platinum) -->
+                <div class="snap-center shrink-0 w-[85vw] max-w-[330px] h-52 card-debit-bg text-white rounded-[24px] p-5 flex flex-col justify-between cursor-pointer hover:brightness-110 transition shadow-xl relative overflow-hidden border border-white/10" onclick="openCardModal('debit')">
+                    <!-- Subtle cherry radial overlay -->
+                    <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-400/40 to-transparent mix-blend-overlay pointer-events-none"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div class="flex justify-between items-start">
+                            <div class="font-black text-xl text-yellow-400 drop-shadow-md tracking-tight bg-black/20 px-2 py-0.5 rounded backdrop-blur-sm">Maybank</div>
+                            <div class="text-white text-[10px] font-bold italic tracking-wider drop-shadow-md">platinum</div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="w-11 h-7 bg-gradient-to-br from-yellow-100 to-yellow-500 rounded border border-yellow-600 mb-2 opacity-90 shadow-sm"></div>
+                            <div class="font-mono text-xl tracking-[0.15em] text-white drop-shadow-md">**** **** **** <span id="debit-last4">1234</span></div>
+                        </div>
+                        <div class="flex justify-between items-end text-white mt-1">
+                            <div>
+                                <div class="text-[9px] uppercase tracking-widest opacity-90 font-bold" id="debit-name">Debit Card</div>
+                                <div class="font-black text-2xl tracking-tight leading-none mt-1 drop-shadow-md"><span class="text-sm mr-1">MYR</span><span id="debit-display">0.00</span></div>
+                            </div>
+                            <div class="flex -space-x-3 drop-shadow-md">
+                                <div class="w-8 h-8 rounded-full bg-[#EB001B] opacity-90 mix-blend-screen"></div>
+                                <div class="w-8 h-8 rounded-full bg-[#F79E1B] opacity-90 mix-blend-screen"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- CREDIT -->
-                <div class="snap-center shrink-0 w-[85vw] max-w-[320px] h-48 bg-gradient-to-br from-[#FFD600] to-[#F59E0B] text-gray-900 rounded-[28px] p-6 flex flex-col justify-between cursor-pointer hover:brightness-105 transition shadow-[0_10px_25px_rgba(255,214,0,0.25)] relative overflow-hidden" onclick="openCardModal()">
-                    <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-white/30 rounded-full blur-3xl"></div>
-                    <div class="flex justify-between items-start relative z-10">
-                        <div class="flex items-center gap-2 font-bold text-sm"><span>💳</span><span>Credit Card</span></div>
-                        <span class="text-[10px] font-black bg-black/10 text-gray-900 px-2.5 py-1 rounded-full"><span id="credit-pct">0</span>% Used</span>
-                    </div>
-                    <div class="relative z-10">
-                        <p class="text-[10px] font-black text-gray-800/60 uppercase tracking-widest mb-1">Limit: 10,000</p>
-                        <div class="font-black text-3xl tracking-tight">MYR <span id="credit-display">0.00</span></div>
+                <!-- CREDIT CARD (Maybank Ikhwan Gold) -->
+                <div class="snap-center shrink-0 w-[85vw] max-w-[330px] h-52 card-gold-bg text-gray-900 rounded-[24px] p-5 flex flex-col justify-between cursor-pointer hover:brightness-105 transition shadow-[0_10px_25px_rgba(217,119,6,0.3)] relative overflow-hidden border border-yellow-300/50" onclick="openCardModal('credit')">
+                    <!-- Ikhwan Swoosh Design -->
+                    <div class="absolute bottom-10 left-[-20%] right-[-20%] h-6 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-90 transform -skew-y-6 drop-shadow-sm"></div>
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-50 pointer-events-none"></div>
+
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div class="flex justify-between items-start">
+                            <div class="font-black text-xl drop-shadow-sm tracking-tight bg-white/40 px-2 py-0.5 rounded backdrop-blur-sm">Maybank <span class="text-xs font-bold ml-1">Islamic</span></div>
+                            <div class="text-[10px] font-black opacity-80 uppercase tracking-widest">gold</div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="w-11 h-7 bg-gradient-to-br from-yellow-100 to-yellow-300 rounded border border-yellow-600 mb-2 shadow-sm"></div>
+                            <div class="font-mono text-xl tracking-[0.15em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">**** **** **** <span id="credit-last4">8888</span></div>
+                        </div>
+                        <div class="flex justify-between items-end mt-1">
+                            <div>
+                                <div class="text-[9px] uppercase tracking-widest font-black opacity-80" id="credit-name">Ikhwan CC</div>
+                                <div class="font-black text-2xl tracking-tight leading-none mt-1 drop-shadow-sm"><span class="text-sm mr-1">MYR</span><span id="credit-display">0.00</span></div>
+                            </div>
+                            <div class="flex flex-col items-end drop-shadow-md">
+                                <span class="text-[8px] font-black bg-white/50 backdrop-blur-sm text-gray-900 px-2 py-0.5 rounded-full mb-1 border border-white/50"><span id="credit-pct">0</span>% Used</span>
+                                <div class="flex -space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-[#EB001B] opacity-95"></div>
+                                    <div class="w-8 h-8 rounded-full bg-[#F79E1B] opacity-95"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- KWSP -->
-                <div class="snap-center shrink-0 w-[85vw] max-w-[320px] h-48 bg-gradient-to-br from-[#10B981] to-[#059669] text-white rounded-[28px] p-6 flex flex-col justify-between cursor-pointer hover:brightness-105 transition shadow-[0_10px_25px_rgba(16,185,129,0.3)] relative overflow-hidden" onclick="openCardModal()">
-                    <div class="absolute -right-8 -bottom-8 w-36 h-36 bg-white/20 rounded-full blur-2xl"></div>
-                    <div class="flex justify-between items-start relative z-10">
-                        <div class="flex items-center gap-2 font-bold text-sm"><span>🏦</span><span>KWSP (EPF)</span></div>
-                    </div>
-                    <div class="relative z-10">
-                        <p class="text-[10px] font-bold text-green-100 uppercase tracking-widest mb-1">Retirement Fund</p>
-                        <div class="font-black text-3xl tracking-tight">MYR <span id="kwsp-display">0.00</span></div>
+                <!-- KWSP CARD (White & Logo Accurate) -->
+                <div class="snap-center shrink-0 w-[85vw] max-w-[330px] h-52 bg-gradient-to-br from-white via-gray-50 to-gray-200 text-gray-900 rounded-[24px] p-5 flex flex-col justify-between cursor-pointer hover:brightness-95 transition shadow-[0_10px_25px_rgba(0,0,0,0.1)] relative overflow-hidden border border-gray-300" onclick="openCardModal('kwsp')">
+                    <!-- Subtle wavy background effect -->
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-white rounded-full blur-2xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div class="flex justify-between items-start">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-10 h-10 rounded-full bg-[#002868] flex items-center justify-center border-[3px] border-[#ED1A3B] shadow-sm"><span class="text-yellow-400 font-black text-[9px] tracking-tighter">KWSP</span></div>
+                                <div class="font-black text-2xl text-[#002868] tracking-tighter leading-none border-l-2 border-[#ED1A3B] pl-2">KWSP<br><span class="text-[#ED1A3B]">EPF</span></div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1 ml-1">Member Number</div>
+                            <div class="font-mono text-xl tracking-[0.15em] text-gray-700">**** **** <span id="kwsp-last4">0000</span></div>
+                        </div>
+                        <div class="flex justify-between items-end mt-1">
+                            <div>
+                                <div class="text-[9px] uppercase tracking-widest font-bold text-gray-500 ml-1" id="kwsp-name">Retirement Fund</div>
+                                <div class="font-black text-2xl text-[#002868] tracking-tight leading-none mt-1 drop-shadow-sm"><span class="text-sm mr-1">MYR</span><span id="kwsp-display">0.00</span></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-1">
-                
                 <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-sm dark:shadow-none border border-gray-200 dark:border-white/5 flex flex-col transition-colors duration-300">
                     <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-bold tracking-widest uppercase">Historical Net Worth (Cash + EPF)</p>
                     <h3 class="text-3xl md:text-4xl font-black mt-1 tracking-tight drop-shadow-sm">MYR <span id="total-net-worth">0.00</span></h3>
@@ -172,9 +208,8 @@
                     <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
                         <div class="flex justify-between items-center mb-2">
                             <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-bold tracking-widest uppercase">Emergency Fund</p>
-                            <!-- GLOWING + ACTION ICON -->
                             <button onclick="openSavingsModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0" title="Set Target">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                             </button>
                         </div>
                         <div class="mt-1">
@@ -192,7 +227,6 @@
                                 <h4 class="font-black text-xl text-red-600 dark:text-red-500 uppercase tracking-widest drop-shadow-sm">DEBT</h4>
                                 <span id="total-debt-display" class="text-[10px] font-black text-white bg-red-600 dark:bg-red-600 px-3 py-1 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.5)] hidden"></span>
                             </div>
-                            <!-- GLOWING + ACTION ICON -->
                             <button onclick="openDebtModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                             </button>
@@ -256,7 +290,6 @@
                         <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-400"></span> Prev</div>
                     </div>
                 </div>
-                <!-- GLOWING GRAPH -->
                 <div class="w-full h-48 relative drop-shadow-[0_6px_10px_rgba(255,214,0,0.35)]"><canvas id="comparisonChart"></canvas></div>
             </div>
 
@@ -284,7 +317,6 @@
                 </div>
                 <h3 class="text-3xl md:text-4xl font-black tracking-tight mb-5 drop-shadow-sm">MYR <span id="food-total-display">0.00</span></h3>
                 <div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
-                <!-- GLOWING GRAPH -->
                 <div class="w-full h-48 relative drop-shadow-[0_6px_10px_rgba(255,214,0,0.35)]"><canvas id="foodChart"></canvas></div>
             </div>
 
@@ -309,7 +341,6 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <div class="flex justify-between items-center mb-6">
                     <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Yearly Pacing</p>
-                    <!-- GLOWING + ACTION ICON -->
                     <button onclick="openUtilHistoryModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center font-bold shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0" title="Log Past Bill">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
@@ -327,7 +358,6 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-6 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-5">
                     <h4 class="font-black text-sm text-brand tracking-wide">UPCOMING REMINDERS</h4>
-                    <!-- GLOWING + ACTION ICON -->
                     <button onclick="openBillModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
@@ -343,7 +373,6 @@
             
             <div class="flex justify-between items-center mt-1">
                 <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Income Tracker</p>
-                <!-- GLOWING + ACTION ICON -->
                 <button onclick="openPayrollModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center font-bold shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0" title="Log Payslip">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </button>
@@ -352,7 +381,6 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-1">Gross vs Net vs Deductions</p>
                 <h4 class="font-black text-base mb-6">Income Trajectory</h4>
-                <!-- GLOWING GRAPH FOR NET PAY LINE -->
                 <div class="w-full h-64 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.3)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
@@ -389,6 +417,14 @@
                     <h3 class="text-3xl font-black tracking-tight" id="li-name">Name</h3>
                     <p class="text-sm font-semibold text-textMuted-light dark:text-textMuted-dark mt-1" id="li-role">Role • Industry</p>
                     <p class="text-xs text-textMuted-light dark:text-textMuted-dark mt-1.5" id="li-location">Location</p>
+                    
+                    <!-- NEW CONTACT INFO SECTION -->
+                    <div class="mt-5 pt-5 border-t border-gray-200/50 dark:border-white/10 flex flex-col gap-2.5">
+                        <div class="flex items-center gap-3 text-sm font-semibold"><span class="text-brand drop-shadow-sm w-4 text-center">✉️</span> <span id="li-email">email@example.com</span></div>
+                        <div class="flex items-center gap-3 text-sm font-semibold"><span class="text-brand drop-shadow-sm w-4 text-center">📱</span> <span id="li-phone">+60 00-000 0000</span></div>
+                        <div class="flex items-center gap-3 text-sm font-bold text-red-500"><span class="drop-shadow-sm w-4 text-center">🆘</span> <span id="li-emergency">Emergency Ctc</span></div>
+                    </div>
+
                     <div class="mt-6 flex flex-wrap gap-2" id="li-skills"></div>
                 </div>
             </div>
@@ -413,6 +449,16 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Email</label>
+                            <input type="email" id="prof-email" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Phone No.</label>
+                            <input type="text" id="prof-phone" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
                             <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Job Title</label>
                             <input type="text" id="prof-role" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
@@ -423,13 +469,17 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Location</label>
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Location / Address</label>
                             <input type="text" id="prof-address" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Tenure (Yrs)</label>
                             <input type="number" id="prof-tenure" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-red-500 mb-1.5 pl-1 uppercase tracking-wider">Emergency Contact (Name & No)</label>
+                        <input type="text" id="prof-emergency" class="w-full bg-red-50 dark:bg-red-900/10 text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-red-200 dark:border-red-900/50 outline-none focus:ring-1 focus:ring-red-500 transition-colors duration-300">
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Skills</label>
@@ -491,26 +541,32 @@
     <!-- MODALS                                     -->
     <!-- ========================================== -->
 
-    <!-- Update Accounts Modal -->
+    <!-- DYNAMIC CARD EDIT MODAL -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-2xl font-black tracking-tight mb-5">Update Accounts</h3>
-            <form onsubmit="saveCards(event)" class="space-y-4">
+            <h3 class="text-2xl font-black tracking-tight mb-5" id="edit-card-title">Update Card</h3>
+            <form onsubmit="saveCardEdit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-widest">Debit Card</label>
-                    <input type="number" id="card-debit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-widest">Card Name / Label</label>
+                    <input type="text" id="edit-card-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-brand mb-1.5 uppercase tracking-widest">Credit Card</label>
-                    <input type="number" id="card-credit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-widest">Last 4 Digits</label>
+                        <input type="text" id="edit-card-last4" maxlength="4" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-brand mb-1.5 uppercase tracking-widest">Balance / Funds</label>
+                        <input type="number" id="edit-card-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-green-500 mb-1.5 uppercase tracking-widest">Starting KWSP Balance</label>
-                    <input type="number" id="card-kwsp-input" step="0.01" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-green-500 transition">
+                <div id="edit-card-limit-container" class="hidden">
+                    <label class="block text-[10px] font-bold text-red-500 mb-1.5 uppercase tracking-widest">Max Limit (Credit Only)</label>
+                    <input type="number" id="edit-card-limit" step="0.01" class="w-full bg-red-50 dark:bg-red-900/10 text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-red-200 dark:border-red-900/50 outline-none focus:ring-1 focus:ring-red-500 transition">
                 </div>
                 <div class="flex gap-3 pt-3">
                     <button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-3.5 rounded-2xl font-bold transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-3.5 rounded-2xl font-black shadow-md hover:scale-[1.02] transition-transform">Save</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-3.5 rounded-2xl font-black shadow-md hover:scale-[1.02] transition-transform">Save Data</button>
                 </div>
             </form>
         </div>
@@ -742,22 +798,31 @@
     <!-- EXPANDED JAVASCRIPT ENGINE                 -->
     <!-- ========================================== -->
     <script>
-        // --- 1. DATA STORES ---
+        // --- 1. DATA STORES WITH MIGRATION ---
         let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
         let savingsData = JSON.parse(localStorage.getItem('vault_savings')) || { current: 1250, target: 10000 };
         let debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
-        let cardData = JSON.parse(localStorage.getItem('vault_cards')) || { debit: 2500, credit: 5000, kwsp: 0 };
-        let bills = JSON.parse(localStorage.getItem('vault_bills')) || [
-            { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, 
-            { name: "Unifi", amount: 129, dueDate: "2026-07-28" }
-        ];
+        let bills = JSON.parse(localStorage.getItem('vault_bills')) || [ { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi", amount: 129, dueDate: "2026-07-28" } ];
         let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
         let payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
+        
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
-            name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7", skills: "Hardware Diagnostic, Maintenance, Excel Data, System Upgrades", avatar: "", cover: ""
+            name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: ""
         };
 
+        // NEW: SMART CARD MIGRATION (Checks if old data was just a raw number, and updates it to new object schema)
+        let cardData = JSON.parse(localStorage.getItem('vault_cards')) || {};
+        if (typeof cardData.debit === 'number' || cardData.debit === undefined) {
+            cardData = {
+                debit: { balance: typeof cardData.debit === 'number' ? cardData.debit : 2500, name: "Debit Card", last4: "1234" },
+                credit: { balance: typeof cardData.credit === 'number' ? cardData.credit : 5000, name: "Ikhwan CC", last4: "8888", limit: 10000 },
+                kwsp: { balance: typeof cardData.kwsp === 'number' ? cardData.kwsp : 0, name: "Retirement Fund", last4: "0000" }
+            };
+            localStorage.setItem('vault_cards', JSON.stringify(cardData));
+        }
+
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart;
+        let currentEditCard = ''; // Tracks which card the user clicked to edit
 
         // --- 2. INITIALIZATION & UTILITIES ---
         function formatDisplayDate(dateStr) {
@@ -780,14 +845,8 @@
             
             [categoryChart, comparisonChart, salaryChart, foodChart, utilChart].forEach(c => {
                 if(c && c.options.scales) {
-                    if(c.options.scales.x) { 
-                        if(c.options.scales.x.grid) c.options.scales.x.grid.color = gc; 
-                        if(c.options.scales.x.ticks) c.options.scales.x.ticks.color = tc; 
-                    }
-                    if(c.options.scales.y) { 
-                        if(c.options.scales.y.grid) c.options.scales.y.grid.color = gc; 
-                        if(c.options.scales.y.ticks) c.options.scales.y.ticks.color = tc; 
-                    }
+                    if(c.options.scales.x) { if(c.options.scales.x.grid) c.options.scales.x.grid.color = gc; if(c.options.scales.x.ticks) c.options.scales.x.ticks.color = tc; }
+                    if(c.options.scales.y) { if(c.options.scales.y.grid) c.options.scales.y.grid.color = gc; if(c.options.scales.y.ticks) c.options.scales.y.ticks.color = tc; }
                     c.update();
                 }
             });
@@ -799,34 +858,15 @@
             tabs.forEach(id => {
                 document.getElementById(`tab-${id}`).classList.add('hidden'); 
                 document.getElementById(`tab-${id}`).classList.remove('flex');
-                
-                let mobBtn = document.getElementById(`nav-mob-${id}`); 
-                if(mobBtn) { 
-                    mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); 
-                    mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark'); 
-                }
-                
-                let deskBtn = document.getElementById(`nav-desk-${id}`); 
-                if(deskBtn) { 
-                    deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); 
-                    deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
-                }
+                let mobBtn = document.getElementById(`nav-mob-${id}`); if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark'); }
+                let deskBtn = document.getElementById(`nav-desk-${id}`); if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
             });
 
             document.getElementById(`tab-${tabId}`).classList.remove('hidden'); 
             document.getElementById(`tab-${tabId}`).classList.add('flex');
             
-            let activeMob = document.getElementById(`nav-mob-${tabId}`); 
-            if(activeMob) { 
-                activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); 
-                activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); 
-            }
-            
-            let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
-            if(activeDesk) { 
-                activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
-                activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); 
-            }
+            let activeMob = document.getElementById(`nav-mob-${tabId}`); if(activeMob) { activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
+            let activeDesk = document.getElementById(`nav-desk-${tabId}`); if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
 
             const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'bills': 'Utility History', 'salary': 'Payroll & Wealth', 'profile': 'Profile Settings' };
             document.getElementById('header-title').innerText = headerTitles[tabId];
@@ -895,7 +935,7 @@
                 }
             });
 
-            let totalKwsp = cardData.kwsp || 0;
+            let totalKwsp = cardData.kwsp.balance || 0;
             payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.bonus) * 0.13; });
             
             const totalNetWealth = runningBalance + totalKwsp;
@@ -1136,24 +1176,70 @@
         // --- 5. MODAL CONTROLLERS & DATA SAVING ---
         function renderCards() { 
             const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct'); const kEl = document.getElementById('kwsp-display');
-            if(dEl) dEl.innerText = cardData.debit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
-            if(cEl) cEl.innerText = cardData.credit.toLocaleString(undefined, {minimumFractionDigits: 2}); 
             
+            // Render Dynamic Card Texts
+            if(dEl) {
+                dEl.innerText = cardData.debit.balance.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                document.getElementById('debit-name').innerText = cardData.debit.name;
+                document.getElementById('debit-last4').innerText = cardData.debit.last4;
+            }
+            if(cEl) {
+                cEl.innerText = cardData.credit.balance.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                document.getElementById('credit-name').innerText = cardData.credit.name;
+                document.getElementById('credit-last4').innerText = cardData.credit.last4;
+            }
+            if(kEl) {
+                let totalKwsp = cardData.kwsp.balance || 0;
+                payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.bonus) * 0.13; });
+                kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2});
+                document.getElementById('kwsp-name').innerText = cardData.kwsp.name;
+                document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4;
+            }
+            
+            // Dynamic Credit Utilization
             if(cpEl) {
-                const maxLimit = 10000; const currentBalance = cardData.credit;
+                const maxLimit = cardData.credit.limit || 10000; const currentBalance = cardData.credit.balance;
                 const usedPercentage = Math.round((currentBalance / maxLimit) * 100);
                 cpEl.innerText = usedPercentage;
             }
-
-            if(kEl) {
-                let totalKwsp = cardData.kwsp || 0;
-                payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.bonus) * 0.13; });
-                kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2});
-            }
         }
-        function openCardModal() { document.getElementById('card-debit-input').value = cardData.debit; document.getElementById('card-credit-input').value = cardData.credit; document.getElementById('card-kwsp-input').value = cardData.kwsp || 0; document.getElementById('card-modal').classList.remove('hidden'); }
+
+        function openCardModal(type) { 
+            currentEditCard = type;
+            const data = cardData[type];
+            document.getElementById('edit-card-title').innerText = `Update Card`;
+            document.getElementById('edit-card-name').value = data.name;
+            document.getElementById('edit-card-last4').value = data.last4;
+            document.getElementById('edit-card-balance').value = data.balance;
+            
+            const limitContainer = document.getElementById('edit-card-limit-container');
+            if (type === 'credit') {
+                limitContainer.classList.remove('hidden');
+                document.getElementById('edit-card-limit').value = data.limit || 10000;
+                document.getElementById('edit-card-limit').required = true;
+            } else {
+                limitContainer.classList.add('hidden');
+                document.getElementById('edit-card-limit').required = false;
+            }
+            
+            document.getElementById('card-modal').classList.remove('hidden'); 
+        }
         function closeCardModal() { document.getElementById('card-modal').classList.add('hidden'); }
-        function saveCards(e) { e.preventDefault(); cardData.debit = parseFloat(document.getElementById('card-debit-input').value) || 0; cardData.credit = parseFloat(document.getElementById('card-credit-input').value) || 0; cardData.kwsp = parseFloat(document.getElementById('card-kwsp-input').value) || 0; localStorage.setItem('vault_cards', JSON.stringify(cardData)); renderCards(); updateHomeDashboard(); closeCardModal(); }
+        function saveCardEdit(e) { 
+            e.preventDefault(); 
+            cardData[currentEditCard].name = document.getElementById('edit-card-name').value;
+            cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value;
+            cardData[currentEditCard].balance = parseFloat(document.getElementById('edit-card-balance').value) || 0;
+            
+            if (currentEditCard === 'credit') {
+                cardData.credit.limit = parseFloat(document.getElementById('edit-card-limit').value) || 10000;
+            }
+            
+            localStorage.setItem('vault_cards', JSON.stringify(cardData)); 
+            renderCards(); 
+            updateHomeDashboard(); 
+            closeCardModal(); 
+        }
 
         function openTxModal() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
         function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
@@ -1323,8 +1409,12 @@
         function closeCategoryModal() { document.getElementById('category-modal').classList.add('hidden'); }
 
         function renderProfile() {
-            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
+            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-email').value = profile.email || ""; document.getElementById('prof-phone').value = profile.phone || ""; document.getElementById('prof-emergency').value = profile.emergency || ""; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
+            
             document.getElementById('li-name').innerText = profile.name; document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`; document.getElementById('li-location').innerText = profile.address;
+            document.getElementById('li-email').innerText = profile.email || "email@example.com";
+            document.getElementById('li-phone').innerText = profile.phone || "+60 00-000 0000";
+            document.getElementById('li-emergency').innerText = profile.emergency || "Emergency Ctc";
             
             const skillsDiv = document.getElementById('li-skills'); skillsDiv.innerHTML = '';
             if(profile.skills) profile.skills.split(',').forEach(s => { if(s.trim()) skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[10px] font-bold px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; });
@@ -1338,7 +1428,7 @@
         
         function saveProfile(e) { 
             e.preventDefault(); 
-            profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
+            profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.email = document.getElementById('prof-email').value; profile.phone = document.getElementById('prof-phone').value; profile.emergency = document.getElementById('prof-emergency').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
             localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
         }
         
