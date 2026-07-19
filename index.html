@@ -54,19 +54,37 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
-    <!-- DESKTOP Sidebar -->
+    <!-- DESKTOP Sidebar (Upgraded to Minimalist SVG Icons) -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-10">
             <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-md">V</div>
             <h1 class="text-xl font-bold tracking-wide">Vault</h1>
         </div>
         <nav class="flex-1 space-y-3 text-sm font-semibold flex flex-col">
-            <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-4 py-3 bg-brand text-gray-900 shadow-md rounded-xl transition"><span>🏠</span> Dashboard</button>
-            <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>📊</span> Overall Analytics</button>
-            <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>🍔</span> Food & Dining</button>
-            <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>⚡</span> Utilities & Bills</button>
-            <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>🏦</span> Payroll & Wealth</button>
-            <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl"><span>👤</span> Profile</button>
+            <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-4 py-3 bg-brand text-gray-900 shadow-md rounded-xl transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>Dashboard</span>
+            </button>
+            <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <span>Overall Analytics</span>
+            </button>
+            <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                <span>Food & Dining</span>
+            </button>
+            <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <span>Utilities & Bills</span>
+            </button>
+            <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                <span>Payroll & Wealth</span>
+            </button>
+            <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Profile</span>
+            </button>
             
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
                 <button onclick="openTxModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-md rounded-xl font-bold transition hover:brightness-105">
@@ -405,21 +423,33 @@
 
     </main>
 
-    <!-- MOBILE FAB NAVIGATION -->
-    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[95%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-full flex justify-between items-center px-2 py-2 shadow-xl z-[90] transition-colors duration-300">
-        <button onclick="switchTab('home')" id="nav-mob-home" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-900 bg-brand shadow-md text-lg transition">🏠</button>
-        <button onclick="switchTab('overall')" id="nav-mob-overall" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">📊</button>
-        <button onclick="switchTab('food')" id="nav-mob-food" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">🍔</button>
+    <!-- MOBILE FAB NAVIGATION (Upgraded to Minimalist Glowing SVGs) -->
+    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[95%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-full flex justify-between items-center px-4 py-3 shadow-xl z-[90] transition-colors duration-300">
+        <button onclick="switchTab('home')" id="nav-mob-home" class="p-2 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </button>
+        <button onclick="switchTab('overall')" id="nav-mob-overall" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        </button>
+        <button onclick="switchTab('food')" id="nav-mob-food" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+        </button>
         
-        <div class="relative w-12 h-10 flex justify-center items-center shrink-0">
-            <button onclick="openTxModal()" class="absolute bottom-2 w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.3)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
+        <div class="relative w-14 h-14 flex justify-center items-center shrink-0 -mt-8">
+            <button onclick="openTxModal()" class="absolute w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
             </button>
         </div>
 
-        <button onclick="switchTab('bills')" id="nav-mob-bills" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">⚡</button>
-        <button onclick="switchTab('salary')" id="nav-mob-salary" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">🏦</button>
-        <button onclick="switchTab('profile')" id="nav-mob-profile" class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted-light dark:text-textMuted-dark text-lg transition hover:bg-surface-light dark:hover:bg-surface-dark">👤</button>
+        <button onclick="switchTab('bills')" id="nav-mob-bills" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </button>
+        <button onclick="switchTab('salary')" id="nav-mob-salary" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        </button>
+        <button onclick="switchTab('profile')" id="nav-mob-profile" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </button>
     </nav>
 
     <!-- ========================================== -->
@@ -688,10 +718,7 @@
             { name: "Unifi", amount: 129, dueDate: "2026-07-28" }
         ];
         let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
-        
-        // NEW SMART PAYROLL STORE
         let payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
-        
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
             name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", tenure: "7", skills: "Hardware Diagnostic, Maintenance, Excel Data, System Upgrades", avatar: "", cover: ""
         };
@@ -739,21 +766,35 @@
                 document.getElementById(`tab-${id}`).classList.add('hidden'); 
                 document.getElementById(`tab-${id}`).classList.remove('flex');
                 
+                // Remove Active Status (SVG CSS changes)
                 let mobBtn = document.getElementById(`nav-mob-${id}`); 
-                if(mobBtn) { mobBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
+                if(mobBtn) { 
+                    mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); 
+                    mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark'); 
+                }
                 
                 let deskBtn = document.getElementById(`nav-desk-${id}`); 
-                if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
+                if(deskBtn) { 
+                    deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-md'); 
+                    deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
+                }
             });
 
             document.getElementById(`tab-${tabId}`).classList.remove('hidden'); 
             document.getElementById(`tab-${tabId}`).classList.add('flex');
             
+            // Add Active Status (Glowing SVG effect)
             let activeMob = document.getElementById(`nav-mob-${tabId}`); 
-            if(activeMob) { activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeMob.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
+            if(activeMob) { 
+                activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); 
+                activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); 
+            }
             
             let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
-            if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); }
+            if(activeDesk) { 
+                activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); 
+                activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-md'); 
+            }
 
             const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'bills': 'Utility History', 'salary': 'Payroll & Wealth', 'profile': 'Profile Settings' };
             document.getElementById('header-title').innerText = headerTitles[tabId];
@@ -822,12 +863,8 @@
                 }
             });
 
-            // NEW: Add KWSP to Total Net Worth!
             let totalKwsp = cardData.kwsp || 0;
-            payrollHistory.forEach(p => {
-                // KWSP receives 11% from employee + 13% from employer automatically
-                totalKwsp += p.epf + (p.basic + p.bonus) * 0.13;
-            });
+            payrollHistory.forEach(p => { totalKwsp += p.epf + (p.basic + p.bonus) * 0.13; });
             
             const totalNetWealth = runningBalance + totalKwsp;
             const tnwEl = document.getElementById('total-net-worth');
@@ -1011,7 +1048,6 @@
             if(confirm('Delete this utility log?')) { utilHistory.splice(globalIndex, 1); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); }
         }
 
-        // NEW SMART PAYROLL DASHBOARD ENGINE
         function updateCareerDashboard() {
             const list = document.getElementById('payroll-history-list'); 
             if(list) list.innerHTML = '';
@@ -1058,7 +1094,6 @@
                     { type: 'line', label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 3, tension: 0.3, pointBackgroundColor: '#10B981', fill: false },
                     { type: 'line', label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointBackgroundColor: '#EF4444', fill: false }
                 ];
-                // Disable stacking for this new combo chart
                 salaryChart.options.scales.x.stacked = false;
                 salaryChart.options.scales.y.stacked = false;
                 salaryChart.update();
@@ -1168,7 +1203,6 @@
         function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
         function saveUtilHistory(e) { e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateDropdowns(); updateUtilDashboard(); closeUtilHistoryModal(); }
 
-        // NEW PAYROLL MODAL FUNCTIONS
         function openPayrollModal() { 
             const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
             document.getElementById('payroll-modal').classList.remove('hidden'); 
@@ -1184,7 +1218,7 @@
             let epfBase = basic + bonus; 
             
             let epf = epfBase * 0.11;
-            let socsoBase = Math.min(gross, 6000); // Malaysian Statutory Cap
+            let socsoBase = Math.min(gross, 6000); 
             let socso = socsoBase * 0.005; 
             let eis = socsoBase * 0.002;  
             
@@ -1213,20 +1247,14 @@
             const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             const net = (basic + allow + bonus) - (epf + socso + eis + tax);
 
-            // Overwrite if same month exists
             payrollHistory = payrollHistory.filter(p => p.month !== month); 
             payrollHistory.push({ month, basic, allowance: allow, bonus, epf, socso, eis, tax, net }); 
             localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
             
-            // Auto-Inject to main transactions ledger
             transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
 
-            updateCareerDashboard(); 
-            populateDropdowns();
-            updateHomeDashboard();
-            renderCards();
-            closePayrollModal();
+            updateCareerDashboard(); populateDropdowns(); updateHomeDashboard(); renderCards(); closePayrollModal();
             alert("Payslip Saved! Net Pay injected to Cash Flow & EPF injected to KWSP.");
         }
 
