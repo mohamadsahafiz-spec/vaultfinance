@@ -19,9 +19,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
-        /* Hidden Native Scrollbars */
+        /* Hidden Native Scrollbars for App-Like Feel */
         ::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
         .modal-enter { animation: fadeIn 0.2s ease-out forwards; }
         .tab-enter { animation: slideIn 0.2s ease-out forwards; }
@@ -55,123 +57,145 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
-    <!-- DESKTOP Sidebar -->
+    <!-- DESKTOP Sidebar (Minimalist SVG Icons) -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-10">
-            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-md">V</div>
-            <h1 class="text-xl font-black tracking-tight">Vault</h1>
+            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-[0_0_12px_rgba(255,214,0,0.5)]">V</div>
+            <h1 class="text-2xl font-black tracking-tight">Vault</h1>
         </div>
-        <nav class="flex-1 space-y-3 text-sm font-semibold flex flex-col">
-            <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-4 py-3 bg-brand text-gray-900 shadow-md rounded-xl transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <nav class="flex-1 space-y-2 text-sm font-bold flex flex-col">
+            <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-4 py-3.5 bg-brand text-gray-900 shadow-md rounded-xl transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 <span>Dashboard</span>
             </button>
-            <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-4 py-3.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                 <span>Overall Analytics</span>
             </button>
-            <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+            <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-4 py-3.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
                 <span>Food & Dining</span>
             </button>
-            <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-4 py-3.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 <span>Utilities & Bills</span>
             </button>
-            <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-4 py-3.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
                 <span>Payroll & Wealth</span>
             </button>
-            <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-4 py-3 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-4 py-3.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-xl">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span>Profile</span>
             </button>
             
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
-                <button onclick="openTxModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-md rounded-xl font-bold transition hover:brightness-105">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
-                    Add Transaction
+                <button onclick="openTxModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3.5 bg-brand text-gray-900 shadow-[0_0_15px_rgba(255,214,0,0.4)] rounded-xl font-black transition hover:scale-105">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    New Transaction
                 </button>
             </div>
         </nav>
     </aside>
 
-    <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-32 md:pb-8 scroll-smooth" id="main-scroll">
+    <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-32 md:pb-8 scroll-smooth hide-scrollbar" id="main-scroll">
         
-        <!-- Header (Theme Button Removed, Moved to Profile) -->
-        <header class="flex justify-between items-center p-5 md:p-8 shrink-0">
-            <div class="flex-1 min-w-0"><h2 id="header-title" class="text-2xl font-black tracking-tight truncate">Hi, Sahafiz</h2></div>
+        <!-- HIGHLY OPTIMIZED HEADER -->
+        <header class="flex justify-between items-end px-5 pt-8 pb-3 md:px-8 shrink-0">
+            <div class="flex-1 min-w-0 mr-4"><h2 id="header-title" class="text-3xl font-black tracking-tight truncate drop-shadow-sm">Hi, Sahafiz</h2></div>
         </header>
 
         <!-- ========================================== -->
         <!-- TAB 1: HOME DASHBOARD                      -->
         <!-- ========================================== -->
-        <div id="tab-home" class="tab-enter px-5 md:px-8 flex flex-col gap-6">
+        <div id="tab-home" class="tab-enter px-5 md:px-8 flex flex-col gap-5">
             
-            <div class="flex justify-end items-center -mt-2 mb-2">
-                <select id="home-month-filter" onchange="updateHomeDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            <div class="flex justify-between items-center mt-1">
+                <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">My Cards</p>
+                <select id="home-month-filter" onchange="updateHomeDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="col-span-1 lg:col-span-2 bg-panel-light dark:bg-panel-dark p-2 rounded-[32px] shadow-sm dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-gray-200 dark:border-white/10 relative overflow-hidden flex flex-col transition-colors duration-300">
-                    <div class="absolute inset-0 rounded-[32px] border-t border-white/50 dark:border-white/10 pointer-events-none z-40"></div>
-
-                    <!-- REBALANCED DEBIT CARD -->
-                    <div class="bg-gray-900 text-white rounded-3xl mx-2 mt-2 px-5 pt-5 pb-11 cursor-pointer hover:brightness-110 transition relative z-0 shadow-md" onclick="openCardModal()">
-                        <div class="flex justify-between items-center pr-1">
-                            <div class="flex items-center gap-2 font-bold text-[14px]"><span class="text-brand">💳</span><span>Debit Card</span></div>
-                            <div class="font-bold text-[15px] tracking-tight">MYR <span id="debit-display">0.00</span></div>
-                        </div>
+            <!-- NATIVE HORIZONTAL SWIPE CARDS -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-5 px-5 hide-scrollbar">
+                
+                <!-- DEBIT -->
+                <div class="snap-center shrink-0 w-[85vw] max-w-[320px] h-48 bg-gradient-to-br from-gray-800 to-black text-white rounded-[28px] p-6 flex flex-col justify-between cursor-pointer hover:brightness-110 transition shadow-xl relative overflow-hidden" onclick="openCardModal()">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
+                    <div class="absolute bottom-0 right-0 w-24 h-24 bg-brand/10 rounded-tl-full blur-xl"></div>
+                    <div class="flex justify-between items-start relative z-10">
+                        <div class="flex items-center gap-2 font-bold text-sm"><span class="text-brand text-lg">💳</span><span>Debit Card</span></div>
                     </div>
-
-                    <!-- REBALANCED CREDIT CARD -->
-                    <div class="bg-brand text-gray-900 rounded-3xl mx-2 px-5 pt-5 pb-11 relative z-10 shadow-[0_-8px_15px_rgba(0,0,0,0.1)] border border-black/5 -mt-6 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
-                        <div class="flex justify-between items-center pr-1">
-                            <div class="flex items-center gap-2 font-bold text-[14px]"><span>💳</span><span>Credit Card</span><span class="text-[10px] font-black bg-black/10 text-gray-900 px-2 py-0.5 rounded-full ml-1"><span id="credit-pct">0</span>% Used</span></div>
-                            <div class="font-bold text-[14px] tracking-tight text-right">MYR <span id="credit-display">0.00</span> <span class="text-[11px] font-bold opacity-60">/ 10,000</span></div>
-                        </div>
-                    </div>
-
-                    <!-- REBALANCED KWSP CARD -->
-                    <div class="bg-[#10B981] text-white rounded-3xl mx-2 px-5 pt-5 pb-6 relative z-20 shadow-[0_-8px_15px_rgba(0,0,0,0.1)] border border-black/5 dark:border-white/10 -mt-6 cursor-pointer hover:brightness-105 transition" onclick="openCardModal()">
-                        <div class="flex justify-between items-center pr-1">
-                            <div class="flex items-center gap-2 font-bold text-[14px]"><span>🏦</span><span>KWSP (EPF)</span></div>
-                            <div class="font-bold text-[14px] tracking-tight text-right">MYR <span id="kwsp-display">0.00</span></div>
-                        </div>
-                    </div>
-
-                    <div class="px-5 pt-5 pb-4 relative z-30 mt-1">
-                        <p class="text-textMuted-light dark:text-textMuted-dark text-[11px] font-bold tracking-wide uppercase">Historical Net Worth (Cash + EPF)</p>
-                        <h3 class="text-2xl md:text-3xl font-black mt-0.5 tracking-tight">MYR <span id="total-net-worth">0.00</span></h3>
-                        <div class="mt-3 flex items-center gap-2">
-                            <p class="text-[11px] font-bold text-textMuted-light dark:text-textMuted-dark">Cash Flow (Sel Month):</p>
-                            <p id="sel-month-balance" class="text-sm font-bold tracking-tight">MYR 0.00</p>
-                        </div>
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Available Balance</p>
+                        <div class="font-black text-3xl tracking-tight">MYR <span id="debit-display">0.00</span></div>
                     </div>
                 </div>
 
-                <div class="space-y-6">
-                    <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="text-textMuted-light dark:text-textMuted-dark text-xs font-bold tracking-wide uppercase">Emergency Fund</p>
-                            <button onclick="openSavingsModal()" class="text-textMuted-light dark:text-textMuted-dark hover:text-brand transition p-1.5 rounded-full" title="Set Target">🎯</button>
+                <!-- CREDIT -->
+                <div class="snap-center shrink-0 w-[85vw] max-w-[320px] h-48 bg-gradient-to-br from-[#FFD600] to-[#F59E0B] text-gray-900 rounded-[28px] p-6 flex flex-col justify-between cursor-pointer hover:brightness-105 transition shadow-[0_10px_25px_rgba(255,214,0,0.25)] relative overflow-hidden" onclick="openCardModal()">
+                    <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-white/30 rounded-full blur-3xl"></div>
+                    <div class="flex justify-between items-start relative z-10">
+                        <div class="flex items-center gap-2 font-bold text-sm"><span>💳</span><span>Credit Card</span></div>
+                        <span class="text-[10px] font-black bg-black/10 text-gray-900 px-2.5 py-1 rounded-full"><span id="credit-pct">0</span>% Used</span>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-black text-gray-800/60 uppercase tracking-widest mb-1">Limit: 10,000</p>
+                        <div class="font-black text-3xl tracking-tight">MYR <span id="credit-display">0.00</span></div>
+                    </div>
+                </div>
+
+                <!-- KWSP -->
+                <div class="snap-center shrink-0 w-[85vw] max-w-[320px] h-48 bg-gradient-to-br from-[#10B981] to-[#059669] text-white rounded-[28px] p-6 flex flex-col justify-between cursor-pointer hover:brightness-105 transition shadow-[0_10px_25px_rgba(16,185,129,0.3)] relative overflow-hidden" onclick="openCardModal()">
+                    <div class="absolute -right-8 -bottom-8 w-36 h-36 bg-white/20 rounded-full blur-2xl"></div>
+                    <div class="flex justify-between items-start relative z-10">
+                        <div class="flex items-center gap-2 font-bold text-sm"><span>🏦</span><span>KWSP (EPF)</span></div>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-bold text-green-100 uppercase tracking-widest mb-1">Retirement Fund</p>
+                        <div class="font-black text-3xl tracking-tight">MYR <span id="kwsp-display">0.00</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-1">
+                
+                <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-sm dark:shadow-none border border-gray-200 dark:border-white/5 flex flex-col transition-colors duration-300">
+                    <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-bold tracking-widest uppercase">Historical Net Worth (Cash + EPF)</p>
+                    <h3 class="text-3xl md:text-4xl font-black mt-1 tracking-tight drop-shadow-sm">MYR <span id="total-net-worth">0.00</span></h3>
+                    <div class="mt-5 flex justify-between items-center bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl border border-gray-100 dark:border-transparent">
+                        <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Cash Flow (Sel Month)</p>
+                        <p id="sel-month-balance" class="text-sm font-black tracking-tight">MYR 0.00</p>
+                    </div>
+                </div>
+
+                <div class="space-y-5">
+                    <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-bold tracking-widest uppercase">Emergency Fund</p>
+                            <!-- GLOWING + ACTION ICON -->
+                            <button onclick="openSavingsModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0" title="Set Target">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                            </button>
                         </div>
-                        <div class="mt-2">
-                            <h4 class="text-2xl font-black">MYR <span id="current-savings">0</span></h4>
-                            <p class="text-xs text-textMuted-light dark:text-textMuted-dark font-semibold mt-0.5">Target: MYR <span id="target-savings">0</span></p>
+                        <div class="mt-1">
+                            <h4 class="text-3xl font-black tracking-tight">MYR <span id="current-savings">0</span></h4>
+                            <p class="text-[10px] text-textMuted-light dark:text-textMuted-dark font-bold uppercase tracking-widest mt-1.5">Target: MYR <span id="target-savings">0</span></p>
                         </div>
-                        <div class="w-full bg-surface-light dark:bg-surface-dark h-4 rounded-full mt-5 p-1 border border-gray-100 dark:border-white/5">
-                            <div id="savings-progress" class="bg-brand h-full rounded-full shadow-[0_0_8px_rgba(255,214,0,0.4)] transition-all duration-1000 ease-out" style="width: 0%;"></div>
+                        <div class="w-full bg-surface-light dark:bg-surface-dark h-3 rounded-full mt-6 p-0.5 border border-gray-100 dark:border-white/5 overflow-hidden">
+                            <div id="savings-progress" class="bg-brand h-full rounded-full shadow-[0_0_8px_rgba(255,214,0,0.8)] transition-all duration-1000 ease-out" style="width: 0%;"></div>
                         </div>
                     </div>
                     
-                    <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
-                        <div class="flex justify-between items-center mb-4">
+                    <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
+                        <div class="flex justify-between items-center mb-5">
                             <div class="flex items-center gap-3">
                                 <h4 class="font-black text-xl text-red-600 dark:text-red-500 uppercase tracking-widest drop-shadow-sm">DEBT</h4>
-                                <span id="total-debt-display" class="text-xs font-black text-white bg-red-600 dark:bg-red-600 px-3 py-1 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.5)] hidden"></span>
+                                <span id="total-debt-display" class="text-[10px] font-black text-white bg-red-600 dark:bg-red-600 px-3 py-1 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.5)] hidden"></span>
                             </div>
-                            <button onclick="openDebtModal()" class="text-brand text-xs font-bold hover:underline transition">+ Add</button>
+                            <!-- GLOWING + ACTION ICON -->
+                            <button onclick="openDebtModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            </button>
                         </div>
                         <div id="debt-list" class="space-y-3 flex-1"></div>
                     </div>
@@ -182,61 +206,62 @@
         <!-- ========================================== -->
         <!-- TAB 2: OVERALL ANALYTICS                   -->
         <!-- ========================================== -->
-        <div id="tab-overall" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+        <div id="tab-overall" class="tab-enter px-5 md:px-8 hidden flex-col gap-5">
             
-            <div class="flex justify-end items-center -mt-2 mb-2">
-                <select id="overall-month-filter" onchange="updateOverallDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            <div class="flex justify-between items-center mt-1">
+                <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Analytics</p>
+                <select id="overall-month-filter" onchange="updateOverallDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h3 class="text-3xl font-black mb-0.5 tracking-tight">MYR <span id="monthly-spend">0.00</span></h3>
-                <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-6">Total Spendings for Selection</p>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-1">Total Spent</p>
+                <h3 class="text-3xl md:text-4xl font-black mb-6 tracking-tight drop-shadow-sm">MYR <span id="monthly-spend">0.00</span></h3>
 
                 <div class="flex h-3 rounded-full overflow-hidden mb-5 w-full bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-transparent">
-                    <div id="bar-food" class="bg-brand h-full transition-all duration-1000" style="width: 0%"></div>
-                    <div id="bar-util" class="bg-gray-400 dark:bg-gray-600 h-full transition-all duration-1000" style="width: 0%"></div>
-                    <div id="bar-other" class="bg-gray-900 dark:bg-white h-full transition-all duration-1000" style="width: 0%"></div>
+                    <div id="bar-food" class="bg-brand h-full transition-all duration-1000 shadow-[0_0_8px_rgba(255,214,0,0.8)]" style="width: 0%"></div>
+                    <div id="bar-util" class="bg-blue-500 h-full transition-all duration-1000 shadow-[0_0_8px_rgba(59,130,246,0.8)]" style="width: 0%"></div>
+                    <div id="bar-other" class="bg-gray-400 dark:bg-gray-600 h-full transition-all duration-1000" style="width: 0%"></div>
                 </div>
                 
                 <div class="grid grid-cols-3 gap-2">
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-brand border border-transparent transition" onclick="switchTab('food')">
-                        <div class="text-brand text-base mb-1">🍔</div>
+                        <div class="text-brand text-base mb-1 drop-shadow-md">🍔</div>
                         <p class="font-black text-sm leading-none mb-1"><span id="pct-food">0</span>%</p>
-                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-food">0.00</span></p>
-                        <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Food</p>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1.5">MYR <span id="val-food">0.00</span></p>
+                        <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-widest">Food</p>
                     </div>
-                    <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-600 border border-transparent transition" onclick="switchTab('bills')">
-                        <div class="text-gray-500 dark:text-gray-400 text-base mb-1">⚡</div>
+                    <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-blue-500 border border-transparent transition" onclick="switchTab('bills')">
+                        <div class="text-blue-500 text-base mb-1 drop-shadow-md">⚡</div>
                         <p class="font-black text-sm leading-none mb-1"><span id="pct-util">0</span>%</p>
-                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-util">0.00</span></p>
-                        <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Utilities</p>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1.5">MYR <span id="val-util">0.00</span></p>
+                        <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-widest">Utilities</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-900 dark:hover:border-white border border-transparent transition" onclick="openCategoryModal('other')">
-                        <div class="text-gray-900 dark:text-white text-base mb-1">📦</div>
+                        <div class="text-gray-900 dark:text-white text-base mb-1 drop-shadow-md">📦</div>
                         <p class="font-black text-sm leading-none mb-1"><span id="pct-other">0</span>%</p>
-                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-other">0.00</span></p>
-                        <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Other</p>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1.5">MYR <span id="val-other">0.00</span></p>
+                        <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-widest">Other</p>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <div class="flex justify-between items-end mb-5">
                     <div>
-                        <h4 class="font-bold text-sm">Annual Spending Trend</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected Year vs Previous Year</p>
+                        <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-1">Annual Spending Trend</p>
+                        <h4 class="font-black text-base">Selected vs Previous</h4>
                     </div>
-                    <div class="flex items-center gap-3 text-[10px] font-bold">
-                        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brand"></span> Selected</div>
-                        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-gray-400"></span> Previous</div>
+                    <div class="flex items-center gap-3 text-[10px] font-bold bg-surface-light dark:bg-surface-dark px-3 py-1.5 rounded-full border border-gray-200 dark:border-transparent">
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand shadow-[0_0_5px_rgba(255,214,0,0.8)]"></span> Sel</div>
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-400"></span> Prev</div>
                     </div>
                 </div>
-                <!-- ADDED GLOW STYLE via drop-shadow -->
-                <div class="w-full h-48 relative drop-shadow-[0_4px_8px_rgba(255,214,0,0.3)]"><canvas id="comparisonChart"></canvas></div>
+                <!-- GLOWING GRAPH -->
+                <div class="w-full h-48 relative drop-shadow-[0_6px_10px_rgba(255,214,0,0.35)]"><canvas id="comparisonChart"></canvas></div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Ledger (Selected Month)</h4>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-5">Ledger (Selected Month)</p>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse"><tbody id="overall-transaction-list" class="text-sm"></tbody></table>
                 </div>
@@ -246,27 +271,25 @@
         <!-- ========================================== -->
         <!-- TAB 3: FOOD & DINING                       -->
         <!-- ========================================== -->
-        <div id="tab-food" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+        <div id="tab-food" class="tab-enter px-5 md:px-8 hidden flex-col gap-5">
             
-            <div class="flex justify-end items-center -mt-2 mb-2">
-                <select id="food-month-filter" onchange="updateFoodDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            <div class="flex justify-between items-center mt-1">
+                <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Food Insight</p>
+                <select id="food-month-filter" onchange="updateFoodDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
                 <div class="flex justify-between items-end mb-4">
-                    <div>
-                        <h4 class="font-bold text-sm">Annual Spending Trend</h4>
-                        <p class="text-textMuted-light dark:text-textMuted-dark font-semibold text-[11px] mt-0.5">Selected Year vs Previous Year</p>
-                    </div>
+                    <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Monthly Footprint</p>
                 </div>
-                <h3 class="text-3xl font-black tracking-tight mb-4">MYR <span id="food-total-display">0.00</span></h3>
-                <div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
-                <!-- ADDED GLOW STYLE via drop-shadow -->
-                <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5 drop-shadow-[0_4px_6px_rgba(255,214,0,0.2)]"><canvas id="foodChart"></canvas></div>
+                <h3 class="text-3xl md:text-4xl font-black tracking-tight mb-5 drop-shadow-sm">MYR <span id="food-total-display">0.00</span></h3>
+                <div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-3.5 rounded-2xl mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-100 dark:border-transparent"></div>
+                <!-- GLOWING GRAPH -->
+                <div class="w-full h-48 relative drop-shadow-[0_6px_10px_rgba(255,214,0,0.35)]"><canvas id="foodChart"></canvas></div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Food Ledger (Selected Month)</h4>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-5">Food Ledger</p>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse"><tbody id="food-transaction-list" class="text-sm"></tbody></table>
                 </div>
@@ -276,34 +299,38 @@
         <!-- ========================================== -->
         <!-- TAB 4: UTILITIES & BILLS                   -->
         <!-- ========================================== -->
-        <div id="tab-bills" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+        <div id="tab-bills" class="tab-enter px-5 md:px-8 hidden flex-col gap-5">
             
-            <div class="flex justify-end items-center -mt-2 mb-2">
-                <select id="util-year-filter" onchange="updateUtilDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs md:text-sm px-3 py-2 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
+            <div class="flex justify-between items-center mt-1">
+                <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Utilities</p>
+                <select id="util-year-filter" onchange="updateUtilDashboard()" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-xs px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand shadow-sm cursor-pointer"></select>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <div class="flex justify-between items-end mb-5">
-                    <div>
-                        <h4 class="font-bold text-sm">Monthly Breakdown</h4>
-                        <p class="text-textMuted-light font-semibold text-[11px] mt-0.5">Selected Year Pacing</p>
-                    </div>
-                    <button onclick="openUtilHistoryModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Past Bill</button>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <div class="flex justify-between items-center mb-6">
+                    <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Yearly Pacing</p>
+                    <!-- GLOWING + ACTION ICON -->
+                    <button onclick="openUtilHistoryModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center font-bold shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0" title="Log Past Bill">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
                 </div>
-                <div class="w-full h-56 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-100 dark:border-white/5"><canvas id="utilChart"></canvas></div>
+                <div class="w-full h-56 relative"><canvas id="utilChart"></canvas></div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Historical Ledger (Selected Year)</h4>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-5">Historical Ledger</p>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse"><tbody id="util-history-list" class="text-sm"></tbody></table>
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-5 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-6 rounded-3xl shadow-sm dark:shadow-none flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-5">
-                    <h4 class="font-bold text-sm text-brand">Upcoming Reminders</h4>
-                    <button onclick="openBillModal()" class="text-xs font-bold text-brand hover:underline transition">+ Add Reminder</button>
+                    <h4 class="font-black text-sm text-brand tracking-wide">UPCOMING REMINDERS</h4>
+                    <!-- GLOWING + ACTION ICON -->
+                    <button onclick="openBillModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
                 </div>
                 <div id="bill-list" class="space-y-3 flex-1 overflow-y-auto max-h-[400px] pr-1"></div>
             </div>
@@ -312,24 +339,25 @@
         <!-- ========================================== -->
         <!-- TAB 5: PAYROLL & WEALTH                    -->
         <!-- ========================================== -->
-        <div id="tab-salary" class="tab-enter px-5 md:px-8 hidden flex-col gap-6">
+        <div id="tab-salary" class="tab-enter px-5 md:px-8 hidden flex-col gap-5">
             
-            <div class="flex justify-end items-center -mt-2 mb-2">
-                <button onclick="openPayrollModal()" class="bg-brand text-gray-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:brightness-105 transition">+ Log Payslip</button>
+            <div class="flex justify-between items-center mt-1">
+                <p class="text-xs font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Income Tracker</p>
+                <!-- GLOWING + ACTION ICON -->
+                <button onclick="openPayrollModal()" class="w-8 h-8 rounded-full bg-brand text-gray-900 flex items-center justify-center font-bold shadow-[0_0_12px_rgba(255,214,0,0.7)] hover:scale-110 transition-transform shrink-0" title="Log Payslip">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <div class="flex justify-between items-end mb-4">
-                    <div>
-                        <h4 class="font-bold text-sm">Income Trajectory</h4>
-                        <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Gross vs Net Pay vs Deductions</p>
-                    </div>
-                </div>
-                <div class="w-full h-64 relative"><canvas id="salaryChart"></canvas></div>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-1">Gross vs Net vs Deductions</p>
+                <h4 class="font-black text-base mb-6">Income Trajectory</h4>
+                <!-- GLOWING GRAPH FOR NET PAY LINE -->
+                <div class="w-full h-64 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.3)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
-                <h4 class="font-bold text-sm mb-5">Payslip Ledger</h4>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300 flex flex-col">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-5">Payslip Ledger</p>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse"><tbody id="payroll-history-list" class="text-sm"></tbody></table>
                 </div>
@@ -339,124 +367,123 @@
         <!-- ========================================== -->
         <!-- TAB 6: PROFILE                             -->
         <!-- ========================================== -->
-        <div id="tab-profile" class="tab-enter px-5 md:px-8 hidden flex-col gap-6 pb-20">
+        <div id="tab-profile" class="tab-enter px-5 md:px-8 hidden flex-col gap-5 pb-20">
             
-            <div class="relative bg-panel-light dark:bg-panel-dark rounded-3xl overflow-hidden shadow-sm dark:shadow-none border border-gray-200 dark:border-white/5 transition-colors duration-300">
-                <div class="h-32 bg-gradient-to-r from-gray-700 to-brand relative">
-                    <button onclick="document.getElementById('cover-upload').click()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition text-xs shadow-md">✏️</button>
+            <div class="relative bg-panel-light dark:bg-panel-dark rounded-[32px] overflow-hidden shadow-sm dark:shadow-none border border-gray-200 dark:border-white/5 transition-colors duration-300 mt-1">
+                <div class="h-36 bg-gradient-to-br from-gray-800 to-black relative">
+                    <button onclick="document.getElementById('cover-upload').click()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/20 backdrop-blur text-white flex items-center justify-center hover:bg-white/30 transition text-xs shadow-md">✏️</button>
                     <input type="file" id="cover-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'cover')">
                     <img id="profile-cover-img" src="" class="w-full h-full object-cover hidden">
                 </div>
                 
-                <div class="absolute top-16 left-6 z-10">
-                    <div class="w-24 h-24 rounded-full border-[4px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-lg transition-colors duration-300" onclick="document.getElementById('avatar-upload').click()">
+                <div class="absolute top-20 left-6 z-10">
+                    <div class="w-24 h-24 rounded-full border-[4px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-xl transition-colors duration-300" onclick="document.getElementById('avatar-upload').click()">
                         <img id="profile-avatar-img" src="" class="w-full h-full object-cover hidden">
-                        <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-400" id="profile-avatar-initial"></div>
-                        <div class="absolute inset-0 bg-black/40 hidden group-hover:flex items-center justify-center text-white text-xs font-bold transition">Edit</div>
+                        <div class="absolute inset-0 flex items-center justify-center text-3xl font-black text-gray-400" id="profile-avatar-initial"></div>
+                        <div class="absolute inset-0 bg-black/50 hidden group-hover:flex items-center justify-center text-white text-xs font-bold transition backdrop-blur-sm">Edit</div>
                     </div>
                     <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'avatar')">
                 </div>
                 
-                <div class="pt-12 px-6 pb-6">
-                    <h3 class="text-2xl font-black" id="li-name">Name</h3>
-                    <p class="text-sm font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5" id="li-role">Role • Industry</p>
-                    <p class="text-xs text-textMuted-light dark:text-textMuted-dark mt-1" id="li-location">Location</p>
-                    <div class="mt-5 flex flex-wrap gap-2" id="li-skills"></div>
+                <div class="pt-14 px-7 pb-7">
+                    <h3 class="text-3xl font-black tracking-tight" id="li-name">Name</h3>
+                    <p class="text-sm font-semibold text-textMuted-light dark:text-textMuted-dark mt-1" id="li-role">Role • Industry</p>
+                    <p class="text-xs text-textMuted-light dark:text-textMuted-dark mt-1.5" id="li-location">Location</p>
+                    <div class="mt-6 flex flex-wrap gap-2" id="li-skills"></div>
                 </div>
             </div>
 
-            <!-- NEW: THEME SETTINGS MOVED HERE -->
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-4">App Settings</h4>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-[32px] shadow-sm dark:shadow-none transition-colors duration-300">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-4">App Settings</p>
                 <div class="flex justify-between items-center bg-surface-light dark:bg-surface-dark p-4 rounded-2xl border border-gray-200 dark:border-transparent transition-colors duration-300">
                     <div>
                         <p class="font-bold text-sm">Appearance Mode</p>
-                        <p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Toggle light and dark theme</p>
+                        <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Toggle light and dark theme</p>
                     </div>
                     <button onclick="toggleTheme()" class="w-12 h-12 rounded-full bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/10 flex items-center justify-center shadow-md text-xl transition hover:scale-105 shrink-0" id="theme-icon">🌙</button>
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-4">Edit Profile Information</h4>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-[32px] shadow-sm dark:shadow-none transition-colors duration-300">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-5">Edit Profile</p>
                 <form id="profile-form" onsubmit="saveProfile(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Full Name</label>
-                        <input type="text" id="prof-name" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Full Name</label>
+                        <input type="text" id="prof-name" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Job Title</label>
-                            <input type="text" id="prof-role" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Job Title</label>
+                            <input type="text" id="prof-role" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Industry</label>
-                            <input type="text" id="prof-industry" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Industry</label>
+                            <input type="text" id="prof-industry" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Location</label>
-                            <input type="text" id="prof-address" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Location</label>
+                            <input type="text" id="prof-address" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Tenure (Years)</label>
-                            <input type="number" id="prof-tenure" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Tenure (Yrs)</label>
+                            <input type="number" id="prof-tenure" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Core Skills (Comma separated)</label>
-                        <input type="text" id="prof-skills" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-semibold text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300" placeholder="e.g. Troubleshooting, Analytics, Leadership">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-wider">Skills</label>
+                        <input type="text" id="prof-skills" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300" placeholder="e.g. Troubleshooting, Analytics">
                     </div>
-                    <button type="submit" class="w-full bg-brand text-gray-900 px-4 py-3 rounded-xl font-bold text-sm shadow-md mt-2 hover:brightness-105 transition">Save Profile</button>
+                    <button type="submit" class="w-full bg-brand text-gray-900 px-4 py-3.5 rounded-2xl font-black text-sm shadow-md mt-2 hover:scale-[1.02] transition-transform">Save Profile</button>
                 </form>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-3xl shadow-sm dark:shadow-none transition-colors duration-300">
-                <h4 class="font-bold text-sm mb-4">Data Management</h4>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-6 rounded-[32px] shadow-sm dark:shadow-none transition-colors duration-300">
+                <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-5">Data Management</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-4 py-3 rounded-xl shadow-md transition hover:brightness-105">📦 Export Sync Backup</button>
+                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-4 py-3.5 rounded-2xl shadow-md transition hover:scale-[1.02]">📦 Export Backup</button>
                     <div>
                         <input type="file" id="json-file-input" accept=".json" class="hidden">
-                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">📥 Import Sync Backup</button>
+                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent transition hover:text-brand">📥 Import Backup</button>
                     </div>
                     <div>
                         <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">⬆ Import CSV Ledger</button>
+                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent transition hover:text-brand">⬆ Import CSV</button>
                     </div>
-                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-bold px-4 py-3 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
+                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-bold px-4 py-3.5 rounded-2xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <!-- MOBILE FAB NAVIGATION (Upgraded to Minimalist Glowing SVGs) -->
-    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[95%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-full flex justify-between items-center px-4 py-3 shadow-xl z-[90] transition-colors duration-300">
+    <!-- MINIMALIST GLOWING SVG BOTTOM NAV -->
+    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-3xl flex justify-between items-center px-4 py-3 shadow-2xl z-[90] transition-colors duration-300">
         <button onclick="switchTab('home')" id="nav-mob-home" class="p-2 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         </button>
         <button onclick="switchTab('overall')" id="nav-mob-overall" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
         </button>
         <button onclick="switchTab('food')" id="nav-mob-food" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
         </button>
         
-        <div class="relative w-14 h-14 flex justify-center items-center shrink-0 -mt-8">
-            <button onclick="openTxModal()" class="absolute w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_16px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
+        <div class="relative w-14 h-14 flex justify-center items-center shrink-0 -mt-10">
+            <button onclick="openTxModal()" class="absolute w-14 h-14 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_8px_20px_rgba(255,214,0,0.5)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
+                <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
             </button>
         </div>
 
         <button onclick="switchTab('bills')" id="nav-mob-bills" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
         </button>
         <button onclick="switchTab('salary')" id="nav-mob-salary" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
         </button>
         <button onclick="switchTab('profile')" id="nav-mob-profile" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </button>
     </nav>
 
@@ -466,166 +493,166 @@
 
     <!-- Update Accounts Modal -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold mb-5">Update Accounts</h3>
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-2xl font-black tracking-tight mb-5">Update Accounts</h3>
             <form onsubmit="saveCards(event)" class="space-y-4">
                 <div>
-                    <label class="block text-[11px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Debit Card</label>
-                    <input type="number" id="card-debit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-widest">Debit Card</label>
+                    <input type="number" id="card-debit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold text-brand mb-1 uppercase tracking-wider">Credit Card</label>
-                    <input type="number" id="card-credit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-brand mb-1.5 uppercase tracking-widest">Credit Card</label>
+                    <input type="number" id="card-credit-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold text-green-500 mb-1 uppercase tracking-wider">Starting KWSP Balance</label>
-                    <input type="number" id="card-kwsp-input" step="0.01" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-3 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-green-500 transition">
+                    <label class="block text-[10px] font-bold text-green-500 mb-1.5 uppercase tracking-widest">Starting KWSP Balance</label>
+                    <input type="number" id="card-kwsp-input" step="0.01" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-green-500 transition">
                 </div>
                 <div class="flex gap-3 pt-3">
-                    <button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl font-bold transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md hover:brightness-105 transition">Save</button>
+                    <button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-3.5 rounded-2xl font-bold transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-3.5 rounded-2xl font-black shadow-md hover:scale-[1.02] transition-transform">Save</button>
                 </div>
             </form>
         </div>
     </div>
     
     <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold mb-5">Add Transaction</h3>
-            <form id="tx-form" onsubmit="saveTransaction(event)" class="space-y-3">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-2xl font-black tracking-tight mb-5">Add Transaction</h3>
+            <form id="tx-form" onsubmit="saveTransaction(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Description</label>
-                    <input type="text" id="tx-desc" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Description</label>
+                    <input type="text" id="tx-desc" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label>
-                        <input type="number" id="tx-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Amount</label>
+                        <input type="number" id="tx-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Date</label>
-                        <input type="date" id="tx-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Date</label>
+                        <input type="date" id="tx-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Type</label>
-                        <select id="tx-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Type</label>
+                        <select id="tx-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                             <option value="expense">Expense</option>
                             <option value="income">Income</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Category</label>
-                        <input type="text" id="tx-category" required placeholder="Food, Utility..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Category</label>
+                        <input type="text" id="tx-category" required placeholder="Food, Utility..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold text-sm px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                 </div>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-2.5 rounded-xl font-bold transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-2.5 rounded-xl font-bold shadow-md hover:brightness-105 transition">Save</button>
+                <div class="flex gap-3 pt-3">
+                    <button type="button" onclick="closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-sm px-4 py-3.5 rounded-2xl font-bold transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-sm px-4 py-3.5 rounded-2xl font-black shadow-md hover:scale-[1.02] transition-transform">Save</button>
                 </div>
             </form>
         </div>
     </div>
     
     <div id="savings-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold mb-5">Update Target</h3>
-            <form onsubmit="saveSavings(event)" class="space-y-3">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-2xl font-black tracking-tight mb-5">Update Target</h3>
+            <form onsubmit="saveSavings(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Current Saved</label>
-                    <input type="number" id="savings-current-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Current Saved</label>
+                    <input type="number" id="savings-current-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Target</label>
-                    <input type="number" id="savings-target-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Target</label>
+                    <input type="number" id="savings-target-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="closeSavingsModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save</button>
+                <div class="flex gap-3 pt-3">
+                    <button type="button" onclick="closeSavingsModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-2xl font-bold py-3.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-2xl font-black py-3.5 shadow-md hover:scale-[1.02] transition-transform">Save</button>
                 </div>
             </form>
         </div>
     </div>
     
     <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold mb-5">Add Debt</h3>
-            <form id="debt-form" onsubmit="saveDebt(event)" class="space-y-3">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-2xl font-black tracking-tight mb-5">Add Debt</h3>
+            <form id="debt-form" onsubmit="saveDebt(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Debt Name</label>
-                    <input type="text" id="debt-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Debt Name</label>
+                    <input type="text" id="debt-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Balance</label>
-                        <input type="number" id="debt-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Balance</label>
+                        <input type="number" id="debt-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Min Payment</label>
-                        <input type="number" id="debt-min" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Min Payment</label>
+                        <input type="number" id="debt-min" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                 </div>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="closeDebtModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Add</button>
+                <div class="flex gap-3 pt-3">
+                    <button type="button" onclick="closeDebtModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-2xl font-bold py-3.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-2xl font-black py-3.5 shadow-md hover:scale-[1.02] transition-transform">Add</button>
                 </div>
             </form>
         </div>
     </div>
 
     <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold mb-5">Add Reminder</h3>
-            <form id="bill-form" onsubmit="saveBill(event)" class="space-y-3">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-2xl font-black tracking-tight mb-5">Add Reminder</h3>
+            <form id="bill-form" onsubmit="saveBill(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Bill Name</label>
-                    <input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Bill Name</label>
+                    <input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label>
-                        <input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Amount</label>
+                        <input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Due Date</label>
-                        <input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Due Date</label>
+                        <input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                 </div>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Add</button>
+                <div class="flex gap-3 pt-3">
+                    <button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-2xl font-bold py-3.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-2xl font-black py-3.5 shadow-md hover:scale-[1.02] transition-transform">Add</button>
                 </div>
             </form>
         </div>
     </div>
 
     <div id="category-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
             <div class="flex justify-between items-start mb-4">
                 <div>
-                    <h3 class="text-xl font-bold">Category Graph</h3>
-                    <p class="text-xs font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5">Daily Breakdown</p>
+                    <h3 class="text-2xl font-black tracking-tight">Category Graph</h3>
+                    <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mt-1 uppercase tracking-widest">Daily Breakdown</p>
                 </div>
                 <button onclick="closeCategoryModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:bg-red-500 hover:text-white transition font-bold text-sm">✕</button>
             </div>
-            <div id="category-modal-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-200 dark:border-transparent"></div>
+            <div id="category-modal-insight" class="bg-surface-light dark:bg-surface-dark p-4 rounded-2xl mb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-200 dark:border-transparent"></div>
             <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-2xl p-3 border border-gray-200 dark:border-transparent"><canvas id="categoryChart"></canvas></div>
         </div>
     </div>
 
     <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold mb-5">Log Past Utility Bill</h3>
-            <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-2xl font-black tracking-tight mb-5">Log Past Bill</h3>
+            <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Month Paid</label>
-                    <input type="month" id="util-hist-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Month Paid</label>
+                    <input type="month" id="util-hist-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Bill Type</label>
-                        <select id="util-hist-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Bill Type</label>
+                        <select id="util-hist-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                             <option value="Electricity">Electricity (TNB)</option>
                             <option value="Water">Water</option>
                             <option value="Internet">Internet/Wifi</option>
@@ -634,78 +661,77 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Amount</label>
-                        <input type="number" id="util-hist-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Amount</label>
+                        <input type="number" id="util-hist-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                 </div>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save Log</button>
+                <div class="flex gap-3 pt-3">
+                    <button type="button" onclick="closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-2xl font-bold py-3.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-2xl font-black py-3.5 shadow-md hover:scale-[1.02] transition-transform">Save Log</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- NEW SMART PAYROLL ENGINE MODAL -->
     <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh]">
-            <h3 class="text-xl font-bold mb-1">Smart Payroll Engine</h3>
-            <p class="text-[11px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-4">Auto-calculates EPF, SOCSO & EIS</p>
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh] hide-scrollbar">
+            <h3 class="text-2xl font-black tracking-tight mb-1">Smart Payroll</h3>
+            <p class="text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mb-5">Auto-calculates EPF & SOCSO</p>
             
             <form id="payroll-form" onsubmit="savePayrollRecord(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1">Payslip Month</label>
-                    <input type="month" id="pay-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark px-4 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 pl-1 uppercase tracking-widest">Payslip Month</label>
+                    <input type="month" id="pay-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-bold px-4 py-3.5 rounded-2xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
                 
-                <div class="p-3 bg-surface-light dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-white/5">
-                    <h4 class="text-xs font-bold mb-3 text-brand">Gross Earnings</h4>
+                <div class="p-4 bg-surface-light dark:bg-surface-dark rounded-3xl border border-gray-200 dark:border-white/5">
+                    <h4 class="text-[10px] font-black uppercase tracking-widest mb-4 text-brand">Gross Earnings</h4>
                     <div class="space-y-3">
                         <div class="flex items-center gap-2">
-                            <label class="w-24 text-xs font-bold text-textMuted-light dark:text-textMuted-dark">Basic Salary</label>
-                            <input type="number" id="pay-basic" step="0.01" oninput="autoCalcPayroll()" required class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm">
+                            <label class="w-24 text-[11px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Basic Salary</label>
+                            <input type="number" id="pay-basic" step="0.01" oninput="autoCalcPayroll()" required class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-bold px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm transition">
                         </div>
                         <div class="flex items-center gap-2">
-                            <label class="w-24 text-xs font-bold text-textMuted-light dark:text-textMuted-dark">Fixed Allow.</label>
-                            <input type="number" id="pay-allow" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm">
+                            <label class="w-24 text-[11px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Allowance</label>
+                            <input type="number" id="pay-allow" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-bold px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm transition">
                         </div>
                         <div class="flex items-center gap-2">
-                            <label class="w-24 text-xs font-bold text-textMuted-light dark:text-textMuted-dark">Bonus</label>
-                            <input type="number" id="pay-bonus" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm">
+                            <label class="w-24 text-[11px] font-bold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Bonus</label>
+                            <input type="number" id="pay-bonus" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-bold px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-sm transition">
                         </div>
                     </div>
                 </div>
 
-                <div class="p-3 bg-red-50 dark:bg-red-900/10 rounded-2xl border border-red-100 dark:border-red-900/30">
-                    <h4 class="text-xs font-bold mb-3 text-red-500">Statutory Deductions</h4>
+                <div class="p-4 bg-red-50 dark:bg-red-900/10 rounded-3xl border border-red-100 dark:border-red-900/30">
+                    <h4 class="text-[10px] font-black uppercase tracking-widest mb-4 text-red-500">Statutory Deductions</h4>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">EPF (11%)</label>
-                            <input type="number" id="pay-epf" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 uppercase tracking-wide">EPF (11%)</label>
+                            <input type="number" id="pay-epf" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm transition">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">Tax (PCB)</label>
-                            <input type="number" id="pay-tax" step="0.01" value="0" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 uppercase tracking-wide">Tax (PCB)</label>
+                            <input type="number" id="pay-tax" step="0.01" value="0" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm transition">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">SOCSO (~0.5%)</label>
-                            <input type="number" id="pay-socso" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 uppercase tracking-wide">SOCSO (~0.5%)</label>
+                            <input type="number" id="pay-socso" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm transition">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1">EIS (~0.2%)</label>
-                            <input type="number" id="pay-eis" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm">
+                            <label class="block text-[10px] font-bold text-textMuted-light dark:text-textMuted-dark mb-1.5 uppercase tracking-wide">EIS (~0.2%)</label>
+                            <input type="number" id="pay-eis" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-sm transition">
                         </div>
                     </div>
                 </div>
 
-                <div class="flex justify-between items-center px-2 pt-2 border-t border-gray-200 dark:border-white/10">
-                    <p class="font-bold text-sm">Total Net Pay</p>
-                    <p class="text-xl font-black text-green-500">MYR <span id="pay-net-display">0.00</span></p>
+                <div class="flex justify-between items-center px-3 pt-3 border-t border-gray-200 dark:border-white/10">
+                    <p class="font-bold text-sm uppercase tracking-widest">Net Pay</p>
+                    <p class="text-2xl font-black text-green-500 tracking-tight drop-shadow-sm">MYR <span id="pay-net-display">0.00</span></p>
                 </div>
 
                 <div class="flex gap-3 pt-2">
-                    <button type="button" onclick="closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-bold py-2.5 transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold py-2.5 shadow-md hover:brightness-105 transition">Save Payslip</button>
+                    <button type="button" onclick="closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-2xl font-bold py-3.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-2xl font-black py-3.5 shadow-md hover:scale-[1.02] transition-transform">Save Payslip</button>
                 </div>
             </form>
         </div>
@@ -997,9 +1023,9 @@
             
             const fiEl = document.getElementById('food-insight');
             if(fiEl) {
-                let fHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lSum.toFixed(0)}</span></div>`;
-                if (cSum > lSum && lSum > 0) fHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
-                else if (lSum > 0) fHtml += `<div class="text-brand font-bold text-xs">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
+                let fHtml = `<div class="text-[10px] font-bold uppercase tracking-widest">Prev: <span class="font-black text-xs">MYR ${lSum.toFixed(0)}</span></div>`;
+                if (cSum > lSum && lSum > 0) fHtml += `<div class="text-red-500 font-bold text-xs bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
+                else if (lSum > 0) fHtml += `<div class="text-brand font-black text-xs">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
                 fiEl.innerHTML = fHtml;
             }
 
@@ -1097,8 +1123,8 @@
                 salaryChart.data.labels = mos;
                 salaryChart.data.datasets = [
                     { type: 'bar', label: 'Gross Income', data: grossArr, backgroundColor: '#FFD600', borderRadius: 4 },
-                    { type: 'line', label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 3, tension: 0.3, pointBackgroundColor: '#10B981', fill: false },
-                    { type: 'line', label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointBackgroundColor: '#EF4444', fill: false }
+                    { type: 'line', label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 4, tension: 0.3, pointBackgroundColor: '#10B981', fill: false },
+                    { type: 'line', label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 3, borderDash: [5, 5], tension: 0.3, pointBackgroundColor: '#EF4444', fill: false }
                 ];
                 salaryChart.options.scales.x.stacked = false;
                 salaryChart.options.scales.y.stacked = false;
@@ -1285,9 +1311,9 @@
             });
 
             let isDark = document.documentElement.classList.contains('dark');
-            let catInsightHtml = `<div class="text-xs font-bold">Previous: <span class="font-bold">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
-            if (currCatTotal > lastCatTotal && lastCatTotal > 0) catInsightHtml += `<div class="text-red-500 font-bold text-xs">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
-            else if (lastCatTotal > 0) catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-xs">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
+            let catInsightHtml = `<div class="text-[10px] font-bold uppercase tracking-widest">Previous: <span class="font-black text-xs">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
+            if (currCatTotal > lastCatTotal && lastCatTotal > 0) catInsightHtml += `<div class="text-red-500 font-bold text-xs bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
+            else if (lastCatTotal > 0) catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-black text-xs">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
             else catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-xs font-semibold">No historical data</div>`; 
 
             document.getElementById('category-modal-insight').innerHTML = catInsightHtml;
