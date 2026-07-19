@@ -194,18 +194,22 @@
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-brand border border-transparent transition" onclick="switchTab('food')">
                         <div class="text-brand text-base mb-1">🍔</div>
                         <p class="font-bold text-sm leading-none mb-1"><span id="pct-food">0</span>%</p>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-food">0.00</span></p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Food</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-600 border border-transparent transition" onclick="switchTab('bills')">
                         <div class="text-gray-500 dark:text-gray-400 text-base mb-1">⚡</div>
                         <p class="font-bold text-sm leading-none mb-1"><span id="pct-util">0</span>%</p>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-util">0.00</span></p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Utilities</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-2xl text-center cursor-pointer hover:border-gray-900 dark:hover:border-white border border-transparent transition" onclick="openCategoryModal('other')">
                         <div class="text-gray-900 dark:text-white text-base mb-1">📦</div>
                         <p class="font-bold text-sm leading-none mb-1"><span id="pct-other">0</span>%</p>
+                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-other">0.00</span></p>
                         <p class="text-[9px] font-bold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Other</p>
                     </div>
+                </div>
                 </div>
             </div>
 
@@ -945,6 +949,12 @@
             const msEl = document.getElementById('monthly-spend');
             if(msEl) msEl.innerText = monthlySpend.toLocaleString(undefined, {minimumFractionDigits: 2});
             
+// Feed the Real MYR Values to the UI
+            const vfEl = document.getElementById('val-food'); if(vfEl) vfEl.innerText = foodSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const vuEl = document.getElementById('val-util'); if(vuEl) vuEl.innerText = utilSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const voEl = document.getElementById('val-other'); if(voEl) voEl.innerText = otherSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            // Calculate and Feed the Percentages
             if(monthlySpend > 0) {
                 const pf = Math.round((foodSpend/monthlySpend)*100); 
                 const pu = Math.round((utilSpend/monthlySpend)*100); 
@@ -960,13 +970,6 @@
             } else {
                 ['bar-food','bar-util','bar-other'].forEach(id => { const el = document.getElementById(id); if(el) el.style.width='0%'; });
                 ['pct-food','pct-util','pct-other'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText='0'; });
-            }
-
-            if(comparisonChart) {
-                comparisonChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                comparisonChart.data.datasets[0].data = currYearMonthly; 
-                comparisonChart.data.datasets[1].data = lastYearMonthly;
-                comparisonChart.update();
             }
         }
 
