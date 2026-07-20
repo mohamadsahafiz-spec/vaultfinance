@@ -51,7 +51,6 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
-    <!-- DESKTOP Sidebar -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-8">
             <div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-lg shadow-[0_0_10px_rgba(255,214,0,0.5)]">V</div>
@@ -192,45 +191,57 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-1">
-                <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-sm border border-gray-200 dark:border-white/5 flex flex-col transition-colors duration-300">
-                    <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold tracking-wider uppercase">Historical Net Worth (Cash + EPF)</p>
-                    <h3 class="text-2xl font-bold mt-1 tracking-tight"><span class="text-sm font-medium opacity-70 pr-1">MYR</span><span id="total-net-worth">0.00</span></h3>
-                    <div class="mt-4 flex justify-between items-center bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-100 dark:border-transparent">
-                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Cash Flow (Month)</p>
-                        <p id="sel-month-balance" class="text-sm font-bold tracking-tight">MYR 0.00</p>
+            <!-- NEW FIXED COMMITMENTS WIDGET -->
+            <div id="commitments-card" class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-all duration-500 mt-1 flex flex-col">
+                <div class="flex justify-between items-center mb-3">
+                    <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Commitments</p>
+                    <span id="payday-badge" class="hidden bg-brand text-gray-900 text-[9px] font-bold px-2 py-0.5 rounded shadow-[0_0_8px_rgba(255,214,0,0.8)] animate-pulse tracking-widest uppercase">Payday Due!</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center group">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+                            <div>
+                                <p class="font-bold text-xs">Car Loan (JND7218)</p>
+                                <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">Hire Purchase</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-xs text-gray-900 dark:text-white">MYR 500.00</p>
+                            <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="space-y-4">
-                    <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold tracking-wider uppercase">Emergency Fund</p>
-                            <button onclick="openSavingsModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Set Target">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                            </button>
-                        </div>
-                        <div class="mt-0.5">
-                            <h4 class="text-xl font-bold tracking-tight"><span class="text-xs font-medium opacity-70 pr-1">MYR</span><span id="current-savings">0</span></h4>
-                            <p class="text-[9px] text-textMuted-light dark:text-textMuted-dark font-medium uppercase tracking-wider mt-1">Target: MYR <span id="target-savings">0</span></p>
-                        </div>
-                        <div class="w-full bg-surface-light dark:bg-surface-dark h-2 rounded-full mt-4 p-0.5 border border-gray-100 dark:border-white/5 overflow-hidden">
-                            <div id="savings-progress" class="bg-brand h-full rounded-full shadow-[0_0_5px_rgba(255,214,0,0.6)] transition-all duration-1000 ease-out" style="width: 0%;"></div>
-                        </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
+                    <div class="flex justify-between items-center mb-1">
+                        <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold tracking-wider uppercase">Emergency Fund</p>
+                        <button onclick="openSavingsModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Set Target">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                        </button>
                     </div>
-                    
-                    <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center gap-2">
-                                <h4 class="font-bold text-sm text-red-600 dark:text-red-500 uppercase tracking-wider">Debt</h4>
-                                <span id="total-debt-display" class="text-[9px] font-bold text-white bg-red-500 px-2 py-0.5 rounded shadow-[0_0_8px_rgba(239,68,68,0.4)] hidden"></span>
-                            </div>
-                            <button onclick="openDebtModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            </button>
-                        </div>
-                        <div id="debt-list" class="space-y-2.5 flex-1"></div>
+                    <div class="mt-0.5">
+                        <h4 class="text-xl font-bold tracking-tight"><span class="text-xs font-medium opacity-70 pr-1">MYR</span><span id="current-savings">0</span></h4>
+                        <p class="text-[9px] text-textMuted-light dark:text-textMuted-dark font-medium uppercase tracking-wider mt-1">Target: MYR <span id="target-savings">0</span></p>
                     </div>
+                    <div class="w-full bg-surface-light dark:bg-surface-dark h-2 rounded-full mt-4 p-0.5 border border-gray-100 dark:border-white/5 overflow-hidden">
+                        <div id="savings-progress" class="bg-brand h-full rounded-full shadow-[0_0_5px_rgba(255,214,0,0.6)] transition-all duration-1000 ease-out" style="width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-bold text-sm text-red-600 dark:text-red-500 uppercase tracking-wider">Debt</h4>
+                            <span id="total-debt-display" class="text-[9px] font-bold text-white bg-red-500 px-2 py-0.5 rounded shadow-[0_0_8px_rgba(239,68,68,0.4)] hidden"></span>
+                        </div>
+                        <button onclick="openDebtModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </button>
+                    </div>
+                    <div id="debt-list" class="space-y-2.5 flex-1"></div>
                 </div>
             </div>
         </div>
@@ -268,7 +279,7 @@
                         <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-util">0.00</span></p>
                         <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Utilities</p>
                     </div>
-                    <div class="bg-surface-light dark:bg-surface-dark p-2.5 rounded-xl text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-500 border border-transparent transition" onclick="openCategoryModal('other')">
+                    <div class="bg-surface-light dark:bg-surface-dark p-2.5 rounded-xl text-center cursor-pointer hover:border-gray-900 dark:hover:border-white border border-transparent transition" onclick="openCategoryModal('other')">
                         <div class="mb-1 flex justify-center"><svg class="w-5 h-5 text-gray-500 dark:text-gray-400 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
                         <p class="font-bold text-xs leading-none mb-1"><span id="pct-other">0</span>%</p>
                         <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-other">0.00</span></p>
@@ -341,7 +352,7 @@
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
                 </div>
-                <div class="w-full h-48 relative"><canvas id="utilChart"></canvas></div>
+                <div class="w-full h-48 relative drop-shadow-[0_4px_6px_rgba(59,130,246,0.25)]"><canvas id="utilChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -368,7 +379,7 @@
         <div id="tab-salary" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
             
             <div class="flex justify-between items-center mt-1">
-                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Income</p>
+                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Income Tracker</p>
                 <div id="salary-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
@@ -554,7 +565,7 @@
         
         <div class="relative w-12 h-12 flex justify-center items-center shrink-0 -mt-8">
             <button onclick="openTxModal()" class="absolute w-12 h-12 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_6px_15px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform border-[3px] border-surface-light dark:border-surface-dark z-[100]">
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
             </button>
         </div>
 
@@ -631,9 +642,16 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Category</label>
-                        <input type="text" id="tx-category" required placeholder="Food, Utility..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Payment Method</label>
+                        <select id="tx-method" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                            <option value="debit">Debit Card</option>
+                            <option value="credit">Credit Card</option>
+                        </select>
                     </div>
+                </div>
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Category</label>
+                    <input type="text" id="tx-category" required placeholder="Food, Utility..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
                 <div class="flex gap-2.5 pt-2">
                     <button type="button" onclick="closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
@@ -981,6 +999,25 @@
             document.getElementById('main-scroll').scrollTo(0,0);
         }
 
+        // CALENDAR PAYDAY LISTENER
+        function checkPayday() {
+            const today = new Date();
+            const commitmentsCard = document.getElementById('commitments-card');
+            const paydayBadge = document.getElementById('payday-badge');
+            
+            if (commitmentsCard) {
+                if (today.getDate() === 27) {
+                    commitmentsCard.classList.add('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]', 'animate-pulse');
+                    commitmentsCard.classList.remove('border-gray-200', 'dark:border-white/5');
+                    if (paydayBadge) paydayBadge.classList.remove('hidden');
+                } else {
+                    commitmentsCard.classList.remove('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]', 'animate-pulse');
+                    commitmentsCard.classList.add('border-gray-200', 'dark:border-white/5');
+                    if (paydayBadge) paydayBadge.classList.add('hidden');
+                }
+            }
+        }
+
         function populateTimelines() {
             // General Months
             let txMonths = new Set();
@@ -1123,10 +1160,15 @@
             payrollHistory.forEach(p => { 
                 let gross = p.basic + p.allowance + p.bonus;
                 let empEpf = 0;
-                if(gross > 0 && gross <= 5000) {
-                    empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13);
-                } else if(gross > 5000) {
-                    empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12);
+                if (p.empEpf) {
+                    empEpf = p.empEpf; // Read from history if available
+                } else {
+                    // Fallback for old data
+                    if(gross > 0 && gross <= 5000) {
+                        empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13);
+                    } else if(gross > 5000) {
+                        empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12);
+                    }
                 }
                 totalKwsp += p.epf + empEpf; 
             });
@@ -1173,23 +1215,22 @@
                     if(txM === currM && txY === currY) {
                         monthlySpend += amt; 
                         
-                        let iconWrap = '';
-                        if(isFood) {
-                            foodSpend += amt; 
-                            iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
-                        } else if(isUtil) {
-                            utilSpend += amt; 
-                            iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
-                        } else {
-                            otherSpend += amt;
-                            iconWrap = `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20"><svg class="w-4 h-4 text-gray-500 dark:text-gray-400 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>`;
-                        }
+                        if(isFood) foodSpend += amt; 
+                        else if(isUtil) utilSpend += amt; 
+                        else otherSpend += amt;
                         
                         const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
                         const sign = t.type === 'income' ? '+' : '-';
                         
+                        let iconWrap = '';
                         if (t.type === 'income') {
                             iconWrap = `<div class="w-9 h-9 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20"><svg class="w-4 h-4 text-green-500 drop-shadow-[0_0_6px_rgba(34,197,94,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></div>`;
+                        } else if (isFood) {
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
+                        } else if (isUtil) {
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
+                        } else {
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20"><svg class="w-4 h-4 text-gray-500 dark:text-gray-400 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>`;
                         }
                         
                         if(list) {
@@ -1272,7 +1313,7 @@
 
                 if(txM === currM && txY === currY) {
                     cSum += amt; 
-                    const iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
+                    const iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
                     if(list) {
                         list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
                             <td class="py-2.5 w-11">${iconWrap}</td>
@@ -1327,7 +1368,7 @@
             let monthlyComms = new Array(12).fill(0); 
             let monthlyOther = new Array(12).fill(0);
             
-            const iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
+            const iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
             
             histThisYear.forEach((u, i) => {
                 const amt = parseFloat(u.amount); 
@@ -1453,7 +1494,7 @@
             renderWidget('bonus', currBonus, prevBonus);
             renderWidget('tax', currTax, prevTax, true);
             
-            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
+            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
 
             histThisYear.forEach((c) => {
                 const totalGross = c.basic + c.allowance + c.bonus;
@@ -1523,10 +1564,14 @@
                 payrollHistory.forEach(p => { 
                     let gross = p.basic + p.allowance + p.bonus;
                     let empEpf = 0;
-                    if(gross > 0 && gross <= 5000) {
-                        empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13);
-                    } else if(gross > 5000) {
-                        empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12);
+                    if (p.empEpf) {
+                        empEpf = p.empEpf; 
+                    } else {
+                        if(gross > 0 && gross <= 5000) {
+                            empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13);
+                        } else if(gross > 5000) {
+                            empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12);
+                        }
                     }
                     totalKwsp += p.epf + empEpf; 
                 });
@@ -1597,10 +1642,14 @@
             const date = document.getElementById('tx-date').value; 
             const desc = document.getElementById('tx-desc').value; 
             const type = document.getElementById('tx-type').value; 
+            const method = document.getElementById('tx-method').value;
             const category = document.getElementById('tx-category').value; 
             const amount = parseFloat(document.getElementById('tx-amount').value);
 
             if (type === 'expense') {
+                if (method === 'debit') cardData.debit.balance -= amount;
+                else if (method === 'credit') cardData.credit.balance += amount;
+                
                 let debtUpdated = false; 
                 const searchString = (desc + " " + category).toLowerCase();
                 debts.forEach((debt, index) => {
@@ -1615,14 +1664,21 @@
                     renderDebts(); 
                     alert("Matched keyword! Debt balance auto-deducted."); 
                 }
+            } else if (type === 'income') {
+                if (method === 'debit') cardData.debit.balance += amount;
+                else if (method === 'credit') cardData.credit.balance -= amount;
             }
+            
+            localStorage.setItem('vault_cards', JSON.stringify(cardData));
 
             transactions.push({ date, desc, type, category, amount }); 
             localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+            
             populateTimelines(); 
             updateHomeDashboard(); 
             updateOverallDashboard(); 
             updateFoodDashboard(); 
+            renderCards();
             closeTxModal(); 
         }
 
@@ -1718,7 +1774,7 @@
             }
             
             const today = new Date();
-            const iconWrap = `<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-3.5 h-3.5 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>`;
+            const iconWrap = `<div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
 
             bills.forEach((b, i) => {
                 const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
@@ -1799,16 +1855,20 @@
             let socsoEisBase = basic + allow; 
             
             let epf = 0; 
+            let empEpf = 0;
             let socso = 0; 
             let eis = 0;
 
             if (epfBase > 0) {
                 if (epfBase <= 5000) {
                     epf = Math.ceil((Math.ceil(epfBase / 20) * 20) * 0.11);
+                    empEpf = Math.ceil((Math.ceil(epfBase / 20) * 20) * 0.13);
                 } else if (epfBase <= 20000) {
                     epf = Math.ceil((Math.ceil(epfBase / 100) * 100) * 0.11);
+                    empEpf = Math.ceil((Math.ceil(epfBase / 100) * 100) * 0.12);
                 } else {
                     epf = Math.ceil(epfBase * 0.11);
+                    empEpf = Math.ceil(epfBase * 0.12);
                 }
             }
             
@@ -1822,6 +1882,10 @@
             document.getElementById('pay-epf').value = epf > 0 ? epf : '';
             document.getElementById('pay-socso').value = socso > 0 ? socso.toFixed(2) : '';
             document.getElementById('pay-eis').value = eis > 0 ? eis.toFixed(2) : '';
+            
+            // Hidden field trick to store the dynamically calculated Employer EPF without cluttering the UI
+            document.getElementById('pay-epf').setAttribute('data-employer', empEpf);
+            
             calcNetPay();
         }
 
@@ -1847,16 +1911,19 @@
             const allow = parseFloat(document.getElementById('pay-allow').value) || 0;
             const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             const epf = parseFloat(document.getElementById('pay-epf').value) || 0;
+            const empEpf = parseFloat(document.getElementById('pay-epf').getAttribute('data-employer')) || 0;
             const socso = parseFloat(document.getElementById('pay-socso').value) || 0;
             const eis = parseFloat(document.getElementById('pay-eis').value) || 0;
             const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             const net = (basic + allow + bonus) - (epf + socso + eis + tax);
 
             payrollHistory = payrollHistory.filter(p => p.month !== month); 
-            payrollHistory.push({ month, basic, allowance: allow, bonus, epf, socso, eis, tax, net }); 
+            payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); 
             localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
             
-            // Remove previous exact auto-sync entry to prevent dupes
+            cardData.debit.balance += net;
+            localStorage.setItem('vault_cards', JSON.stringify(cardData));
+
             transactions = transactions.filter(t => !(t.date === month + '-01' && t.category === 'Payroll'));
             transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
@@ -1866,7 +1933,7 @@
             updateHomeDashboard(); 
             renderCards(); 
             closePayrollModal();
-            alert("Payslip Saved! Net Pay injected to Cash Flow & EPF injected to KWSP.");
+            alert("Payslip Saved! Net Pay injected into your Debit Card.");
         }
 
         function openCategoryModal(type) {
@@ -1892,7 +1959,6 @@
                 const dayIndex = txDate.getDate() - 1;
                 const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
                 
-                // REGEX UPDATED: Removed 'grocery|grocer'
                 const isFood = catMatch.match(/food|lunch|dinner|eat|cafe/); 
                 const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
                 
@@ -2005,7 +2071,6 @@
             reader.readAsDataURL(file);
         }
 
-        // --- 6. DATA MANAGEMENT ---
         function exportBackup() { 
             const backupData = { 
                 vault_transactions: localStorage.getItem('vault_transactions'), 
@@ -2119,8 +2184,8 @@
             } 
         }
 
-        // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
+            checkPayday();
             populateTimelines();
             
             Chart.defaults.font.family = 'Inter'; 
