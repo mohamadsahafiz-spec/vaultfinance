@@ -10,12 +10,14 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     
+    <!-- Fonts & Scripts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- PDF EXPORT ENGINE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     <style>
         ::-webkit-scrollbar { display: none; }
@@ -90,7 +92,7 @@
             </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
                 <button onclick="openActionModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.3)] rounded-lg font-bold transition hover:scale-[1.02]">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
                     Add Entry
                 </button>
             </div>
@@ -225,7 +227,7 @@
                 <div id="debt-list" class="space-y-2.5 flex-1"></div>
             </div>
 
-            <!-- NEW GOALS WIDGET (REPLACES EMERGENCY FUND) -->
+            <!-- GOALS WIDGET -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-4">
                     <h4 class="font-bold text-sm text-brand uppercase tracking-wider">Goals</h4>
@@ -299,7 +301,7 @@
                     <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Ledger (Selected Month)</p>
                 </div>
                 
-                <!-- NEW SMART SEARCH BAR -->
+                <!-- SMART SEARCH BAR -->
                 <div class="mb-4 relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-textMuted-light dark:text-textMuted-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -339,7 +341,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 3.5: FAMILY & EDU (NEW)                -->
+        <!-- TAB 3.5: FAMILY & EDU                      -->
         <!-- ========================================== -->
         <div id="tab-family" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
             
@@ -554,7 +556,8 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📦 Export Backup</button>
+                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📦 Export JSON Backup</button>
+                    <button onclick="exportPDF()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📄 Export PDF Report</button>
                     <div>
                         <input type="file" id="json-file-input" accept=".json" class="hidden">
                         <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-medium px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">📥 Import Backup</button>
@@ -563,7 +566,7 @@
                         <input type="file" id="csv-file-input" accept=".csv" class="hidden">
                         <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-medium px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">⬆ Import CSV</button>
                     </div>
-                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-medium px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
+                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-medium px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition md:col-span-2">⚠ Factory Reset</button>
                 </div>
             </div>
         </div>
@@ -646,7 +649,7 @@
         </div>
     </div>
 
-    <!-- NEW FIXED COMMITMENT MODAL -->
+    <!-- FIXED COMMITMENT MODAL -->
     <div id="commitment-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4">Add Fixed Commitment</h3>
@@ -750,7 +753,7 @@
         </div>
     </div>
     
-    <!-- NEW MULTI-GOAL MODAL -->
+    <!-- MULTI-GOAL MODAL -->
     <div id="goal-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4" id="goal-modal-title">Add New Goal</h3>
@@ -830,118 +833,8 @@
         </div>
     </div>
 
-    <div id="category-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
-            <div class="flex justify-between items-start mb-3">
-                <div>
-                    <h3 class="text-xl font-bold tracking-tight">Category Graph</h3>
-                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Daily Breakdown</p>
-                </div>
-                <button onclick="closeCategoryModal()" class="w-7 h-7 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:bg-red-500 hover:text-white transition font-bold text-xs">✕</button>
-            </div>
-            <div id="category-modal-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-200 dark:border-transparent"></div>
-            <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-xl p-2 border border-gray-200 dark:border-transparent"><canvas id="categoryChart"></canvas></div>
-        </div>
-    </div>
-
-    <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4">Log Past Bill</h3>
-            <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Month Paid</label>
-                    <input type="month" id="util-hist-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Bill Type</label>
-                        <select id="util-hist-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                            <option value="Electricity">Electricity (TNB)</option>
-                            <option value="Water">Water</option>
-                            <option value="Internet">Internet/Wifi</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
-                        <input type="number" id="util-hist-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Log</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh] hide-scrollbar">
-            <h3 class="text-xl font-bold tracking-tight mb-0.5">Smart Payroll</h3>
-            <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Auto-calculates EPF & SOCSO</p>
-            
-            <form id="payroll-form" onsubmit="savePayrollRecord(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Payslip Month</label>
-                    <input type="month" id="pay-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                
-                <div class="p-3 bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-white/5">
-                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-brand">Gross Earnings</h4>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Basic</label>
-                            <input type="number" id="pay-basic" step="0.01" oninput="autoCalcPayroll()" required class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Allow.</label>
-                            <input type="number" id="pay-allow" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Bonus</label>
-                            <input type="number" id="pay-bonus" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-3 bg-red-50 dark:bg-red-900/10 rounded-xl border border-red-100 dark:border-red-900/30">
-                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-red-500">Statutory Deductions</h4>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EPF (11%)</label>
-                            <input type="number" id="pay-epf" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">Tax (PCB)</label>
-                            <input type="number" id="pay-tax" step="0.01" value="0" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">SOCSO (~0.5%)</label>
-                            <input type="number" id="pay-socso" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EIS (~0.2%)</label>
-                            <input type="number" id="pay-eis" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center px-2 pt-2 border-t border-gray-200 dark:border-white/10">
-                    <p class="font-semibold text-xs uppercase tracking-wider">Net Pay</p>
-                    <p class="text-xl font-bold text-green-500 tracking-tight drop-shadow-sm">MYR <span id="pay-net-display">0.00</span></p>
-                </div>
-
-                <div class="flex gap-2.5 pt-1">
-                    <button type="button" onclick="closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- EXPANDED JAVASCRIPT ENGINE -->
+    <!-- SCRIPT ENGINE -->
     <script>
-        // MIGRATION & INIT
         let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
         let debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
         let bills = JSON.parse(localStorage.getItem('vault_bills')) || [ { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi", amount: 129, dueDate: "2026-07-28" } ];
@@ -949,7 +842,6 @@
         let payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
         let commitments = JSON.parse(localStorage.getItem('vault_commitments')) || [ { name: "Car Loan (JND7218)", type: "Hire Purchase", amount: 500 } ];
 
-        // GOALS ENGINE
         let goalsData = JSON.parse(localStorage.getItem('vault_goals'));
         if (!goalsData) {
             let legacySavings = JSON.parse(localStorage.getItem('vault_savings'));
@@ -981,7 +873,6 @@
 
         window.selectedMonth = ""; window.selectedYear = ""; window.selectedSalaryYear = ""; window.selectedFamilyMonth = "";
 
-        // CONFETTI ENGINE
         function fireConfetti() {
             for(let i=0; i<60; i++) {
                 let conf = document.createElement('div');
@@ -999,11 +890,18 @@
             }
         }
 
-        // ACTION MODAL TRIGGERS
+        // EXPORT PDF
+        function exportPDF() {
+            const element = document.querySelector('main');
+            const nav = document.querySelector('nav.md\\:hidden');
+            if(nav) nav.style.display = 'none';
+            const opt = { margin: 0, filename: 'Vault_Financial_Report.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
+            html2pdf().set(opt).from(element).save().then(() => { if(nav) nav.style.display = ''; });
+        }
+
         function openActionModal() { document.getElementById('action-modal').classList.remove('hidden'); }
         function closeActionModal() { document.getElementById('action-modal').classList.add('hidden'); }
 
-        // GLOBAL DELETE TRANSACTION FUNCTION
         window.deleteTransaction = function(index) {
             if(confirm('Delete this transaction?')) { 
                 transactions.splice(index, 1); 
@@ -1076,15 +974,7 @@
                 activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-sm'); 
             }
 
-            const headerTitles = { 
-                'home': `Hi, ${profile.name.split(' ')[0]}`, 
-                'overall': 'Overall Analytics', 
-                'food': 'Food & Dining', 
-                'family': 'Family & Edu',
-                'bills': 'Utility History', 
-                'salary': 'Payroll & Wealth', 
-                'profile': 'Profile Settings' 
-            };
+            const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'family': 'Family & Edu', 'bills': 'Utility History', 'salary': 'Payroll & Wealth', 'profile': 'Profile Settings' };
             document.getElementById('header-title').innerText = headerTitles[tabId];
             document.getElementById('main-scroll').scrollTo(0,0);
         }
@@ -1122,32 +1012,20 @@
 
             let monthHTML = '';
             txArr.forEach(m => {
-                const [y, mo] = m.split('-');
-                const display = `${mNames[parseInt(mo, 10)-1]} ${y}`;
-                const isActive = (m === window.selectedMonth);
-                const activeClass = isActive 
-                    ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' 
-                    : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                const [y, mo] = m.split('-'); const display = `${mNames[parseInt(mo, 10)-1]} ${y}`; const isActive = (m === window.selectedMonth);
+                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
                 monthHTML += `<button onclick="selectMonth('${m}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${display}</button>`;
             });
 
-            ['home-timeline', 'overall-timeline', 'food-timeline'].forEach(id => {
-                const el = document.getElementById(id);
-                if(el) { el.innerHTML = monthHTML; }
-            });
+            ['home-timeline', 'overall-timeline', 'food-timeline'].forEach(id => { const el = document.getElementById(id); if(el) { el.innerHTML = monthHTML; } });
 
             let famHTML = '';
             txArr.forEach(m => {
-                const [y, mo] = m.split('-');
-                const display = `${mNames[parseInt(mo, 10)-1]} ${y}`;
-                const isActive = (m === window.selectedFamilyMonth);
-                const activeClass = isActive 
-                    ? 'bg-purple-500 text-white shadow-[0_0_10px_rgba(168,85,247,0.8)] font-bold border-purple-500' 
-                    : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-purple-500 transition-colors duration-300';
+                const [y, mo] = m.split('-'); const display = `${mNames[parseInt(mo, 10)-1]} ${y}`; const isActive = (m === window.selectedFamilyMonth);
+                const activeClass = isActive ? 'bg-purple-500 text-white shadow-[0_0_10px_rgba(168,85,247,0.8)] font-bold border-purple-500' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-purple-500 transition-colors duration-300';
                 famHTML += `<button onclick="selectFamilyMonth('${m}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${display}</button>`;
             });
             const fEl = document.getElementById('family-timeline'); if (fEl) fEl.innerHTML = famHTML;
-
 
             let uYears = new Set(); uYears.add(now.getFullYear().toString());
             utilHistory.forEach(u => { if(u.month) { uYears.add(u.month.split('-')[0]); } });
@@ -1157,9 +1035,7 @@
             let yearHTML = '';
             uArr.forEach(y => {
                 const isActive = (y === window.selectedYear);
-                const activeClass = isActive 
-                    ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' 
-                    : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
                 yearHTML += `<button onclick="selectYear('${y}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${y}</button>`;
             });
 
@@ -1174,27 +1050,17 @@
             let sHTML = '';
             sArr.forEach(y => {
                 const isActive = (y === window.selectedSalaryYear);
-                const activeClass = isActive 
-                    ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' 
-                    : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
                 sHTML += `<button onclick="selectSalaryYear('${y}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${y}</button>`;
             });
 
             const sEl = document.getElementById('salary-timeline'); if(sEl) { sEl.innerHTML = sHTML; }
         }
 
-        window.selectMonth = function(m) {
-            window.selectedMonth = m; populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard();
-        }
-        window.selectFamilyMonth = function(m) {
-            window.selectedFamilyMonth = m; populateTimelines(); updateFamilyDashboard();
-        }
-        window.selectYear = function(y) {
-            window.selectedYear = y; populateTimelines(); updateUtilDashboard();
-        }
-        window.selectSalaryYear = function(y) {
-            window.selectedSalaryYear = y; populateTimelines(); updateCareerDashboard();
-        }
+        window.selectMonth = function(m) { window.selectedMonth = m; populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); }
+        window.selectFamilyMonth = function(m) { window.selectedFamilyMonth = m; populateTimelines(); updateFamilyDashboard(); }
+        window.selectYear = function(y) { window.selectedYear = y; populateTimelines(); updateUtilDashboard(); }
+        window.selectSalaryYear = function(y) { window.selectedSalaryYear = y; populateTimelines(); updateCareerDashboard(); }
 
         function updateHomeDashboard() {
             const filter = window.selectedMonth;
@@ -1239,7 +1105,6 @@
                 selMonthEl.innerHTML = `<span class="${color}">${sign}MYR ${Math.abs(monthBalance).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>`;
             }
 
-            // SAFE TO SPEND LOGIC (Debit - Commits - Min Debts)
             let debitBal = (cardData.debit && cardData.debit.balance) ? parseFloat(cardData.debit.balance) : 0;
             let totalCommits = commitments.reduce((sum, c) => sum + parseFloat(c.amount || 0), 0);
             let totalMinDebts = debts.reduce((sum, d) => sum + parseFloat(d.minPayment || 0), 0);
@@ -1287,7 +1152,6 @@
                         else if(isUtil) utilSpend += amt; 
                         else otherSpend += amt;
                         
-                        // Smart Search Filter
                         if (searchTerm && !catMatch.includes(searchTerm)) return;
 
                         const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
@@ -1383,7 +1247,10 @@
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
                 if(!t.date || t.type === 'income') return; 
-                const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
+                const txDate = new Date(t.date); 
+                const amt = parseFloat(t.amount); 
+                const txM = txDate.getMonth(); 
+                const txY = txDate.getFullYear();
                 
                 const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
                 const isFood = catMatch.match(/food|lunch|dinner|eat|cafe/);
@@ -1404,24 +1271,33 @@
                         </tr>`;
                     }
                     txCount++;
-                } else if(txM === lastM && txY === lastY) { lSum += amt; }
+                } else if(txM === lastM && txY === lastY) { 
+                    lSum += amt; 
+                }
             });
             
-            if(txCount === 0 && list) { list.innerHTML = `<tr><td class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">No food logs found.</td></tr>`; }
+            if(txCount === 0 && list) {
+                list.innerHTML = `<tr><td class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">No food logs found.</td></tr>`;
+            }
 
-            const ftEl = document.getElementById('food-total-display'); if(ftEl) ftEl.innerText = cSum.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const ftEl = document.getElementById('food-total-display');
+            if(ftEl) ftEl.innerText = cSum.toLocaleString(undefined, {minimumFractionDigits: 2});
             
             const fiEl = document.getElementById('food-insight');
             if(fiEl) {
                 let fHtml = `<div class="text-[9px] font-semibold uppercase tracking-wider">Prev: <span class="font-bold text-xs">MYR ${lSum.toFixed(0)}</span></div>`;
-                if (cSum > lSum && lSum > 0) fHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
-                else if (lSum > 0) fHtml += `<div class="text-brand font-bold text-[10px]">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
+                if (cSum > lSum && lSum > 0) {
+                    fHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
+                } else if (lSum > 0) {
+                    fHtml += `<div class="text-brand font-bold text-[10px]">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
+                }
                 fiEl.innerHTML = fHtml;
             }
 
             if(foodChart) {
                 foodChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                foodChart.data.datasets[0].data = currYearFood; foodChart.data.datasets[1].data = lastYearFood;
+                foodChart.data.datasets[0].data = currYearFood; 
+                foodChart.data.datasets[1].data = lastYearFood;
                 foodChart.update();
             }
         }
@@ -1558,7 +1434,8 @@
             if(confirm('Delete this utility log?')) { 
                 utilHistory.splice(globalIndex, 1); 
                 localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); 
-                populateTimelines(); updateUtilDashboard(); 
+                populateTimelines(); 
+                updateUtilDashboard(); 
             }
         }
 
@@ -1569,8 +1446,12 @@
             const list = document.getElementById('payroll-history-list'); 
             if(list) list.innerHTML = '';
             
-            let grossArr = new Array(12).fill(0); let netArr = new Array(12).fill(0); let dedArr = new Array(12).fill(0); 
-            let currBase = 0; let currBonus = 0; let currTax = 0; let prevBase = 0; let prevBonus = 0; let prevTax = 0;
+            let grossArr = new Array(12).fill(0); 
+            let netArr = new Array(12).fill(0); 
+            let dedArr = new Array(12).fill(0); 
+            
+            let currBase = 0; let currBonus = 0; let currTax = 0;
+            let prevBase = 0; let prevBonus = 0; let prevTax = 0;
             
             let histThisYear = payrollHistory.filter(p => p.month && p.month.startsWith(yr)).sort((a,b) => new Date(b.month) - new Date(a.month));
 
@@ -1580,10 +1461,17 @@
                 let baseAllow = p.basic + p.allowance;
                 
                 if (pYear === yr) {
-                    currBase += baseAllow; currBonus += p.bonus; currTax += p.tax;
-                    grossArr[pMonthIdx] += (baseAllow + p.bonus); netArr[pMonthIdx] += p.net; dedArr[pMonthIdx] += (p.epf + p.socso + p.eis + p.tax);
+                    currBase += baseAllow;
+                    currBonus += p.bonus;
+                    currTax += p.tax;
+                    
+                    grossArr[pMonthIdx] += (baseAllow + p.bonus);
+                    netArr[pMonthIdx] += p.net;
+                    dedArr[pMonthIdx] += (p.epf + p.socso + p.eis + p.tax);
                 } else if (pYear === (parseInt(yr) - 1).toString()) {
-                    prevBase += baseAllow; prevBonus += p.bonus; prevTax += p.tax;
+                    prevBase += baseAllow;
+                    prevBonus += p.bonus;
+                    prevTax += p.tax;
                 }
             });
 
@@ -1591,17 +1479,27 @@
                 const totalEl = document.getElementById(`widget-${id}-total`);
                 const pctEl = document.getElementById(`widget-${id}-pct`);
                 const valEl = document.getElementById(`widget-${id}-val`);
+                
                 if(totalEl) totalEl.innerText = curr.toLocaleString(undefined, {minimumFractionDigits: 2});
+                
                 if (!pctEl || !valEl) return;
 
                 if (prev === 0 && curr === 0) {
-                    pctEl.innerText = "NO DATA"; valEl.innerText = ""; pctEl.className = "text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-500/20 text-gray-500 uppercase tracking-widest"; return;
+                    pctEl.innerText = "NO DATA"; valEl.innerText = "";
+                    pctEl.className = "text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-500/20 text-gray-500 uppercase tracking-widest";
+                    return;
                 } else if (prev === 0 && curr > 0) {
-                    pctEl.innerText = "NEW"; valEl.innerText = ""; pctEl.className = "text-[9px] font-bold px-1.5 py-0.5 rounded bg-brand/20 text-brand uppercase tracking-widest"; return;
+                    pctEl.innerText = "NEW"; valEl.innerText = "";
+                    pctEl.className = "text-[9px] font-bold px-1.5 py-0.5 rounded bg-brand/20 text-brand uppercase tracking-widest";
+                    return;
                 }
 
-                let diff = curr - prev; let pct = (diff / prev) * 100; let sign = diff >= 0 ? '+' : '';
-                pctEl.innerText = `${sign}${pct.toFixed(1)}%`; valEl.innerText = `${sign} RM ${Math.abs(diff).toLocaleString(undefined, {minimumFractionDigits: 0})}`;
+                let diff = curr - prev;
+                let pct = (diff / prev) * 100;
+                let sign = diff >= 0 ? '+' : '';
+                
+                pctEl.innerText = `${sign}${pct.toFixed(1)}%`;
+                valEl.innerText = `${sign} RM ${Math.abs(diff).toLocaleString(undefined, {minimumFractionDigits: 0})}`;
                 
                 if (diff > 0) {
                     pctEl.className = `text-[10px] font-bold px-1.5 py-0.5 rounded ${invertColors ? 'bg-red-500/20 text-red-500' : 'bg-green-500/20 text-green-500'}`;
@@ -1610,11 +1508,14 @@
                     pctEl.className = `text-[10px] font-bold px-1.5 py-0.5 rounded ${invertColors ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'}`;
                     valEl.className = `text-[10px] font-semibold ${invertColors ? 'text-green-500' : 'text-red-500'}`;
                 } else {
-                    pctEl.className = "text-[10px] font-bold px-1.5 py-0.5 rounded bg-gray-500/20 text-gray-500"; valEl.className = "text-[10px] font-semibold text-gray-500";
+                    pctEl.className = "text-[10px] font-bold px-1.5 py-0.5 rounded bg-gray-500/20 text-gray-500";
+                    valEl.className = "text-[10px] font-semibold text-gray-500";
                 }
             };
 
-            renderWidget('base', currBase, prevBase); renderWidget('bonus', currBonus, prevBonus); renderWidget('tax', currTax, prevTax, true);
+            renderWidget('base', currBase, prevBase);
+            renderWidget('bonus', currBonus, prevBonus);
+            renderWidget('tax', currTax, prevTax, true);
             
             const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
 
@@ -1626,8 +1527,14 @@
                     list.innerHTML += `
                     <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
                         <td class="py-2.5 w-11">${iconWrap}</td>
-                        <td class="py-2.5 pl-2"><p class="font-bold text-xs">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p></td>
-                        <td class="py-2.5 pr-2 text-right"><p class="font-bold text-[9px] text-red-500 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded border border-red-100 dark:border-red-900/50 inline-block">-MYR ${totalDeds.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-1 uppercase tracking-wider">EPF: ${c.epf} | Tax: ${c.tax}</p></td>
+                        <td class="py-2.5 pl-2">
+                            <p class="font-bold text-xs">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+                            <p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p>
+                        </td>
+                        <td class="py-2.5 pr-2 text-right">
+                            <p class="font-bold text-[9px] text-red-500 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded border border-red-100 dark:border-red-900/50 inline-block">-MYR ${totalDeds.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+                            <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-1 uppercase tracking-wider">EPF: ${c.epf} | Tax: ${c.tax}</p>
+                        </td>
                         <td class="py-2.5 text-right w-8"><button onclick="deletePayslip('${c.month}')" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td>
                     </tr>`;
                 }
@@ -1652,432 +1559,82 @@
             if(confirm('Delete this payslip?')) { 
                 payrollHistory = payrollHistory.filter(p => p.month !== monthStr);
                 localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
-                populateTimelines(); updateCareerDashboard(); updateHomeDashboard(); renderCards(); 
+                populateTimelines();
+                updateCareerDashboard(); 
+                updateHomeDashboard(); 
+                renderCards(); 
             }
         }
 
-        function renderCommitments() {
-            const list = document.getElementById('commitments-list');
-            if(!list) return;
-            list.innerHTML = '';
-            
-            if (commitments.length === 0) {
-                list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-2 uppercase tracking-wider">No fixed commitments.</p>`;
-                return;
-            }
-
-            commitments.forEach((c, i) => {
-                list.innerHTML += `
-                <div class="flex justify-between items-center group">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">
-                            <svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                        </div>
-                        <div>
-                            <p class="font-bold text-xs">${c.name}</p>
-                            <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.type}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 text-right">
-                        <div>
-                            <p class="font-bold text-xs text-gray-900 dark:text-white">MYR ${parseFloat(c.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
-                            <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p>
-                        </div>
-                        <button onclick="if(confirm('Delete commitment?')) { commitments.splice(${i}, 1); localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0">✕</button>
-                    </div>
-                </div>`;
-            });
-        }
-
-        function openCommitmentModal() { document.getElementById('commitment-modal').classList.remove('hidden'); }
-        function closeCommitmentModal() { document.getElementById('commitment-modal').classList.add('hidden'); document.getElementById('commitment-form').reset(); }
-        function saveCommitment(e) {
-            e.preventDefault();
-            commitments.push({
-                name: document.getElementById('commit-name').value,
-                type: document.getElementById('commit-type').value,
-                amount: parseFloat(document.getElementById('commit-amount').value)
-            });
-            localStorage.setItem('vault_commitments', JSON.stringify(commitments));
-            renderCommitments(); updateHomeDashboard(); closeCommitmentModal();
-        }
-
-        // GOALS IMPLEMENTATION
-        function renderGoals() {
-            const gl = document.getElementById('goals-list');
-            if(!gl) return;
-            gl.innerHTML = '';
-            
-            if (goalsData.length === 0) { 
-                gl.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4 uppercase tracking-wider">No active goals.</p>`; 
-                return; 
-            }
-            
-            goalsData.forEach((g, i) => { 
-                let pct = (g.current / g.target) * 100;
-                let isComplete = pct >= 100;
-                if(pct > 100) pct = 100;
-
-                let completeBadge = isComplete ? `<span class="px-1.5 py-0.5 bg-brand/20 text-brand border border-brand/30 rounded text-[7px] uppercase font-bold tracking-widest shadow-[0_0_5px_rgba(255,214,0,0.5)]">Achieved</span>` : '';
-                let progressColor = isComplete ? 'bg-brand shadow-[0_0_8px_rgba(255,214,0,0.8)]' : 'bg-brand shadow-[0_0_5px_rgba(255,214,0,0.4)]';
-
-                gl.innerHTML += `
-                <div class="bg-surface-light dark:bg-surface-dark border border-transparent p-4 rounded-xl flex flex-col group transition-all duration-300 relative cursor-pointer hover:border-brand/30 hover:shadow-md" onclick="openGoalModal(${i})">
-                    <button onclick="event.stopPropagation(); if(confirm('Delete this goal?')) { goalsData.splice(${i}, 1); localStorage.setItem('vault_goals', JSON.stringify(goalsData)); renderGoals(); }" class="absolute top-2 right-2 w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center z-10">✕</button>
-                    
-                    <div class="flex items-center gap-2 mb-2 pr-6">
-                        <p class="font-bold text-xs truncate">${g.name}</p>
-                        ${completeBadge}
-                    </div>
-                    
-                    <div class="flex justify-between items-end mb-2">
-                        <h4 class="text-lg font-bold tracking-tight leading-none"><span class="text-[10px] font-medium opacity-70 pr-0.5">MYR</span>${parseFloat(g.current).toLocaleString(undefined, {minimumFractionDigits: 0})}</h4>
-                        <p class="text-[9px] text-textMuted-light dark:text-textMuted-dark font-semibold uppercase tracking-wider">Target: ${parseFloat(g.target).toLocaleString()}</p>
-                    </div>
-                    
-                    <div class="w-full bg-panel-light dark:bg-panel-dark h-2 rounded-full p-0.5 border border-gray-100 dark:border-white/5 overflow-hidden">
-                        <div class="${progressColor} h-full rounded-full transition-all duration-1000 ease-out" style="width: ${pct}%;"></div>
-                    </div>
-                </div>`; 
-            }); 
-        }
-
-        function openGoalModal(index = -1) { 
-            document.getElementById('goal-index').value = index;
-            if (index >= 0) {
-                document.getElementById('goal-modal-title').innerText = "Update Goal";
-                document.getElementById('goal-name-input').value = goalsData[index].name;
-                document.getElementById('goal-current-input').value = goalsData[index].current;
-                document.getElementById('goal-target-input').value = goalsData[index].target;
-            } else {
-                document.getElementById('goal-modal-title').innerText = "Add New Goal";
-                document.getElementById('goal-form').reset();
-            }
-            document.getElementById('goal-modal').classList.remove('hidden'); 
-        }
-        function closeGoalModal() { document.getElementById('goal-modal').classList.add('hidden'); }
-        function saveGoal(e) { 
-            e.preventDefault(); 
-            let idx = parseInt(document.getElementById('goal-index').value);
-            let name = document.getElementById('goal-name-input').value;
-            let current = parseFloat(document.getElementById('goal-current-input').value)||0;
-            let target = parseFloat(document.getElementById('goal-target-input').value)||1;
-            
-            let previouslyIncomplete = true;
-            if (idx >= 0 && goalsData[idx].current < goalsData[idx].target) previouslyIncomplete = true;
-            else if (idx >= 0) previouslyIncomplete = false;
-
-            if (idx >= 0) {
-                goalsData[idx].name = name; goalsData[idx].current = current; goalsData[idx].target = target;
-            } else {
-                goalsData.push({name, current, target});
-            }
-            
-            localStorage.setItem('vault_goals', JSON.stringify(goalsData)); 
-            renderGoals(); 
-            closeGoalModal(); 
-            
-            if (current >= target && previouslyIncomplete) {
-                fireConfetti();
-            }
-        }
-
-        function renderDebts() {
-            const dl = document.getElementById('debt-list'); 
-            const tdEl = document.getElementById('total-debt-display');
-            if(!dl) return; 
-            dl.innerHTML = ''; 
-            debts.sort((a, b) => a.balance - b.balance);
-            
-            const totalDebt = debts.reduce((sum, d) => sum + d.balance, 0);
-            if(tdEl) {
-                if(totalDebt > 0) { 
-                    tdEl.innerText = '-MYR ' + totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2}); 
-                    tdEl.classList.remove('hidden'); 
-                } else { 
-                    tdEl.classList.add('hidden'); 
-                }
-            }
-
-            if (debts.length === 0) { 
-                dl.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4 uppercase tracking-wider">No liabilities tracked.</p>`; 
-                return; 
-            }
-            
-            debts.forEach((d, i) => { 
-                const isCC = d.name.toLowerCase().includes('credit card');
-                const badge = isCC ? `<span class="px-1.5 py-0.5 bg-red-500/10 text-red-500 border border-red-500/30 rounded text-[7px] uppercase font-bold tracking-widest whitespace-nowrap shadow-sm">Priority: 18% APR</span>` : '';
-                const borderClass = isCC ? 'border border-red-500/40 shadow-[0_0_8px_rgba(220,38,38,0.15)]' : 'border border-transparent';
-
-                dl.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark ${borderClass} p-3 rounded-xl flex justify-between items-center group transition-all duration-300"><div class="flex-1 min-w-0 pr-2"><div class="flex items-center flex-wrap gap-1.5"><p class="font-bold text-xs truncate max-w-[80%]">${d.name}</p>${badge}</div><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p></div><div class="flex items-center gap-2 shrink-0"><p class="text-red-500 font-bold text-xs">-MYR ${d.balance.toLocaleString()}</p><button onclick="if(confirm('Delete this debt?')) { debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); updateHomeDashboard(); fireConfetti(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0" title="Mark Paid/Delete">✕</button></div></div>`; 
-            }); 
-        }
-        function openDebtModal() { document.getElementById('debt-modal').classList.remove('hidden'); }
-        function closeDebtModal() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
-        function saveDebt(e) { 
-            e.preventDefault(); 
-            debts.push({ 
-                name: document.getElementById('debt-name').value, 
-                balance: parseFloat(document.getElementById('debt-balance').value), 
-                minPayment: parseFloat(document.getElementById('debt-min').value) 
-            }); 
-            localStorage.setItem('vault_debts', JSON.stringify(debts)); 
-            renderDebts(); updateHomeDashboard(); closeDebtModal(); 
-        }
-
-        function renderBills() {
-            const list = document.getElementById('bill-list'); 
-            if(!list) return; 
-            list.innerHTML = ''; 
-            bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-            if (bills.length === 0) { 
-                list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4 uppercase tracking-wider">No upcoming reminders.</p>`; 
-                return; 
-            }
-            
-            const today = new Date();
-            const iconWrap = `<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-3.5 h-3.5 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>`;
-
-            bills.forEach((b, i) => {
-                const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
-                let dueText = `Due in ${diffDays} Days`; 
-                let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
-                
-                if(diffDays === 0) { 
-                    dueText = 'Due Today'; 
-                    dueColor = 'text-brand font-bold'; 
-                } else if (diffDays < 0) { 
-                    dueText = `Overdue by ${Math.abs(diffDays)} Days`; 
-                    dueColor = 'text-red-500 font-bold'; 
-                } else if (diffDays <= 3) { 
-                    dueColor = 'text-red-500 font-bold'; 
-                }
-                
-                list.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl flex justify-between items-center group"><div class="flex items-center gap-2.5 flex-1 truncate pr-2">${iconWrap}<div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[9px] font-medium ${dueColor} mt-0.5">${dueText}</p></div></div><div class="flex items-center gap-2 shrink-0"><p class="font-bold text-xs">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition"><button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-[10px] flex items-center justify-center">✕</button></div></div></div>`;
-            });
-        }
-        function openBillModal() { document.getElementById('bill-modal').classList.remove('hidden'); }
-        function closeBillModal() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
-        function saveBill(e) { 
-            e.preventDefault(); 
-            bills.push({ 
-                name: document.getElementById('bill-name').value, 
-                amount: parseFloat(document.getElementById('bill-amount').value), 
-                dueDate: document.getElementById('bill-date').value 
-            }); 
-            localStorage.setItem('vault_bills', JSON.stringify(bills)); 
-            renderBills(); closeBillModal(); 
-        }
-
-        function openUtilHistoryModal() { 
-            const now = new Date(); 
-            document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
-            document.getElementById('util-history-modal').classList.remove('hidden'); 
-        }
-        function closeUtilHistoryModal() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
-        function saveUtilHistory(e) { 
-            e.preventDefault(); 
-            utilHistory.push({ 
-                month: document.getElementById('util-hist-month').value, 
-                type: document.getElementById('util-hist-type').value, 
-                amount: parseFloat(document.getElementById('util-hist-amount').value) 
-            }); 
-            localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); 
-            populateTimelines(); updateUtilDashboard(); closeUtilHistoryModal(); 
-        }
-
-        function openPayrollModal() { 
-            const now = new Date(); 
-            document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; 
-            document.getElementById('payroll-modal').classList.remove('hidden'); 
-        }
-        function closePayrollModal() { document.getElementById('payroll-modal').classList.add('hidden'); document.getElementById('payroll-form').reset(); document.getElementById('pay-net-display').innerText = '0.00'; }
-        
-        function autoCalcPayroll() {
-            let basic = parseFloat(document.getElementById('pay-basic').value) || 0;
-            let allow = parseFloat(document.getElementById('pay-allow').value) || 0;
-            let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
-            
-            let epfBase = basic + allow + bonus; 
-            let socsoEisBase = basic + allow; 
-            
-            let epf = 0; let empEpf = 0; let socso = 0; let eis = 0;
-
-            if (epfBase > 0) {
-                if (epfBase <= 5000) { epf = Math.ceil((Math.ceil(epfBase / 20) * 20) * 0.11); empEpf = Math.ceil((Math.ceil(epfBase / 20) * 20) * 0.13); } 
-                else if (epfBase <= 20000) { epf = Math.ceil((Math.ceil(epfBase / 100) * 100) * 0.11); empEpf = Math.ceil((Math.ceil(epfBase / 100) * 100) * 0.12); } 
-                else { epf = Math.ceil(epfBase * 0.11); empEpf = Math.ceil(epfBase * 0.12); }
-            }
-            
-            if (socsoEisBase > 0) {
-                let socsoGross = Math.min(socsoEisBase, 6000); 
-                let socsoBase = Math.ceil(socsoGross / 100) * 100 - 50;
-                socso = socsoBase * 0.005; eis = socsoBase * 0.002;
-            }
-            
-            document.getElementById('pay-epf').value = epf > 0 ? epf : '';
-            document.getElementById('pay-socso').value = socso > 0 ? socso.toFixed(2) : '';
-            document.getElementById('pay-eis').value = eis > 0 ? eis.toFixed(2) : '';
-            document.getElementById('pay-epf').setAttribute('data-employer', empEpf);
-            calcNetPay();
-        }
-
-        function calcNetPay() {
-            let basic = parseFloat(document.getElementById('pay-basic').value) || 0; let allow = parseFloat(document.getElementById('pay-allow').value) || 0; let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
-            let epf = parseFloat(document.getElementById('pay-epf').value) || 0; let socso = parseFloat(document.getElementById('pay-socso').value) || 0; let eis = parseFloat(document.getElementById('pay-eis').value) || 0; let tax = parseFloat(document.getElementById('pay-tax').value) || 0;
-            let gross = basic + allow + bonus; let deds = epf + socso + eis + tax;
-            document.getElementById('pay-net-display').innerText = (gross - deds).toFixed(2);
-        }
-
-        function savePayrollRecord(e) { 
-            e.preventDefault(); 
-            const month = document.getElementById('pay-month').value;
-            const basic = parseFloat(document.getElementById('pay-basic').value) || 0;
-            const allow = parseFloat(document.getElementById('pay-allow').value) || 0;
-            const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
-            const epf = parseFloat(document.getElementById('pay-epf').value) || 0;
-            const empEpf = parseFloat(document.getElementById('pay-epf').getAttribute('data-employer')) || 0;
-            const socso = parseFloat(document.getElementById('pay-socso').value) || 0;
-            const eis = parseFloat(document.getElementById('pay-eis').value) || 0;
-            const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
-            const net = (basic + allow + bonus) - (epf + socso + eis + tax);
-
-            payrollHistory = payrollHistory.filter(p => p.month !== month); 
-            payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); 
-            localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
-            
-            cardData.debit.balance += net;
-            localStorage.setItem('vault_cards', JSON.stringify(cardData));
-
-            transactions = transactions.filter(t => !(t.date === month + '-01' && t.category === 'Payroll'));
-            transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
-            localStorage.setItem('vault_transactions', JSON.stringify(transactions));
-
-            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closePayrollModal();
-            alert("Payslip Saved! Net Pay injected into your Debit Card.");
-        }
-
-        function openCategoryModal(type) {
-            if (type !== 'other') return; 
-            const filter = window.selectedMonth; if(!filter) return;
-            const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
-            const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
-            
-            let dailySpend = new Array(31).fill(0); let currCatTotal = 0; let lastCatTotal = 0;
-
-            transactions.forEach(t => {
-                if (t.type !== 'expense' || !t.date) return; 
-                const txDate = new Date(t.date); if (isNaN(txDate.getTime())) return;
-                
-                const amt = parseFloat(t.amount); const dayIndex = txDate.getDate() - 1;
-                const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
-                
-                const isFood = catMatch.match(/food|lunch|dinner|eat|cafe/); 
-                const isFam = catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/);
-                const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
-                
-                if (!isFood && !isUtil && !isFam) {
-                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) { dailySpend[dayIndex] += amt; currCatTotal += amt; } 
-                    else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { lastCatTotal += amt; }
-                }
-            });
-
-            let isDark = document.documentElement.classList.contains('dark');
-            let catInsightHtml = `<div class="text-[9px] font-semibold uppercase tracking-wider">Previous: <span class="font-bold text-xs">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
-            if (currCatTotal > lastCatTotal && lastCatTotal > 0) catInsightHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
-            else if (lastCatTotal > 0) catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-[10px]">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
-            else catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold">No historical data</div>`; 
-
-            document.getElementById('category-modal-insight').innerHTML = catInsightHtml;
-            if(categoryChart) { categoryChart.data.datasets[0].data = dailySpend; categoryChart.data.datasets[0].backgroundColor = isDark ? '#FFFFFF' : '#111827'; categoryChart.update(); }
-            document.getElementById('category-modal').classList.remove('hidden');
-        }
-        function closeCategoryModal() { document.getElementById('category-modal').classList.add('hidden'); }
-
-        function renderProfile() {
-            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-email').value = profile.email || ""; document.getElementById('prof-phone').value = profile.phone || ""; document.getElementById('prof-emergency').value = profile.emergency || ""; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
-            document.getElementById('li-name').innerText = profile.name; document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`; document.getElementById('li-location').innerText = profile.address; document.getElementById('li-email').innerText = profile.email || "email@example.com"; document.getElementById('li-phone').innerText = profile.phone || "+60 00-000 0000"; document.getElementById('li-emergency').innerText = profile.emergency || "Emergency Ctc";
-            
-            const skillsDiv = document.getElementById('li-skills'); skillsDiv.innerHTML = '';
-            if(profile.skills) { profile.skills.split(',').forEach(s => { if(s.trim()) skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[9px] font-bold px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; }); }
-
-            if(profile.avatar) { document.getElementById('profile-avatar-img').src = profile.avatar; document.getElementById('profile-avatar-img').classList.remove('hidden'); document.getElementById('profile-avatar-initial').classList.add('hidden'); } 
-            else { document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); }
-            if(profile.cover) { document.getElementById('profile-cover-img').src = profile.cover; document.getElementById('profile-cover-img').classList.remove('hidden'); }
-            if (!document.getElementById('tab-home').classList.contains('hidden')) { document.getElementById('header-title').innerText = `Hi, ${profile.name.split(' ')[0]}`; }
-        }
-        
-        function saveProfile(e) { 
-            e.preventDefault(); 
-            profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.email = document.getElementById('prof-email').value; profile.phone = document.getElementById('prof-phone').value; profile.emergency = document.getElementById('prof-emergency').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
-            localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
-        }
-        
-        function handleImageUpload(e, type) {
-            const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
-            reader.onload = function(event) { if(type === 'avatar') { profile.avatar = event.target.result; } else { profile.cover = event.target.result; } localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); };
-            reader.readAsDataURL(file);
-        }
-
-        function exportBackup() { 
-            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_goals: localStorage.getItem('vault_goals'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_payroll: localStorage.getItem('vault_payroll'), vault_commitments: localStorage.getItem('vault_commitments') }; 
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
-        }
-
-        document.getElementById('json-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { try { const data = JSON.parse(event.target.result); Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); } catch(err) { alert("Invalid backup file."); } }; reader.readAsText(file); 
-        });
-
-        document.getElementById('csv-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { 
-                const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
-                if (rows.length <= 1) return alert("File is empty or invalid. Make sure it has headers."); 
-                const headers = rows[0].split(',').map(h => h.trim().toLowerCase()); 
-                const monthMap = { 'jan':'01', 'feb':'02', 'mar':'03', 'apr':'04', 'may':'05', 'jun':'06', 'jul':'07', 'aug':'08', 'sep':'09', 'oct':'10', 'nov':'11', 'dec':'12' }; 
-                const importedData = rows.slice(1).map(row => { 
-                    const values = row.split(','); let obj = {}; 
-                    headers.forEach((h, i) => { 
-                        let val = values[i] ? values[i].trim() : ''; 
-                        if (h === 'type') val = val.toLowerCase(); 
-                        if (h === 'date') { 
-                            if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
-                            else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
-                        } 
-                        obj[h] = val; 
-                    }); 
-                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); return obj; 
-                }); 
-                const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
-                transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
-                transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); e.target.value = ''; 
-            }; reader.readAsText(file); 
-        });
-        
-        function clearData() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
-
-        // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
-            checkPayday(); populateTimelines();
+            checkPayday();
+            populateTimelines();
             
             Chart.defaults.font.family = 'Inter'; 
-            let isDark = document.documentElement.classList.contains('dark'); let tc = isDark ? '#8E8E93' : '#6B7280'; let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; Chart.defaults.color = tc;
+            let isDark = document.documentElement.classList.contains('dark'); 
+            let tc = isDark ? '#8E8E93' : '#6B7280'; 
+            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
+            Chart.defaults.color = tc;
             
-            const lineConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { color: gc }, ticks: { color: tc } } } };
+            const lineConfig = { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { legend: { display: false } }, 
+                scales: { 
+                    y: { display: false }, 
+                    x: { grid: { color: gc }, ticks: { color: tc } } 
+                } 
+            };
 
-            categoryChart = new Chart(document.getElementById('categoryChart'), { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } });
-            comparisonChart = new Chart(document.getElementById('comparisonChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
-            foodChart = new Chart(document.getElementById('foodChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
-            familyChart = new Chart(document.getElementById('familyChart'), { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#A855F7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#A855F7' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
-            utilChart = new Chart(document.getElementById('utilChart'), { type: 'line', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } });
-            salaryChart = new Chart(document.getElementById('salaryChart'), { type: 'line', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } });
+            categoryChart = new Chart(document.getElementById('categoryChart'), { 
+                type: 'bar', 
+                data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } 
+            });
 
-            renderCards(); renderBills(); renderDebts(); renderGoals(); renderCommitments(); renderProfile();
-            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); updateUtilDashboard(); updateCareerDashboard();
+            comparisonChart = new Chart(document.getElementById('comparisonChart'), { 
+                type: 'line', 
+                data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, 
+                options: lineConfig 
+            });
+            
+            foodChart = new Chart(document.getElementById('foodChart'), { 
+                type: 'line', 
+                data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, 
+                options: lineConfig 
+            });
+
+            familyChart = new Chart(document.getElementById('familyChart'), { 
+                type: 'line', 
+                data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#A855F7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#A855F7' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, 
+                options: lineConfig 
+            });
+            
+            utilChart = new Chart(document.getElementById('utilChart'), { 
+                type: 'line', 
+                data: { labels: [], datasets: [] }, 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } 
+            });
+            
+            salaryChart = new Chart(document.getElementById('salaryChart'), { 
+                type: 'line', 
+                data: { labels: [], datasets: [] }, 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } 
+            });
+
+            renderCards(); 
+            renderBills(); 
+            renderDebts(); 
+            renderGoals(); 
+            renderCommitments();
+            renderProfile();
+            updateHomeDashboard(); 
+            updateOverallDashboard(); 
+            updateFoodDashboard(); 
+            updateFamilyDashboard();
+            updateUtilDashboard(); 
+            updateCareerDashboard();
         };
     </script>
-    
-    <script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); }</script>
 </body>
 </html>
