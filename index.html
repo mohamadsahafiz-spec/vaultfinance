@@ -25,8 +25,11 @@
         
         .modal-enter { animation: fadeIn 0.15s ease-out forwards; }
         .tab-enter { animation: slideIn 0.2s ease-out forwards; }
+        .action-sheet-enter { animation: slideUp 0.2s ease-out forwards; }
+        
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
         
         .card-debit-bg { background: linear-gradient(105deg, #9ca3af 35%, #9f1239 35.1%, #e11d48 70%, #be123c 100%); }
         .card-gold-bg { background: linear-gradient(135deg, #fef08a 0%, #d97706 45%, #f59e0b 100%); }
@@ -82,9 +85,9 @@
                 <span>Profile</span>
             </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
-                <button onclick="openTxModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.3)] rounded-lg font-bold transition hover:scale-[1.02]">
+                <button onclick="openActionModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.3)] rounded-lg font-bold transition hover:scale-[1.02]">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
-                    New Transaction
+                    Add Entry
                 </button>
             </div>
         </nav>
@@ -125,7 +128,7 @@
                            <div class="flex justify-between items-end text-white mt-1">
                                <div>
                                    <div class="text-[8px] uppercase tracking-wider opacity-80 font-semibold flex items-center gap-1.5"><svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg> <span id="debit-name">Debit Card</span></div>
-                                   <div class="font-bold text-xl tracking-tight leading-none mt-1 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="debit-display">0.00</span></div>
+                                   <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="debit-display">0.00</span></div>
                                </div>
                                <div class="flex -space-x-2 drop-shadow-md pb-0.5">
                                    <div class="w-6 h-6 rounded-full bg-[#EB001B] opacity-90 mix-blend-screen"></div>
@@ -153,7 +156,7 @@
                             <div class="flex justify-between items-end mt-1">
                                 <div>
                                     <div class="text-[8px] uppercase tracking-wider font-semibold opacity-80 flex items-center gap-1.5"><svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg> <span id="credit-name">Ikhwan CC</span></div>
-                                    <div class="font-bold text-xl tracking-tight leading-none mt-1 drop-shadow-sm"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="credit-display">0.00</span></div>
+                                    <div class="font-bold text-xl tracking-tight leading-none mt-0.5 drop-shadow-sm"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="credit-display">0.00</span></div>
                                 </div>
                                 <div class="flex flex-col items-end drop-shadow-sm pb-0.5">
                                     <span class="text-[7px] font-bold bg-white/60 backdrop-blur-sm text-gray-900 px-1.5 py-0.5 rounded-sm mb-1 border border-white/50"><span id="credit-pct">0</span>% Used</span>
@@ -184,43 +187,26 @@
                         <div class="flex justify-between items-end mt-1">
                             <div>
                                 <div class="text-[8px] uppercase tracking-wider font-semibold text-gray-500 ml-0.5 flex items-center gap-1.5"><svg class="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-4h6v4"></path></svg> <span id="kwsp-name">Retirement Fund</span></div>
-                                <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-1 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
+                                <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- NEW FIXED COMMITMENTS WIDGET -->
+            <!-- FIXED COMMITMENTS WIDGET -->
             <div id="commitments-card" class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-all duration-500 mt-1 flex flex-col">
-                <div class="flex justify-between items-center mb-3">
+                <div class="flex justify-between items-center mb-4">
                     <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Commitments</p>
                     <span id="payday-badge" class="hidden bg-brand text-gray-900 text-[9px] font-bold px-2 py-0.5 rounded shadow-[0_0_8px_rgba(255,214,0,0.8)] animate-pulse tracking-widest uppercase">Payday Due!</span>
                 </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center group">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
-                            <div>
-                                <p class="font-bold text-xs">Car Loan (JND7218)</p>
-                                <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">Hire Purchase</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-bold text-xs text-gray-900 dark:text-white">MYR 500.00</p>
-                            <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p>
-                        </div>
-                    </div>
-                </div>
+                <div id="commitments-list" class="space-y-3"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                     <div class="flex justify-between items-center mb-1">
                         <p class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold tracking-wider uppercase">Emergency Fund</p>
-                        <button onclick="openSavingsModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Set Target">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                        </button>
                     </div>
                     <div class="mt-0.5">
                         <h4 class="text-xl font-bold tracking-tight"><span class="text-xs font-medium opacity-70 pr-1">MYR</span><span id="current-savings">0</span></h4>
@@ -237,9 +223,6 @@
                             <h4 class="font-bold text-sm text-red-600 dark:text-red-500 uppercase tracking-wider">Debt</h4>
                             <span id="total-debt-display" class="text-[9px] font-bold text-white bg-red-500 px-2 py-0.5 rounded shadow-[0_0_8px_rgba(239,68,68,0.4)] hidden"></span>
                         </div>
-                        <button onclick="openDebtModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                        </button>
                     </div>
                     <div id="debt-list" class="space-y-2.5 flex-1"></div>
                 </div>
@@ -279,7 +262,7 @@
                         <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-util">0.00</span></p>
                         <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Utilities</p>
                     </div>
-                    <div class="bg-surface-light dark:bg-surface-dark p-2.5 rounded-xl text-center cursor-pointer hover:border-gray-900 dark:hover:border-white border border-transparent transition" onclick="openCategoryModal('other')">
+                    <div class="bg-surface-light dark:bg-surface-dark p-2.5 rounded-xl text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-500 border border-transparent transition" onclick="openCategoryModal('other')">
                         <div class="mb-1 flex justify-center"><svg class="w-5 h-5 text-gray-500 dark:text-gray-400 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
                         <p class="font-bold text-xs leading-none mb-1"><span id="pct-other">0</span>%</p>
                         <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark leading-tight mb-1">MYR <span id="val-other">0.00</span></p>
@@ -348,9 +331,6 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <div class="flex justify-between items-center mb-5">
                     <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Yearly Pacing</p>
-                    <button onclick="openUtilHistoryModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Log Past Bill">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    </button>
                 </div>
                 <div class="w-full h-48 relative drop-shadow-[0_4px_6px_rgba(59,130,246,0.25)]"><canvas id="utilChart"></canvas></div>
             </div>
@@ -365,9 +345,6 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-brand/20 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-4">
                     <h4 class="font-bold text-xs text-brand uppercase tracking-wider">Reminders</h4>
-                    <button onclick="openBillModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    </button>
                 </div>
                 <div id="bill-list" class="space-y-2.5 flex-1 overflow-y-auto max-h-[300px] pr-1"></div>
             </div>
@@ -379,7 +356,7 @@
         <div id="tab-salary" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
             
             <div class="flex justify-between items-center mt-1">
-                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Income Tracker</p>
+                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Income</p>
                 <div id="salary-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
@@ -421,9 +398,6 @@
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
                 <div class="flex justify-between items-center mb-5">
                     <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Gross vs Net vs Deductions</p>
-                    <button onclick="openPayrollModal()" class="w-6 h-6 rounded-full bg-brand text-gray-900 flex items-center justify-center shadow-[0_0_8px_rgba(255,214,0,0.5)] hover:scale-110 transition-transform shrink-0" title="Log Payslip">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    </button>
                 </div>
                 <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
             </div>
@@ -442,33 +416,33 @@
         <div id="tab-profile" class="tab-enter px-5 md:px-6 hidden flex-col gap-4 pb-20">
             
             <div class="relative bg-panel-light dark:bg-panel-dark rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-white/5 transition-colors duration-300 mt-1">
-                <div class="h-28 bg-gradient-to-br from-gray-800 to-black relative">
+                <div class="h-32 bg-gradient-to-br from-gray-800 to-black relative">
                     <button onclick="document.getElementById('cover-upload').click()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/20 backdrop-blur text-white flex items-center justify-center hover:bg-white/30 transition text-xs shadow-md"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
                     <input type="file" id="cover-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'cover')">
                     <img id="profile-cover-img" src="" class="w-full h-full object-cover hidden">
                 </div>
                 
-                <div class="absolute top-16 left-5 z-10">
-                    <div class="w-20 h-20 rounded-full border-[3px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-lg transition-colors duration-300" onclick="document.getElementById('avatar-upload').click()">
+                <div class="absolute top-16 left-1/2 -translate-x-1/2 z-10">
+                    <div class="w-24 h-24 rounded-full border-[4px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-lg transition-colors duration-300" onclick="document.getElementById('avatar-upload').click()">
                         <img id="profile-avatar-img" src="" class="w-full h-full object-cover hidden">
-                        <div class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-gray-400" id="profile-avatar-initial"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-400" id="profile-avatar-initial"></div>
                         <div class="absolute inset-0 bg-black/50 hidden group-hover:flex items-center justify-center text-white text-[10px] font-semibold transition backdrop-blur-sm">Edit</div>
                     </div>
                     <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'avatar')">
                 </div>
                 
-                <div class="pt-12 px-6 pb-6">
-                    <h3 class="text-xl font-bold tracking-tight" id="li-name">Name</h3>
-                    <p class="text-[11px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5" id="li-role">Role • Industry</p>
-                    <p class="text-[10px] text-textMuted-light dark:text-textMuted-dark mt-1" id="li-location">Location</p>
+                <div class="pt-12 px-6 pb-6 flex flex-col items-center text-center">
+                    <h3 class="text-2xl font-bold tracking-tight" id="li-name">Name</h3>
+                    <p class="text-xs font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5" id="li-role">Role • Industry</p>
+                    <p class="text-[10px] text-textMuted-light dark:text-textMuted-dark mt-1.5" id="li-location">Location</p>
                     
-                    <div class="mt-4 pt-4 border-t border-gray-200/50 dark:border-white/10 flex flex-col gap-2">
-                        <div class="flex items-center gap-2.5 text-xs font-medium text-textMuted-light dark:text-textMuted-dark"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span id="li-email">email@example.com</span></div>
-                        <div class="flex items-center gap-2.5 text-xs font-medium text-textMuted-light dark:text-textMuted-dark"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> <span id="li-phone">+60 00-000 0000</span></div>
-                        <div class="flex items-center gap-2.5 text-xs font-semibold text-red-500"><svg class="w-4 h-4 text-red-500 drop-shadow-[0_0_5px_rgba(239,68,68,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> <span id="li-emergency">Emergency Ctc</span></div>
+                    <div class="mt-5 pt-5 border-t border-gray-200/50 dark:border-white/10 flex flex-col gap-3 w-full max-w-xs text-left">
+                        <div class="flex items-center gap-3 text-xs font-medium text-textMuted-light dark:text-textMuted-dark"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span id="li-email">email@example.com</span></div>
+                        <div class="flex items-center gap-3 text-xs font-medium text-textMuted-light dark:text-textMuted-dark"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> <span id="li-phone">+60 00-000 0000</span></div>
+                        <div class="flex items-center gap-3 text-xs font-semibold text-red-500"><svg class="w-4 h-4 text-red-500 drop-shadow-[0_0_5px_rgba(239,68,68,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> <span id="li-emergency">Emergency Ctc</span></div>
                     </div>
 
-                    <div class="mt-5 flex flex-wrap gap-1.5" id="li-skills"></div>
+                    <div class="mt-6 flex flex-wrap justify-center gap-1.5" id="li-skills"></div>
                 </div>
             </div>
 
@@ -544,7 +518,7 @@
                         <input type="file" id="csv-file-input" accept=".csv" class="hidden">
                         <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-medium px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">⬆ Import CSV</button>
                     </div>
-                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-medium px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition">⚠ Factory Reset</button>
+                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-medium px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-50 hover:text-white transition">⚠ Factory Reset</button>
                 </div>
             </div>
         </div>
@@ -564,7 +538,7 @@
         </button>
         
         <div class="relative w-12 h-12 flex justify-center items-center shrink-0 -mt-8">
-            <button onclick="openTxModal()" class="absolute w-12 h-12 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_6px_15px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform border-[3px] border-surface-light dark:border-surface-dark z-[100]">
+            <button onclick="openActionModal()" class="absolute w-12 h-12 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_6px_15px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform border-[3px] border-surface-light dark:border-surface-dark z-[100]">
                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
             </button>
         </div>
@@ -583,6 +557,69 @@
     <!-- ========================================== -->
     <!-- MODALS                                     -->
     <!-- ========================================== -->
+
+    <!-- MASTER ACTION SHEET MODAL -->
+    <div id="action-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-end sm:items-center justify-center sm:p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold tracking-tight">Add New...</h3>
+                <button onclick="closeActionModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
+            </div>
+            <div class="grid grid-cols-3 gap-y-6 gap-x-2">
+                <button onclick="closeActionModal(); openTxModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-brand/10 text-gray-900 dark:text-white group-hover:text-brand flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-brand/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Transaction</span>
+                </button>
+                <button onclick="closeActionModal(); openPayrollModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-green-500/10 text-gray-900 dark:text-white group-hover:text-green-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-green-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Payslip</span>
+                </button>
+                <button onclick="closeActionModal(); openUtilHistoryModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-blue-500/10 text-gray-900 dark:text-white group-hover:text-blue-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-blue-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Utility Bill</span>
+                </button>
+                <button onclick="closeActionModal(); openCommitmentModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Comm.</span>
+                </button>
+                <button onclick="closeActionModal(); openDebtModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-red-500/10 text-gray-900 dark:text-white group-hover:text-red-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-red-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Debt</span>
+                </button>
+                <button onclick="closeActionModal(); openBillModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-orange-500/10 text-gray-900 dark:text-white group-hover:text-orange-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-orange-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Reminder</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW FIXED COMMITMENT MODAL -->
+    <div id="commitment-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4">Add Fixed Commitment</h3>
+            <form id="commitment-form" onsubmit="saveCommitment(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Commitment Name</label>
+                    <input type="text" id="commit-name" required placeholder="e.g., Car Loan (JND7218)" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Type / Note</label>
+                        <input type="text" id="commit-type" required placeholder="e.g., Hire Purchase" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Monthly Amount</label>
+                        <input type="number" id="commit-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeCommitmentModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- DYNAMIC CARD EDIT MODAL -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
@@ -762,7 +799,6 @@
                             <option value="Electricity">Electricity (TNB)</option>
                             <option value="Water">Water</option>
                             <option value="Internet">Internet/Wifi</option>
-                            <option value="Phone">Phone/Mobile</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -852,6 +888,10 @@
         let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
         let payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
         
+        let commitments = JSON.parse(localStorage.getItem('vault_commitments')) || [
+            { name: "Car Loan (JND7218)", type: "Hire Purchase", amount: 500 }
+        ];
+
         let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
             name: "Sahafiz", 
             role: "Field Service Engineer", 
@@ -900,6 +940,14 @@
         window.selectedMonth = "";
         window.selectedYear = "";
         window.selectedSalaryYear = "";
+
+        // ACTION MODAL TRIGGERS
+        function openActionModal() {
+            document.getElementById('action-modal').classList.remove('hidden');
+        }
+        function closeActionModal() {
+            document.getElementById('action-modal').classList.add('hidden');
+        }
 
         // GLOBAL DELETE TRANSACTION FUNCTION
         window.deleteTransaction = function(index) {
@@ -999,7 +1047,6 @@
             document.getElementById('main-scroll').scrollTo(0,0);
         }
 
-        // CALENDAR PAYDAY LISTENER
         function checkPayday() {
             const today = new Date();
             const commitmentsCard = document.getElementById('commitments-card');
@@ -1007,11 +1054,11 @@
             
             if (commitmentsCard) {
                 if (today.getDate() === 27) {
-                    commitmentsCard.classList.add('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]', 'animate-pulse');
+                    commitmentsCard.classList.add('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]');
                     commitmentsCard.classList.remove('border-gray-200', 'dark:border-white/5');
                     if (paydayBadge) paydayBadge.classList.remove('hidden');
                 } else {
-                    commitmentsCard.classList.remove('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]', 'animate-pulse');
+                    commitmentsCard.classList.remove('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]');
                     commitmentsCard.classList.add('border-gray-200', 'dark:border-white/5');
                     if (paydayBadge) paydayBadge.classList.add('hidden');
                 }
@@ -1161,9 +1208,8 @@
                 let gross = p.basic + p.allowance + p.bonus;
                 let empEpf = 0;
                 if (p.empEpf) {
-                    empEpf = p.empEpf; // Read from history if available
+                    empEpf = p.empEpf; 
                 } else {
-                    // Fallback for old data
                     if(gross > 0 && gross <= 5000) {
                         empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13);
                     } else if(gross > 5000) {
@@ -1215,22 +1261,29 @@
                     if(txM === currM && txY === currY) {
                         monthlySpend += amt; 
                         
-                        if(isFood) foodSpend += amt; 
-                        else if(isUtil) utilSpend += amt; 
-                        else otherSpend += amt;
+                        let iconWrap = '';
+                        if(isFood) {
+                            foodSpend += amt; 
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
+                        } else if(isUtil) {
+                            utilSpend += amt; 
+                            let utilSvg = `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>`;
+                            if(catMatch.match(/water/)) {
+                                utilSvg = `<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.7L12 2 8 9.3C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>`;
+                            } else if (catMatch.match(/internet|wifi|unifi/)) {
+                                utilSvg = `<path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line>`;
+                            }
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">${utilSvg}</svg></div>`;
+                        } else {
+                            otherSpend += amt;
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20 shrink-0"><svg class="w-4 h-4 text-gray-500 dark:text-gray-400 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>`;
+                        }
                         
                         const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
                         const sign = t.type === 'income' ? '+' : '-';
                         
-                        let iconWrap = '';
                         if (t.type === 'income') {
-                            iconWrap = `<div class="w-9 h-9 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20"><svg class="w-4 h-4 text-green-500 drop-shadow-[0_0_6px_rgba(34,197,94,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></div>`;
-                        } else if (isFood) {
-                            iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
-                        } else if (isUtil) {
-                            iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
-                        } else {
-                            iconWrap = `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20"><svg class="w-4 h-4 text-gray-500 dark:text-gray-400 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>`;
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20 shrink-0"><svg class="w-4 h-4 text-green-500 drop-shadow-[0_0_6px_rgba(34,197,94,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></div>`;
                         }
                         
                         if(list) {
@@ -1313,7 +1366,7 @@
 
                 if(txM === currM && txY === currY) {
                     cSum += amt; 
-                    const iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
+                    const iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
                     if(list) {
                         list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
                             <td class="py-2.5 w-11">${iconWrap}</td>
@@ -1368,8 +1421,6 @@
             let monthlyComms = new Array(12).fill(0); 
             let monthlyOther = new Array(12).fill(0);
             
-            const iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
-            
             histThisYear.forEach((u, i) => {
                 const amt = parseFloat(u.amount); 
                 const mIdx = parseInt(u.month.split('-')[1]) - 1;
@@ -1380,6 +1431,23 @@
                 else monthlyOther[mIdx] += amt;
 
                 const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                
+                let utilSvg = ''; let colorClass = ''; let bgClass = '';
+                if(u.type === 'Electricity') {
+                    utilSvg = `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>`;
+                    colorClass = 'text-yellow-500 drop-shadow-[0_0_6px_rgba(234,179,8,0.8)]'; bgClass = 'bg-yellow-500/10 border-yellow-500/20';
+                } else if(u.type === 'Water') {
+                    utilSvg = `<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.7L12 2 8 9.3C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>`;
+                    colorClass = 'text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]'; bgClass = 'bg-blue-500/10 border-blue-500/20';
+                } else if(u.type === 'Internet' || u.type === 'Phone') {
+                    utilSvg = `<path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line>`;
+                    colorClass = 'text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.8)]'; bgClass = 'bg-purple-500/10 border-purple-500/20';
+                } else {
+                    utilSvg = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line>`;
+                    colorClass = 'text-gray-500 dark:text-gray-400 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]'; bgClass = 'bg-gray-500/10 border-gray-500/20';
+                }
+                
+                const iconWrap = `<div class="w-9 h-9 rounded-full ${bgClass} flex items-center justify-center border shrink-0"><svg class="w-4 h-4 ${colorClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">${utilSvg}</svg></div>`;
                 
                 if(list) {
                     list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group">
@@ -1494,7 +1562,7 @@
             renderWidget('bonus', currBonus, prevBonus);
             renderWidget('tax', currTax, prevTax, true);
             
-            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
+            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
 
             histThisYear.forEach((c) => {
                 const totalGross = c.basic + c.allowance + c.bonus;
@@ -1541,6 +1609,58 @@
                 updateHomeDashboard(); 
                 renderCards(); 
             }
+        }
+
+        function renderCommitments() {
+            const list = document.getElementById('commitments-list');
+            if(!list) return;
+            list.innerHTML = '';
+            
+            if (commitments.length === 0) {
+                list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-2 uppercase tracking-wider">No fixed commitments.</p>`;
+                return;
+            }
+
+            commitments.forEach((c, i) => {
+                list.innerHTML += `
+                <div class="flex justify-between items-center group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">
+                            <svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-xs">${c.name}</p>
+                            <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.type}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-right">
+                        <div>
+                            <p class="font-bold text-xs text-gray-900 dark:text-white">MYR ${parseFloat(c.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
+                            <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p>
+                        </div>
+                        <button onclick="if(confirm('Delete commitment?')) { commitments.splice(${i}, 1); localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0">✕</button>
+                    </div>
+                </div>`;
+            });
+        }
+
+        function openCommitmentModal() {
+            document.getElementById('commitment-modal').classList.remove('hidden');
+        }
+        function closeCommitmentModal() {
+            document.getElementById('commitment-modal').classList.add('hidden');
+            document.getElementById('commitment-form').reset();
+        }
+        function saveCommitment(e) {
+            e.preventDefault();
+            commitments.push({
+                name: document.getElementById('commit-name').value,
+                type: document.getElementById('commit-type').value,
+                amount: parseFloat(document.getElementById('commit-amount').value)
+            });
+            localStorage.setItem('vault_commitments', JSON.stringify(commitments));
+            renderCommitments();
+            closeCommitmentModal();
         }
 
         function renderCards() { 
@@ -1774,7 +1894,7 @@
             }
             
             const today = new Date();
-            const iconWrap = `<div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
+            const iconWrap = `<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-3.5 h-3.5 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>`;
 
             bills.forEach((b, i) => {
                 const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
@@ -2080,7 +2200,8 @@
                 vault_bills: localStorage.getItem('vault_bills'), 
                 vault_profile: localStorage.getItem('vault_profile'), 
                 vault_util_hist: localStorage.getItem('vault_util_hist'), 
-                vault_payroll: localStorage.getItem('vault_payroll') 
+                vault_payroll: localStorage.getItem('vault_payroll'),
+                vault_commitments: localStorage.getItem('vault_commitments')
             }; 
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); 
             const a = document.createElement('a'); 
@@ -2184,6 +2305,7 @@
             } 
         }
 
+        // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
             checkPayday();
             populateTimelines();
@@ -2238,6 +2360,7 @@
             renderBills(); 
             renderDebts(); 
             renderSavings(); 
+            renderCommitments();
             renderProfile();
             updateHomeDashboard(); 
             updateOverallDashboard(); 
