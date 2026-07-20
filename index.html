@@ -55,6 +55,7 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
+    <!-- DESKTOP Sidebar -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-8">
             <div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-lg shadow-[0_0_10px_rgba(255,214,0,0.5)]">V</div>
@@ -91,29 +92,35 @@
             </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
                 <button onclick="openActionModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.3)] rounded-lg font-bold transition hover:scale-[1.02]">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
                     Add Entry
                 </button>
             </div>
         </nav>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-28 md:pb-6 scroll-smooth hide-scrollbar" id="main-scroll">
         
-        <header class="flex justify-between items-end px-5 pt-6 pb-2 md:px-6 shrink-0">
+        <!-- HEADER WITH NEW AVATAR PLACEMENT -->
+        <header class="flex justify-between items-center px-5 pt-6 pb-2 md:px-6 shrink-0 relative z-20">
             <div class="flex-1 min-w-0 mr-4"><h2 id="header-title" class="text-2xl font-bold tracking-tight truncate drop-shadow-sm">Hi, Sahafiz</h2></div>
+            <button onclick="switchTab('profile')" class="w-9 h-9 rounded-full border-2 border-brand/80 bg-surface-light dark:bg-surface-dark overflow-hidden flex items-center justify-center shadow-[0_0_10px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform shrink-0" title="Profile">
+                <img id="header-avatar-img" src="" class="w-full h-full object-cover hidden">
+                <div id="header-avatar-initial" class="text-sm font-bold text-gray-400">S</div>
+            </button>
         </header>
 
         <!-- ========================================== -->
         <!-- TAB 1: HOME DASHBOARD                      -->
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter px-5 md:px-6 flex flex-col gap-4">
+            
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">My Cards</p>
                 <div id="home-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
+            <!-- HORIZONTAL SWIPE CARDS -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
                 <!-- DEBIT CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('debit')">
@@ -298,6 +305,7 @@
                     <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Ledger (Selected Month)</p>
                 </div>
                 
+                <!-- SMART SEARCH BAR -->
                 <div class="mb-4 relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-textMuted-light dark:text-textMuted-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -556,7 +564,7 @@
                     <button onclick="exportPDF()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📄 Export PDF</button>
                     <div>
                         <input type="file" id="json-file-input" accept=".json" class="hidden">
-                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-medium px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">📥 Import Backup</button>
+                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-medium px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">📥 Import JSON</button>
                     </div>
                     <div>
                         <input type="file" id="csv-file-input" accept=".csv" class="hidden">
@@ -569,358 +577,45 @@
 
     </main>
 
-    <!-- MINIMALIST GLOWING SVG BOTTOM NAV -->
-    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-4 py-2.5 shadow-xl z-[90] transition-colors duration-300">
-        <button onclick="switchTab('home')" id="nav-mob-home" class="p-2 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-        </button>
-        <button onclick="switchTab('overall')" id="nav-mob-overall" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-        </button>
-        <button onclick="switchTab('family')" id="nav-mob-family" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-        </button>
-        <button onclick="switchTab('food')" id="nav-mob-food" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
-        </button>
+    <!-- PERFECT 3-1-3 BOTTOM NAV -->
+    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90] transition-colors duration-300">
         
-        <div class="relative w-12 h-12 flex justify-center items-center shrink-0 -mt-8">
-            <button onclick="openActionModal()" class="absolute w-12 h-12 bg-brand rounded-full flex items-center justify-center text-gray-900 shadow-[0_6px_15px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform border-[3px] border-surface-light dark:border-surface-dark z-[100]">
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </button>
+            <button onclick="switchTab('overall')" id="nav-mob-overall" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </button>
+            <button onclick="switchTab('family')" id="nav-mob-family" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </button>
+        </div>
+        
+        <div class="relative w-14 h-14 flex justify-center items-center shrink-0 -mt-6">
+            <button onclick="openActionModal()" class="absolute w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,214,0,0.6)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
+                <div class="w-9 h-9 rounded-full border border-yellow-700/30 flex items-center justify-center bg-gradient-to-br from-yellow-300 to-yellow-500 shadow-inner">
+                    <span class="font-black text-xl text-yellow-900 drop-shadow-md" style="font-family: 'Inter', sans-serif;">V</span>
+                </div>
             </button>
         </div>
 
-        <button onclick="switchTab('bills')" id="nav-mob-bills" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-        </button>
-        <button onclick="switchTab('salary')" id="nav-mob-salary" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
-        </button>
-        <button onclick="switchTab('profile')" id="nav-mob-profile" class="p-2 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        </button>
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="switchTab('food')" id="nav-mob-food" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+            </button>
+            <button onclick="switchTab('bills')" id="nav-mob-bills" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </button>
+            <button onclick="switchTab('salary')" id="nav-mob-salary" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            </button>
+        </div>
+        
     </nav>
-
-    <!-- MODALS -->
-    
-    <!-- MASTER ACTION SHEET -->
-    <div id="action-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-end sm:items-center justify-center sm:p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold tracking-tight">Add New...</h3>
-                <button onclick="closeActionModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
-            </div>
-            <div class="grid grid-cols-3 gap-y-6 gap-x-2">
-                <button onclick="closeActionModal(); openTxModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-brand/10 text-gray-900 dark:text-white group-hover:text-brand flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-brand/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Transaction</span>
-                </button>
-                <button onclick="closeActionModal(); openPayrollModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-green-500/10 text-gray-900 dark:text-white group-hover:text-green-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-green-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
-                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Payslip</span>
-                </button>
-                <button onclick="closeActionModal(); openUtilHistoryModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-blue-500/10 text-gray-900 dark:text-white group-hover:text-blue-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-blue-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
-                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Utility Bill</span>
-                </button>
-                <button onclick="closeActionModal(); openCommitmentModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
-                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Comm.</span>
-                </button>
-                <button onclick="closeActionModal(); openDebtModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-red-500/10 text-gray-900 dark:text-white group-hover:text-red-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-red-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Debt</span>
-                </button>
-                <button onclick="closeActionModal(); openGoalModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-brand/10 text-gray-900 dark:text-white group-hover:text-brand flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-brand/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
-                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Goal</span>
-                </button>
-                <button onclick="closeActionModal(); openBillModal()" class="flex flex-col items-center gap-2.5 group col-span-3 mt-2">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-orange-500/10 text-gray-900 dark:text-white group-hover:text-orange-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-orange-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Reminder</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CARDS / TRANSACTIONS / ETC MODALS -->
-    <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4" id="edit-card-title">Update Card</h3>
-            <form onsubmit="saveCardEdit(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Card Name</label>
-                    <input type="text" id="edit-card-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Last 4 Digits</label>
-                        <input type="text" id="edit-card-last4" maxlength="4" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-brand mb-1 uppercase tracking-wider">Balance / Funds</label>
-                        <input type="number" id="edit-card-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div id="edit-card-limit-container" class="hidden">
-                    <label class="block text-[9px] font-semibold text-red-500 mb-1 uppercase tracking-wider">Max Limit</label>
-                    <input type="number" id="edit-card-limit" step="0.01" class="w-full bg-red-50 dark:bg-red-900/10 text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-900/50 outline-none focus:ring-1 focus:ring-red-500 transition">
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-xs px-3 py-2.5 rounded-xl font-bold shadow-sm hover:scale-[1.02] transition-transform">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4">Add Transaction</h3>
-            <form id="tx-form" onsubmit="saveTransaction(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Description</label>
-                    <input type="text" id="tx-desc" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
-                        <input type="number" id="tx-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Date</label>
-                        <input type="date" id="tx-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Type</label>
-                        <select id="tx-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                            <option value="expense">Expense</option>
-                            <option value="income">Income</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Payment Method</label>
-                        <select id="tx-method" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                            <option value="debit">Debit Card</option>
-                            <option value="credit">Credit Card</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Category</label>
-                    <input type="text" id="tx-category" required placeholder="Food, Utility, Tuition..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-xs px-3 py-2.5 rounded-xl font-bold shadow-sm hover:scale-[1.02] transition-transform">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="commitment-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4">Add Fixed Commitment</h3>
-            <form id="commitment-form" onsubmit="saveCommitment(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Commitment Name</label>
-                    <input type="text" id="commit-name" required placeholder="e.g., Car Loan (JND7218)" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Type / Note</label>
-                        <input type="text" id="commit-type" required placeholder="e.g., Hire Purchase" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Monthly Amount</label>
-                        <input type="number" id="commit-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeCommitmentModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <div id="goal-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4" id="goal-modal-title">Add New Goal</h3>
-            <form id="goal-form" onsubmit="saveGoal(event)" class="space-y-3">
-                <input type="hidden" id="goal-index" value="-1">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Goal Name</label>
-                    <input type="text" id="goal-name-input" required placeholder="e.g. Emergency Fund, Vacation" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Current Saved</label>
-                        <input type="number" id="goal-current-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Target Amount</label>
-                        <input type="number" id="goal-target-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeGoalModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Goal</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4">Add Debt</h3>
-            <form id="debt-form" onsubmit="saveDebt(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Debt Name</label>
-                    <input type="text" id="debt-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Balance</label>
-                        <input type="number" id="debt-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Min Payment</label>
-                        <input type="number" id="debt-min" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeDebtModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4">Add Reminder</h3>
-            <form id="bill-form" onsubmit="saveBill(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Bill Name</label>
-                    <input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
-                        <input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Due Date</label>
-                        <input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
-            <h3 class="text-xl font-bold tracking-tight mb-4">Log Past Bill</h3>
-            <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Month Paid</label>
-                    <input type="month" id="util-hist-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Bill Type</label>
-                        <select id="util-hist-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                            <option value="Electricity">Electricity (TNB)</option>
-                            <option value="Water">Water</option>
-                            <option value="Internet">Internet/Wifi</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
-                        <input type="number" id="util-hist-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                    </div>
-                </div>
-                <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Log</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh] hide-scrollbar">
-            <h3 class="text-xl font-bold tracking-tight mb-0.5">Smart Payroll</h3>
-            <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Auto-calculates EPF & SOCSO</p>
-            
-            <form id="payroll-form" onsubmit="savePayrollRecord(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Payslip Month</label>
-                    <input type="month" id="pay-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
-                </div>
-                
-                <div class="p-3 bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-white/5">
-                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-brand">Gross Earnings</h4>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Basic</label>
-                            <input type="number" id="pay-basic" step="0.01" oninput="autoCalcPayroll()" required class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Allow.</label>
-                            <input type="number" id="pay-allow" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Bonus</label>
-                            <input type="number" id="pay-bonus" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-3 bg-red-50 dark:bg-red-900/10 rounded-xl border border-red-100 dark:border-red-900/30">
-                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-red-500">Statutory Deductions</h4>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EPF (11%)</label>
-                            <input type="number" id="pay-epf" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">Tax (PCB)</label>
-                            <input type="number" id="pay-tax" step="0.01" value="0" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">SOCSO (~0.5%)</label>
-                            <input type="number" id="pay-socso" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EIS (~0.2%)</label>
-                            <input type="number" id="pay-eis" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center px-2 pt-2 border-t border-gray-200 dark:border-white/10">
-                    <p class="font-semibold text-xs uppercase tracking-wider">Net Pay</p>
-                    <p class="text-xl font-bold text-green-500 tracking-tight drop-shadow-sm">MYR <span id="pay-net-display">0.00</span></p>
-                </div>
-
-                <div class="flex gap-2.5 pt-1">
-                    <button type="button" onclick="closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
-                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- SCRIPT ENGINE -->
+</body>
+</html>
+<!-- SCRIPT ENGINE -->
     <script>
         const SVG_INC = `<svg class="w-4 h-4 text-green-500 drop-shadow-[0_0_6px_rgba(34,197,94,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`;
         const SVG_FOOD = `<svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>`;
@@ -1161,9 +856,10 @@
                         else otherSpend += amt;
                         
                         if (searchTerm && !catMatch.includes(searchTerm)) return;
-                        
+
+                        const c = 'text-gray-900 dark:text-white'; const sign = '-';
                         if(list) {
-                            list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group"><td class="py-2.5 w-11">${getIconWrap(t.type, catMatch)}</td><td class="py-2.5 pl-2"><p class="font-bold text-xs">${t.desc}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p></td><td class="py-2.5 text-right font-bold text-sm text-gray-900 dark:text-white">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-2.5 text-right w-8"><button onclick="deleteTransaction(${i})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
+                            list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group"><td class="py-2.5 w-11">${getIconWrap(t.type, catMatch)}</td><td class="py-2.5 pl-2"><p class="font-bold text-xs">${t.desc}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p></td><td class="py-2.5 text-right font-bold text-sm ${c}">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-2.5 text-right w-8"><button onclick="deleteTransaction(${i})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
                         }
                         txCount++;
                     }
@@ -1325,7 +1021,8 @@
             histThisYear.forEach((c) => {
                 const totalGross = c.basic + c.allowance + c.bonus; const totalDeds = c.epf + c.socso + c.eis + c.tax;
                 if(list) {
-                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
+                    list.innerHTML += `
+                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
                         <td class="py-2.5 w-11">${iconWrap}</td>
                         <td class="py-2.5 pl-2"><p class="font-bold text-xs">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p></td>
                         <td class="py-2.5 pr-2 text-right"><p class="font-bold text-[9px] text-red-500 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded border border-red-100 dark:border-red-900/50 inline-block">-MYR ${totalDeds.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-1 uppercase tracking-wider">EPF: ${c.epf} | Tax: ${c.tax}</p></td>
@@ -1558,180 +1255,33 @@
             updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closePayrollModal(); alert("Payslip Saved! Net Pay injected into your Debit Card.");
         }
 
-        window.openCategoryModal = function(type) {
-            if (type !== 'other') return; const filter = window.selectedMonth; if(!filter) return;
-            const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1; const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
-            let dailySpend = new Array(31).fill(0); let currCatTotal = 0; let lastCatTotal = 0;
-
-            transactions.forEach(t => {
-                if (t.type !== 'expense' || !t.date) return; const txDate = new Date(t.date); if (isNaN(txDate.getTime())) return;
-                const amt = parseFloat(t.amount); const dayIndex = txDate.getDate() - 1; const catMatch = ((t.category || '') + " " + (t.desc || '')).toLowerCase();
-                const isFood = catMatch.match(/food|lunch|dinner|eat|cafe/); const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/); const isFam = catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/);
-                
-                if (!isFood && !isUtil && !isFam) {
-                    if (txDate.getMonth() === currM && txDate.getFullYear() === currY) { dailySpend[dayIndex] += amt; currCatTotal += amt; } 
-                    else if (txDate.getMonth() === lastM && txDate.getFullYear() === lastY) { lastCatTotal += amt; }
-                }
-            });
-
-            let isDark = document.documentElement.classList.contains('dark'); let catInsightHtml = `<div class="text-[9px] font-semibold uppercase tracking-wider">Previous: <span class="font-bold text-xs">MYR ${lastCatTotal.toFixed(0)}</span></div>`;
-            if (currCatTotal > lastCatTotal && lastCatTotal > 0) catInsightHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(currCatTotal - lastCatTotal).toFixed(0)}</div>`; 
-            else if (lastCatTotal > 0) catInsightHtml += `<div class="${isDark ? 'text-white' : 'text-gray-900'} font-bold text-[10px]">✨ MYR ${(lastCatTotal - currCatTotal).toFixed(0)} remaining</div>`; 
-            else catInsightHtml += `<div class="text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold">No historical data</div>`; 
-
-            document.getElementById('category-modal-insight').innerHTML = catInsightHtml;
-            if(categoryChart) { categoryChart.data.datasets[0].data = dailySpend; categoryChart.data.datasets[0].backgroundColor = isDark ? '#FFFFFF' : '#111827'; categoryChart.update(); }
-            document.getElementById('category-modal').classList.remove('hidden');
-        }
-        window.closeCategoryModal = function() { document.getElementById('category-modal').classList.add('hidden'); }
-
-        window.renderProfile = function() {
-            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-email').value = profile.email || ""; document.getElementById('prof-phone').value = profile.phone || ""; document.getElementById('prof-emergency').value = profile.emergency || ""; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
-            document.getElementById('li-name').innerText = profile.name; document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`; document.getElementById('li-location').innerText = profile.address; document.getElementById('li-email').innerText = profile.email || "email@example.com"; document.getElementById('li-phone').innerText = profile.phone || "+60 00-000 0000"; document.getElementById('li-emergency').innerText = profile.emergency || "Emergency Ctc";
-            
-            const skillsDiv = document.getElementById('li-skills'); skillsDiv.innerHTML = '';
-            if(profile.skills) { profile.skills.split(',').forEach(s => { if(s.trim()) skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[9px] font-bold px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; }); }
-
-            if(profile.avatar) { document.getElementById('profile-avatar-img').src = profile.avatar; document.getElementById('profile-avatar-img').classList.remove('hidden'); document.getElementById('profile-avatar-initial').classList.add('hidden'); } else { document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); }
-            if(profile.cover) { document.getElementById('profile-cover-img').src = profile.cover; document.getElementById('profile-cover-img').classList.remove('hidden'); }
-            if (!document.getElementById('tab-home').classList.contains('hidden')) { document.getElementById('header-title').innerText = `Hi, ${profile.name.split(' ')[0]}`; }
-        }
-        
-        window.saveProfile = function(e) { 
-            e.preventDefault(); 
-            profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.email = document.getElementById('prof-email').value; profile.phone = document.getElementById('prof-phone').value; profile.emergency = document.getElementById('prof-emergency').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
-            localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
-        }
-        
-        window.handleImageUpload = function(e, type) {
-            const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
-            reader.onload = function(event) { if(type === 'avatar') { profile.avatar = event.target.result; } else { profile.cover = event.target.result; } localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); };
-            reader.readAsDataURL(file);
-        }
-
-        window.exportBackup = function() { 
-            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_goals: localStorage.getItem('vault_goals'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_payroll: localStorage.getItem('vault_payroll'), vault_commitments: localStorage.getItem('vault_commitments') }; 
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
-        }
-
-        document.getElementById('json-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { try { const data = JSON.parse(event.target.result); Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); } catch(err) { alert("Invalid backup file."); } }; reader.readAsText(file); 
-        });
-
-        document.getElementById('csv-file-input').addEventListener('change', function(e) { 
-            const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { 
-                const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
-                if (rows.length <= 1) return alert("File is empty or invalid. Make sure it has headers."); 
-                const headers = rows[0].split(',').map(h => h.trim().toLowerCase()); const monthMap = { 'jan':'01', 'feb':'02', 'mar':'03', 'apr':'04', 'may':'05', 'jun':'06', 'jul':'07', 'aug':'08', 'sep':'09', 'oct':'10', 'nov':'11', 'dec':'12' }; 
-                const importedData = rows.slice(1).map(row => { 
-                    const values = row.split(','); let obj = {}; 
-                    headers.forEach((h, i) => { 
-                        let val = values[i] ? values[i].trim() : ''; if (h === 'type') val = val.toLowerCase(); 
-                        if (h === 'date') { 
-                            if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
-                            else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
-                        } 
-                        obj[h] = val; 
-                    }); 
-                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); return obj; 
-                }); 
-                const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
-                transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
-                transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); e.target.value = ''; 
-            }; reader.readAsText(file); 
-        });
-        
-        window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
-
-        // --- 7. INITIALIZATION (ON LOAD) ---
         window.onload = function() {
-            checkPayday();
-            populateTimelines();
+            checkPayday(); populateTimelines();
             
             Chart.defaults.font.family = 'Inter'; 
-            let isDark = document.documentElement.classList.contains('dark'); 
-            let tc = isDark ? '#8E8E93' : '#6B7280'; 
-            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
-            Chart.defaults.color = tc;
-            
-            const lineConfig = { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: { legend: { display: false } }, 
-                scales: { 
-                    y: { display: false }, 
-                    x: { grid: { color: gc }, ticks: { color: tc } } 
-                } 
-            };
+            let isDark = document.documentElement.classList.contains('dark'); let tc = isDark ? '#8E8E93' : '#6B7280'; let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; Chart.defaults.color = tc;
+            const lineConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { color: gc }, ticks: { color: tc } } } };
 
             const catCanvas = document.getElementById('categoryChart');
-            if(catCanvas) {
-                categoryChart = new Chart(catCanvas, { 
-                    type: 'bar', 
-                    data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, 
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } 
-                });
-            }
+            if(catCanvas) categoryChart = new Chart(catCanvas, { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } });
 
             const compCanvas = document.getElementById('comparisonChart');
-            if(compCanvas) {
-                comparisonChart = new Chart(compCanvas, { 
-                    type: 'line', 
-                    data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, 
-                    options: lineConfig 
-                });
-            }
+            if(compCanvas) comparisonChart = new Chart(compCanvas, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
             
             const foodCanvas = document.getElementById('foodChart');
-            if(foodCanvas) {
-                foodChart = new Chart(foodCanvas, { 
-                    type: 'line', 
-                    data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, 
-                    options: lineConfig 
-                });
-            }
+            if(foodCanvas) foodChart = new Chart(foodCanvas, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
 
             const famCanvas = document.getElementById('familyChart');
-            if(famCanvas) {
-                familyChart = new Chart(famCanvas, { 
-                    type: 'line', 
-                    data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#A855F7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#A855F7' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, 
-                    options: lineConfig 
-                });
-            }
+            if(famCanvas) familyChart = new Chart(famCanvas, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#A855F7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#A855F7' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
             
             const utilCanvas = document.getElementById('utilChart');
-            if(utilCanvas) {
-                utilChart = new Chart(utilCanvas, { 
-                    type: 'line', 
-                    data: { labels: [], datasets: [] }, 
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } 
-                });
-            }
+            if(utilCanvas) utilChart = new Chart(utilCanvas, { type: 'line', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } });
             
             const salCanvas = document.getElementById('salaryChart');
-            if(salCanvas) {
-                salaryChart = new Chart(salCanvas, { 
-                    type: 'line', 
-                    data: { labels: [], datasets: [] }, 
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } 
-                });
-            }
+            if(salCanvas) salaryChart = new Chart(salCanvas, { type: 'line', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } });
 
-            renderCards(); 
-            renderBills(); 
-            renderDebts(); 
-            renderGoals(); 
-            renderCommitments();
-            renderProfile();
-            updateHomeDashboard(); 
-            updateOverallDashboard(); 
-            updateFoodDashboard(); 
-            updateFamilyDashboard();
-            updateUtilDashboard(); 
-            updateCareerDashboard();
+            renderCards(); renderBills(); renderDebts(); renderGoals(); renderCommitments(); renderProfile();
+            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); updateUtilDashboard(); updateCareerDashboard();
         };
     </script>
 </body>
