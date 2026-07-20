@@ -340,8 +340,7 @@
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
                 </div>
-                <!-- GLOWING SMOOTH LINE CHART FOR UTILITIES -->
-                <div class="w-full h-48 relative drop-shadow-[0_4px_6px_rgba(59,130,246,0.25)]"><canvas id="utilChart"></canvas></div>
+                <div class="w-full h-48 relative"><canvas id="utilChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -414,8 +413,7 @@
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
                 </div>
-                <!-- GLOWING SMOOTH AREA CHART FOR SALARY -->
-                <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(255,214,0,0.25)]"><canvas id="salaryChart"></canvas></div>
+                <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -981,7 +979,6 @@
         }
 
         function populateTimelines() {
-            // General Months
             let txMonths = new Set();
             const now = new Date(); 
             const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`;
@@ -1015,7 +1012,6 @@
                 if(el) { el.innerHTML = monthHTML; }
             });
 
-            // Utility Years
             let uYears = new Set(); 
             uYears.add(now.getFullYear().toString());
             utilHistory.forEach(u => { 
@@ -1039,7 +1035,6 @@
             const uEl = document.getElementById('util-timeline');
             if(uEl) { uEl.innerHTML = yearHTML; }
 
-            // Salary Years
             let sYears = new Set();
             sYears.add(now.getFullYear().toString());
             payrollHistory.forEach(p => { 
@@ -1162,7 +1157,6 @@
                 const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
                 
                 const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
-                // REGEX UPDATED: Removed 'grocery|grocer' so they route to 'Other'
                 const isFood = catMatch.match(/food|lunch|dinner|eat|cafe/);
                 const isUtil = catMatch.match(/util|bill|water|electric|internet|phone/);
                 
@@ -1178,13 +1172,23 @@
                         else otherSpend += amt;
                         
                         const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white';
-                        const icon = t.type === 'income' ? '💰' : '💳';
                         const sign = t.type === 'income' ? '+' : '-';
+                        
+                        let iconWrap = '';
+                        if (t.type === 'income') {
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>`;
+                        } else if (isFood) {
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
+                        } else if (isUtil) {
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
+                        } else {
+                            iconWrap = `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20"><svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
+                        }
                         
                         if(list) {
                             list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
-                                <td class="py-2.5"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-xs border border-transparent">${icon}</div></td>
-                                <td class="py-2.5 pl-3"><p class="font-bold text-xs">${t.desc}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p></td>
+                                <td class="py-2.5 w-11">${iconWrap}</td>
+                                <td class="py-2.5 pl-2"><p class="font-bold text-xs">${t.desc}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}</p></td>
                                 <td class="py-2.5 text-right font-bold text-sm ${c}">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                                 <td class="py-2.5 text-right w-8"><button onclick="deleteTransaction(${i})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td>
                             </tr>`;
@@ -1253,7 +1257,6 @@
                 const txY = txDate.getFullYear();
                 
                 const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase();
-                // REGEX UPDATED: Removed 'grocery|grocer'
                 const isFood = catMatch.match(/food|lunch|dinner|eat|cafe/);
                 if(!isFood) return;
                 
@@ -1262,10 +1265,11 @@
 
                 if(txM === currM && txY === currY) {
                     cSum += amt; 
+                    const iconWrap = `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20"><svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>`;
                     if(list) {
                         list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark transition group">
-                            <td class="py-2.5"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-xs border border-transparent">💳</div></td>
-                            <td class="py-2.5 pl-3"><p class="font-bold text-xs">${t.desc}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}</p></td>
+                            <td class="py-2.5 w-11">${iconWrap}</td>
+                            <td class="py-2.5 pl-2"><p class="font-bold text-xs">${t.desc}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}</p></td>
                             <td class="py-2.5 text-right font-bold text-sm">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                             <td class="py-2.5 text-right w-8"><button onclick="deleteTransaction(${i})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td>
                         </tr>`;
@@ -1326,9 +1330,15 @@
                 else monthlyOther[mIdx] += amt;
 
                 const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const iconWrap = `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
                 
                 if(list) {
-                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group"><td class="py-2.5"><div class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center text-xs">📄</div></td><td class="py-2.5 pl-3"><p class="font-bold text-xs">${u.type}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></td><td class="py-2.5 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td><td class="py-2.5 text-right w-8"><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td></tr>`;
+                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group">
+                        <td class="py-2.5 w-11">${iconWrap}</td>
+                        <td class="py-2.5 pl-2"><p class="font-bold text-xs">${u.type}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></td>
+                        <td class="py-2.5 pr-3 text-right font-bold text-sm">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                        <td class="py-2.5 text-right w-8"><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="w-6 h-6 rounded-full text-textMuted-light dark:text-textMuted-dark hover:text-white hover:bg-red-500 text-[10px] inline-flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition">✕</button></td>
+                    </tr>`;
                 }
             });
             
@@ -1338,7 +1348,6 @@
 
             if(utilChart) {
                 utilChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                // UPGRADED TO SMOOTH LINE CHART
                 utilChart.data.datasets = [
                     { label: 'Electricity', data: monthlyElec, borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' },
                     { label: 'Water', data: monthlyWater, borderColor: '#3B82F6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#3B82F6' },
@@ -1435,6 +1444,8 @@
             renderWidget('base', currBase, prevBase);
             renderWidget('bonus', currBonus, prevBonus);
             renderWidget('tax', currTax, prevTax, true);
+            
+            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20"><svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
 
             histThisYear.forEach((c) => {
                 const totalGross = c.basic + c.allowance + c.bonus;
@@ -1443,8 +1454,8 @@
                 if(list) {
                     list.innerHTML += `
                     <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
-                        <td class="py-2.5"><div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 text-xs">📄</div></td>
-                        <td class="py-2.5 pl-3">
+                        <td class="py-2.5 w-11">${iconWrap}</td>
+                        <td class="py-2.5 pl-2">
                             <p class="font-bold text-xs">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
                             <p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p>
                         </td>
@@ -1463,7 +1474,6 @@
 
             if(salaryChart) {
                 salaryChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                // UPGRADED TO SMOOTH LINE & DASHED AREA CHART
                 salaryChart.data.datasets = [
                     { label: 'Gross Income', data: grossArr, borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.15)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#FFD600' },
                     { label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 3, pointBackgroundColor: '#10B981', fill: false },
@@ -1700,6 +1710,8 @@
             }
             
             const today = new Date();
+            const iconWrap = `<div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>`;
+
             bills.forEach((b, i) => {
                 const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24));
                 let dueText = `Due in ${diffDays} Days`; 
@@ -1715,7 +1727,7 @@
                     dueColor = 'text-red-500 font-bold'; 
                 }
                 
-                list.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl flex justify-between items-center group"><div class="flex items-center gap-2.5 flex-1 truncate pr-2"><div class="w-7 h-7 rounded-full bg-panel-light dark:bg-panel-dark flex items-center justify-center text-[10px] shadow-sm border border-gray-100 dark:border-white/5">📄</div><div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[9px] font-medium ${dueColor} mt-0.5">${dueText}</p></div></div><div class="flex items-center gap-2 shrink-0"><p class="font-bold text-xs">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition"><button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-[10px] flex items-center justify-center">✕</button></div></div></div>`;
+                list.innerHTML += `<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl flex justify-between items-center group"><div class="flex items-center gap-2.5 flex-1 truncate pr-2">${iconWrap}<div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[9px] font-medium ${dueColor} mt-0.5">${dueText}</p></div></div><div class="flex items-center gap-2 shrink-0"><p class="font-bold text-xs">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><div class="flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition"><button onclick="if(confirm('Delete reminder?')) { bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white text-[10px] flex items-center justify-center">✕</button></div></div></div>`;
             });
         }
         function openBillModal() { 
