@@ -184,7 +184,7 @@
                         <div class="flex justify-between items-end mt-1">
                             <div>
                                 <div class="text-[8px] uppercase tracking-wider font-semibold text-gray-500 ml-0.5" id="kwsp-name">Retirement Fund</div>
-                                <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-0.5 drop-shadow-sm"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
+                                <div class="font-bold text-xl text-[#002868] tracking-tight leading-none mt-0.5 drop-shadow-md"><span class="text-[10px] font-medium opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
                             </div>
                         </div>
                     </div>
@@ -340,7 +340,8 @@
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
                 </div>
-                <div class="w-full h-48 relative"><canvas id="utilChart"></canvas></div>
+                <!-- GLOWING SMOOTH LINE CHART FOR UTILITIES -->
+                <div class="w-full h-48 relative drop-shadow-[0_4px_6px_rgba(59,130,246,0.25)]"><canvas id="utilChart"></canvas></div>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -371,7 +372,6 @@
                 <div id="salary-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
-            <!-- PERFORMANCE WIDGETS -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
                 <div class="snap-center shrink-0 w-[70vw] max-w-[240px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-4 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col justify-between">
                     <div>
@@ -414,7 +414,8 @@
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
                 </div>
-                <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
+                <!-- GLOWING SMOOTH AREA CHART FOR SALARY -->
+                <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(255,214,0,0.25)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
@@ -1337,11 +1338,12 @@
 
             if(utilChart) {
                 utilChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                // UPGRADED TO SMOOTH LINE CHART
                 utilChart.data.datasets = [
-                    { label: 'Electricity', data: monthlyElec, backgroundColor: '#FFD600', borderRadius: 4 },
-                    { label: 'Water', data: monthlyWater, backgroundColor: '#3B82F6', borderRadius: 4 },
-                    { label: 'Internet/Phone', data: monthlyComms, backgroundColor: '#10B981', borderRadius: 4 },
-                    { label: 'Other', data: monthlyOther, backgroundColor: '#9CA3AF', borderRadius: 4 }
+                    { label: 'Electricity', data: monthlyElec, borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' },
+                    { label: 'Water', data: monthlyWater, borderColor: '#3B82F6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#3B82F6' },
+                    { label: 'Internet/Phone', data: monthlyComms, borderColor: '#10B981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#10B981' },
+                    { label: 'Other', data: monthlyOther, borderColor: '#9CA3AF', backgroundColor: 'rgba(156, 163, 175, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#9CA3AF' }
                 ];
                 utilChart.update();
             }
@@ -1461,13 +1463,12 @@
 
             if(salaryChart) {
                 salaryChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                // UPGRADED TO SMOOTH LINE & DASHED AREA CHART
                 salaryChart.data.datasets = [
-                    { type: 'bar', label: 'Gross Income', data: grossArr, backgroundColor: '#FFD600', borderRadius: 4 },
-                    { type: 'line', label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 3, tension: 0.3, pointBackgroundColor: '#10B981', fill: false },
-                    { type: 'line', label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 2, borderDash: [5, 5], tension: 0.3, pointBackgroundColor: '#EF4444', fill: false }
+                    { label: 'Gross Income', data: grossArr, borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.15)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#FFD600' },
+                    { label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 3, pointBackgroundColor: '#10B981', fill: false },
+                    { label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 3, pointBackgroundColor: '#EF4444', fill: false }
                 ];
-                salaryChart.options.scales.x.stacked = false;
-                salaryChart.options.scales.y.stacked = false;
                 salaryChart.update();
             }
         }
@@ -2137,15 +2138,15 @@
             });
             
             utilChart = new Chart(document.getElementById('utilChart'), { 
-                type: 'bar', 
+                type: 'line', 
                 data: { labels: [], datasets: [] }, 
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { stacked: true, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: true, display: false } } } 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } 
             });
             
             salaryChart = new Chart(document.getElementById('salaryChart'), { 
-                type: 'bar', 
+                type: 'line', 
                 data: { labels: [], datasets: [] }, 
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { stacked: false, grid: { color: gc }, ticks: { color: tc } }, y: { stacked: false, display: false } } } 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } 
             });
 
             renderCards(); 
