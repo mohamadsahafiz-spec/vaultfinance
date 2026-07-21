@@ -10,10 +10,10 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     
+    <!-- Fonts & Libraries -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -38,9 +38,9 @@
 
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
+            document.documentElement.classList.add('dark');
         } else {
-            document.documentElement.classList.remove('dark')
+            document.documentElement.classList.remove('dark');
         }
         tailwind.config = {
             darkMode: 'class', 
@@ -55,7 +55,7 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
-    <!-- DESKTOP Sidebar -->
+    <!-- DESKTOP SIDEBAR -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-8">
             <div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-lg shadow-[0_0_10px_rgba(255,214,0,0.5)]">V</div>
@@ -63,31 +63,31 @@
         </div>
         <nav class="flex-1 space-y-1.5 text-sm font-semibold flex flex-col">
             <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-3 py-2.5 bg-brand text-gray-900 shadow-sm rounded-lg transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 <span>Dashboard</span>
             </button>
             <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                 <span>Overall Analytics</span>
             </button>
             <button onclick="switchTab('family')" id="nav-desk-family" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <span>Family & Edu</span>
             </button>
             <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
                 <span>Food & Dining</span>
             </button>
             <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 <span>Utilities & Bills</span>
             </button>
             <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
                 <span>Payroll & Wealth</span>
             </button>
             <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span>Profile</span>
             </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
@@ -101,7 +101,7 @@
 
     <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto pb-28 md:pb-6 scroll-smooth hide-scrollbar" id="main-scroll">
         
-        <!-- HEADER WITH NEW AVATAR PLACEMENT -->
+        <!-- HEADER WITH TOP-RIGHT AVATAR -->
         <header class="flex justify-between items-center px-5 pt-6 pb-2 md:px-6 shrink-0 relative z-20">
             <div class="flex-1 min-w-0 mr-4"><h2 id="header-title" class="text-2xl font-bold tracking-tight truncate drop-shadow-sm">Hi, Sahafiz</h2></div>
             <button onclick="switchTab('profile')" class="w-9 h-9 rounded-full border-2 border-brand/80 bg-surface-light dark:bg-surface-dark overflow-hidden flex items-center justify-center shadow-[0_0_10px_rgba(255,214,0,0.4)] hover:scale-105 transition-transform shrink-0" title="Profile">
@@ -110,17 +110,14 @@
             </button>
         </header>
 
-        <!-- ========================================== -->
-        <!-- TAB 1: HOME DASHBOARD                      -->
-        <!-- ========================================== -->
+        <!-- TAB 1: HOME DASHBOARD -->
         <div id="tab-home" class="tab-enter px-5 md:px-6 flex flex-col gap-4">
-            
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">My Cards</p>
                 <div id="home-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
-            <!-- HORIZONTAL SWIPE CARDS -->
+            <!-- CARDS ROW -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
                 <!-- DEBIT CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('debit')">
@@ -153,7 +150,6 @@
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('credit')">
                     <div class="card-gold-bg w-full h-full p-4 flex flex-col justify-between relative shadow-[0_8px_20px_rgba(217,119,6,0.25)]">
                         <div class="absolute bottom-8 left-[-20%] right-[-20%] h-4 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-80 transform -skew-y-6 drop-shadow-sm"></div>
-                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between">
                             <div class="flex justify-between items-start">
                                 <div class="font-bold text-base drop-shadow-sm tracking-tight bg-white/40 px-1.5 py-0.5 rounded backdrop-blur-sm">Maybank <span class="text-[9px] font-semibold ml-0.5">Islamic</span></div>
@@ -182,7 +178,6 @@
 
                 <!-- KWSP CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-gradient-to-br from-white via-gray-50 to-gray-200 text-gray-900 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-95 transition shadow-[0_8px_20px_rgba(0,0,0,0.08)] relative overflow-hidden border border-gray-300" onclick="openCardModal('kwsp')">
-                    <div class="absolute -right-8 -top-8 w-32 h-32 bg-white rounded-full blur-xl pointer-events-none"></div>
                     <div class="relative z-10 flex flex-col h-full justify-between">
                         <div class="flex justify-between items-start">
                             <div class="flex items-center gap-2">
@@ -221,6 +216,7 @@
                 <div id="commitments-list" class="space-y-3"></div>
             </div>
 
+            <!-- DEBT WIDGET -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center gap-2">
@@ -241,11 +237,8 @@
             
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 2: OVERALL ANALYTICS                   -->
-        <!-- ========================================== -->
+        <!-- TAB 2: OVERALL ANALYTICS -->
         <div id="tab-overall" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
-            
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Analytics</p>
                 <div id="overall-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
@@ -264,22 +257,22 @@
                 
                 <div class="grid grid-cols-4 gap-2">
                     <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-brand border border-transparent transition flex flex-col items-center" onclick="switchTab('food')">
-                        <div class="mb-1"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>
+                        <div class="mb-1"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>
                         <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-food">0</span>%</p>
                         <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Food</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-blue-500 border border-transparent transition flex flex-col items-center" onclick="switchTab('bills')">
-                        <div class="mb-1"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                        <div class="mb-1"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
                         <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-util">0</span>%</p>
                         <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Util</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-purple-500 border border-transparent transition flex flex-col items-center" onclick="switchTab('family')">
-                        <div class="mb-1"><svg class="w-4 h-4 text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                        <div class="mb-1"><svg class="w-4 h-4 text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
                         <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-family">0</span>%</p>
                         <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Fam</p>
                     </div>
                     <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-gray-400 border border-transparent transition flex flex-col items-center" onclick="openCategoryModal('other')">
-                        <div class="mb-1"><svg class="w-4 h-4 text-gray-500 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                        <div class="mb-1"><svg class="w-4 h-4 text-gray-500 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
                         <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-other">0</span>%</p>
                         <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Other</p>
                     </div>
@@ -305,10 +298,10 @@
                     <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Ledger (Selected Month)</p>
                 </div>
                 
-                <!-- SMART SEARCH BAR -->
+                <!-- SEARCH BAR -->
                 <div class="mb-4 relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="w-4 h-4 text-textMuted-light dark:text-textMuted-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <svg class="w-4 h-4 text-textMuted-light dark:text-textMuted-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </div>
                     <input type="text" id="search-tx" onkeyup="updateOverallDashboard()" placeholder="Search transactions..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
@@ -319,11 +312,8 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 3: FOOD & DINING                       -->
-        <!-- ========================================== -->
+        <!-- TAB 3: FOOD & DINING -->
         <div id="tab-food" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
-            
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Food Insight</p>
                 <div id="food-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
@@ -344,11 +334,8 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 3.5: FAMILY & EDU                      -->
-        <!-- ========================================== -->
+        <!-- TAB 3.5: FAMILY & EDU -->
         <div id="tab-family" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
-            
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Family Insight</p>
                 <div id="family-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
@@ -369,11 +356,8 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 4: UTILITIES & BILLS                   -->
-        <!-- ========================================== -->
+        <!-- TAB 4: UTILITIES & BILLS -->
         <div id="tab-bills" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
-            
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Utilities</p>
                 <div id="util-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
@@ -401,18 +385,15 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 5: PAYROLL & WEALTH                    -->
-        <!-- ========================================== -->
+        <!-- TAB 5: PAYROLL & WEALTH -->
         <div id="tab-salary" class="tab-enter px-5 md:px-6 hidden flex-col gap-4">
-            
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Income</p>
                 <div id="salary-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
-                <div class="snap-center shrink-0 w-[70vw] max-w-[240px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-4 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col justify-between">
+                <div class="snap-center shrink-0 w-[70vw] max-w-[240px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
                     <div>
                         <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Base & Allowances</p>
                         <h4 class="font-black text-2xl tracking-tight mb-2"><span class="text-[10px] font-medium opacity-70 pr-0.5">MYR</span><span id="widget-base-total">0.00</span></h4>
@@ -423,7 +404,7 @@
                     </div>
                 </div>
                 
-                <div class="snap-center shrink-0 w-[70vw] max-w-[240px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-4 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col justify-between">
+                <div class="snap-center shrink-0 w-[70vw] max-w-[240px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
                     <div>
                         <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Bonus Performance</p>
                         <h4 class="font-black text-2xl tracking-tight mb-2"><span class="text-[10px] font-medium opacity-70 pr-0.5">MYR</span><span id="widget-bonus-total">0.00</span></h4>
@@ -434,7 +415,7 @@
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[70vw] max-w-[240px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-4 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col justify-between">
+                <div class="snap-center shrink-0 w-[70vw] max-w-[240px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
                     <div>
                         <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Tax Footprint (PCB)</p>
                         <h4 class="font-black text-2xl tracking-tight mb-2"><span class="text-[10px] font-medium opacity-70 pr-0.5">MYR</span><span id="widget-tax-total">0.00</span></h4>
@@ -446,14 +427,12 @@
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
-                <div class="flex justify-between items-center mb-5">
-                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Gross vs Net vs Deductions</p>
-                </div>
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm">
+                <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-5">Gross vs Net vs Deductions</p>
                 <div class="w-full h-56 relative drop-shadow-[0_4px_8px_rgba(16,185,129,0.25)]"><canvas id="salaryChart"></canvas></div>
             </div>
             
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-3">Payslip Ledger</p>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse"><tbody id="payroll-history-list" class="text-sm"></tbody></table>
@@ -461,12 +440,9 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 6: PROFILE                             -->
-        <!-- ========================================== -->
+        <!-- TAB 6: PROFILE -->
         <div id="tab-profile" class="tab-enter px-5 md:px-6 hidden flex-col gap-4 pb-20">
-            
-            <div class="relative bg-panel-light dark:bg-panel-dark rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-white/5 transition-colors duration-300 mt-1">
+            <div class="relative bg-panel-light dark:bg-panel-dark rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-white/5 mt-1">
                 <div class="h-32 bg-gradient-to-br from-gray-800 to-black relative">
                     <button onclick="document.getElementById('cover-upload').click()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/20 backdrop-blur text-white flex items-center justify-center hover:bg-white/30 transition text-xs shadow-md"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
                     <input type="file" id="cover-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'cover')">
@@ -474,9 +450,9 @@
                 </div>
                 
                 <div class="absolute top-16 left-1/2 -translate-x-1/2 z-10">
-                    <div class="w-24 h-24 rounded-full border-[4px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-lg transition-colors duration-300" onclick="document.getElementById('avatar-upload').click()">
+                    <div class="w-24 h-24 rounded-full border-[4px] border-panel-light dark:border-panel-dark bg-surface-light dark:bg-surface-dark overflow-hidden relative cursor-pointer group shadow-lg" onclick="document.getElementById('avatar-upload').click()">
                         <img id="profile-avatar-img" src="" class="w-full h-full object-cover hidden">
-                        <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-400" id="profile-avatar-initial"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-400" id="profile-avatar-initial">S</div>
                         <div class="absolute inset-0 bg-black/50 hidden group-hover:flex items-center justify-center text-white text-[10px] font-semibold transition backdrop-blur-sm">Edit</div>
                     </div>
                     <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event, 'avatar')">
@@ -497,9 +473,9 @@
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-3">Settings</p>
-                <div class="flex justify-between items-center bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-transparent transition-colors duration-300">
+                <div class="flex justify-between items-center bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-transparent">
                     <div>
                         <p class="font-semibold text-xs">Appearance Mode</p>
                         <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">Toggle light and dark theme</p>
@@ -508,56 +484,56 @@
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Edit Profile</p>
                 <form id="profile-form" onsubmit="saveProfile(event)" class="space-y-3">
                     <div>
                         <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Full Name</label>
-                        <input type="text" id="prof-name" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                        <input type="text" id="prof-name" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Email</label>
-                            <input type="email" id="prof-email" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <input type="email" id="prof-email" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                         </div>
                         <div>
                             <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Phone No.</label>
-                            <input type="text" id="prof-phone" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <input type="text" id="prof-phone" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Job Title</label>
-                            <input type="text" id="prof-role" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <input type="text" id="prof-role" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                         </div>
                         <div>
                             <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Industry</label>
-                            <input type="text" id="prof-industry" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <input type="text" id="prof-industry" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Location / Address</label>
-                            <input type="text" id="prof-address" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <input type="text" id="prof-address" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                         </div>
                         <div>
                             <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Tenure (Yrs)</label>
-                            <input type="number" id="prof-tenure" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300">
+                            <input type="number" id="prof-tenure" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                         </div>
                     </div>
                     <div>
                         <label class="block text-[9px] font-semibold text-red-500 mb-1 pl-1 uppercase tracking-wider">Emergency (Name & No)</label>
-                        <input type="text" id="prof-emergency" class="w-full bg-red-50 dark:bg-red-900/10 text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-900/50 outline-none focus:ring-1 focus:ring-red-500 transition-colors duration-300">
+                        <input type="text" id="prof-emergency" class="w-full bg-red-50 dark:bg-red-900/10 text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-900/50 outline-none focus:ring-1 focus:ring-red-500 transition">
                     </div>
                     <div>
                         <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Skills</label>
-                        <input type="text" id="prof-skills" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition-colors duration-300" placeholder="e.g. Troubleshooting, Analytics">
+                        <input type="text" id="prof-skills" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition" placeholder="e.g. Troubleshooting, Analytics">
                     </div>
                     <button type="submit" class="w-full bg-brand text-gray-900 px-4 py-2.5 rounded-xl font-bold text-sm shadow-md mt-1 hover:scale-[1.02] transition-transform">Save Profile</button>
                 </form>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300">
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📦 Export JSON</button>
@@ -577,18 +553,18 @@
 
     </main>
 
-    <!-- PERFECT 3-1-3 BOTTOM NAV -->
+    <!-- PERFECT 3-1-3 BOTTOM NAV DOCK -->
     <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90] transition-colors duration-300">
         
         <div class="flex items-center gap-2 sm:gap-3">
             <button onclick="switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </button>
             <button onclick="switchTab('overall')" id="nav-mob-overall" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
             </button>
             <button onclick="switchTab('family')" id="nav-mob-family" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             </button>
         </div>
         
@@ -602,22 +578,362 @@
 
         <div class="flex items-center gap-2 sm:gap-3">
             <button onclick="switchTab('food')" id="nav-mob-food" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
             </button>
             <button onclick="switchTab('bills')" id="nav-mob-bills" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             </button>
             <button onclick="switchTab('salary')" id="nav-mob-salary" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
             </button>
         </div>
         
     </nav>
-</body>
-</html>
-<!-- SCRIPT ENGINE -->
+
+    <!-- ALL MODALS -->
+    
+    <!-- MASTER ACTION SHEET MODAL -->
+    <div id="action-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-end sm:items-center justify-center sm:p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold tracking-tight">Add New...</h3>
+                <button onclick="closeActionModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
+            </div>
+            <div class="grid grid-cols-3 gap-y-6 gap-x-2">
+                <button onclick="closeActionModal(); openTxModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-brand/10 text-gray-900 dark:text-white group-hover:text-brand flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-brand/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Transaction</span>
+                </button>
+                <button onclick="closeActionModal(); openPayrollModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-green-500/10 text-gray-900 dark:text-white group-hover:text-green-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-green-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Payslip</span>
+                </button>
+                <button onclick="closeActionModal(); openUtilHistoryModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-blue-500/10 text-gray-900 dark:text-white group-hover:text-blue-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-blue-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Utility Bill</span>
+                </button>
+                <button onclick="closeActionModal(); openCommitmentModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Comm.</span>
+                </button>
+                <button onclick="closeActionModal(); openDebtModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-red-500/10 text-gray-900 dark:text-white group-hover:text-red-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-red-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Debt</span>
+                </button>
+                <button onclick="closeActionModal(); openGoalModal()" class="flex flex-col items-center gap-2.5 group">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-brand/10 text-gray-900 dark:text-white group-hover:text-brand flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-brand/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Goal</span>
+                </button>
+                <button onclick="closeActionModal(); openBillModal()" class="flex flex-col items-center gap-2.5 group col-span-3 mt-2">
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-orange-500/10 text-gray-900 dark:text-white group-hover:text-orange-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-orange-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                    <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Reminder</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD EDIT MODAL -->
+    <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4" id="edit-card-title">Update Card</h3>
+            <form onsubmit="saveCardEdit(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Card Name</label>
+                    <input type="text" id="edit-card-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Last 4 Digits</label>
+                        <input type="text" id="edit-card-last4" maxlength="4" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-brand mb-1 uppercase tracking-wider">Balance / Funds</label>
+                        <input type="number" id="edit-card-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div id="edit-card-limit-container" class="hidden">
+                    <label class="block text-[9px] font-semibold text-red-500 mb-1 uppercase tracking-wider">Max Limit</label>
+                    <input type="number" id="edit-card-limit" step="0.01" class="w-full bg-red-50 dark:bg-red-900/10 text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-900/50 outline-none focus:ring-1 focus:ring-red-500 transition">
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-xs px-3 py-2.5 rounded-xl font-bold shadow-sm hover:scale-[1.02] transition-transform">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TRANSACTION MODAL -->
+    <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4">Add Transaction</h3>
+            <form id="tx-form" onsubmit="saveTransaction(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Description</label>
+                    <input type="text" id="tx-desc" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
+                        <input type="number" id="tx-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Date</label>
+                        <input type="date" id="tx-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Type</label>
+                        <select id="tx-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Payment Method</label>
+                        <select id="tx-method" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                            <option value="debit">Debit Card</option>
+                            <option value="credit">Credit Card</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Category</label>
+                    <input type="text" id="tx-category" required placeholder="Food, Utility, Tuition..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 text-xs px-3 py-2.5 rounded-xl font-bold shadow-sm hover:scale-[1.02] transition-transform">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- COMMITMENT MODAL -->
+    <div id="commitment-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4">Add Fixed Commitment</h3>
+            <form id="commitment-form" onsubmit="saveCommitment(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Commitment Name</label>
+                    <input type="text" id="commit-name" required placeholder="e.g., Car Loan (JND7218)" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Type / Note</label>
+                        <input type="text" id="commit-type" required placeholder="e.g., Hire Purchase" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Monthly Amount</label>
+                        <input type="number" id="commit-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeCommitmentModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- GOAL MODAL -->
+    <div id="goal-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4" id="goal-modal-title">Add New Goal</h3>
+            <form id="goal-form" onsubmit="saveGoal(event)" class="space-y-3">
+                <input type="hidden" id="goal-index" value="-1">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Goal Name</label>
+                    <input type="text" id="goal-name-input" required placeholder="e.g. Emergency Fund, Vacation" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Current Saved</label>
+                        <input type="number" id="goal-current-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Target Amount</label>
+                        <input type="number" id="goal-target-input" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeGoalModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- DEBT MODAL -->
+    <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4">Add Debt</h3>
+            <form id="debt-form" onsubmit="saveDebt(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Debt Name</label>
+                    <input type="text" id="debt-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Balance</label>
+                        <input type="number" id="debt-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Min Payment</label>
+                        <input type="number" id="debt-min" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeDebtModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- REMINDER BILL MODAL -->
+    <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4">Add Reminder</h3>
+            <form id="bill-form" onsubmit="saveBill(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Bill Name</label>
+                    <input type="text" id="bill-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
+                        <input type="number" id="bill-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Due Date</label>
+                        <input type="date" id="bill-date" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- UTILITY HISTORY MODAL -->
+    <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
+            <h3 class="text-xl font-bold tracking-tight mb-4">Log Past Bill</h3>
+            <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Month Paid</label>
+                    <input type="month" id="util-hist-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Bill Type</label>
+                        <select id="util-hist-type" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                            <option value="Electricity">Electricity (TNB)</option>
+                            <option value="Water">Water</option>
+                            <option value="Internet">Internet/Wifi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Amount</label>
+                        <input type="number" id="util-hist-amount" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                </div>
+                <div class="flex gap-2.5 pt-2">
+                    <button type="button" onclick="closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Log</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PAYROLL MODAL -->
+    <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh] hide-scrollbar">
+            <h3 class="text-xl font-bold tracking-tight mb-0.5">Smart Payroll</h3>
+            <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Auto-calculates EPF & SOCSO</p>
+            
+            <form id="payroll-form" onsubmit="savePayrollRecord(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-0.5 uppercase tracking-wider">Payslip Month</label>
+                    <input type="month" id="pay-month" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                
+                <div class="p-3 bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-white/5">
+                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-brand">Gross Earnings</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Basic</label>
+                            <input type="number" id="pay-basic" step="0.01" oninput="autoCalcPayroll()" required class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Allow.</label>
+                            <input type="number" id="pay-allow" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="w-20 text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wide">Bonus</label>
+                            <input type="number" id="pay-bonus" step="0.01" value="0" oninput="autoCalcPayroll()" class="flex-1 bg-panel-light dark:bg-panel-dark text-textMain-light dark:text-textMain-dark font-medium px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand text-xs transition">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-red-50 dark:bg-red-900/10 rounded-xl border border-red-100 dark:border-red-900/30">
+                    <h4 class="text-[9px] font-bold uppercase tracking-wider mb-2 text-red-500">Statutory Deductions</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EPF (11%)</label>
+                            <input type="number" id="pay-epf" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">Tax (PCB)</label>
+                            <input type="number" id="pay-tax" step="0.01" value="0" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">SOCSO (~0.5%)</label>
+                            <input type="number" id="pay-socso" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wide">EIS (~0.2%)</label>
+                            <input type="number" id="pay-eis" step="0.01" oninput="calcNetPay()" class="w-full bg-panel-light dark:bg-panel-dark text-red-500 font-bold px-2.5 py-1.5 rounded-lg border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-red-500 text-xs transition">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center px-2 pt-2 border-t border-gray-200 dark:border-white/10">
+                    <p class="font-semibold text-xs uppercase tracking-wider">Net Pay</p>
+                    <p class="text-xl font-bold text-green-500 tracking-tight drop-shadow-sm">MYR <span id="pay-net-display">0.00</span></p>
+                </div>
+
+                <div class="flex gap-2.5 pt-1">
+                    <button type="button" onclick="closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="submit" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CATEGORY DAILY CHART MODAL -->
+    <div id="category-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-200 dark:border-white/5 modal-enter">
+            <div class="flex justify-between items-start mb-3">
+                <div>
+                    <h3 class="text-xl font-bold tracking-tight">Category Graph</h3>
+                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Daily Breakdown</p>
+                </div>
+                <button onclick="closeCategoryModal()" class="w-7 h-7 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:bg-red-500 hover:text-white transition font-bold text-xs">✕</button>
+            </div>
+            <div id="category-modal-insight" class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border border-gray-200 dark:border-transparent"></div>
+            <div class="w-full h-48 relative bg-surface-light dark:bg-surface-dark rounded-xl p-2 border border-gray-200 dark:border-transparent"><canvas id="categoryChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT ENGINE -->
     <script>
-        const SVG_INC = `<svg class="w-4 h-4 text-green-500 drop-shadow-[0_0_6px_rgba(34,197,94,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`;
+        const SVG_INC = `<svg class="w-4 h-4 text-green-500 drop-shadow-[0_0_6px_rgba(34,197,94,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`;
         const SVG_FOOD = `<svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>`;
         const SVG_FAM = `<svg class="w-4 h-4 text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`;
         const SVG_UTIL = `<svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`;
@@ -670,7 +986,6 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart, familyChart;
         let currentEditCard = ''; window.selectedMonth = ""; window.selectedYear = ""; window.selectedSalaryYear = ""; window.selectedFamilyMonth = "";
 
-        // CONFETTI ENGINE
         function fireConfetti() {
             for(let i=0; i<60; i++) {
                 let conf = document.createElement('div');
@@ -685,7 +1000,6 @@
             }
         }
 
-        // EXPORT PDF
         window.exportPDF = function() {
             const element = document.querySelector('main');
             const nav = document.querySelector('nav.md\\:hidden');
@@ -733,21 +1047,27 @@
         window.switchTab = function(tabId) {
             const tabs = ['home', 'overall', 'food', 'family', 'bills', 'salary', 'profile'];
             tabs.forEach(id => {
-                document.getElementById(`tab-${id}`).classList.add('hidden'); document.getElementById(`tab-${id}`).classList.remove('flex');
+                let tabEl = document.getElementById(`tab-${id}`);
+                if(tabEl) { tabEl.classList.add('hidden'); tabEl.classList.remove('flex'); }
+                
                 let mobBtn = document.getElementById(`nav-mob-${id}`); 
                 if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark'); }
                 let deskBtn = document.getElementById(`nav-desk-${id}`); 
                 if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-sm'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
             });
 
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden'); document.getElementById(`tab-${tabId}`).classList.add('flex');
+            let activeTab = document.getElementById(`tab-${tabId}`);
+            if(activeTab) { activeTab.classList.remove('hidden'); activeTab.classList.add('flex'); }
+            
             let activeMob = document.getElementById(`nav-mob-${tabId}`); 
             if(activeMob) { activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
             let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
             if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-sm'); }
 
             const headerTitles = { 'home': `Hi, ${profile.name.split(' ')[0]}`, 'overall': 'Overall Analytics', 'food': 'Food & Dining', 'family': 'Family & Edu', 'bills': 'Utility History', 'salary': 'Payroll & Wealth', 'profile': 'Profile Settings' };
-            document.getElementById('header-title').innerText = headerTitles[tabId]; document.getElementById('main-scroll').scrollTo(0,0);
+            const headEl = document.getElementById('header-title');
+            if(headEl) headEl.innerText = headerTitles[tabId] || 'Vault'; 
+            document.getElementById('main-scroll').scrollTo(0,0);
         }
 
         function checkPayday() {
@@ -1016,13 +1336,12 @@
 
             renderWidget('base', currBase, prevBase); renderWidget('bonus', currBonus, prevBonus); renderWidget('tax', currTax, prevTax, true);
             
-            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
+            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
 
             histThisYear.forEach((c) => {
                 const totalGross = c.basic + c.allowance + c.bonus; const totalDeds = c.epf + c.socso + c.eis + c.tax;
                 if(list) {
-                    list.innerHTML += `
-                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
+                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
                         <td class="py-2.5 w-11">${iconWrap}</td>
                         <td class="py-2.5 pl-2"><p class="font-bold text-xs">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p></td>
                         <td class="py-2.5 pr-2 text-right"><p class="font-bold text-[9px] text-red-500 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded border border-red-100 dark:border-red-900/50 inline-block">-MYR ${totalDeds.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-1 uppercase tracking-wider">EPF: ${c.epf} | Tax: ${c.tax}</p></td>
@@ -1177,7 +1496,7 @@
             const list = document.getElementById('commitments-list'); if(!list) return; list.innerHTML = '';
             if (commitments.length === 0) { list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-2 uppercase tracking-wider">No fixed commitments.</p>`; return; }
             commitments.forEach((c, i) => {
-                list.innerHTML += `<div class="flex justify-between items-center group"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><div><p class="font-bold text-xs">${c.name}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.type}</p></div></div><div class="flex items-center gap-2 text-right"><div><p class="font-bold text-xs text-gray-900 dark:text-white">MYR ${parseFloat(c.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p></div><button onclick="if(confirm('Delete commitment?')) { commitments.splice(${i}, 1); localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0">✕</button></div></div>`;
+                list.innerHTML += `<div class="flex justify-between items-center group"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><div><p class="font-bold text-xs">${c.name}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.type}</p></div></div><div class="flex items-center gap-2 text-right"><div><p class="font-bold text-xs text-gray-900 dark:text-white">MYR ${parseFloat(c.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p></div><button onclick="if(confirm('Delete commitment?')) { commitments.splice(${i}, 1); localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0">✕</button></div></div>`;
             });
         }
         window.openCommitmentModal = function() { document.getElementById('commitment-modal').classList.remove('hidden'); }
@@ -1191,7 +1510,7 @@
             const list = document.getElementById('bill-list'); if(!list) return; list.innerHTML = ''; bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
             if (bills.length === 0) { list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4 uppercase tracking-wider">No upcoming reminders.</p>`; return; }
             
-            const today = new Date(); const iconWrap = `<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-3.5 h-3.5 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>`;
+            const today = new Date(); const iconWrap = `<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-3.5 h-3.5 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>`;
             bills.forEach((b, i) => {
                 const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24)); let dueText = `Due in ${diffDays} Days`; let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
                 if(diffDays === 0) { dueText = 'Due Today'; dueColor = 'text-brand font-bold'; } else if (diffDays < 0) { dueText = `Overdue by ${Math.abs(diffDays)} Days`; dueColor = 'text-red-500 font-bold'; } else if (diffDays <= 3) { dueColor = 'text-red-500 font-bold'; }
@@ -1255,11 +1574,80 @@
             updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closePayrollModal(); alert("Payslip Saved! Net Pay injected into your Debit Card.");
         }
 
+        window.renderProfile = function() {
+            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-email').value = profile.email || ""; document.getElementById('prof-phone').value = profile.phone || ""; document.getElementById('prof-emergency').value = profile.emergency || ""; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
+            document.getElementById('li-name').innerText = profile.name; document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`; document.getElementById('li-location').innerText = profile.address; document.getElementById('li-email').innerText = profile.email || "email@example.com"; document.getElementById('li-phone').innerText = profile.phone || "+60 00-000 0000"; document.getElementById('li-emergency').innerText = profile.emergency || "Emergency Ctc";
+            
+            const skillsDiv = document.getElementById('li-skills'); skillsDiv.innerHTML = '';
+            if(profile.skills) { profile.skills.split(',').forEach(s => { if(s.trim()) skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[9px] font-bold px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; }); }
+
+            if(profile.avatar) { 
+                document.getElementById('profile-avatar-img').src = profile.avatar; document.getElementById('profile-avatar-img').classList.remove('hidden'); document.getElementById('profile-avatar-initial').classList.add('hidden'); 
+                document.getElementById('header-avatar-img').src = profile.avatar; document.getElementById('header-avatar-img').classList.remove('hidden'); document.getElementById('header-avatar-initial').classList.add('hidden');
+            } else { 
+                document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); 
+                document.getElementById('header-avatar-initial').innerText = profile.name.charAt(0);
+            }
+            if(profile.cover) { document.getElementById('profile-cover-img').src = profile.cover; document.getElementById('profile-cover-img').classList.remove('hidden'); }
+        }
+        
+        window.saveProfile = function(e) { 
+            e.preventDefault(); 
+            profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.email = document.getElementById('prof-email').value; profile.phone = document.getElementById('prof-phone').value; profile.emergency = document.getElementById('prof-emergency').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
+            localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
+        }
+        
+        window.handleImageUpload = function(e, type) {
+            const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
+            reader.onload = function(event) { if(type === 'avatar') { profile.avatar = event.target.result; } else { profile.cover = event.target.result; } localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); };
+            reader.readAsDataURL(file);
+        }
+
+        window.exportBackup = function() { 
+            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_goals: localStorage.getItem('vault_goals'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_payroll: localStorage.getItem('vault_payroll'), vault_commitments: localStorage.getItem('vault_commitments') }; 
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
+        }
+
+        document.getElementById('json-file-input').addEventListener('change', function(e) { 
+            const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
+            reader.onload = function(event) { try { const data = JSON.parse(event.target.result); Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); } catch(err) { alert("Invalid backup file."); } }; reader.readAsText(file); 
+        });
+
+        document.getElementById('csv-file-input').addEventListener('change', function(e) { 
+            const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
+                if (rows.length <= 1) return alert("File is empty or invalid. Make sure it has headers."); 
+                const headers = rows[0].split(',').map(h => h.trim().toLowerCase()); const monthMap = { 'jan':'01', 'feb':'02', 'mar':'03', 'apr':'04', 'may':'05', 'jun':'06', 'jul':'07', 'aug':'08', 'sep':'09', 'oct':'10', 'nov':'11', 'dec':'12' }; 
+                const importedData = rows.slice(1).map(row => { 
+                    const values = row.split(','); let obj = {}; 
+                    headers.forEach((h, i) => { 
+                        let val = values[i] ? values[i].trim() : ''; if (h === 'type') val = val.toLowerCase(); 
+                        if (h === 'date') { 
+                            if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
+                            else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
+                        } 
+                        obj[h] = val; 
+                    }); 
+                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); return obj; 
+                }); 
+                const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
+                transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
+                transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); e.target.value = ''; 
+            }; reader.readAsText(file); 
+        });
+        
+        window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
+
         window.onload = function() {
-            checkPayday(); populateTimelines();
+            checkPayday();
+            populateTimelines();
             
             Chart.defaults.font.family = 'Inter'; 
-            let isDark = document.documentElement.classList.contains('dark'); let tc = isDark ? '#8E8E93' : '#6B7280'; let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; Chart.defaults.color = tc;
+            let isDark = document.documentElement.classList.contains('dark'); 
+            let tc = isDark ? '#8E8E93' : '#6B7280'; 
+            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
+            Chart.defaults.color = tc;
             const lineConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { color: gc }, ticks: { color: tc } } } };
 
             const catCanvas = document.getElementById('categoryChart');
