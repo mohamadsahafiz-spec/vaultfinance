@@ -16,7 +16,6 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     <style>
         ::-webkit-scrollbar { display: none; }
@@ -62,36 +61,36 @@
         </div>
         <nav class="flex-1 space-y-1.5 text-sm font-semibold flex flex-col">
             <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-3 py-2.5 bg-brand text-gray-900 shadow-sm rounded-lg transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 <span>Dashboard</span>
             </button>
             <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                 <span>Overall Analytics</span>
             </button>
             <button onclick="switchTab('family')" id="nav-desk-family" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <span>Family & Edu</span>
             </button>
             <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
                 <span>Food & Dining</span>
             </button>
             <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 <span>Utilities & Bills</span>
             </button>
             <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
                 <span>Payroll & Wealth</span>
             </button>
             <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span>Profile</span>
             </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
                 <button onclick="openActionModal()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.3)] rounded-lg font-bold transition hover:scale-[1.02]">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 11H13V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5V11H5C4.45 11 4 12C4 12.55 4.45 13 5 13H11V19C11 19.55 11.45 20 12 20C12.55 20 13 19.55 13 19V13H19C19.55 13 20 12.55 20 12C20 11.45 19.55 11 19 11Z"/></svg>
                     Add Entry
                 </button>
             </div>
@@ -116,6 +115,7 @@
                 <div id="home-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
+            <!-- CARDS ROW -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
                 <!-- DEBIT CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('debit')">
@@ -207,7 +207,7 @@
                 <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-2">After Fixed Commitments & Min Debts</p>
             </div>
 
-            <!-- FIXED COMMITMENTS -->
+            <!-- FIXED COMMITMENTS WIDGET -->
             <div id="commitments-card" class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-all duration-500 flex flex-col">
                 <div class="flex justify-between items-center mb-4">
                     <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Commitments</p>
@@ -216,7 +216,7 @@
                 <div id="commitments-list" class="space-y-3"></div>
             </div>
 
-            <!-- DEBTS -->
+            <!-- DEBT WIDGET -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center gap-2">
@@ -227,7 +227,7 @@
                 <div id="debt-list" class="space-y-2.5 flex-1"></div>
             </div>
 
-            <!-- GOALS -->
+            <!-- GOALS WIDGET -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-4">
                     <h4 class="font-bold text-sm text-brand uppercase tracking-wider">Goals</h4>
@@ -298,6 +298,7 @@
                     <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Ledger (Selected Month)</p>
                 </div>
                 
+                <!-- SEARCH BAR -->
                 <div class="mb-4 relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-textMuted-light dark:text-textMuted-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -528,29 +529,45 @@
                         <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Skills</label>
                         <input type="text" id="prof-skills" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition" placeholder="e.g. Troubleshooting, Analytics">
                     </div>
-                    <!-- NEON HOLLOW BUTTON -->
                     <button type="submit" class="w-full bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 px-4 py-2.5 rounded-xl font-bold text-sm shadow-[0_0_10px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] mt-1 transition-all duration-300">Save Profile</button>
                 </form>
             </div>
 
+            <!-- REDESIGNED DATA MANAGEMENT UI -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    
-                    <!-- NEON HOLLOW BUTTONS -->
-                    <button onclick="exportBackup()" class="w-full bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] transition-all duration-300">📦 Export JSON</button>
-                    <button onclick="exportPDF()" class="w-full bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] transition-all duration-300">📄 Export PDF</button>
+                
+                <button onclick="openStatsModal()" class="w-full mb-3 flex justify-between items-center bg-blue-500/10 border-2 border-blue-500/50 hover:bg-blue-500 hover:text-white text-blue-500 dark:text-blue-400 px-4 py-3 rounded-xl transition-all duration-300 shadow-sm group">
+                    <span class="text-xs font-bold uppercase tracking-wider">📊 Lifetime Stats</span>
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="exportBackup()" class="w-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 p-3 rounded-xl shadow-[0_0_8px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] transition-all duration-300">
+                        <span class="text-lg">📦</span>
+                        <span class="text-[9px] font-bold uppercase tracking-wider">Export JSON</span>
+                    </button>
                     
                     <div>
                         <input type="file" id="json-file-input" accept=".json" class="hidden">
-                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(59,130,246,0.2)] hover:shadow-[0_0_15px_rgba(59,130,246,0.6)] transition-all duration-300">📥 Import JSON</button>
-                    </div>
-                    <div>
-                        <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(59,130,246,0.2)] hover:shadow-[0_0_15px_rgba(59,130,246,0.6)] transition-all duration-300">⬆ Import CSV</button>
+                        <button onclick="document.getElementById('json-file-input').click()" class="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(34,197,94,0.2)] hover:shadow-[0_0_15px_rgba(34,197,94,0.6)] transition-all duration-300">
+                            <span class="text-lg">📥</span>
+                            <span class="text-[9px] font-bold uppercase tracking-wider">Import JSON</span>
+                        </button>
                     </div>
                     
-                    <button onclick="clearData()" class="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] transition-all duration-300 md:col-span-2">⚠ Factory Reset</button>
+                    <div>
+                        <input type="file" id="csv-file-input" accept=".csv" class="hidden">
+                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(34,197,94,0.2)] hover:shadow-[0_0_15px_rgba(34,197,94,0.6)] transition-all duration-300">
+                            <span class="text-lg">⬆️</span>
+                            <span class="text-[9px] font-bold uppercase tracking-wider">Import CSV</span>
+                        </button>
+                    </div>
+                    
+                    <button onclick="clearData()" class="w-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] transition-all duration-300">
+                        <span class="text-lg">⚠️</span>
+                        <span class="text-[9px] font-bold uppercase tracking-wider">Factory Reset</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -618,7 +635,7 @@
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Utility Bill</span>
                 </button>
                 <button onclick="closeActionModal(); openCommitmentModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Comm.</span>
                 </button>
                 <button onclick="closeActionModal(); openDebtModal()" class="flex flex-col items-center gap-2.5 group">
@@ -637,7 +654,39 @@
         </div>
     </div>
 
-    <!-- CARD EDIT MODAL -->
+    <!-- LIFETIME STATS MODAL (NEW) -->
+    <div id="stats-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter relative">
+            <button onclick="closeStatsModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
+            <h3 class="text-xl font-bold tracking-tight mb-1">Lifetime Statistics</h3>
+            <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-5">All-time data summary</p>
+            
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-white/5">
+                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Total Spent</p>
+                    <p class="font-bold text-lg text-gray-900 dark:text-white" id="stat-total-spent">MYR 0</p>
+                </div>
+                <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-white/5">
+                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Total Salary</p>
+                    <p class="font-bold text-lg text-green-500" id="stat-total-salary">MYR 0</p>
+                </div>
+                <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-white/5">
+                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Total Bonus</p>
+                    <p class="font-bold text-lg text-brand" id="stat-total-bonus">MYR 0</p>
+                </div>
+                <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-white/5">
+                    <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-1">Total Tax Paid</p>
+                    <p class="font-bold text-lg text-red-500" id="stat-total-tax">MYR 0</p>
+                </div>
+            </div>
+            
+            <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-white/5 flex justify-between items-center">
+                <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Transactions Logged</p>
+                <p class="font-black text-xl text-gray-900 dark:text-white" id="stat-total-tx">0</p>
+            </div>
+        </div>
+    </div>
+	<!-- CARD EDIT MODAL -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4" id="edit-card-title">Update Card</h3>
