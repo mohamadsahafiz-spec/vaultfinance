@@ -244,12 +244,12 @@
 			<!-- Floating seamlessly below the cards without background containment -->
 			<div class="relative z-20 px-5 md:px-6 flex flex-col gap-4 flex-1 w-full pb-32">
                 
-                <!-- SAFE TO SPEND WIDGET -->
-                <div class="bg-gradient-to-r from-green-500/20 to-brand/10 border border-green-500/30 dark:border-green-400/20 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300 relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-green-500/20 rounded-full blur-2xl pointer-events-none"></div>
-                    <p class="text-green-700 dark:text-green-400 text-[10px] font-bold tracking-wider uppercase drop-shadow-sm flex items-center gap-1.5"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Safe to Spend</p>
-                    <h3 class="text-3xl font-black mt-1.5 tracking-tight text-gray-900 dark:text-white"><span class="text-sm font-semibold opacity-70 pr-1">MYR</span><span id="safe-to-spend-display">0.00</span></h3>
-                    <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-2 uppercase tracking-wide">After Fixed Commitments & Min Debts</p>
+				<!-- SAFE TO SPEND WIDGET (Scaled Down 50%) -->
+                <div class="bg-gradient-to-r from-green-500/20 to-brand/10 border border-green-500/30 dark:border-green-400/20 p-4 rounded-xl shadow-sm flex flex-col transition-colors duration-300 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-green-500/20 rounded-full blur-2xl pointer-events-none"></div>
+                    <p class="text-green-700 dark:text-green-400 text-[9px] font-bold tracking-wider uppercase drop-shadow-sm flex items-center gap-1.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Safe to Spend</p>
+                    <h3 class="text-xl sm:text-2xl font-bold mt-1 tracking-tight text-gray-900 dark:text-white"><span class="text-[10px] font-semibold opacity-70 pr-0.5">MYR</span><span id="safe-to-spend-display">0.00</span></h3>
+                    <p class="text-[8px] font-medium text-textMuted-light dark:text-textMuted-dark mt-1.5 uppercase tracking-wide">After Fixed Commitments & Min Debts</p>
                 </div>
 
                 <!-- FIXED COMMITMENTS WIDGET -->
