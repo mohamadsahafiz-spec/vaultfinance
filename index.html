@@ -7,13 +7,13 @@
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FFD600">
-    <link rel="icon" type="image/png" href="favicon.png?v=10">
-    <link rel="apple-touch-icon" href="favicon.png?v=10">
+    <link rel="icon" type="image/png" href="favicon.png?v=11">
+    <link rel="apple-touch-icon" href="favicon.png?v=11">
     
-    <!-- Fonts & Libraries -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -38,9 +38,9 @@
 
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+            document.documentElement.classList.add('dark')
         } else {
-            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.remove('dark')
         }
         tailwind.config = {
             darkMode: 'class', 
@@ -55,7 +55,6 @@
 </head>
 <body class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-sans antialiased flex h-[100dvh] overflow-hidden transition-colors duration-300 selection:bg-brand selection:text-gray-900">
 
-    <!-- DESKTOP SIDEBAR -->
     <aside class="hidden md:flex w-64 bg-panel-light dark:bg-panel-dark flex-col p-6 z-10 h-full shrink-0 border-r border-gray-200 dark:border-white/5 transition-colors duration-300">
         <div class="flex items-center gap-3 mb-8">
             <div class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-gray-900 font-bold text-lg shadow-[0_0_10px_rgba(255,214,0,0.5)]">V</div>
@@ -63,31 +62,31 @@
         </div>
         <nav class="flex-1 space-y-1.5 text-sm font-semibold flex flex-col">
             <button onclick="switchTab('home')" id="nav-desk-home" class="w-full flex items-center gap-3 px-3 py-2.5 bg-brand text-gray-900 shadow-sm rounded-lg transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 <span>Dashboard</span>
             </button>
             <button onclick="switchTab('overall')" id="nav-desk-overall" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                 <span>Overall Analytics</span>
             </button>
             <button onclick="switchTab('family')" id="nav-desk-family" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <span>Family & Edu</span>
             </button>
             <button onclick="switchTab('food')" id="nav-desk-food" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
                 <span>Food & Dining</span>
             </button>
             <button onclick="switchTab('bills')" id="nav-desk-bills" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 <span>Utilities & Bills</span>
             </button>
             <button onclick="switchTab('salary')" id="nav-desk-salary" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
                 <span>Payroll & Wealth</span>
             </button>
             <button onclick="switchTab('profile')" id="nav-desk-profile" class="w-full flex items-center gap-3 px-3 py-2.5 text-textMuted-light dark:text-textMuted-dark hover:bg-surface-light dark:hover:bg-surface-dark transition rounded-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span>Profile</span>
             </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-white/5">
@@ -117,7 +116,6 @@
                 <div id="home-timeline" class="flex overflow-x-auto gap-2 hide-scrollbar py-1"></div>
             </div>
 
-            <!-- CARDS ROW -->
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 -mx-5 px-5 hide-scrollbar">
                 <!-- DEBIT CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('debit')">
@@ -150,6 +148,7 @@
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-panel-light dark:bg-panel-dark rounded-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300" onclick="openCardModal('credit')">
                     <div class="card-gold-bg w-full h-full p-4 flex flex-col justify-between relative shadow-[0_8px_20px_rgba(217,119,6,0.25)]">
                         <div class="absolute bottom-8 left-[-20%] right-[-20%] h-4 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-80 transform -skew-y-6 drop-shadow-sm"></div>
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between">
                             <div class="flex justify-between items-start">
                                 <div class="font-bold text-base drop-shadow-sm tracking-tight bg-white/40 px-1.5 py-0.5 rounded backdrop-blur-sm">Maybank <span class="text-[9px] font-semibold ml-0.5">Islamic</span></div>
@@ -178,6 +177,7 @@
 
                 <!-- KWSP CARD -->
                 <div class="snap-center shrink-0 w-[80vw] max-w-[280px] h-44 bg-gradient-to-br from-white via-gray-50 to-gray-200 text-gray-900 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:brightness-95 transition shadow-[0_8px_20px_rgba(0,0,0,0.08)] relative overflow-hidden border border-gray-300" onclick="openCardModal('kwsp')">
+                    <div class="absolute -right-8 -top-8 w-32 h-32 bg-white rounded-full blur-xl pointer-events-none"></div>
                     <div class="relative z-10 flex flex-col h-full justify-between">
                         <div class="flex justify-between items-start">
                             <div class="flex items-center gap-2">
@@ -207,7 +207,7 @@
                 <p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-2">After Fixed Commitments & Min Debts</p>
             </div>
 
-            <!-- FIXED COMMITMENTS WIDGET -->
+            <!-- FIXED COMMITMENTS -->
             <div id="commitments-card" class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-all duration-500 flex flex-col">
                 <div class="flex justify-between items-center mb-4">
                     <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Commitments</p>
@@ -216,7 +216,7 @@
                 <div id="commitments-list" class="space-y-3"></div>
             </div>
 
-            <!-- DEBT WIDGET -->
+            <!-- DEBTS -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center gap-2">
@@ -227,7 +227,7 @@
                 <div id="debt-list" class="space-y-2.5 flex-1"></div>
             </div>
 
-            <!-- GOALS WIDGET -->
+            <!-- GOALS -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col transition-colors duration-300">
                 <div class="flex justify-between items-center mb-4">
                     <h4 class="font-bold text-sm text-brand uppercase tracking-wider">Goals</h4>
@@ -298,7 +298,6 @@
                     <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Ledger (Selected Month)</p>
                 </div>
                 
-                <!-- SEARCH BAR -->
                 <div class="mb-4 relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-textMuted-light dark:text-textMuted-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -529,24 +528,29 @@
                         <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Skills</label>
                         <input type="text" id="prof-skills" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition" placeholder="e.g. Troubleshooting, Analytics">
                     </div>
-                    <button type="submit" class="w-full bg-brand text-gray-900 px-4 py-2.5 rounded-xl font-bold text-sm shadow-md mt-1 hover:scale-[1.02] transition-transform">Save Profile</button>
+                    <!-- NEON HOLLOW BUTTON -->
+                    <button type="submit" class="w-full bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 px-4 py-2.5 rounded-xl font-bold text-sm shadow-[0_0_10px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] mt-1 transition-all duration-300">Save Profile</button>
                 </form>
             </div>
 
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <button onclick="exportBackup()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📦 Export JSON</button>
-                    <button onclick="exportPDF()" class="w-full bg-brand text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition hover:scale-[1.02]">📄 Export PDF</button>
+                    
+                    <!-- NEON HOLLOW BUTTONS -->
+                    <button onclick="exportBackup()" class="w-full bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] transition-all duration-300">📦 Export JSON</button>
+                    <button onclick="exportPDF()" class="w-full bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] transition-all duration-300">📄 Export PDF</button>
+                    
                     <div>
                         <input type="file" id="json-file-input" accept=".json" class="hidden">
-                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-medium px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">📥 Import JSON</button>
+                        <button onclick="document.getElementById('json-file-input').click()" class="w-full bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(59,130,246,0.2)] hover:shadow-[0_0_15px_rgba(59,130,246,0.6)] transition-all duration-300">📥 Import JSON</button>
                     </div>
                     <div>
                         <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-xs font-medium px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent transition hover:text-brand">⬆ Import CSV</button>
+                        <button onclick="document.getElementById('csv-file-input').click()" class="w-full bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(59,130,246,0.2)] hover:shadow-[0_0_15px_rgba(59,130,246,0.6)] transition-all duration-300">⬆ Import CSV</button>
                     </div>
-                    <button onclick="clearData()" class="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-500 text-xs font-medium px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-500/20 hover:bg-red-500 hover:text-white transition md:col-span-2">⚠ Factory Reset</button>
+                    
+                    <button onclick="clearData()" class="w-full bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow-[0_0_8px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] transition-all duration-300 md:col-span-2">⚠ Factory Reset</button>
                 </div>
             </div>
         </div>
@@ -569,9 +573,10 @@
         </div>
         
         <div class="relative w-14 h-14 flex justify-center items-center shrink-0 -mt-6">
-            <button onclick="openActionModal()" class="absolute w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,214,0,0.6)] hover:scale-105 transition-transform border-[4px] border-surface-light dark:border-surface-dark z-[100]">
-                <div class="w-9 h-9 rounded-full border border-yellow-700/30 flex items-center justify-center bg-gradient-to-br from-yellow-300 to-yellow-500 shadow-inner">
-                    <span class="font-black text-xl text-yellow-900 drop-shadow-md" style="font-family: 'Inter', sans-serif;">V</span>
+            <!-- NEON V COIN BUTTON -->
+            <button onclick="openActionModal()" class="absolute w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] hover:scale-105 transition-transform z-[100] outline-none">
+                <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner">
+                    <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)]" style="font-family: 'Inter', sans-serif;">V</span>
                 </div>
             </button>
         </div>
@@ -613,7 +618,7 @@
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Utility Bill</span>
                 </button>
                 <button onclick="closeActionModal(); openCommitmentModal()" class="flex flex-col items-center gap-2.5 group">
-                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+                    <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Comm.</span>
                 </button>
                 <button onclick="closeActionModal(); openDebtModal()" class="flex flex-col items-center gap-2.5 group">
@@ -986,6 +991,23 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart, familyChart;
         let currentEditCard = ''; window.selectedMonth = ""; window.selectedYear = ""; window.selectedSalaryYear = ""; window.selectedFamilyMonth = "";
 
+        // STATS MODAL
+        window.openStatsModal = function() {
+            let totalSpent = 0;
+            transactions.forEach(t => { if (t.type === 'expense') totalSpent += parseFloat(t.amount); });
+            let totalSalary = 0; let totalBonus = 0; let totalTax = 0;
+            payrollHistory.forEach(p => { totalSalary += (p.basic + p.allowance); totalBonus += p.bonus; totalTax += p.tax; });
+
+            document.getElementById('stat-total-spent').innerText = 'MYR ' + totalSpent.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-salary').innerText = 'MYR ' + totalSalary.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-bonus').innerText = 'MYR ' + totalBonus.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-tax').innerText = 'MYR ' + totalTax.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-tx').innerText = transactions.length;
+
+            document.getElementById('stats-modal').classList.remove('hidden');
+        }
+        window.closeStatsModal = function() { document.getElementById('stats-modal').classList.add('hidden'); }
+
         function fireConfetti() {
             for(let i=0; i<60; i++) {
                 let conf = document.createElement('div');
@@ -1000,21 +1022,12 @@
             }
         }
 
-        window.exportPDF = function() {
-            const element = document.querySelector('main');
-            const nav = document.querySelector('nav.md\\:hidden');
-            if(nav) nav.style.display = 'none';
-            const opt = { margin: 0, filename: 'Vault_Financial_Report.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
-            html2pdf().set(opt).from(element).save().then(() => { if(nav) nav.style.display = ''; });
-        }
-
         window.openActionModal = function() { document.getElementById('action-modal').classList.remove('hidden'); }
         window.closeActionModal = function() { document.getElementById('action-modal').classList.add('hidden'); }
 
         window.deleteTransaction = function(index) {
             if(confirm('Delete this transaction?')) { 
-                transactions.splice(index, 1); 
-                localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+                transactions.splice(index, 1); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
                 populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard();
             }
         };
@@ -1336,12 +1349,13 @@
 
             renderWidget('base', currBase, prevBase); renderWidget('bonus', currBonus, prevBonus); renderWidget('tax', currTax, prevTax, true);
             
-            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
+            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
 
             histThisYear.forEach((c) => {
                 const totalGross = c.basic + c.allowance + c.bonus; const totalDeds = c.epf + c.socso + c.eis + c.tax;
                 if(list) {
-                    list.innerHTML += `<tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
+                    list.innerHTML += `
+                    <tr class="border-b border-gray-100 dark:border-white/5 hover:bg-surface-light dark:hover:bg-surface-dark group transition-colors duration-300">
                         <td class="py-2.5 w-11">${iconWrap}</td>
                         <td class="py-2.5 pl-2"><p class="font-bold text-xs">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[10px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p></td>
                         <td class="py-2.5 pr-2 text-right"><p class="font-bold text-[9px] text-red-500 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded border border-red-100 dark:border-red-900/50 inline-block">-MYR ${totalDeds.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-1 uppercase tracking-wider">EPF: ${c.epf} | Tax: ${c.tax}</p></td>
@@ -1359,6 +1373,14 @@
                     { label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 3, pointBackgroundColor: '#EF4444', fill: false }
                 ];
                 salaryChart.update();
+            }
+        }
+
+        window.deletePayslip = function(monthStr) {
+            if(confirm('Delete this payslip?')) { 
+                payrollHistory = payrollHistory.filter(p => p.month !== monthStr);
+                localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
+                populateTimelines(); updateCareerDashboard(); updateHomeDashboard(); renderCards(); 
             }
         }
 
@@ -1496,7 +1518,7 @@
             const list = document.getElementById('commitments-list'); if(!list) return; list.innerHTML = '';
             if (commitments.length === 0) { list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-2 uppercase tracking-wider">No fixed commitments.</p>`; return; }
             commitments.forEach((c, i) => {
-                list.innerHTML += `<div class="flex justify-between items-center group"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><div><p class="font-bold text-xs">${c.name}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.type}</p></div></div><div class="flex items-center gap-2 text-right"><div><p class="font-bold text-xs text-gray-900 dark:text-white">MYR ${parseFloat(c.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p></div><button onclick="if(confirm('Delete commitment?')) { commitments.splice(${i}, 1); localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0">✕</button></div></div>`;
+                list.innerHTML += `<div class="flex justify-between items-center group"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><div><p class="font-bold text-xs">${c.name}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.type}</p></div></div><div class="flex items-center gap-2 text-right"><div><p class="font-bold text-xs text-gray-900 dark:text-white">MYR ${parseFloat(c.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p></div><button onclick="if(confirm('Delete commitment?')) { commitments.splice(${i}, 1); localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); }" class="w-6 h-6 rounded-full text-red-500 hover:bg-red-500 hover:text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition text-[10px] flex items-center justify-center shrink-0">✕</button></div></div>`;
             });
         }
         window.openCommitmentModal = function() { document.getElementById('commitment-modal').classList.remove('hidden'); }
@@ -1510,7 +1532,7 @@
             const list = document.getElementById('bill-list'); if(!list) return; list.innerHTML = ''; bills.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
             if (bills.length === 0) { list.innerHTML = `<p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-4 uppercase tracking-wider">No upcoming reminders.</p>`; return; }
             
-            const today = new Date(); const iconWrap = `<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-3.5 h-3.5 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>`;
+            const today = new Date(); const iconWrap = `<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-3.5 h-3.5 text-brand drop-shadow-[0_0_5px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>`;
             bills.forEach((b, i) => {
                 const diffDays = Math.ceil((new Date(b.dueDate) - today) / (1000 * 60 * 60 * 24)); let dueText = `Due in ${diffDays} Days`; let dueColor = 'text-textMuted-light dark:text-textMuted-dark';
                 if(diffDays === 0) { dueText = 'Due Today'; dueColor = 'text-brand font-bold'; } else if (diffDays < 0) { dueText = `Overdue by ${Math.abs(diffDays)} Days`; dueColor = 'text-red-500 font-bold'; } else if (diffDays <= 3) { dueColor = 'text-red-500 font-bold'; }
