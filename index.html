@@ -117,10 +117,10 @@
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter flex flex-col w-full min-h-[100dvh] relative">
             
-            <!-- SEAMLESS NEON BACKGROUND (Locked to top 65vh, overflow hidden only for the glow) -->
-            <div class="absolute top-0 left-0 right-0 h-[65vh] min-h-[480px] overflow-hidden pointer-events-none z-0 flex justify-center items-center">
-                <div class="absolute w-[180vw] h-[180vw] sm:w-[90vw] sm:h-[90vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_55%)] blur-[80px] opacity-20 dark:opacity-15"></div>
-                <div class="absolute w-[100vw] h-[100vw] sm:w-[50vw] sm:h-[50vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_65%)] blur-[50px] opacity-25 dark:opacity-20"></div>
+			<!-- FULL-BLEED NEON BACKGROUND (No strict height limits, no hard light cutoffs) -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center items-start pt-[15vh]">
+                <div class="absolute w-[180vw] h-[180vw] sm:w-[90vw] sm:h-[90vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_65%)] blur-[80px] opacity-20 dark:opacity-15"></div>
+                <div class="absolute w-[100vw] h-[100vw] sm:w-[50vw] sm:h-[50vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_75%)] blur-[50px] opacity-25 dark:opacity-20"></div>
             </div>
 
             <!-- THRONE ZONE (Restored to 65% height, removed clipping) -->
