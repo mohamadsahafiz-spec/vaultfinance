@@ -667,8 +667,8 @@
 
     </main>
 
-    <!-- PERFECT 3-1-3 BOTTOM NAV DOCK -->
-    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90] transition-colors duration-300">
+	<!-- PERFECT 3-1-3 BOTTOM NAV DOCK -->
+    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90] transition-colors duration-300 pointer-events-auto">
         
         <div class="flex items-center gap-2 sm:gap-3">
             <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
@@ -682,9 +682,9 @@
             </button>
         </div>
         
-        <div class="flex justify-center items-center w-14 h-14 -mt-6">
-            <!-- NEON V COIN BUTTON -->
-            <button onclick="vibrate(50); openActionModal()" class="w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] hover:scale-105 transition-transform z-[100] outline-none cursor-pointer">
+        <div class="relative z-50 flex justify-center items-center w-14 h-14 -mt-7 pointer-events-auto">
+            <!-- NEON V COIN BUTTON (Fixed Layering) -->
+            <button type="button" onclick="openActionModal()" class="w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer relative z-50 pointer-events-auto">
                 <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner pointer-events-none">
                     <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display">V</span>
                 </div>
@@ -867,9 +867,24 @@
             }
         }
 
-        window.openActionModal = function() { document.getElementById('action-modal').classList.remove('hidden'); }
-        window.closeActionModal = function() { document.getElementById('action-modal').classList.add('hidden'); }
+		window.openActionModal = function() { 
+            vibrate(50);
+            const modal = document.getElementById('action-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                modal.style.zIndex = "200"; // Bypass HTML and force to front layer
+            }
+        };
 
+        window.closeActionModal = function() { 
+            vibrate(20);
+            const modal = document.getElementById('action-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        };
         window.deleteTransaction = function(index) {
             if(confirm('Delete this transaction?')) { 
                 vibrate([30, 50, 30]);
