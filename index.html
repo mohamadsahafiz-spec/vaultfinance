@@ -667,8 +667,10 @@
 
     </main>
 	
-	<!-- PERFECT 3-1-3 BOTTOM NAV DOCK -->
-    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[999]">
+	<!-- ========================================== -->
+    <!-- PERFECT 3-1-3 BOTTOM NAV DOCK              -->
+    <!-- ========================================== -->
+    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90]">
         
         <!-- Left Side Icons -->
         <div class="flex items-center gap-2 sm:gap-3">
@@ -683,12 +685,8 @@
             </button>
         </div>
         
-        <!-- CENTER V BUTTON (Absolutely centered and lifted above the nav) -->
-        <button type="button" onclick="openActionModal()" class="absolute left-1/2 -translate-x-1/2 -top-5 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[1000]">
-            <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner pointer-events-none">
-                <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display">V</span>
-            </div>
-        </button>
+        <!-- EMPTY MIDDLE SPACE (Keeps the icons pushed to the sides) -->
+        <div class="w-14 h-1 px-2 pointer-events-none"></div>
 
         <!-- Right Side Icons -->
         <div class="flex items-center gap-2 sm:gap-3">
@@ -704,6 +702,17 @@
         </div>
         
     </nav>
+
+    <!-- ========================================== -->
+    <!-- THE SINGLE, UNSTOPPABLE FLOATING V BUTTON  -->
+    <!-- ========================================== -->
+    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[36px] left-1/2 -translate-x-1/2 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[9999]">
+        <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner pointer-events-none">
+            <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display">V</span>
+        </div>
+    </button>
+
+    <!-- ADD TO HOME SCREEN PROMPT (A2HS) -->
 
     <!-- ABSOLUTE INDEPENDENT V BUTTON (Immune to all layout layering) -->
     <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[36px] left-1/2 -translate-x-1/2 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[9999]">
