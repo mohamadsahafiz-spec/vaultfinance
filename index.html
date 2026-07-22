@@ -667,42 +667,44 @@
 
     </main>
 
-	<!-- PERFECT 3-1-3 BOTTOM NAV DOCK (Completely Decoupled V-Button) -->
-    <div class="md:hidden fixed bottom-5 left-0 w-full flex justify-center z-[150] pointer-events-none">
-        <div class="relative w-[90%] max-w-sm flex justify-center items-end">
-            
-            <!-- Background Nav Bar -->
-            <nav class="w-full bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl transition-colors duration-300 pointer-events-auto">
-                
-                <!-- Left Icons -->
-                <div class="flex items-center gap-2 sm:gap-3">
-                    <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    </button>
-                    <button onclick="vibrate(30); switchTab('overall')" id="nav-mob-overall" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                    </button>
-                    <button onclick="vibrate(30); switchTab('family')" id="nav-mob-family" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    </button>
-                </div>
-                
-                <!-- Empty Spacer for the V button to sit over -->
-                <div class="w-12 h-1 px-2"></div>
+	<!-- PERFECT 3-1-3 BOTTOM NAV DOCK -->
+    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90] transition-colors duration-300">
+        
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </button>
+            <button onclick="vibrate(30); switchTab('overall')" id="nav-mob-overall" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </button>
+            <button onclick="vibrate(30); switchTab('family')" id="nav-mob-family" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Empty Spacer to keep the 3-1-3 symmetry while the button floats above -->
+        <div class="w-14 h-1 px-2"></div>
 
-                <!-- Right Icons -->
-                <div class="flex items-center gap-2 sm:gap-3">
-                    <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
-                    </button>
-                    <button onclick="vibrate(30); switchTab('bills')" id="nav-mob-bills" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                    </button>
-                    <button onclick="vibrate(30); switchTab('salary')" id="nav-mob-salary" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
-                    </button>
-                </div>
-            </nav>
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+            </button>
+            <button onclick="vibrate(30); switchTab('bills')" id="nav-mob-bills" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </button>
+            <button onclick="vibrate(30); switchTab('salary')" id="nav-mob-salary" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            </button>
+        </div>
+        
+    </nav>
+
+    <!-- ABSOLUTE INDEPENDENT V BUTTON (Immune to all layout layering) -->
+    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[36px] left-1/2 -translate-x-1/2 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[9999]">
+        <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner pointer-events-none">
+            <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display">V</span>
+        </div>
+    </button>
 
             <!-- INDEPENDENT FLOATING V BUTTON -->
             <button type="button" onclick="openActionModal()" class="absolute left-1/2 -translate-x-1/2 bottom-4 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_20px_rgba(255,214,0,0.5)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer pointer-events-auto z-[200]">
@@ -730,7 +732,7 @@
     </div>
 
     <!-- FIELD LOG MODAL -->
-    <div id="field-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+    <div id="field-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[9999] flex items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-brand/30 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-0.5 font-display text-brand">Field Log</h3>
             <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Mileage & Per Diem Tracker</p>
@@ -881,19 +883,18 @@
             const modal = document.getElementById('action-modal');
             if (modal) {
                 modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                modal.style.zIndex = "200"; // Bypass HTML and force to front layer
+                modal.style.display = 'flex'; // Absolute override
             }
-        };
-
+        }
+        
         window.closeActionModal = function() { 
             vibrate(20);
             const modal = document.getElementById('action-modal');
             if (modal) {
                 modal.classList.add('hidden');
-                modal.classList.remove('flex');
+                modal.style.display = '';
             }
-        };
+        }
         window.deleteTransaction = function(index) {
             if(confirm('Delete this transaction?')) { 
                 vibrate([30, 50, 30]);
