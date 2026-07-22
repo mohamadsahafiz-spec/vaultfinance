@@ -656,7 +656,7 @@
                         </button>
                     </div>
                     
-                    <button onclick="vibrate([50, 50, 50]); clearData()" class="w-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] transition-all duration-300 md:col-span-2 group">
+                    <button onclick="vibrate([50, 50, 50]); clearData()" class="w-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-50 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] transition-all duration-300 md:col-span-2 group">
                         <svg class="w-5 h-5 drop-shadow-[0_0_4px_rgba(239,68,68,0.6)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                         <span class="text-[9px] font-bold uppercase tracking-wider">Factory Reset</span>
                     </button>
@@ -672,7 +672,7 @@
     <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90]">
         
         <!-- Left Side Icons -->
-        <div class="flex items-center gap-2 sm:gap-3 pointer-events-auto">
+        <div class="flex items-center gap-2 sm:gap-3">
             <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </button>
@@ -684,11 +684,11 @@
             </button>
         </div>
         
-        <!-- EMPTY MIDDLE SPACE (Keeps the icons pushed to the sides) -->
+        <!-- EMPTY MIDDLE SPACE -->
         <div class="w-14 h-1 px-2 pointer-events-none"></div>
 
         <!-- Right Side Icons -->
-        <div class="flex items-center gap-2 sm:gap-3 pointer-events-auto">
+        <div class="flex items-center gap-2 sm:gap-3">
             <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
             </button>
@@ -705,12 +705,11 @@
     <!-- ========================================== -->
     <!-- THE SINGLE, UNSTOPPABLE FLOATING V BUTTON  -->
     <!-- ========================================== -->
-    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[36px] left-1/2 -translate-x-1/2 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[9999] pointer-events-auto">
+    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-9 left-1/2 -translate-x-1/2 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[100]">
         <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner pointer-events-none">
             <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display">V</span>
         </div>
     </button>
-
 
     <!-- ADD TO HOME SCREEN PROMPT (A2HS) -->
     <div id="a2hs-prompt" class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-[#1A1A1A]/95 backdrop-blur-xl border border-brand/50 rounded-2xl p-4 shadow-[0_10px_30px_rgba(255,214,0,0.2)] z-[100] hidden transform transition-all duration-500 translate-y-10 opacity-0">
@@ -727,45 +726,47 @@
         <button id="a2hs-btn" class="w-full bg-brand text-gray-900 font-bold text-xs py-2.5 rounded-xl shadow-sm mt-2 hover:scale-[1.02] transition-transform">Install Now</button>
     </div>
 
-    <!-- ALL MODALS -->
+    <!-- ========================================== -->
+    <!-- ALL MODALS (Standardized Z-Index Ladder)   -->
+    <!-- ========================================== -->
     
     <!-- MASTER ACTION SHEET MODAL -->
-    <div id="action-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[9999] flex items-end sm:items-center justify-center sm:p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6 relative z-[10000]">
+    <div id="action-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[200] flex-col justify-end sm:justify-center items-center sm:p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xl font-bold tracking-tight font-display">Add New...</h3>
                 <button onclick="vibrate(20); closeActionModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
             </div>
             <div class="grid grid-cols-3 gap-y-6 gap-x-2">
-                <button onclick="vibrate(30); closeActionModal(); openTxModal()" class="flex flex-col items-center gap-2.5 group">
+                <button onclick="vibrate(30); openTxModal()" class="flex flex-col items-center gap-2.5 group">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-brand/10 text-gray-900 dark:text-white group-hover:text-brand flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-brand/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Transaction</span>
                 </button>
-                <button onclick="vibrate(30); closeActionModal(); openPayrollModal()" class="flex flex-col items-center gap-2.5 group">
+                <button onclick="vibrate(30); openPayrollModal()" class="flex flex-col items-center gap-2.5 group">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-green-500/10 text-gray-900 dark:text-white group-hover:text-green-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-green-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Payslip</span>
                 </button>
-                <button onclick="vibrate(30); closeActionModal(); openUtilHistoryModal()" class="flex flex-col items-center gap-2.5 group">
+                <button onclick="vibrate(30); openUtilHistoryModal()" class="flex flex-col items-center gap-2.5 group">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-blue-500/10 text-gray-900 dark:text-white group-hover:text-blue-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-blue-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Utility Bill</span>
                 </button>
-                <button onclick="vibrate(30); closeActionModal(); openCommitmentModal()" class="flex flex-col items-center gap-2.5 group">
+                <button onclick="vibrate(30); openCommitmentModal()" class="flex flex-col items-center gap-2.5 group">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-purple-500/10 text-gray-900 dark:text-white group-hover:text-purple-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-purple-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Comm.</span>
                 </button>
-                <button onclick="vibrate(30); closeActionModal(); openDebtModal()" class="flex flex-col items-center gap-2.5 group">
+                <button onclick="vibrate(30); openDebtModal()" class="flex flex-col items-center gap-2.5 group">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-red-500/10 text-gray-900 dark:text-white group-hover:text-red-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-red-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Debt</span>
                 </button>
-                <button onclick="vibrate(30); closeActionModal(); openGoalModal()" class="flex flex-col items-center gap-2.5 group">
+                <button onclick="vibrate(30); openGoalModal()" class="flex flex-col items-center gap-2.5 group">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-brand/10 text-gray-900 dark:text-white group-hover:text-brand flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-brand/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Goal</span>
                 </button>
-                <button onclick="vibrate(30); closeActionModal(); openFieldModal()" class="flex flex-col items-center gap-2.5 group mt-2">
+                <button onclick="vibrate(30); openFieldModal()" class="flex flex-col items-center gap-2.5 group">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-teal-500/10 text-gray-900 dark:text-white group-hover:text-teal-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-teal-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Field Log</span>
                 </button>
-                <button onclick="vibrate(30); closeActionModal(); openBillModal()" class="flex flex-col items-center gap-2.5 group mt-2 col-span-2">
+                <button onclick="vibrate(30); openBillModal()" class="flex flex-col items-center gap-2.5 group col-span-2">
                     <div class="w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark group-hover:bg-orange-500/10 text-gray-900 dark:text-white group-hover:text-orange-500 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:border-orange-500/30 transition-all"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
                     <span class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Reminder</span>
                 </button>
@@ -774,9 +775,9 @@
     </div>
 
     <!-- LIFETIME STATS MODAL -->
-    <div id="stats-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="stats-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter relative">
-            <button onclick="vibrate(20); closeStatsModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
+            <button onclick="vibrate(20); closeAllModals()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
             <h3 class="text-xl font-bold tracking-tight mb-1 font-display">Lifetime Statistics</h3>
             <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-5">All-time data summary</p>
             
@@ -807,7 +808,7 @@
     </div>
 
     <!-- CARD EDIT MODAL -->
-    <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display" id="edit-card-title">Update Card</h3>
             <form onsubmit="saveCardEdit(event)" class="space-y-3">
@@ -830,7 +831,7 @@
                     <input type="number" id="edit-card-limit" step="0.01" class="w-full bg-red-50 dark:bg-red-900/10 text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-red-200 dark:border-red-900/50 outline-none focus:ring-1 focus:ring-red-500 transition">
                 </div>
                 <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="vibrate(20); closeCardModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate(30)" class="flex-1 bg-brand text-gray-900 text-xs px-3 py-2.5 rounded-xl font-bold shadow-sm hover:scale-[1.02] transition-transform">Save</button>
                 </div>
             </form>
@@ -838,7 +839,7 @@
     </div>
 
     <!-- TRANSACTION MODAL WITH SMART MACROS -->
-    <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="tx-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-2 font-display">Add Transaction</h3>
             
@@ -886,7 +887,6 @@
                     <input type="text" id="tx-category" required placeholder="Food, Utility, Tuition..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
                 
-                <!-- Hardcoded Reimbursable & Shared Toggles -->
                 <div class="grid grid-cols-2 gap-3 pt-1 border-t border-gray-200 dark:border-white/10 mt-2">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" id="tx-reimbursable" class="w-3.5 h-3.5 accent-brand rounded border-gray-300 dark:border-gray-600">
@@ -899,7 +899,7 @@
                 </div>
 
                 <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="vibrate(20); closeTxModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark text-xs px-3 py-2.5 rounded-xl font-semibold transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 text-xs px-3 py-2.5 rounded-xl font-bold shadow-sm hover:scale-[1.02] transition-transform">Save</button>
                 </div>
             </form>
@@ -907,7 +907,7 @@
     </div>
 
     <!-- COMMITMENT MODAL -->
-    <div id="commitment-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="commitment-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display">Add Fixed Commitment</h3>
             <form id="commitment-form" onsubmit="saveCommitment(event)" class="space-y-3">
@@ -926,7 +926,7 @@
                     </div>
                 </div>
                 <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="vibrate(20); closeCommitmentModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
                 </div>
             </form>
@@ -934,7 +934,7 @@
     </div>
     
     <!-- GOAL & LIFECYCLE MODAL -->
-    <div id="goal-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="goal-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display" id="goal-modal-title">Add New Goal / Asset</h3>
             <form id="goal-form" onsubmit="saveGoal(event)" class="space-y-3">
@@ -954,7 +954,6 @@
                     </div>
                 </div>
 
-                <!-- Hardcoded Lifecycle Toggle -->
                 <div class="pt-1 border-t border-gray-200 dark:border-white/10 mt-2">
                     <label class="flex items-center gap-2 cursor-pointer mb-2">
                         <input type="checkbox" id="goal-is-lifecycle" onchange="document.getElementById('lifecycle-months-div').classList.toggle('hidden')" class="w-3.5 h-3.5 accent-brand rounded border-gray-300 dark:border-gray-600">
@@ -967,7 +966,7 @@
                 </div>
 
                 <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="vibrate(20); closeGoalModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Goal</button>
                 </div>
             </form>
@@ -975,7 +974,7 @@
     </div>
     
     <!-- DEBT MODAL -->
-    <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="debt-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display">Add Debt</h3>
             <form id="debt-form" onsubmit="saveDebt(event)" class="space-y-3">
@@ -994,7 +993,7 @@
                     </div>
                 </div>
                 <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="vibrate(20); closeDebtModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
                 </div>
             </form>
@@ -1002,7 +1001,7 @@
     </div>
 
     <!-- REMINDER BILL MODAL -->
-    <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="bill-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display">Add Reminder</h3>
             <form id="bill-form" onsubmit="saveBill(event)" class="space-y-3">
@@ -1021,7 +1020,7 @@
                     </div>
                 </div>
                 <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="vibrate(20); closeBillModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Add</button>
                 </div>
             </form>
@@ -1029,7 +1028,7 @@
     </div>
 
     <!-- UTILITY HISTORY MODAL -->
-    <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="util-history-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display">Log Past Bill</h3>
             <form id="util-hist-form" onsubmit="saveUtilHistory(event)" class="space-y-3">
@@ -1053,7 +1052,7 @@
                     </div>
                 </div>
                 <div class="flex gap-2.5 pt-2">
-                    <button type="button" onclick="vibrate(20); closeUtilHistoryModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save Log</button>
                 </div>
             </form>
@@ -1061,7 +1060,7 @@
     </div>
 
     <!-- PAYROLL MODAL -->
-    <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="payroll-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter overflow-y-auto max-h-[90dvh] hide-scrollbar">
             <h3 class="text-xl font-bold tracking-tight mb-0.5 font-display">Smart Payroll</h3>
             <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Auto-calculates EPF & SOCSO</p>
@@ -1118,7 +1117,7 @@
                 </div>
 
                 <div class="flex gap-2.5 pt-1">
-                    <button type="button" onclick="vibrate(20); closePayrollModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Save</button>
                 </div>
             </form>
@@ -1126,7 +1125,7 @@
     </div>
 
     <!-- FIELD LOG MODAL -->
-    <div id="field-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[1000] flex items-center justify-center p-4">
+    <div id="field-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-brand/30 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-0.5 font-display text-brand">Field Log</h3>
             <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Mileage & Per Diem Tracker</p>
@@ -1160,7 +1159,7 @@
                 </div>
 
                 <div class="flex gap-2.5 pt-1">
-                    <button type="button" onclick="vibrate(20); closeFieldModal()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
+                    <button type="button" onclick="vibrate(20); closeAllModals()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-transparent text-textMain-light dark:text-textMain-dark rounded-xl font-semibold text-xs py-2.5 transition hover:brightness-90">Cancel</button>
                     <button type="submit" onclick="vibrate([30, 50, 30])" class="flex-1 bg-brand text-gray-900 rounded-xl font-bold text-xs py-2.5 shadow-sm hover:scale-[1.02] transition-transform">Log Claim</button>
                 </div>
             </form>
@@ -1169,7 +1168,7 @@
 
     <!-- SCRIPT ENGINE IN PART 2 -->
 	<!-- ========================================== -->
-    <!-- MASTER SCRIPT ENGINE (Fail-proof Version)  -->
+    <!-- MASTER SCRIPT ENGINE                       -->
     <!-- ========================================== -->
     <script>
         // Haptic Feedback Engine
@@ -1243,23 +1242,6 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart, familyChart;
         let currentEditCard = ''; window.selectedMonth = ""; window.selectedYear = ""; window.selectedSalaryYear = ""; window.selectedFamilyMonth = "";
 
-        // STATS MODAL
-        window.openStatsModal = function() {
-            let totalSpent = 0;
-            transactions.forEach(t => { if (t.type === 'expense' && !t.reimbursable) totalSpent += parseFloat(t.amount); });
-            let totalSalary = 0; let totalBonus = 0; let totalTax = 0;
-            payrollHistory.forEach(p => { totalSalary += (p.basic + p.allowance); totalBonus += p.bonus; totalTax += p.tax; });
-
-            document.getElementById('stat-total-spent').innerText = 'MYR ' + totalSpent.toLocaleString(undefined, {minimumFractionDigits: 2});
-            document.getElementById('stat-total-salary').innerText = 'MYR ' + totalSalary.toLocaleString(undefined, {minimumFractionDigits: 2});
-            document.getElementById('stat-total-bonus').innerText = 'MYR ' + totalBonus.toLocaleString(undefined, {minimumFractionDigits: 2});
-            document.getElementById('stat-total-tax').innerText = 'MYR ' + totalTax.toLocaleString(undefined, {minimumFractionDigits: 2});
-            document.getElementById('stat-total-tx').innerText = transactions.length;
-
-            document.getElementById('stats-modal').classList.remove('hidden');
-        }
-        window.closeStatsModal = function() { document.getElementById('stats-modal').classList.add('hidden'); }
-
         // Confetti Engine
         function fireConfetti() {
             vibrate([50, 100, 150, 100, 200]);
@@ -1277,26 +1259,95 @@
         }
 
         // ==========================================
-        // BULLETPROOF MODAL TOGGLES
+        // THE MASTER MODAL "KILL SWITCH"
         // ==========================================
-        window.openActionModal = function() { 
-            vibrate(50);
-            const modal = document.getElementById('action-modal');
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.style.display = 'flex'; // Hard CSS override
-            }
+        window.closeAllModals = function() {
+            const allModals = ['action-modal', 'stats-modal', 'card-modal', 'tx-modal', 'commitment-modal', 'goal-modal', 'debt-modal', 'bill-modal', 'util-history-modal', 'payroll-modal', 'field-modal'];
+            allModals.forEach(id => {
+                const m = document.getElementById(id);
+                if(m) {
+                    m.classList.add('hidden');
+                    m.style.display = ''; // Strip hardcoded display styles
+                }
+            });
         };
 
-        window.closeActionModal = function() { 
-            vibrate(20);
-            const modal = document.getElementById('action-modal');
-            if (modal) {
-                modal.classList.add('hidden');
-                modal.style.display = 'none'; // Hard CSS override
-            }
-        };
+        // Modal Toggles (Always trigger closeAllModals first for a clean slate)
+        window.openActionModal = function() { closeAllModals(); vibrate(50); const m = document.getElementById('action-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; };
+        window.closeActionModal = function() { vibrate(20); closeAllModals(); };
+        
+        window.openStatsModal = function() {
+            closeAllModals();
+            let totalSpent = 0;
+            transactions.forEach(t => { if (t.type === 'expense' && !t.reimbursable) totalSpent += parseFloat(t.amount); });
+            let totalSalary = 0; let totalBonus = 0; let totalTax = 0;
+            payrollHistory.forEach(p => { totalSalary += (p.basic + p.allowance); totalBonus += p.bonus; totalTax += p.tax; });
 
+            document.getElementById('stat-total-spent').innerText = 'MYR ' + totalSpent.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-salary').innerText = 'MYR ' + totalSalary.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-bonus').innerText = 'MYR ' + totalBonus.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-tax').innerText = 'MYR ' + totalTax.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-tx').innerText = transactions.length;
+
+            const m = document.getElementById('stats-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
+        }
+        window.closeStatsModal = function() { closeAllModals(); }
+
+        window.openCardModal = function(type) { 
+            closeAllModals();
+            currentEditCard = type; const data = cardData[type]; if (!data) return;
+            document.getElementById('edit-card-title').innerText = `Update Card`; document.getElementById('edit-card-name').value = data.name || ''; document.getElementById('edit-card-last4').value = data.last4 || ''; document.getElementById('edit-card-balance').value = data.balance || 0;
+            const limitContainer = document.getElementById('edit-card-limit-container');
+            if (type === 'credit') { limitContainer.classList.remove('hidden'); document.getElementById('edit-card-limit').value = data.limit || 10000; document.getElementById('edit-card-limit').required = true; } 
+            else { limitContainer.classList.add('hidden'); document.getElementById('edit-card-limit').required = false; }
+            const m = document.getElementById('card-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
+        }
+        window.closeCardModal = function() { closeAllModals(); }
+
+        window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.closeTxModal = function() { closeAllModals(); document.getElementById('tx-form').reset(); }
+
+        window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.closeFieldModal = function() { closeAllModals(); document.getElementById('field-form').reset(); document.getElementById('field-total-display').innerText = '0.00'; }
+
+        window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.closeCommitmentModal = function() { closeAllModals(); document.getElementById('commitment-form').reset(); }
+
+        window.openGoalModal = function(index = -1) { 
+            closeAllModals();
+            document.getElementById('goal-index').value = index;
+            const checkLC = document.getElementById('goal-is-lifecycle'); const lifeDiv = document.getElementById('lifecycle-months-div'); const lifeInput = document.getElementById('goal-lifespan');
+            if (index >= 0) { 
+                document.getElementById('goal-modal-title').innerText = "Update Tracker"; 
+                document.getElementById('goal-name-input').value = goalsData[index].name; 
+                document.getElementById('goal-current-input').value = goalsData[index].current; 
+                document.getElementById('goal-target-input').value = goalsData[index].target;
+                if(checkLC) checkLC.checked = goalsData[index].isLifecycle || false;
+                if(lifeInput) lifeInput.value = goalsData[index].lifespan || '';
+                if(lifeDiv) goalsData[index].isLifecycle ? lifeDiv.classList.remove('hidden') : lifeDiv.classList.add('hidden');
+            } else { 
+                document.getElementById('goal-modal-title').innerText = "Add New Goal / Asset"; 
+                document.getElementById('goal-form').reset(); 
+                if(checkLC) checkLC.checked = false;
+                if(lifeDiv) lifeDiv.classList.add('hidden');
+            }
+            const m = document.getElementById('goal-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
+        }
+        window.closeGoalModal = function() { closeAllModals(); }
+
+        window.openDebtModal = function() { closeAllModals(); const m = document.getElementById('debt-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.closeDebtModal = function() { closeAllModals(); document.getElementById('debt-form').reset(); }
+
+        window.openBillModal = function() { closeAllModals(); const m = document.getElementById('bill-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.closeBillModal = function() { closeAllModals(); document.getElementById('bill-form').reset(); }
+
+        window.openUtilHistoryModal = function() { closeAllModals(); const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('util-history-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.closeUtilHistoryModal = function() { closeAllModals(); document.getElementById('util-hist-form').reset(); }
+
+        window.openPayrollModal = function() { closeAllModals(); const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('payroll-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.closePayrollModal = function() { closeAllModals(); document.getElementById('payroll-form').reset(); document.getElementById('pay-net-display').innerText = '0.00'; }
+
+        // General Core Functions
         window.deleteTransaction = function(index) {
             if(confirm('Delete this transaction?')) { 
                 vibrate([30, 50, 30]);
@@ -1331,6 +1382,7 @@
         }
 
         window.switchTab = function(tabId) {
+            closeAllModals(); // Guarantee no menus follow you to a new tab
             const tabs = ['home', 'overall', 'food', 'family', 'bills', 'salary', 'profile'];
             tabs.forEach(id => {
                 let tabEl = document.getElementById(`tab-${id}`);
@@ -1350,7 +1402,6 @@
             let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
             if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-sm'); }
 
-            // Dynamic Time-Based Greeting
             const hour = new Date().getHours();
             let greeting = "Welcome";
             if (hour < 12) greeting = "Good morning";
@@ -1432,7 +1483,6 @@
             const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
             let runningBalance = 0; let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
             
-            // Gamified Streak Engine (Calculate days without discretionary expense)
             let streak = 0; let today = new Date(); today.setHours(0,0,0,0);
             let txByDate = {};
             transactions.forEach(t => {
@@ -1565,7 +1615,6 @@
             const filter = window.selectedFamilyMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1; const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
             const list = document.getElementById('family-transaction-list'); if(list) list.innerHTML = ''; let txCount = 0; let cSum = 0; let lSum = 0; let currYearFam = new Array(12).fill(0); let lastYearFam = new Array(12).fill(0);
             
-            // Family Split Owed Logic
             let sharedTotal = 0;
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
@@ -1733,15 +1782,6 @@
             }
         }
 
-        window.openCardModal = function(type) { 
-            currentEditCard = type; const data = cardData[type]; if (!data) return;
-            document.getElementById('edit-card-title').innerText = `Update Card`; document.getElementById('edit-card-name').value = data.name || ''; document.getElementById('edit-card-last4').value = data.last4 || ''; document.getElementById('edit-card-balance').value = data.balance || 0;
-            const limitContainer = document.getElementById('edit-card-limit-container');
-            if (type === 'credit') { limitContainer.classList.remove('hidden'); document.getElementById('edit-card-limit').value = data.limit || 10000; document.getElementById('edit-card-limit').required = true; } 
-            else { limitContainer.classList.add('hidden'); document.getElementById('edit-card-limit').required = false; }
-            document.getElementById('card-modal').classList.remove('hidden'); 
-        }
-        window.closeCardModal = function() { document.getElementById('card-modal').classList.add('hidden'); }
         window.saveCardEdit = function(e) { 
             e.preventDefault(); if (!cardData[currentEditCard]) return;
             cardData[currentEditCard].name = document.getElementById('edit-card-name').value; cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value; cardData[currentEditCard].balance = parseFloat(document.getElementById('edit-card-balance').value) || 0;
@@ -1749,7 +1789,6 @@
             localStorage.setItem('vault_cards', JSON.stringify(cardData)); renderCards(); updateHomeDashboard(); closeCardModal(); 
         }
 
-        // Smart Macros Function
         window.applyMacro = function(desc, category, amount) {
             vibrate(15);
             document.getElementById('tx-desc').value = desc;
@@ -1758,13 +1797,10 @@
             document.getElementById('tx-type').value = 'expense';
         }
 
-        window.openTxModal = function() { document.getElementById('tx-date').valueAsDate = new Date(); document.getElementById('tx-modal').classList.remove('hidden'); }
-        window.closeTxModal = function() { document.getElementById('tx-modal').classList.add('hidden'); document.getElementById('tx-form').reset(); }
         window.saveTransaction = function(e) { 
             e.preventDefault(); 
             const date = document.getElementById('tx-date').value; const desc = document.getElementById('tx-desc').value; const type = document.getElementById('tx-type').value; const method = document.getElementById('tx-method').value; const category = document.getElementById('tx-category').value; const amount = parseFloat(document.getElementById('tx-amount').value);
             
-            // Checking the injected toggles
             const reimbToggle = document.getElementById('tx-reimbursable'); const isReimbursable = reimbToggle ? reimbToggle.checked : false;
             const sharedToggle = document.getElementById('tx-shared'); const isShared = sharedToggle ? sharedToggle.checked : false;
 
@@ -1799,31 +1835,26 @@
             populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); renderCards(); closeTxModal(); 
         }
 
-        // Field Modal Logic
-        window.openFieldModal = function() { document.getElementById('field-date').valueAsDate = new Date(); document.getElementById('field-modal').classList.remove('hidden'); }
-        window.closeFieldModal = function() { document.getElementById('field-modal').classList.add('hidden'); document.getElementById('field-form').reset(); document.getElementById('field-total-display').innerText = '0.00'; }
         window.calcFieldClaim = function() {
             let km = parseFloat(document.getElementById('field-km').value) || 0; let rate = parseFloat(document.getElementById('field-rate').value) || 0; let pd = parseFloat(document.getElementById('field-perdiem').value) || 0;
             document.getElementById('field-total-display').innerText = ((km * rate) + pd).toFixed(2);
         }
+
         window.saveFieldLog = function(e) {
             e.preventDefault();
             let date = document.getElementById('field-date').value; let km = parseFloat(document.getElementById('field-km').value) || 0; let rate = parseFloat(document.getElementById('field-rate').value) || 0; let pd = parseFloat(document.getElementById('field-perdiem').value) || 0;
             let total = (km * rate) + pd;
             
-            // Auto inject into transactions as Reimbursable expense
             transactions.push({ date: date, desc: `Field Trip (${km}km + PD)`, type: 'expense', category: 'Work/Field', amount: total, reimbursable: true, shared: false });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
             populateTimelines(); updateOverallDashboard(); updateHomeDashboard(); updateFamilyDashboard(); closeFieldModal();
             setTimeout(() => alert("Field Log Saved & Tagged as Claimable!"), 100);
         }
 
-        // Smart Goal & Lifecycle Forecasting
         window.renderGoals = function() {
             const gl = document.getElementById('goals-list'); if(!gl) return; gl.innerHTML = '';
             if (goalsData.length === 0) { gl.innerHTML = `<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-3 uppercase tracking-wider">No active goals or lifecycles.</p>`; return; }
             
-            // Estimate average monthly savings capability (10% of avg income, min 300)
             let totalHistIncome = transactions.reduce((sum, t) => t.type === 'income' ? sum + parseFloat(t.amount) : sum, 0);
             let activeMonths = Array.from(new Set(transactions.map(t => t.date.substring(0,7)))).length || 1;
             let avgMonthlySavings = Math.max((totalHistIncome / activeMonths) * 0.10, 300); 
@@ -1850,27 +1881,6 @@
             }); 
         }
 
-        window.openGoalModal = function(index = -1) { 
-            document.getElementById('goal-index').value = index;
-            const checkLC = document.getElementById('goal-is-lifecycle'); const lifeDiv = document.getElementById('lifecycle-months-div'); const lifeInput = document.getElementById('goal-lifespan');
-            if (index >= 0) { 
-                document.getElementById('goal-modal-title').innerText = "Update Tracker"; 
-                document.getElementById('goal-name-input').value = goalsData[index].name; 
-                document.getElementById('goal-current-input').value = goalsData[index].current; 
-                document.getElementById('goal-target-input').value = goalsData[index].target;
-                if(checkLC) checkLC.checked = goalsData[index].isLifecycle || false;
-                if(lifeInput) lifeInput.value = goalsData[index].lifespan || '';
-                if(lifeDiv) goalsData[index].isLifecycle ? lifeDiv.classList.remove('hidden') : lifeDiv.classList.add('hidden');
-            } 
-            else { 
-                document.getElementById('goal-modal-title').innerText = "Add New Goal / Asset"; 
-                document.getElementById('goal-form').reset(); 
-                if(checkLC) checkLC.checked = false;
-                if(lifeDiv) lifeDiv.classList.add('hidden');
-            }
-            document.getElementById('goal-modal').classList.remove('hidden'); 
-        }
-        window.closeGoalModal = function() { document.getElementById('goal-modal').classList.add('hidden'); }
         window.saveGoal = function(e) { 
             e.preventDefault(); 
             let idx = parseInt(document.getElementById('goal-index').value); let name = document.getElementById('goal-name-input').value; let current = parseFloat(document.getElementById('goal-current-input').value)||0; let target = parseFloat(document.getElementById('goal-target-input').value)||1;
@@ -1901,8 +1911,7 @@
                 dl.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group ${borderClass}"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center transition-all duration-300"><div class="flex-1 min-w-0 pr-2"><div class="flex items-center flex-wrap gap-1.5"><p class="font-bold text-[11px] truncate max-w-[80%]">${d.name}</p>${badge}</div><p class="text-[8px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">Min: MYR ${d.minPayment}</p></div><div class="flex items-center gap-2 shrink-0"><p class="text-red-500 font-bold text-[11px]">-MYR ${d.balance.toLocaleString()}</p></div></div><button onclick="if(confirm('Delete this debt?')) { vibrate([30,50,30]); debts.splice(${i}, 1); localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); updateHomeDashboard(); fireConfetti(); }" class="min-w-[80px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`; 
             }); 
         }
-        window.openDebtModal = function() { document.getElementById('debt-modal').classList.remove('hidden'); }
-        window.closeDebtModal = function() { document.getElementById('debt-modal').classList.add('hidden'); document.getElementById('debt-form').reset(); }
+
         window.saveDebt = function(e) { 
             e.preventDefault(); debts.push({ name: document.getElementById('debt-name').value, balance: parseFloat(document.getElementById('debt-balance').value), minPayment: parseFloat(document.getElementById('debt-min').value) }); 
             localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); updateHomeDashboard(); closeDebtModal(); 
@@ -1915,8 +1924,7 @@
                 list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0"><svg class="w-3.5 h-3.5 text-blue-500 drop-shadow-[0_0_5px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><div><p class="font-bold text-[11px]">${c.name}</p><p class="text-[8px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.type}</p></div></div><div class="flex items-center gap-2 text-right"><div><p class="font-bold text-[11px] text-gray-900 dark:text-white">MYR ${parseFloat(c.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[7px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-0.5 uppercase tracking-wider">Monthly</p></div></div></div><button onclick="if(confirm('Delete commitment?')) { vibrate([30,50,30]); commitments.splice(${i}, 1); localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); }" class="min-w-[80px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
             });
         }
-        window.openCommitmentModal = function() { document.getElementById('commitment-modal').classList.remove('hidden'); }
-        window.closeCommitmentModal = function() { document.getElementById('commitment-modal').classList.add('hidden'); document.getElementById('commitment-form').reset(); }
+
         window.saveCommitment = function(e) {
             e.preventDefault(); commitments.push({ name: document.getElementById('commit-name').value, type: document.getElementById('commit-type').value, amount: parseFloat(document.getElementById('commit-amount').value) });
             localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); closeCommitmentModal();
@@ -1933,23 +1941,17 @@
                 list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2.5 flex-1 truncate pr-2">${iconWrap}<div class="truncate"><p class="font-bold text-xs truncate">${b.name}</p><p class="text-[9px] font-medium ${dueColor} mt-0.5">${dueText}</p></div></div><div class="font-bold text-xs pr-1">MYR ${parseFloat(b.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</div></div><button onclick="if(confirm('Delete reminder?')) { vibrate([30,50,30]); bills.splice(${i}, 1); localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); }" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
             });
         }
-        window.openBillModal = function() { document.getElementById('bill-modal').classList.remove('hidden'); }
-        window.closeBillModal = function() { document.getElementById('bill-modal').classList.add('hidden'); document.getElementById('bill-form').reset(); }
+
         window.saveBill = function(e) { 
             e.preventDefault(); bills.push({ name: document.getElementById('bill-name').value, amount: parseFloat(document.getElementById('bill-amount').value), dueDate: document.getElementById('bill-date').value }); 
             localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); closeBillModal(); 
         }
 
-        window.openUtilHistoryModal = function() { const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; document.getElementById('util-history-modal').classList.remove('hidden'); }
-        window.closeUtilHistoryModal = function() { document.getElementById('util-history-modal').classList.add('hidden'); document.getElementById('util-hist-form').reset(); }
         window.saveUtilHistory = function(e) { 
             e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); 
             localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); closeUtilHistoryModal(); 
         }
 
-        window.openPayrollModal = function() { const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; document.getElementById('payroll-modal').classList.remove('hidden'); }
-        window.closePayrollModal = function() { document.getElementById('payroll-modal').classList.add('hidden'); document.getElementById('payroll-form').reset(); document.getElementById('pay-net-display').innerText = '0.00'; }
-        
         window.autoCalcPayroll = function() {
             let basic = parseFloat(document.getElementById('pay-basic').value) || 0; let allow = parseFloat(document.getElementById('pay-allow').value) || 0; let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             let epfBase = basic + allow + bonus; let socsoEisBase = basic + allow; 
@@ -2019,13 +2021,10 @@
             reader.readAsDataURL(file);
         }
 
-        // Pivot-Ready Export Engine
         window.exportBackup = function() { 
-            // Standard JSON Full Backup
             const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_goals: localStorage.getItem('vault_goals'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_payroll: localStorage.getItem('vault_payroll'), vault_commitments: localStorage.getItem('vault_commitments') }; 
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
             
-            // Pivot-Ready CSV Structure Generation
             let csvContent = "data:text/csv;charset=utf-8,Date,Month,Year,Description,Category,Type,Amount,Reimbursable,Shared\n";
             transactions.forEach(t => {
                 let m = "N/A", y = "N/A";
@@ -2068,7 +2067,6 @@
         
         window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
 
-        // Clean Initialization
         window.onload = function() {
             checkPayday();
             populateTimelines();
