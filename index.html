@@ -666,10 +666,11 @@
         </div>
 
     </main>
-
+	
 	<!-- PERFECT 3-1-3 BOTTOM NAV DOCK -->
-    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90] transition-colors duration-300">
+    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[999]">
         
+        <!-- Left Side Icons -->
         <div class="flex items-center gap-2 sm:gap-3">
             <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -682,9 +683,14 @@
             </button>
         </div>
         
-        <!-- Empty Spacer to keep the 3-1-3 symmetry while the button floats above -->
-        <div class="w-14 h-1 px-2"></div>
+        <!-- CENTER V BUTTON (Absolutely centered and lifted above the nav) -->
+        <button type="button" onclick="openActionModal()" class="absolute left-1/2 -translate-x-1/2 -top-5 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[1000]">
+            <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner pointer-events-none">
+                <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display">V</span>
+            </div>
+        </button>
 
+        <!-- Right Side Icons -->
         <div class="flex items-center gap-2 sm:gap-3">
             <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
@@ -877,16 +883,16 @@
                 setTimeout(() => conf.remove(), 2500);
             }
         }
-
 		window.openActionModal = function() { 
             vibrate(50);
             const modal = document.getElementById('action-modal');
             if (modal) {
                 modal.classList.remove('hidden');
-                modal.style.display = 'flex'; // Absolute override
+                modal.style.display = 'flex';
+                modal.style.zIndex = '9999'; // Forces modal to the absolute front
             }
-        }
-        
+        };
+
         window.closeActionModal = function() { 
             vibrate(20);
             const modal = document.getElementById('action-modal');
@@ -894,7 +900,7 @@
                 modal.classList.add('hidden');
                 modal.style.display = '';
             }
-        }
+        };
         window.deleteTransaction = function(index) {
             if(confirm('Delete this transaction?')) { 
                 vibrate([30, 50, 30]);
