@@ -821,9 +821,9 @@
                         <label id="edit-card-last4-label" class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Last 4 Digits</label>
                         <input type="text" id="edit-card-last4" maxlength="4" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
-                    <div>
+					<div>
                         <label id="edit-card-balance-label" class="block text-[9px] font-semibold text-brand mb-1 uppercase tracking-wider">Balance / Funds</label>
-                        <input type="number" id="edit-card-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                        <input type="text" inputmode="decimal" id="edit-card-balance" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                 </div>
                 <div id="edit-card-limit-container" class="hidden">
@@ -1326,13 +1326,19 @@
             const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
         
-		window.openCardModal = function(type) { 
+		// Fail-Safe Open Card Modal
+        window.openCardModal = function(type) { 
             closeAllModals();
             currentEditCard = type; 
             
-            // Auto-heal if object is somehow missing
+            // Guarantee object structure
             if (!cardData[type] || typeof cardData[type] !== 'object') {
-                cardData[type] = { balance: parseFloat(cardData[type]) || 0, name: type.toUpperCase(), last4: '0000' };
+                let oldVal = cardData[type];
+                cardData[type] = {
+                    balance: typeof oldVal === 'number' ? oldVal : (parseFloat(oldVal) || 0),
+                    name: type === 'kwsp' ? 'Retirement Fund' : (type === 'credit' ? 'Ikhwan CC' : 'Debit Card'),
+                    last4: type === 'kwsp' ? '0000' : (type === 'credit' ? '8888' : '1234')
+                };
             }
             const data = cardData[type];
             
@@ -1341,7 +1347,10 @@
             
             document.getElementById('edit-card-name').value = data.name || ''; 
             document.getElementById('edit-card-last4').value = data.last4 || ''; 
-            document.getElementById('edit-card-balance').value = data.balance !== undefined ? data.balance : 0;
+            
+            // Format existing value safely into input
+            let rawBal = data.balance !== undefined && data.balance !== null ? data.balance : 0;
+            document.getElementById('edit-card-balance').value = rawBal;
             
             const limitContainer = document.getElementById('edit-card-limit-container');
             if (type === 'credit') { 
@@ -1356,171 +1365,97 @@
             const m = document.getElementById('card-modal'); 
             if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
-        window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
-        window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
-        window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
-        
-        window.openGoalModal = function(index = -1) { 
-            closeAllModals();
-            document.getElementById('goal-index').value = index;
-            const checkLC = document.getElementById('goal-is-lifecycle'); const lifeDiv = document.getElementById('lifecycle-months-div'); const lifeInput = document.getElementById('goal-lifespan');
-            if (index >= 0) { 
-                document.getElementById('goal-modal-title').innerText = "Update Tracker"; 
-                document.getElementById('goal-name-input').value = goalsData[index].name; 
-                document.getElementById('goal-current-input').value = goalsData[index].current; 
-                document.getElementById('goal-target-input').value = goalsData[index].target;
-                if(checkLC) checkLC.checked = goalsData[index].isLifecycle || false;
-                if(lifeInput) lifeInput.value = goalsData[index].lifespan || '';
-                if(lifeDiv) goalsData[index].isLifecycle ? lifeDiv.classList.remove('hidden') : lifeDiv.classList.add('hidden');
-            } else { 
-                document.getElementById('goal-modal-title').innerText = "Add New Goal / Asset"; 
-                document.getElementById('goal-form').reset(); 
-                if(checkLC) checkLC.checked = false;
-                if(lifeDiv) lifeDiv.classList.add('hidden');
+
+        // Fail-Safe Save Card Edits (Strips Commas)
+        window.saveCardEdit = function(e) { 
+            e.preventDefault(); 
+            if (!currentEditCard) return;
+            
+            if (!cardData[currentEditCard] || typeof cardData[currentEditCard] !== 'object') {
+                cardData[currentEditCard] = {};
             }
-            const m = document.getElementById('goal-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
-        }
-
-        window.openDebtModal = function() { closeAllModals(); const m = document.getElementById('debt-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
-        window.openBillModal = function() { closeAllModals(); const m = document.getElementById('bill-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
-        window.openUtilHistoryModal = function() { closeAllModals(); const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('util-history-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
-        window.openPayrollModal = function() { closeAllModals(); const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('payroll-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
-
-        // General Core Functions
-        window.deleteTransaction = function(index) {
-            if(confirm('Delete this transaction?')) { 
-                vibrate([30, 50, 30]);
-                transactions.splice(index, 1); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-                populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard();
+            
+            // Sanitize number inputs by removing commas
+            let cleanBalStr = String(document.getElementById('edit-card-balance').value).replace(/,/g, '').trim();
+            let parsedBal = parseFloat(cleanBalStr);
+            
+            cardData[currentEditCard].name = document.getElementById('edit-card-name').value; 
+            cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value; 
+            cardData[currentEditCard].balance = isNaN(parsedBal) ? 0 : parsedBal;
+            
+            if (currentEditCard === 'credit') { 
+                let cleanLimitStr = String(document.getElementById('edit-card-limit').value).replace(/,/g, '').trim();
+                let parsedLimit = parseFloat(cleanLimitStr);
+                cardData.credit.limit = isNaN(parsedLimit) ? 10000 : parsedLimit; 
             }
-        };
-
-        function formatDisplayDate(dateStr) {
-            if (!dateStr) return ''; const parts = dateStr.split('-'); if (parts.length !== 3) return dateStr;
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            return `${months[parseInt(parts[1], 10) - 1]} ${parseInt(parts[2], 10)}, ${parts[0].slice(-2)}`;
-        }
-
-        window.toggleTheme = function() {
-            document.documentElement.classList.toggle('dark');
-            let isDark = document.documentElement.classList.contains('dark');
-            localStorage.theme = isDark ? 'dark' : 'light';
             
-            syncMetaThemeColor(); 
-            
-            document.getElementById('theme-icon').innerHTML = isDark 
-                ? '<svg class="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>'
-                : '<svg class="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
-            
-            let tc = isDark ? '#8E8E93' : '#6B7280'; let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; Chart.defaults.color = tc;
-            [categoryChart, comparisonChart, salaryChart, foodChart, utilChart, familyChart].forEach(c => {
-                if(c && c.options.scales) {
-                    if(c.options.scales.x) { if(c.options.scales.x.grid) c.options.scales.x.grid.color = gc; if(c.options.scales.x.ticks) c.options.scales.x.ticks.color = tc; }
-                    if(c.options.scales.y) { if(c.options.scales.y.grid) c.options.scales.y.grid.color = gc; if(c.options.scales.y.ticks) c.options.scales.y.ticks.color = tc; }
-                    c.update();
-                }
-            });
-            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); updateUtilDashboard(); updateCareerDashboard();
-        }
-
-        window.switchTab = function(tabId) {
+            localStorage.setItem('vault_cards', JSON.stringify(cardData)); 
+            renderCards(); 
+            updateHomeDashboard(); 
             closeAllModals(); 
-            const tabs = ['home', 'overall', 'food', 'family', 'bills', 'salary', 'profile'];
-            tabs.forEach(id => {
-                let tabEl = document.getElementById(`tab-${id}`);
-                if(tabEl) { tabEl.classList.add('hidden'); tabEl.classList.remove('flex'); }
-                
-                let mobBtn = document.getElementById(`nav-mob-${id}`); 
-                if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-gray-400', 'dark:text-gray-500'); }
-                let deskBtn = document.getElementById(`nav-desk-${id}`); 
-                if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-sm'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
-            });
-
-            let activeTab = document.getElementById(`tab-${tabId}`);
-            if(activeTab) { activeTab.classList.remove('hidden'); activeTab.classList.add('flex'); }
-            
-            let activeMob = document.getElementById(`nav-mob-${tabId}`); 
-            if(activeMob) { activeMob.classList.remove('text-gray-400', 'dark:text-gray-500'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
-            let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
-            if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-sm'); }
-
-            const hour = new Date().getHours();
-            let greeting = "Welcome";
-            if (hour < 12) greeting = "Good morning";
-            else if (hour < 17) greeting = "Good afternoon";
-            else if (hour < 21) greeting = "Good evening";
-            else greeting = "Late night ledger";
-
-            const headerTitles = { 
-                'home': `${greeting}, ${profile.name.split(' ')[0]}`, 
-                'overall': 'Overall Analytics', 
-                'food': 'Food & Dining', 
-                'family': 'Family & Edu', 
-                'bills': 'Utility History', 
-                'salary': 'Payroll & Wealth', 
-                'profile': 'Profile Settings' 
-            };
-            const headEl = document.getElementById('header-title');
-            if(headEl) headEl.innerText = headerTitles[tabId] || 'Vault'; 
-            document.getElementById('main-scroll').scrollTo(0,0);
         }
 
-        function checkPayday() {
-            const today = new Date(); const commitmentsCard = document.getElementById('commitments-card'); const paydayBadge = document.getElementById('payday-badge');
-            if (commitmentsCard) {
-                if (today.getDate() === 27) { commitmentsCard.classList.add('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]'); commitmentsCard.classList.remove('border-gray-200', 'dark:border-white/5'); if (paydayBadge) paydayBadge.classList.remove('hidden'); } 
-                else { commitmentsCard.classList.remove('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]'); commitmentsCard.classList.add('border-gray-200', 'dark:border-white/5'); if (paydayBadge) paydayBadge.classList.add('hidden'); }
+        // Fail-Safe Render Cards
+        window.renderCards = function() { 
+            const dEl = document.getElementById('debit-display'); 
+            const cEl = document.getElementById('credit-display'); 
+            const cpEl = document.getElementById('credit-pct'); 
+            const kEl = document.getElementById('kwsp-display');
+
+            if(dEl && cardData.debit) { 
+                let dBal = typeof cardData.debit === 'object' ? (parseFloat(cardData.debit.balance) || 0) : (parseFloat(cardData.debit) || 0);
+                dEl.innerText = dBal.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                document.getElementById('debit-name').innerText = cardData.debit.name || 'Debit Card'; 
+                document.getElementById('debit-last4').innerText = cardData.debit.last4 || '1234'; 
+            }
+            if(cEl && cardData.credit) { 
+                let cBal = typeof cardData.credit === 'object' ? (parseFloat(cardData.credit.balance) || 0) : (parseFloat(cardData.credit) || 0);
+                cEl.innerText = cBal.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                document.getElementById('credit-name').innerText = cardData.credit.name || 'Credit Card'; 
+                document.getElementById('credit-last4').innerText = cardData.credit.last4 || '8888'; 
+            }
+            if(kEl && cardData.kwsp) {
+                let baseKwsp = typeof cardData.kwsp === 'object' ? (parseFloat(cardData.kwsp.balance) || 0) : (parseFloat(cardData.kwsp) || 0);
+                let totalKwsp = baseKwsp;
+                let annualEpf = 0;
+                
+                payrollHistory.forEach(p => { 
+                    let gross = p.basic + p.allowance + p.bonus; let empEpf = 0;
+                    if (p.empEpf) { empEpf = p.empEpf; } 
+                    else { 
+                        if(gross > 0 && gross <= 5000) { empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13); } 
+                        else if(gross > 5000) { empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12); } 
+                    }
+                    totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
+                });
+                
+                kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                if (typeof cardData.kwsp === 'object') {
+                    document.getElementById('kwsp-name').innerText = cardData.kwsp.name || 'Retirement Fund'; 
+                    document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4 || '0000';
+                }
+                
+                if(payrollHistory.length > 0) {
+                    let totalEpfContributed = payrollHistory.reduce((sum, p) => sum + (parseFloat(p.epf) || 0) + (parseFloat(p.empEpf) || 0), 0);
+                    annualEpf = (totalEpfContributed / payrollHistory.length) * 12;
+                } else {
+                    annualEpf = 5000; 
+                }
+                const yearsTo55 = 19; 
+                const estDiv = 0.055; 
+                const projected = totalKwsp * Math.pow(1 + estDiv, yearsTo55) + annualEpf * ((Math.pow(1 + estDiv, yearsTo55) - 1) / estDiv);
+                const projEl = document.getElementById('kwsp-projected');
+                if(projEl) projEl.innerText = projected.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            }
+            if(cpEl && cardData.credit) {
+                const maxLimit = cardData.credit.limit || 10000; 
+                const currentBalance = typeof cardData.credit === 'object' ? (parseFloat(cardData.credit.balance) || 0) : 0;
+                const usedPercentage = Math.round((currentBalance / maxLimit) * 100); 
+                cpEl.innerText = usedPercentage;
             }
         }
 
-        function populateTimelines() {
-            let txMonths = new Set(); const now = new Date(); const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`; txMonths.add(currentMonthStr);
-            transactions.forEach(t => { if(t.date && t.date.includes('-')) { txMonths.add(t.date.split('-').slice(0,2).join('-')); } });
-            let txArr = Array.from(txMonths).sort().reverse(); const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            
-            if (!window.selectedMonth || !txArr.includes(window.selectedMonth)) { window.selectedMonth = txArr[0]; }
-            if (!window.selectedFamilyMonth || !txArr.includes(window.selectedFamilyMonth)) { window.selectedFamilyMonth = txArr[0]; }
-
-            let monthHTML = ''; txArr.forEach(m => {
-                const [y, mo] = m.split('-'); const display = `${mNames[parseInt(mo, 10)-1]} ${y}`; const isActive = (m === window.selectedMonth);
-                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
-                monthHTML += `<button onclick="vibrate(10); selectMonth('${m}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${display}</button>`;
-            });
-            ['overall-timeline', 'food-timeline'].forEach(id => { const el = document.getElementById(id); if(el) { el.innerHTML = monthHTML; } });
-
-            let famHTML = ''; txArr.forEach(m => {
-                const [y, mo] = m.split('-'); const display = `${mNames[parseInt(mo, 10)-1]} ${y}`; const isActive = (m === window.selectedFamilyMonth);
-                const activeClass = isActive ? 'bg-purple-500 text-white shadow-[0_0_10px_rgba(168,85,247,0.8)] font-bold border-purple-500' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-purple-500 transition-colors duration-300';
-                famHTML += `<button onclick="vibrate(10); selectFamilyMonth('${m}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${display}</button>`;
-            });
-            const fEl = document.getElementById('family-timeline'); if (fEl) fEl.innerHTML = famHTML;
-
-            let uYears = new Set(); uYears.add(now.getFullYear().toString());
-            utilHistory.forEach(u => { if(u.month) { uYears.add(u.month.split('-')[0]); } }); let uArr = Array.from(uYears).sort().reverse();
-            if (!window.selectedYear || !uArr.includes(window.selectedYear)) { window.selectedYear = uArr[0]; }
-            let yearHTML = ''; uArr.forEach(y => {
-                const isActive = (y === window.selectedYear);
-                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
-                yearHTML += `<button onclick="vibrate(10); selectYear('${y}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${y}</button>`;
-            });
-            const uEl = document.getElementById('util-timeline'); if(uEl) { uEl.innerHTML = yearHTML; }
-
-            let sYears = new Set(); sYears.add(now.getFullYear().toString());
-            payrollHistory.forEach(p => { if(p.month) { sYears.add(p.month.split('-')[0]); } }); let sArr = Array.from(sYears).sort().reverse();
-            if (!window.selectedSalaryYear || !sArr.includes(window.selectedSalaryYear)) { window.selectedSalaryYear = sArr[0]; }
-            let sHTML = ''; sArr.forEach(y => {
-                const isActive = (y === window.selectedSalaryYear);
-                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
-                sHTML += `<button onclick="vibrate(10); selectSalaryYear('${y}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${y}</button>`;
-            });
-            const sEl = document.getElementById('salary-timeline'); if(sEl) { sEl.innerHTML = sHTML; }
-        }
-
-        window.selectMonth = function(m) { window.selectedMonth = m; populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); }
-        window.selectFamilyMonth = function(m) { window.selectedFamilyMonth = m; populateTimelines(); updateFamilyDashboard(); }
-        window.selectYear = function(y) { window.selectedYear = y; populateTimelines(); updateUtilDashboard(); }
-        window.selectSalaryYear = function(y) { window.selectedSalaryYear = y; populateTimelines(); updateCareerDashboard(); }
-
+        // Fail-Safe Home Dashboard Calculation
         window.updateHomeDashboard = function() {
             const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
             let runningBalance = 0; let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -1549,15 +1484,15 @@
                 }
             });
 
-            let totalKwsp = cardData.kwsp.balance || 0;
+            let totalKwsp = typeof cardData.kwsp === 'object' ? (parseFloat(cardData.kwsp.balance) || 0) : (parseFloat(cardData.kwsp) || 0);
             payrollHistory.forEach(p => { 
                 let gross = p.basic + p.allowance + p.bonus; let empEpf = 0;
                 if (p.empEpf) { empEpf = p.empEpf; } else { if(gross > 0 && gross <= 5000) empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13); else if(gross > 5000) empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12); }
-                totalKwsp += p.epf + empEpf; 
+                totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
             });
             
-            let currentDebit = (cardData.debit && cardData.debit.balance) ? parseFloat(cardData.debit.balance) : 0;
-            let currentCreditUsed = (cardData.credit && cardData.credit.balance) ? parseFloat(cardData.credit.balance) : 0;
+            let currentDebit = (cardData.debit && typeof cardData.debit === 'object') ? (parseFloat(cardData.debit.balance) || 0) : 0;
+            let currentCreditUsed = (cardData.credit && typeof cardData.credit === 'object') ? (parseFloat(cardData.credit.balance) || 0) : 0;
             
             const totalNetWealth = (currentDebit + totalKwsp) - currentCreditUsed;
             const tnwEl = document.getElementById('total-net-worth'); if(tnwEl) tnwEl.innerText = totalNetWealth.toLocaleString(undefined, {minimumFractionDigits: 2});
@@ -1566,91 +1501,6 @@
             let totalMinDebts = debts.reduce((sum, d) => sum + parseFloat(d.minPayment || 0), 0);
             let safeToSpend = currentDebit - totalCommits - totalMinDebts; if (safeToSpend < 0) safeToSpend = 0;
             const safeEl = document.getElementById('safe-to-spend-display'); if (safeEl) safeEl.innerText = safeToSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
-        }
-
-        window.updateOverallDashboard = function() {
-            const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
-            const searchInput = document.getElementById('search-tx'); const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : "";
-            const list = document.getElementById('overall-transaction-list'); if(list) list.innerHTML = '';
-            
-            let txCount = 0; let monthlySpend = 0; let foodSpend = 0; let utilSpend = 0; let famSpend = 0; let otherSpend = 0;
-            let currYearMonthly = new Array(12).fill(0); let lastYearMonthly = new Array(12).fill(0);
-
-            transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
-                if(!t.date) return; const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
-                const catMatch = ((t.category||'')+" "+(t.desc||'')+" "+t.amount+" "+t.date).toLowerCase();
-                
-                if(t.type !== 'income' && !t.reimbursable) {
-                    if(txY === currY) currYearMonthly[txM] += amt; if(txY === currY - 1) lastYearMonthly[txM] += amt;
-                    if(txM === currM && txY === currY) {
-                        monthlySpend += amt; 
-                        if(catMatch.match(/food|lunch|dinner|eat|cafe/)) foodSpend += amt; 
-                        else if(catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/)) famSpend += amt;
-                        else if(catMatch.match(/util|bill|water|electric|internet|phone/)) utilSpend += amt; 
-                        else otherSpend += amt;
-                    }
-                }
-
-                let showTx = false;
-                if (searchTerm !== "") {
-                    if (catMatch.includes(searchTerm)) showTx = true;
-                } else {
-                    if (txM === currM && txY === currY) showTx = true;
-                }
-
-                if (showTx) {
-                    const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white'; 
-                    const sign = t.type === 'income' ? '+' : '-';
-                    const tagReimb = t.reimbursable ? `<span class="bg-blue-500/20 text-blue-500 text-[8px] px-1 py-0.5 rounded ml-1 uppercase tracking-widest border border-blue-500/30">Claimable</span>` : '';
-                    const tagShared = t.shared ? `<span class="bg-purple-500/20 text-purple-500 text-[8px] px-1 py-0.5 rounded ml-1 uppercase tracking-widest border border-purple-500/30">Split 50/50</span>` : '';
-
-                    if(list) {
-                        list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-9 h-9">${getIconWrap(t.type, catMatch)}</div><div><p class="font-bold text-xs">${t.desc}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}${tagReimb}${tagShared}</p></div></div><div class="text-right font-bold text-sm ${c} pr-2">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</div></div><button onclick="deleteTransaction(${i})" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
-                    }
-                    txCount++;
-                }
-            });
-            
-            if(txCount === 0 && list) { list.innerHTML = `<p class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">${searchTerm ? 'No results found in lifetime history.' : 'No transactions found.'}</p>`; }
-            const msEl = document.getElementById('monthly-spend'); if(msEl) msEl.innerText = monthlySpend.toLocaleString(undefined, {minimumFractionDigits: 2});
-
-            if(monthlySpend > 0) {
-                const pf = Math.round((foodSpend/monthlySpend)*100); const pu = Math.round((utilSpend/monthlySpend)*100); const pFam = Math.round((famSpend/monthlySpend)*100); const po = 100-pf-pu-pFam;
-                const bf = document.getElementById('bar-food'); if(bf) bf.style.width = pf+'%'; const bu = document.getElementById('bar-util'); if(bu) bu.style.width = pu+'%'; const bFam = document.getElementById('bar-family'); if(bFam) bFam.style.width = pFam+'%'; const bo = document.getElementById('bar-other'); if(bo) bo.style.width = po+'%';
-                const pfEl = document.getElementById('pct-food'); if(pfEl) pfEl.innerText = pf; const puEl = document.getElementById('pct-util'); if(puEl) puEl.innerText = pu; const pFamEl = document.getElementById('pct-family'); if(pFamEl) pFamEl.innerText = pFam; const poEl = document.getElementById('pct-other'); if(poEl) poEl.innerText = po;
-            } else {
-                ['bar-food','bar-util','bar-family','bar-other'].forEach(id => { const el = document.getElementById(id); if(el) el.style.width='0%'; });
-                ['pct-food','pct-util','pct-family','pct-other'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText='0'; });
-            }
-            if(comparisonChart) { comparisonChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; comparisonChart.data.datasets[0].data = currYearMonthly; comparisonChart.data.datasets[1].data = lastYearMonthly; comparisonChart.update(); }
-        }
-
-        window.updateFoodDashboard = function() {
-            const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1; const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
-            const list = document.getElementById('food-transaction-list'); if(list) list.innerHTML = ''; let txCount = 0; let cSum = 0; let lSum = 0; let currYearFood = new Array(12).fill(0); let lastYearFood = new Array(12).fill(0);
-
-            transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
-                if(!t.date || t.type === 'income') return; const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
-                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase(); if(!catMatch.match(/food|lunch|dinner|eat|cafe/)) return;
-                if(txY === currY) currYearFood[txM] += amt; if(txY === currY - 1) lastYearFood[txM] += amt;
-                if(txM === currM && txY === currY) {
-                    cSum += amt; 
-                    if(list) {
-                        list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-9 h-9">${getIconWrap('expense', catMatch)}</div><div><p class="font-bold text-xs">${t.desc}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}</p></div></div><div class="text-right font-bold text-sm pr-2">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</div></div><button onclick="deleteTransaction(${i})" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
-                    }
-                    txCount++;
-                } else if(txM === lastM && txY === lastY) { lSum += amt; }
-            });
-            if(txCount === 0 && list) { list.innerHTML = `<p class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">No food logs found.</p>`; }
-            const ftEl = document.getElementById('food-total-display'); if(ftEl) ftEl.innerText = cSum.toLocaleString(undefined, {minimumFractionDigits: 2});
-            const fiEl = document.getElementById('food-insight');
-            if(fiEl) {
-                let fHtml = `<div class="text-[9px] font-semibold uppercase tracking-wider">Prev: <span class="font-bold text-xs">MYR ${lSum.toFixed(0)}</span></div>`;
-                if (cSum > lSum && lSum > 0) { fHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`; } 
-                else if (lSum > 0) { fHtml += `<div class="text-brand font-bold text-[10px]">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`; }
-                fiEl.innerHTML = fHtml;
-            }
-            if(foodChart) { foodChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; foodChart.data.datasets[0].data = currYearFood; foodChart.data.datasets[1].data = lastYearFood; foodChart.update(); }
         }
 
         window.updateFamilyDashboard = function() {
