@@ -805,9 +805,15 @@
                         </div>
                     </div>
                 </div>
-
+				<!-- KWSP SPECIFIC 3-ACCOUNT INPUTS -->
                 <div id="kwsp-card-fields" class="hidden space-y-2.5 pt-1 border-t border-gray-200 dark:border-white/10">
-                    <p class="text-[9px] font-bold text-brand uppercase tracking-wider">Base Account Balances</p>
+                    <div class="flex justify-between items-center">
+                        <p class="text-[9px] font-bold text-brand uppercase tracking-wider">Base Account Balances</p>
+                        <div class="flex items-center gap-1">
+                            <label class="text-[8px] font-semibold text-gray-400 uppercase">As Of Month:</label>
+                            <input type="month" id="edit-kwsp-asof" class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-[9px] p-1 rounded-lg border border-gray-200 dark:border-transparent outline-none">
+                        </div>
+                    </div>
                     <div class="grid grid-cols-3 gap-2">
                         <div>
                             <label class="block text-[8px] font-semibold text-gray-400 mb-1 uppercase">Persaraan (75%)</label>
@@ -1310,6 +1316,7 @@
             const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
         
+		// Open Card Modal Engine (With As-Of Month for KWSP)
         window.openCardModal = function(type) { 
             closeAllModals();
             currentEditCard = type; 
@@ -1328,6 +1335,10 @@
                 if (kwspFields) kwspFields.classList.remove('hidden');
                 if (limitContainer) limitContainer.classList.add('hidden');
 
+                const now = new Date();
+                const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+
+                document.getElementById('edit-kwsp-asof').value = data.asOf || currentMonthStr;
                 document.getElementById('edit-kwsp-persaraan').value = data.persaraan || 89575.38;
                 document.getElementById('edit-kwsp-sejahtera').value = data.sejahtera || 5589.44;
                 document.getElementById('edit-kwsp-fleksibel').value = data.fleksibel || 336.90;
@@ -1350,6 +1361,7 @@
             if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
 
+        // Save Card Edits Function (Saves As-Of Month)
         window.saveCardEdit = function(e) { 
             e.preventDefault(); 
             if (!currentEditCard) return;
@@ -1369,6 +1381,7 @@
             cardData[currentEditCard].name = document.getElementById('edit-card-name').value;
 
             if (currentEditCard === 'kwsp') {
+                cardData.kwsp.asOf = document.getElementById('edit-kwsp-asof').value;
                 cardData.kwsp.persaraan = cleanNum('edit-kwsp-persaraan');
                 cardData.kwsp.sejahtera = cleanNum('edit-kwsp-sejahtera');
                 cardData.kwsp.fleksibel = cleanNum('edit-kwsp-fleksibel');
@@ -1824,6 +1837,7 @@
         }
 
         // Card Rendering Engine
+		// Dynamic Card Rendering Engine (Filters Payslips by Cutoff Date)
         window.renderCards = function() { 
             const dEl = document.getElementById('debit-display'); 
             const cEl = document.getElementById('credit-display'); 
@@ -1846,21 +1860,24 @@
                 let basePersaraan = parseFloat(cardData.kwsp.persaraan) || 89575.38;
                 let baseSejahtera = parseFloat(cardData.kwsp.sejahtera) || 5589.44;
                 let baseFleksibel = parseFloat(cardData.kwsp.fleksibel) || 336.90;
+                let baseAsOf = cardData.kwsp.asOf || '2026-07';
 
                 let addPersaraan = 0;
                 let addSejahtera = 0;
                 let addFleksibel = 0;
                 let annualEpf = 0;
 
-                // Accumulate 75% / 15% / 10% from all logged payslips
+                // ONLY accumulate payslips that occur STRICTLY AFTER the baseline cutoff month
                 payrollHistory.forEach(p => { 
-                    let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
-                    let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
-                    let totalMonthlyEpf = (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0);
+                    if (p.month && p.month > baseAsOf) {
+                        let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
+                        let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
+                        let totalMonthlyEpf = (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0);
 
-                    addPersaraan += totalMonthlyEpf * 0.75;
-                    addSejahtera += totalMonthlyEpf * 0.15;
-                    addFleksibel += totalMonthlyEpf * 0.10;
+                        addPersaraan += totalMonthlyEpf * 0.75;
+                        addSejahtera += totalMonthlyEpf * 0.15;
+                        addFleksibel += totalMonthlyEpf * 0.10;
+                    }
                 });
 
                 let totalPersaraan = basePersaraan + addPersaraan;
