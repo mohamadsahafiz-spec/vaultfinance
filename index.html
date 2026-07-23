@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Vault - Smart Finance</title>
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#FFD600">
+    <!-- Dynamic Theme Color Meta Tag -->
+    <meta name="theme-color" content="#0A0A0A" id="meta-theme-color">
     <link rel="icon" type="image/png" href="favicon.png?v=11">
     <link rel="apple-touch-icon" href="favicon.png?v=11">
     
@@ -106,8 +107,8 @@
 
     <main class="flex-1 flex flex-col h-full w-full relative overflow-y-auto scroll-smooth hide-scrollbar" id="main-scroll">
         
-        <!-- GLOBAL HEADER WITH TOP-RIGHT AVATAR -->
-        <header class="flex justify-between items-center px-5 pt-6 pb-2 md:px-6 shrink-0 relative z-30 pointer-events-none">
+        <!-- GLOBAL HEADER -->
+        <header class="flex justify-between items-center px-5 pt-8 pb-4 md:px-6 shrink-0 relative z-30 pointer-events-none">
             <div class="flex-1 min-w-0 mr-4 pointer-events-auto">
                 <h2 id="header-title" class="text-2xl font-extrabold tracking-tight truncate drop-shadow-sm text-gray-900 dark:text-white font-display">
                     Welcome, Sahafiz
@@ -124,17 +125,16 @@
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter flex flex-col w-full min-h-[100dvh] relative">
             
-            <!-- FULL-BLEED NEON BACKGROUND -->
-            <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center items-start pt-[10vh]">
-                <div class="absolute w-[150vw] h-[150vw] sm:w-[80vw] sm:h-[80vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_45%)] blur-[60px] opacity-20 dark:opacity-15"></div>
+            <!-- SHARPER NEON BACKGROUND -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center items-start pt-12">
+                <div class="absolute w-[120vw] h-[120vw] sm:w-[80vw] sm:h-[80vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_55%)] blur-[70px] opacity-15 dark:opacity-[0.08]"></div>
             </div>
 
-            <!-- THRONE ZONE -->
-            <div class="w-full h-[65vh] min-h-[480px] relative flex flex-col justify-center z-10 shrink-0 -mt-[76px] pt-[76px]">
+            <!-- THRONE ZONE (Fluid Native Spacing) -->
+            <div class="w-full relative flex flex-col z-10 shrink-0 mt-2 mb-2">
                 <div class="px-6 sm:px-[calc(50%-200px)] mb-3 flex justify-between items-center w-full">
                     <p class="text-[11px] font-black text-brand uppercase tracking-widest drop-shadow-md opacity-90 font-display">My Wallet</p>
                     
-                    <!-- NEW: Gamified No-Spend Streak Badge -->
                     <div id="streak-badge" class="flex items-center gap-1.5 bg-orange-500/10 border border-orange-500/30 px-2 py-1 rounded-lg backdrop-blur-sm hidden transition-all duration-500">
                         <svg class="w-3.5 h-3.5 text-orange-500 drop-shadow-[0_0_5px_rgba(249,115,22,0.8)]" fill="currentColor" viewBox="0 0 24 24"><path d="M11.64 5.93h1.43v4.28h-1.43V5.93zm0 5.71h1.43v1.43h-1.43v-1.43zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" opacity="0.3"/><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12 4.41c-3.1 3.55-5 5.86-5 8.09 0 2.76 2.24 5 5 5s5-2.24 5-5c0-2.23-1.9-4.54-5-8.09zm0 11.59c-1.65 0-3-1.35-3-3 0-1.6 1.13-3.23 3-5.26 1.87 2.03 3 3.66 3 5.26 0 1.65-1.35 3-3 3z"/></svg>
                         <span class="text-[9px] font-bold text-orange-500 uppercase tracking-widest"><span id="streak-count">0</span> Day Streak</span>
@@ -142,10 +142,10 @@
                 </div>
 
                 <!-- CARDS SWIPER -->
-                <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-[7.5vw] sm:px-[calc(50%-200px)] hide-scrollbar w-full items-center relative z-20 pt-2 pb-16">
+                <div class="flex overflow-x-auto snap-x snap-mandatory gap-5 px-[7vw] sm:px-[calc(50%-200px)] hide-scrollbar w-full items-center relative z-20 pb-6 pt-1">
                     
                     <!-- DEBIT CARD -->
-                    <div class="snap-center shrink-0 w-[80vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_50px_rgba(190,18,60,0.3)]" onclick="vibrate(20); openCardModal('debit')">
+                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(190,18,60,0.25)]" onclick="vibrate(20); openCardModal('debit')">
                        <div class="card-debit-bg w-full h-full p-5 md:p-7 flex flex-col justify-between relative">
                            <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-500/20 to-transparent mix-blend-overlay pointer-events-none"></div>
                            <div class="relative z-10 flex flex-col h-full justify-between">
@@ -172,7 +172,7 @@
                     </div>
 
                     <!-- CREDIT CARD -->
-                    <div class="snap-center shrink-0 w-[80vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_50px_rgba(245,158,11,0.25)]" onclick="vibrate(20); openCardModal('credit')">
+                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(245,158,11,0.2)]" onclick="vibrate(20); openCardModal('credit')">
                         <div class="card-gold-bg w-full h-full p-5 md:p-7 flex flex-col justify-between relative">
                             <div class="absolute bottom-8 left-[-20%] right-[-20%] h-8 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-80 transform -skew-y-6 drop-shadow-lg"></div>
                             <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
@@ -202,12 +202,16 @@
                         </div>
                     </div>
 
-                    <!-- KWSP CARD (3D Flip Projector) -->
-                    <div class="snap-center shrink-0 w-[80vw] sm:w-[360px] aspect-[1.586/1] group perspective-1000 cursor-pointer" onclick="vibrate(30); document.getElementById('kwsp-inner').classList.toggle('rotate-y-180')">
-                        <div id="kwsp-inner" class="relative w-full h-full transition-transform duration-700 transform-style-3d shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.15)] rounded-[24px]">
+                    <!-- KWSP CARD (With Native Edit Icon) -->
+                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] group perspective-1000 cursor-pointer relative" onclick="vibrate(30); document.getElementById('kwsp-inner').classList.toggle('rotate-y-180')">
+                        <div id="kwsp-inner" class="relative w-full h-full transition-transform duration-700 transform-style-3d shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.15)] rounded-[24px]">
                             
                             <!-- Front of KWSP Card -->
                             <div class="absolute inset-0 backface-hidden card-kwsp-bg rounded-[24px] border border-gray-300 overflow-hidden p-5 md:p-7 flex flex-col justify-between text-gray-900">
+                                <!-- Editable Icon -->
+                                <div class="absolute top-4 right-4 z-20 w-7 h-7 rounded-full bg-black/5 flex items-center justify-center cursor-pointer hover:bg-black/10 transition-colors shadow-sm" onclick="event.stopPropagation(); vibrate(20); openCardModal('kwsp')" title="Edit KWSP Details">
+                                    <svg class="w-3.5 h-3.5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                </div>
                                 <div class="absolute -right-10 -top-10 w-48 h-48 bg-white rounded-full blur-2xl pointer-events-none opacity-80"></div>
                                 <div class="relative z-10 flex flex-col h-full justify-between">
                                     <div class="flex justify-between items-start">
@@ -225,7 +229,6 @@
                                             <div class="text-[9px] uppercase tracking-widest font-bold text-gray-500 ml-1 flex items-center gap-1.5 mb-0.5"><svg class="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-4h6v4"></path></svg> <span id="kwsp-name">Retirement Fund</span></div>
                                             <div class="font-display font-black text-3xl tracking-tight leading-none drop-shadow-md text-[#002868]"><span class="text-sm font-bold opacity-80 pr-1">MYR</span><span id="kwsp-display">0.00</span></div>
                                         </div>
-                                        <!-- Flip Icon Indicator -->
                                         <div class="w-6 h-6 rounded-full bg-black/5 flex items-center justify-center text-gray-500"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg></div>
                                     </div>
                                 </div>
@@ -257,7 +260,7 @@
                     </div>
 
                     <!-- TOTAL NET WORTH CARD -->
-                    <div class="snap-center shrink-0 w-[80vw] sm:w-[360px] aspect-[1.586/1] bg-[#0A0A0A] rounded-[24px] border border-gray-800 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.5)] flex flex-col justify-between p-5 md:p-7">
+                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] bg-[#0A0A0A] rounded-[24px] border border-gray-800 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_15px_35px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col justify-between p-5 md:p-7">
                         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_#FFD600_0%,_transparent_60%)] opacity-20 pointer-events-none"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between">
                             <div class="flex justify-between items-start">
@@ -283,10 +286,9 @@
                 </div>
             </div>
 
-            <!-- LOWER CONTEXT PANEL (TRACKING WIDGETS) -->
-            <div class="relative z-20 px-5 md:px-6 flex flex-col gap-4 flex-1 w-full pb-32 -mt-6">
+            <!-- LOWER CONTEXT PANEL -->
+            <div class="relative z-20 px-5 md:px-6 flex flex-col gap-4 flex-1 w-full pb-32">
                 
-                <!-- SAFE TO SPEND WIDGET -->
                 <div class="bg-gradient-to-r from-green-500/20 to-brand/10 border border-green-500/30 dark:border-green-400/20 p-4 rounded-xl shadow-sm flex flex-col transition-colors duration-300 relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 w-16 h-16 bg-green-500/20 rounded-full blur-2xl pointer-events-none"></div>
                     <p class="text-green-700 dark:text-green-400 text-[9px] font-bold tracking-wider uppercase drop-shadow-sm flex items-center gap-1.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Safe to Spend</p>
@@ -294,7 +296,6 @@
                     <p class="text-[8px] font-medium text-textMuted-light dark:text-textMuted-dark mt-1.5 uppercase tracking-wide">After Fixed Commitments & Min Debts</p>
                 </div>
 
-                <!-- FIXED COMMITMENTS WIDGET -->
                 <div id="commitments-card" class="bg-panel-light dark:bg-[#1A1A1A] border border-gray-200 dark:border-white/5 p-4 rounded-xl shadow-sm transition-all duration-500 flex flex-col overflow-hidden">
                     <div class="flex justify-between items-center mb-3">
                         <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Fixed Commitments (Swipe Left)</p>
@@ -303,7 +304,6 @@
                     <div id="commitments-list" class="space-y-2.5"></div>
                 </div>
 
-                <!-- DEBT WIDGET -->
                 <div class="bg-panel-light dark:bg-[#1A1A1A] border border-gray-200 dark:border-white/5 p-4 rounded-xl shadow-sm flex flex-col transition-colors duration-300 overflow-hidden">
                     <div class="flex justify-between items-center mb-3">
                         <div class="flex items-center gap-2">
@@ -314,7 +314,6 @@
                     <div id="debt-list" class="space-y-2.5 flex-1"></div>
                 </div>
 
-                <!-- GOALS WIDGET -->
                 <div class="bg-panel-light dark:bg-[#1A1A1A] border border-gray-200 dark:border-white/5 p-4 rounded-xl shadow-sm flex flex-col transition-colors duration-300 overflow-hidden">
                     <div class="flex justify-between items-center mb-3">
                         <h4 class="font-bold text-xs text-brand uppercase tracking-wider font-display">Goals & Lifecycles</h4>
@@ -669,17 +668,17 @@
     <!-- ========================================== -->
     <!-- PERFECT 3-1-3 BOTTOM NAV DOCK              -->
     <!-- ========================================== -->
-    <nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-5 py-2.5 shadow-xl z-[90]">
+    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-6 py-3 shadow-2xl z-[90]">
         
         <!-- Left Side Icons -->
-        <div class="flex items-center gap-2 sm:gap-3">
-            <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
+        <div class="flex items-center gap-3 sm:gap-4 pointer-events-auto">
+            <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </button>
-            <button onclick="vibrate(30); switchTab('overall')" id="nav-mob-overall" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <button onclick="vibrate(30); switchTab('overall')" id="nav-mob-overall" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
             </button>
-            <button onclick="vibrate(30); switchTab('family')" id="nav-mob-family" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <button onclick="vibrate(30); switchTab('family')" id="nav-mob-family" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             </button>
         </div>
@@ -688,14 +687,14 @@
         <div class="w-14 h-1 px-2 pointer-events-none"></div>
 
         <!-- Right Side Icons -->
-        <div class="flex items-center gap-2 sm:gap-3">
-            <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+        <div class="flex items-center gap-3 sm:gap-4 pointer-events-auto">
+            <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
             </button>
-            <button onclick="vibrate(30); switchTab('bills')" id="nav-mob-bills" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <button onclick="vibrate(30); switchTab('bills')" id="nav-mob-bills" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             </button>
-            <button onclick="vibrate(30); switchTab('salary')" id="nav-mob-salary" class="p-1.5 transition-all duration-300 text-textMuted-light dark:text-textMuted-dark hover:text-gray-300">
+            <button onclick="vibrate(30); switchTab('salary')" id="nav-mob-salary" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
             </button>
         </div>
@@ -703,36 +702,19 @@
     </nav>
 
     <!-- ========================================== -->
-    <!-- THE SINGLE, UNSTOPPABLE FLOATING V BUTTON  -->
+    <!-- THE NATIVE, HIGH-CONTRAST V BUTTON         -->
     <!-- ========================================== -->
-    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-9 left-1/2 -translate-x-1/2 w-14 h-14 bg-surface-light dark:bg-surface-dark rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_0_15px_rgba(255,214,0,0.6)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[100]">
-        <div class="w-10 h-10 rounded-full border border-brand/50 flex items-center justify-center bg-brand/10 shadow-inner pointer-events-none">
-            <span class="font-black text-xl text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display">V</span>
-        </div>
+    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[44px] left-1/2 -translate-x-1/2 w-[54px] h-[54px] bg-[#111111] rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_8px_20px_rgba(255,214,0,0.3)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[9999] pointer-events-auto">
+        <span class="font-black text-[22px] text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display leading-none mt-0.5">V</span>
     </button>
-
-    <!-- ADD TO HOME SCREEN PROMPT (A2HS) -->
-    <div id="a2hs-prompt" class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-[#1A1A1A]/95 backdrop-blur-xl border border-brand/50 rounded-2xl p-4 shadow-[0_10px_30px_rgba(255,214,0,0.2)] z-[100] hidden transform transition-all duration-500 translate-y-10 opacity-0">
-        <div class="flex justify-between items-start mb-2">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-inner font-display">V</div>
-                <div>
-                    <h4 class="font-bold text-sm tracking-tight font-display">Install Vault App</h4>
-                    <p class="text-[9px] text-textMuted-light dark:text-textMuted-dark font-medium mt-0.5">Run natively without the browser</p>
-                </div>
-            </div>
-            <button onclick="vibrate(20); dismissA2HS()" class="w-6 h-6 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark flex items-center justify-center text-[10px] font-bold">✕</button>
-        </div>
-        <button id="a2hs-btn" class="w-full bg-brand text-gray-900 font-bold text-xs py-2.5 rounded-xl shadow-sm mt-2 hover:scale-[1.02] transition-transform">Install Now</button>
-    </div>
 
     <!-- ========================================== -->
     <!-- ALL MODALS (Standardized Z-Index Ladder)   -->
     <!-- ========================================== -->
     
-	<!-- MASTER ACTION SHEET MODAL -->
+    <!-- MASTER ACTION SHEET MODAL -->
     <div id="action-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[200] flex-col justify-end sm:justify-center items-center sm:p-4">
-        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6 relative z-[10000]">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xl font-bold tracking-tight font-display">Add New...</h3>
                 <button onclick="vibrate(20); closeActionModal()" class="w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
@@ -813,16 +795,16 @@
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display" id="edit-card-title">Update Card</h3>
             <form onsubmit="saveCardEdit(event)" class="space-y-3">
                 <div>
-                    <label class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Card Name</label>
+                    <label id="edit-card-name-label" class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Card Name</label>
                     <input type="text" id="edit-card-name" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Last 4 Digits</label>
+                        <label id="edit-card-last4-label" class="block text-[9px] font-semibold text-gray-500 mb-1 uppercase tracking-wider">Last 4 Digits</label>
                         <input type="text" id="edit-card-last4" maxlength="4" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                     <div>
-                        <label class="block text-[9px] font-semibold text-brand mb-1 uppercase tracking-wider">Balance / Funds</label>
+                        <label id="edit-card-balance-label" class="block text-[9px] font-semibold text-brand mb-1 uppercase tracking-wider">Balance / Funds</label>
                         <input type="number" id="edit-card-balance" step="0.01" required class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
                     </div>
                 </div>
@@ -843,7 +825,6 @@
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-2 font-display">Add Transaction</h3>
             
-            <!-- SMART MACROS DOCK -->
             <div class="flex gap-2 overflow-x-auto hide-scrollbar py-2 mb-2 snap-x">
                 <button type="button" onclick="applyMacro('Playschool', 'Family', 350)" class="snap-start shrink-0 bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wide transition hover:bg-purple-500 hover:text-white">Playschool</button>
                 <button type="button" onclick="applyMacro('Fuel & Toll', 'Utility', 50)" class="snap-start shrink-0 bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wide transition hover:bg-blue-500 hover:text-white">Fuel/Toll</button>
@@ -1242,6 +1223,14 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart, familyChart;
         let currentEditCard = ''; window.selectedMonth = ""; window.selectedYear = ""; window.selectedSalaryYear = ""; window.selectedFamilyMonth = "";
 
+        // Status Bar Initialization
+        function syncMetaThemeColor() {
+            let isDark = document.documentElement.classList.contains('dark');
+            const metaThemeColor = document.getElementById('meta-theme-color');
+            if (metaThemeColor) { metaThemeColor.setAttribute('content', isDark ? '#0A0A0A' : '#F4F5F7'); }
+        }
+        syncMetaThemeColor(); // Run on load
+
         // Confetti Engine
         function fireConfetti() {
             vibrate([50, 100, 150, 100, 200]);
@@ -1291,28 +1280,37 @@
 
             const m = document.getElementById('stats-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
         }
-        window.closeStatsModal = function() { closeAllModals(); }
-
+        
         window.openCardModal = function(type) { 
             closeAllModals();
             currentEditCard = type; const data = cardData[type]; if (!data) return;
-            document.getElementById('edit-card-title').innerText = `Update Card`; document.getElementById('edit-card-name').value = data.name || ''; document.getElementById('edit-card-last4').value = data.last4 || ''; document.getElementById('edit-card-balance').value = data.balance || 0;
+            
+            let displayType = type === 'kwsp' ? 'KWSP/EPF' : (type === 'credit' ? 'Credit Card' : 'Debit Card');
+            document.getElementById('edit-card-title').innerText = `Update ${displayType}`; 
+            
+            document.getElementById('edit-card-name').value = data.name || ''; 
+            document.getElementById('edit-card-last4').value = data.last4 || ''; 
+            
+            // For KWSP, balance implies Base Balance BEFORE payroll auto-additions.
+            document.getElementById('edit-card-balance').value = data.balance || 0;
+            
             const limitContainer = document.getElementById('edit-card-limit-container');
-            if (type === 'credit') { limitContainer.classList.remove('hidden'); document.getElementById('edit-card-limit').value = data.limit || 10000; document.getElementById('edit-card-limit').required = true; } 
-            else { limitContainer.classList.add('hidden'); document.getElementById('edit-card-limit').required = false; }
+            if (type === 'credit') { 
+                limitContainer.classList.remove('hidden'); 
+                document.getElementById('edit-card-limit').value = data.limit || 10000; 
+                document.getElementById('edit-card-limit').required = true; 
+            } else { 
+                limitContainer.classList.add('hidden'); 
+                document.getElementById('edit-card-limit').required = false; 
+            }
+            
             const m = document.getElementById('card-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
         }
-        window.closeCardModal = function() { closeAllModals(); }
 
         window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.closeTxModal = function() { closeAllModals(); document.getElementById('tx-form').reset(); }
-
         window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.closeFieldModal = function() { closeAllModals(); document.getElementById('field-form').reset(); document.getElementById('field-total-display').innerText = '0.00'; }
-
         window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.closeCommitmentModal = function() { closeAllModals(); document.getElementById('commitment-form').reset(); }
-
+        
         window.openGoalModal = function(index = -1) { 
             closeAllModals();
             document.getElementById('goal-index').value = index;
@@ -1333,19 +1331,11 @@
             }
             const m = document.getElementById('goal-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
         }
-        window.closeGoalModal = function() { closeAllModals(); }
 
         window.openDebtModal = function() { closeAllModals(); const m = document.getElementById('debt-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.closeDebtModal = function() { closeAllModals(); document.getElementById('debt-form').reset(); }
-
         window.openBillModal = function() { closeAllModals(); const m = document.getElementById('bill-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.closeBillModal = function() { closeAllModals(); document.getElementById('bill-form').reset(); }
-
         window.openUtilHistoryModal = function() { closeAllModals(); const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('util-history-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.closeUtilHistoryModal = function() { closeAllModals(); document.getElementById('util-hist-form').reset(); }
-
         window.openPayrollModal = function() { closeAllModals(); const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('payroll-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.closePayrollModal = function() { closeAllModals(); document.getElementById('payroll-form').reset(); document.getElementById('pay-net-display').innerText = '0.00'; }
 
         // General Core Functions
         window.deleteTransaction = function(index) {
@@ -1366,6 +1356,9 @@
             document.documentElement.classList.toggle('dark');
             let isDark = document.documentElement.classList.contains('dark');
             localStorage.theme = isDark ? 'dark' : 'light';
+            
+            syncMetaThemeColor(); // Adjust mobile status bar color dynamically
+            
             document.getElementById('theme-icon').innerHTML = isDark 
                 ? '<svg class="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>'
                 : '<svg class="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
@@ -1389,7 +1382,7 @@
                 if(tabEl) { tabEl.classList.add('hidden'); tabEl.classList.remove('flex'); }
                 
                 let mobBtn = document.getElementById(`nav-mob-${id}`); 
-                if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark'); }
+                if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-gray-400', 'dark:text-gray-500'); }
                 let deskBtn = document.getElementById(`nav-desk-${id}`); 
                 if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-sm'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
             });
@@ -1398,7 +1391,7 @@
             if(activeTab) { activeTab.classList.remove('hidden'); activeTab.classList.add('flex'); }
             
             let activeMob = document.getElementById(`nav-mob-${tabId}`); 
-            if(activeMob) { activeMob.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
+            if(activeMob) { activeMob.classList.remove('text-gray-400', 'dark:text-gray-500'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
             let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
             if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-sm'); }
 
@@ -1748,6 +1741,16 @@
             }
         }
 
+        window.saveCardEdit = function(e) { 
+            e.preventDefault(); if (!cardData[currentEditCard]) return;
+            cardData[currentEditCard].name = document.getElementById('edit-card-name').value; 
+            cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value; 
+            cardData[currentEditCard].balance = parseFloat(document.getElementById('edit-card-balance').value) || 0;
+            if (currentEditCard === 'credit') { cardData.credit.limit = parseFloat(document.getElementById('edit-card-limit').value) || 10000; }
+            localStorage.setItem('vault_cards', JSON.stringify(cardData)); 
+            renderCards(); updateHomeDashboard(); closeAllModals(); 
+        }
+
         window.renderCards = function() { 
             const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct'); const kEl = document.getElementById('kwsp-display');
             if(dEl && cardData.debit) { dEl.innerText = cardData.debit.balance.toLocaleString(undefined, {minimumFractionDigits: 2}); document.getElementById('debit-name').innerText = cardData.debit.name; document.getElementById('debit-last4').innerText = cardData.debit.last4; }
@@ -1762,16 +1765,14 @@
                 });
                 kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); document.getElementById('kwsp-name').innerText = cardData.kwsp.name; document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4;
                 
-                // KWSP 55 Age Projector Logic (Based on Profile)
                 if(payrollHistory.length > 0) {
                     let totalEpfContributed = payrollHistory.reduce((sum, p) => sum + p.epf + (p.empEpf || 0), 0);
                     annualEpf = (totalEpfContributed / payrollHistory.length) * 12;
                 } else {
-                    annualEpf = 5000; // Baseline assumption if no payroll logged
+                    annualEpf = 5000; 
                 }
-                const yearsTo55 = 19; // 55 - 36 (User is 36 years old)
-                const estDiv = 0.055; // 5.5% historic average
-                // Future Value Formula for Compound Interest + Annual Contributions
+                const yearsTo55 = 19; 
+                const estDiv = 0.055; 
                 const projected = totalKwsp * Math.pow(1 + estDiv, yearsTo55) + annualEpf * ((Math.pow(1 + estDiv, yearsTo55) - 1) / estDiv);
                 const projEl = document.getElementById('kwsp-projected');
                 if(projEl) projEl.innerText = projected.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
@@ -1780,13 +1781,6 @@
                 const maxLimit = cardData.credit.limit || 10000; const currentBalance = cardData.credit.balance;
                 const usedPercentage = Math.round((currentBalance / maxLimit) * 100); cpEl.innerText = usedPercentage;
             }
-        }
-
-        window.saveCardEdit = function(e) { 
-            e.preventDefault(); if (!cardData[currentEditCard]) return;
-            cardData[currentEditCard].name = document.getElementById('edit-card-name').value; cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value; cardData[currentEditCard].balance = parseFloat(document.getElementById('edit-card-balance').value) || 0;
-            if (currentEditCard === 'credit') { cardData.credit.limit = parseFloat(document.getElementById('edit-card-limit').value) || 10000; }
-            localStorage.setItem('vault_cards', JSON.stringify(cardData)); renderCards(); updateHomeDashboard(); closeCardModal(); 
         }
 
         window.applyMacro = function(desc, category, amount) {
@@ -1832,7 +1826,7 @@
             transactions.push({ date, desc, type, category, amount, reimbursable: isReimbursable, shared: isShared }); 
             localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
             
-            populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); renderCards(); closeTxModal(); 
+            populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); renderCards(); closeAllModals(); 
         }
 
         window.calcFieldClaim = function() {
@@ -1847,7 +1841,7 @@
             
             transactions.push({ date: date, desc: `Field Trip (${km}km + PD)`, type: 'expense', category: 'Work/Field', amount: total, reimbursable: true, shared: false });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
-            populateTimelines(); updateOverallDashboard(); updateHomeDashboard(); updateFamilyDashboard(); closeFieldModal();
+            populateTimelines(); updateOverallDashboard(); updateHomeDashboard(); updateFamilyDashboard(); closeAllModals();
             setTimeout(() => alert("Field Log Saved & Tagged as Claimable!"), 100);
         }
 
@@ -1892,7 +1886,7 @@
             if (idx >= 0) { goalsData[idx].name = name; goalsData[idx].current = current; goalsData[idx].target = target; goalsData[idx].isLifecycle = isLC; goalsData[idx].lifespan = lifespan; } 
             else { goalsData.push({name, current, target, isLifecycle: isLC, lifespan}); }
             
-            localStorage.setItem('vault_goals', JSON.stringify(goalsData)); renderGoals(); closeGoalModal(); 
+            localStorage.setItem('vault_goals', JSON.stringify(goalsData)); renderGoals(); closeAllModals(); 
             if (current >= target && previouslyIncomplete) { fireConfetti(); }
         }
 
@@ -1914,7 +1908,7 @@
 
         window.saveDebt = function(e) { 
             e.preventDefault(); debts.push({ name: document.getElementById('debt-name').value, balance: parseFloat(document.getElementById('debt-balance').value), minPayment: parseFloat(document.getElementById('debt-min').value) }); 
-            localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); updateHomeDashboard(); closeDebtModal(); 
+            localStorage.setItem('vault_debts', JSON.stringify(debts)); renderDebts(); updateHomeDashboard(); closeAllModals(); 
         }
 
         window.renderCommitments = function() {
@@ -1927,7 +1921,7 @@
 
         window.saveCommitment = function(e) {
             e.preventDefault(); commitments.push({ name: document.getElementById('commit-name').value, type: document.getElementById('commit-type').value, amount: parseFloat(document.getElementById('commit-amount').value) });
-            localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); closeCommitmentModal();
+            localStorage.setItem('vault_commitments', JSON.stringify(commitments)); renderCommitments(); updateHomeDashboard(); closeAllModals();
         }
 
         window.renderBills = function() {
@@ -1944,12 +1938,12 @@
 
         window.saveBill = function(e) { 
             e.preventDefault(); bills.push({ name: document.getElementById('bill-name').value, amount: parseFloat(document.getElementById('bill-amount').value), dueDate: document.getElementById('bill-date').value }); 
-            localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); closeBillModal(); 
+            localStorage.setItem('vault_bills', JSON.stringify(bills)); renderBills(); closeAllModals(); 
         }
 
         window.saveUtilHistory = function(e) { 
             e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); 
-            localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); closeUtilHistoryModal(); 
+            localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); closeAllModals(); 
         }
 
         window.autoCalcPayroll = function() {
@@ -1989,7 +1983,7 @@
             transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
 
-            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closePayrollModal(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
+            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closeAllModals(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
         }
 
         window.renderProfile = function() {
@@ -2067,6 +2061,7 @@
         
         window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
 
+        // Clean Initialization
         window.onload = function() {
             checkPayday();
             populateTimelines();
