@@ -6,7 +6,7 @@
     <title>Vault - Smart Finance</title>
     
     <link rel="manifest" href="manifest.json">
-    <!-- Dynamic Theme Color Meta Tag -->
+    <!-- Dynamic Theme Color Meta Tag for Mobile Status Bar -->
     <meta name="theme-color" content="#0A0A0A" id="meta-theme-color">
     <link rel="icon" type="image/png" href="favicon.png?v=11">
     <link rel="apple-touch-icon" href="favicon.png?v=11">
@@ -121,16 +121,15 @@
         </header>
 
         <!-- ========================================== -->
-        <!-- TAB 1: HOME DASHBOARD (NEON THRONE)        -->
+        <!-- TAB 1: HOME DASHBOARD (NATIVE SPACING)     -->
         <!-- ========================================== -->
         <div id="tab-home" class="tab-enter flex flex-col w-full min-h-[100dvh] relative">
             
-            <!-- SHARPER NEON BACKGROUND -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center items-start pt-12">
                 <div class="absolute w-[120vw] h-[120vw] sm:w-[80vw] sm:h-[80vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_55%)] blur-[70px] opacity-15 dark:opacity-[0.08]"></div>
             </div>
 
-            <!-- THRONE ZONE (Fluid Native Spacing) -->
+            <!-- THRONE ZONE -->
             <div class="w-full relative flex flex-col z-10 shrink-0 mt-2 mb-2">
                 <div class="px-6 sm:px-[calc(50%-200px)] mb-3 flex justify-between items-center w-full">
                     <p class="text-[11px] font-black text-brand uppercase tracking-widest drop-shadow-md opacity-90 font-display">My Wallet</p>
@@ -208,10 +207,12 @@
                             
                             <!-- Front of KWSP Card -->
                             <div class="absolute inset-0 backface-hidden card-kwsp-bg rounded-[24px] border border-gray-300 overflow-hidden p-5 md:p-7 flex flex-col justify-between text-gray-900">
-                                <!-- Editable Icon -->
-                                <div class="absolute top-4 right-4 z-20 w-7 h-7 rounded-full bg-black/5 flex items-center justify-center cursor-pointer hover:bg-black/10 transition-colors shadow-sm" onclick="event.stopPropagation(); vibrate(20); openCardModal('kwsp')" title="Edit KWSP Details">
-                                    <svg class="w-3.5 h-3.5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                
+                                <!-- EDIT ICON -->
+                                <div class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/5 flex items-center justify-center cursor-pointer hover:bg-black/10 transition-colors shadow-sm" onclick="event.stopPropagation(); vibrate(20); openCardModal('kwsp')" title="Edit KWSP Details">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                 </div>
+
                                 <div class="absolute -right-10 -top-10 w-48 h-48 bg-white rounded-full blur-2xl pointer-events-none opacity-80"></div>
                                 <div class="relative z-10 flex flex-col h-full justify-between">
                                     <div class="flex justify-between items-start">
@@ -234,7 +235,7 @@
                                 </div>
                             </div>
 
-                            <!-- Back of KWSP Card (Age 55 Projector) -->
+                            <!-- Back of KWSP Card -->
                             <div class="absolute inset-0 backface-hidden rotate-y-180 card-kwsp-back rounded-[24px] border border-blue-500/30 overflow-hidden p-5 md:p-7 flex flex-col justify-between text-white shadow-inner">
                                 <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
                                 <div class="relative z-10 flex flex-col h-full justify-between">
@@ -622,7 +623,8 @@
                 </form>
             </div>
 
-			<div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm mt-4">
+            <!-- NATIVE FAIL-PROOF DATA MANAGEMENT -->
+            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm mt-4">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
                 
                 <button onclick="vibrate(30); openStatsModal()" class="w-full mb-3 flex justify-between items-center bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-4 py-3 rounded-xl shadow-[0_0_8px_rgba(59,130,246,0.2)] hover:shadow-[0_0_15px_rgba(59,130,246,0.6)] transition-all duration-300 group">
@@ -640,7 +642,7 @@
                     </button>
                     
                     <div>
-                        <input type="file" id="json-file-input" accept=".json" class="hidden">
+                        <input type="file" id="json-file-input" accept=".json" class="hidden" onchange="handleJsonImport(event)">
                         <button onclick="vibrate(30); document.getElementById('json-file-input').click()" class="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(34,197,94,0.2)] hover:shadow-[0_0_15px_rgba(34,197,94,0.6)] transition-all duration-300 group">
                             <svg class="w-5 h-5 drop-shadow-[0_0_4px_rgba(34,197,94,0.6)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             <span class="text-[9px] font-bold uppercase tracking-wider">Import JSON</span>
@@ -648,7 +650,7 @@
                     </div>
                     
                     <div>
-                        <input type="file" id="csv-file-input" accept=".csv" class="hidden">
+                        <input type="file" id="csv-file-input" accept=".csv" class="hidden" onchange="handleCsvImport(event)">
                         <button onclick="vibrate(30); document.getElementById('csv-file-input').click()" class="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(34,197,94,0.2)] hover:shadow-[0_0_15px_rgba(34,197,94,0.6)] transition-all duration-300 group">
                             <svg class="w-5 h-5 drop-shadow-[0_0_4px_rgba(34,197,94,0.6)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="12" x2="12" y2="18"></line><polyline points="9 15 12 18 15 15"></polyline></svg>
                             <span class="text-[9px] font-bold uppercase tracking-wider">Import CSV</span>
@@ -662,45 +664,6 @@
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm">
-                <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
-                
-                <button onclick="vibrate(30); openStatsModal()" class="w-full mb-3 flex justify-between items-center bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-4 py-3 rounded-xl shadow-[0_0_8px_rgba(59,130,246,0.2)] hover:shadow-[0_0_15px_rgba(59,130,246,0.6)] transition-all duration-300 group">
-                    <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4 drop-shadow-[0_0_5px_rgba(59,130,246,0.8)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                        <span class="text-xs font-bold uppercase tracking-wider">Lifetime Stats</span>
-                    </div>
-                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </button>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="vibrate(30); exportBackup()" class="w-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 p-3 rounded-xl shadow-[0_0_8px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] transition-all duration-300 group">
-                        <svg class="w-5 h-5 drop-shadow-[0_0_4px_rgba(255,214,0,0.6)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                        <span class="text-[9px] font-bold uppercase tracking-wider">Export JSON</span>
-                    </button>
-                    
-                    <div>
-                        <input type="file" id="json-file-input" accept=".json" class="hidden">
-                        <button onclick="vibrate(30); document.getElementById('json-file-input').click()" class="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(34,197,94,0.2)] hover:shadow-[0_0_15px_rgba(34,197,94,0.6)] transition-all duration-300 group">
-                            <svg class="w-5 h-5 drop-shadow-[0_0_4px_rgba(34,197,94,0.6)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            <span class="text-[9px] font-bold uppercase tracking-wider">Import JSON</span>
-                        </button>
-                    </div>
-                    
-                    <div>
-                        <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-                        <button onclick="vibrate(30); document.getElementById('csv-file-input').click()" class="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(34,197,94,0.2)] hover:shadow-[0_0_15px_rgba(34,197,94,0.6)] transition-all duration-300 group">
-                            <svg class="w-5 h-5 drop-shadow-[0_0_4px_rgba(34,197,94,0.6)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="12" x2="12" y2="18"></line><polyline points="9 15 12 18 15 15"></polyline></svg>
-                            <span class="text-[9px] font-bold uppercase tracking-wider">Import CSV</span>
-                        </button>
-                    </div>
-                    
-                    <button onclick="vibrate([50, 50, 50]); clearData()" class="w-full flex flex-col items-center justify-center gap-1.5 bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-50 hover:text-white p-3 rounded-xl shadow-[0_0_8px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] transition-all duration-300 md:col-span-2 group">
-                        <svg class="w-5 h-5 drop-shadow-[0_0_4px_rgba(239,68,68,0.6)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                        <span class="text-[9px] font-bold uppercase tracking-wider">Factory Reset</span>
-                    </button>
-                </div>
-            </div>
         </div>
 
     </main>
@@ -747,6 +710,21 @@
     <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[44px] left-1/2 -translate-x-1/2 w-[54px] h-[54px] bg-[#111111] rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_8px_20px_rgba(255,214,0,0.3)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[9999] pointer-events-auto">
         <span class="font-black text-[22px] text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display leading-none mt-0.5">V</span>
     </button>
+
+    <!-- ADD TO HOME SCREEN PROMPT (A2HS) -->
+    <div id="a2hs-prompt" class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-[#1A1A1A]/95 backdrop-blur-xl border border-brand/50 rounded-2xl p-4 shadow-[0_10px_30px_rgba(255,214,0,0.2)] z-[100] hidden transform transition-all duration-500 translate-y-10 opacity-0">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-inner font-display">V</div>
+                <div>
+                    <h4 class="font-bold text-sm tracking-tight font-display">Install Vault App</h4>
+                    <p class="text-[9px] text-textMuted-light dark:text-textMuted-dark font-medium mt-0.5">Run natively without the browser</p>
+                </div>
+            </div>
+            <button onclick="vibrate(20); dismissA2HS()" class="w-6 h-6 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark flex items-center justify-center text-[10px] font-bold">✕</button>
+        </div>
+        <button id="a2hs-btn" class="w-full bg-brand text-gray-900 font-bold text-xs py-2.5 rounded-xl shadow-sm mt-2 hover:scale-[1.02] transition-transform">Install Now</button>
+    </div>
 
     <!-- ========================================== -->
     <!-- ALL MODALS (Standardized Z-Index Ladder)   -->
@@ -1201,14 +1179,23 @@
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault(); deferredPrompt = e;
-            setTimeout(() => { document.getElementById('a2hs-prompt').classList.remove('hidden', 'translate-y-10', 'opacity-0'); }, 3000);
+            setTimeout(() => { 
+                const p = document.getElementById('a2hs-prompt');
+                if(p) p.classList.remove('hidden', 'translate-y-10', 'opacity-0'); 
+            }, 3000);
         });
-        document.getElementById('a2hs-btn').addEventListener('click', async () => {
-            vibrate(30); if (deferredPrompt) { deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; if (outcome === 'accepted') dismissA2HS(); deferredPrompt = null; }
-        });
+        const a2hsBtn = document.getElementById('a2hs-btn');
+        if(a2hsBtn) {
+            a2hsBtn.addEventListener('click', async () => {
+                vibrate(30); if (deferredPrompt) { deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; if (outcome === 'accepted') dismissA2HS(); deferredPrompt = null; }
+            });
+        }
         window.dismissA2HS = function() {
-            document.getElementById('a2hs-prompt').classList.add('translate-y-10', 'opacity-0');
-            setTimeout(() => document.getElementById('a2hs-prompt').classList.add('hidden'), 500);
+            const p = document.getElementById('a2hs-prompt');
+            if(p) {
+                p.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => p.classList.add('hidden'), 500);
+            }
         };
 
         const SVG_INC = `<svg class="w-4 h-4 text-green-500 drop-shadow-[0_0_6px_rgba(34,197,94,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`;
@@ -1263,13 +1250,12 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart, familyChart;
         let currentEditCard = ''; window.selectedMonth = ""; window.selectedYear = ""; window.selectedSalaryYear = ""; window.selectedFamilyMonth = "";
 
-        // Status Bar Initialization
+        // Status Bar Meta Theme Sync
         function syncMetaThemeColor() {
             let isDark = document.documentElement.classList.contains('dark');
             const metaThemeColor = document.getElementById('meta-theme-color');
             if (metaThemeColor) { metaThemeColor.setAttribute('content', isDark ? '#0A0A0A' : '#F4F5F7'); }
         }
-        syncMetaThemeColor(); // Run on load
 
         // Confetti Engine
         function fireConfetti() {
@@ -1302,7 +1288,7 @@
         };
 
         // Modal Toggles (Always trigger closeAllModals first for a clean slate)
-        window.openActionModal = function() { closeAllModals(); vibrate(50); const m = document.getElementById('action-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; };
+        window.openActionModal = function() { closeAllModals(); vibrate(50); const m = document.getElementById('action-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } };
         window.closeActionModal = function() { vibrate(20); closeAllModals(); };
         
         window.openStatsModal = function() {
@@ -1318,7 +1304,7 @@
             document.getElementById('stat-total-tax').innerText = 'MYR ' + totalTax.toLocaleString(undefined, {minimumFractionDigits: 2});
             document.getElementById('stat-total-tx').innerText = transactions.length;
 
-            const m = document.getElementById('stats-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
+            const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
         
         window.openCardModal = function(type) { 
@@ -1327,7 +1313,6 @@
             
             let displayType = type === 'kwsp' ? 'KWSP/EPF' : (type === 'credit' ? 'Credit Card' : 'Debit Card');
             document.getElementById('edit-card-title').innerText = `Update ${displayType}`; 
-            
             document.getElementById('edit-card-name').value = data.name || ''; 
             document.getElementById('edit-card-last4').value = data.last4 || ''; 
             
@@ -1336,20 +1321,20 @@
             
             const limitContainer = document.getElementById('edit-card-limit-container');
             if (type === 'credit') { 
-                limitContainer.classList.remove('hidden'); 
+                if(limitContainer) limitContainer.classList.remove('hidden'); 
                 document.getElementById('edit-card-limit').value = data.limit || 10000; 
                 document.getElementById('edit-card-limit').required = true; 
             } else { 
-                limitContainer.classList.add('hidden'); 
+                if(limitContainer) limitContainer.classList.add('hidden'); 
                 document.getElementById('edit-card-limit').required = false; 
             }
             
-            const m = document.getElementById('card-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
+            const m = document.getElementById('card-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
 
-        window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
         
         window.openGoalModal = function(index = -1) { 
             closeAllModals();
@@ -1369,13 +1354,13 @@
                 if(checkLC) checkLC.checked = false;
                 if(lifeDiv) lifeDiv.classList.add('hidden');
             }
-            const m = document.getElementById('goal-modal'); m.classList.remove('hidden'); m.style.display = 'flex';
+            const m = document.getElementById('goal-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
 
-        window.openDebtModal = function() { closeAllModals(); const m = document.getElementById('debt-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.openBillModal = function() { closeAllModals(); const m = document.getElementById('bill-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.openUtilHistoryModal = function() { closeAllModals(); const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('util-history-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
-        window.openPayrollModal = function() { closeAllModals(); const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('payroll-modal'); m.classList.remove('hidden'); m.style.display = 'flex'; }
+        window.openDebtModal = function() { closeAllModals(); const m = document.getElementById('debt-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openBillModal = function() { closeAllModals(); const m = document.getElementById('bill-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openUtilHistoryModal = function() { closeAllModals(); const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('util-history-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openPayrollModal = function() { closeAllModals(); const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('payroll-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
 
         // General Core Functions
         window.deleteTransaction = function(index) {
@@ -1397,7 +1382,7 @@
             let isDark = document.documentElement.classList.contains('dark');
             localStorage.theme = isDark ? 'dark' : 'light';
             
-            syncMetaThemeColor(); // Adjust mobile status bar color dynamically
+            syncMetaThemeColor(); 
             
             document.getElementById('theme-icon').innerHTML = isDark 
                 ? '<svg class="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>'
@@ -1415,7 +1400,7 @@
         }
 
         window.switchTab = function(tabId) {
-            closeAllModals(); // Guarantee no menus follow you to a new tab
+            closeAllModals(); 
             const tabs = ['home', 'overall', 'food', 'family', 'bills', 'salary', 'profile'];
             tabs.forEach(id => {
                 let tabEl = document.getElementById(`tab-${id}`);
@@ -2070,12 +2055,19 @@
             const c = document.createElement('a'); c.setAttribute("href", encodeURI(csvContent)); c.setAttribute("download", "vault_pivot_data.csv"); document.body.appendChild(c); c.click(); c.remove();
         }
 
-        document.getElementById('json-file-input').addEventListener('change', function(e) { 
+        window.handleJsonImport = function(e) { 
             const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { try { const data = JSON.parse(event.target.result); Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); } catch(err) { alert("Invalid backup file."); } }; reader.readAsText(file); 
-        });
+            reader.onload = function(event) { 
+                try { 
+                    const data = JSON.parse(event.target.result); 
+                    Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); 
+                    alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); 
+                } catch(err) { alert("Invalid backup file."); } 
+            }; 
+            reader.readAsText(file); 
+        };
 
-        document.getElementById('csv-file-input').addEventListener('change', function(e) { 
+        window.handleCsvImport = function(e) { 
             const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
             reader.onload = function(event) { 
                 const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
@@ -2096,12 +2088,12 @@
                 const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
                 transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
                 transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); e.target.value = ''; 
-            }; reader.readAsText(file); 
-        });
+            }; 
+            reader.readAsText(file); 
+        };
         
         window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
 
-        // Clean Initialization
         window.onload = function() {
             checkPayday();
             populateTimelines();
