@@ -1865,7 +1865,7 @@
             }
         }
 
-        window.renderCards = function() { 
+		window.renderCards = function() { 
             const dEl = document.getElementById('debit-display'); 
             const cEl = document.getElementById('credit-display'); 
             const cpEl = document.getElementById('credit-pct'); 
@@ -1889,7 +1889,8 @@
                 let annualEpf = 0;
                 
                 payrollHistory.forEach(p => { 
-                    let gross = p.basic + p.allowance + p.bonus; let empEpf = 0;
+                    let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
+                    let empEpf = 0;
                     if (p.empEpf) { empEpf = p.empEpf; } 
                     else { 
                         if(gross > 0 && gross <= 5000) { empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13); } 
@@ -1898,12 +1899,27 @@
                     totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
                 });
                 
+                // Set total KWSP display
                 kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); 
                 if (typeof cardData.kwsp === 'object') {
                     document.getElementById('kwsp-name').innerText = cardData.kwsp.name || 'Retirement Fund'; 
                     document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4 || '0000';
                 }
+
+                // Compute 3-Account Restructuring Breakdown
+                let persaraanVal = totalKwsp * 0.75;
+                let sejahteraVal = totalKwsp * 0.15;
+                let fleksibelVal = totalKwsp * 0.10;
+
+                const persEl = document.getElementById('kwsp-persaraan');
+                const sejEl = document.getElementById('kwsp-sejahtera');
+                const fleEl = document.getElementById('kwsp-fleksibel');
+
+                if (persEl) persEl.innerText = 'RM ' + persaraanVal.toLocaleString(undefined, {maximumFractionDigits: 0});
+                if (sejEl) sejEl.innerText = 'RM ' + sejahteraVal.toLocaleString(undefined, {maximumFractionDigits: 0});
+                if (fleEl) fleEl.innerText = 'RM ' + fleksibelVal.toLocaleString(undefined, {maximumFractionDigits: 0});
                 
+                // Age 55 Projector Calculation
                 if(payrollHistory.length > 0) {
                     let totalEpfContributed = payrollHistory.reduce((sum, p) => sum + (parseFloat(p.epf) || 0) + (parseFloat(p.empEpf) || 0), 0);
                     annualEpf = (totalEpfContributed / payrollHistory.length) * 12;
