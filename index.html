@@ -1236,13 +1236,32 @@
             name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: ""
         };
 
-        let cardData = JSON.parse(localStorage.getItem('vault_cards')) || {};
-        if (!cardData.debit || typeof cardData.debit !== 'object' || !cardData.kwsp) {
-            let oldDebit = cardData.debit; let oldCredit = cardData.credit; let oldKwsp = cardData.kwsp;
+		let cardData = JSON.parse(localStorage.getItem('vault_cards')) || {};
+        if (!cardData.debit || typeof cardData.debit !== 'object' || 
+            !cardData.credit || typeof cardData.credit !== 'object' || 
+            !cardData.kwsp || typeof cardData.kwsp !== 'object') {
+            
+            let oldDebit = cardData.debit; 
+            let oldCredit = cardData.credit; 
+            let oldKwsp = cardData.kwsp;
+            
             cardData = {
-                debit: { balance: (oldDebit && typeof oldDebit === 'object') ? oldDebit.balance : (parseFloat(oldDebit) || 2500), name: (oldDebit && oldDebit.name) || "Debit Card", last4: (oldDebit && oldDebit.last4) || "1234" },
-                credit: { balance: (oldCredit && typeof oldCredit === 'object') ? oldCredit.balance : (parseFloat(oldCredit) || 5000), name: (oldCredit && oldCredit.name) || "Ikhwan CC", last4: (oldCredit && oldCredit.last4) || "8888", limit: (oldCredit && oldCredit.limit) || 10000 },
-                kwsp: { balance: (oldKwsp && typeof oldKwsp === 'object') ? oldKwsp.balance : (parseFloat(oldKwsp) || 0), name: (oldKwsp && oldKwsp.name) || "Retirement Fund", last4: "0000" }
+                debit: { 
+                    balance: (oldDebit && typeof oldDebit === 'object') ? (oldDebit.balance || 0) : (parseFloat(oldDebit) || 2500), 
+                    name: (oldDebit && oldDebit.name) || "Debit Card", 
+                    last4: (oldDebit && oldDebit.last4) || "1234" 
+                },
+                credit: { 
+                    balance: (oldCredit && typeof oldCredit === 'object') ? (oldCredit.balance || 0) : (parseFloat(oldCredit) || 5000), 
+                    name: (oldCredit && oldCredit.name) || "Ikhwan CC", 
+                    last4: (oldCredit && oldCredit.last4) || "8888", 
+                    limit: (oldCredit && oldCredit.limit) || 10000 
+                },
+                kwsp: { 
+                    balance: (oldKwsp && typeof oldKwsp === 'object') ? (oldKwsp.balance || 0) : (parseFloat(oldKwsp) || 0), 
+                    name: (oldKwsp && typeof oldKwsp === 'object' && oldKwsp.name) ? oldKwsp.name : "Retirement Fund", 
+                    last4: (oldKwsp && typeof oldKwsp === 'object' && oldKwsp.last4) ? oldKwsp.last4 : "0000" 
+                }
             };
             localStorage.setItem('vault_cards', JSON.stringify(cardData));
         }
@@ -1307,17 +1326,22 @@
             const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
         
-        window.openCardModal = function(type) { 
+		window.openCardModal = function(type) { 
             closeAllModals();
-            currentEditCard = type; const data = cardData[type]; if (!data) return;
+            currentEditCard = type; 
             
-            let displayType = type === 'kwsp' ? 'KWSP/EPF' : (type === 'credit' ? 'Credit Card' : 'Debit Card');
+            // Auto-heal if object is somehow missing
+            if (!cardData[type] || typeof cardData[type] !== 'object') {
+                cardData[type] = { balance: parseFloat(cardData[type]) || 0, name: type.toUpperCase(), last4: '0000' };
+            }
+            const data = cardData[type];
+            
+            let displayType = type === 'kwsp' ? 'KWSP / EPF' : (type === 'credit' ? 'Credit Card' : 'Debit Card');
             document.getElementById('edit-card-title').innerText = `Update ${displayType}`; 
+            
             document.getElementById('edit-card-name').value = data.name || ''; 
             document.getElementById('edit-card-last4').value = data.last4 || ''; 
-            
-            // For KWSP, balance implies Base Balance BEFORE payroll auto-additions.
-            document.getElementById('edit-card-balance').value = data.balance || 0;
+            document.getElementById('edit-card-balance').value = data.balance !== undefined ? data.balance : 0;
             
             const limitContainer = document.getElementById('edit-card-limit-container');
             if (type === 'credit') { 
@@ -1329,9 +1353,9 @@
                 document.getElementById('edit-card-limit').required = false; 
             }
             
-            const m = document.getElementById('card-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
+            const m = document.getElementById('card-modal'); 
+            if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
-
         window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
         window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
         window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
@@ -1766,29 +1790,64 @@
             }
         }
 
-        window.saveCardEdit = function(e) { 
-            e.preventDefault(); if (!cardData[currentEditCard]) return;
+window.saveCardEdit = function(e) { 
+            e.preventDefault(); 
+            if (!currentEditCard) return;
+            
+            if (!cardData[currentEditCard] || typeof cardData[currentEditCard] !== 'object') {
+                cardData[currentEditCard] = {};
+            }
+            
             cardData[currentEditCard].name = document.getElementById('edit-card-name').value; 
             cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value; 
             cardData[currentEditCard].balance = parseFloat(document.getElementById('edit-card-balance').value) || 0;
-            if (currentEditCard === 'credit') { cardData.credit.limit = parseFloat(document.getElementById('edit-card-limit').value) || 10000; }
+            
+            if (currentEditCard === 'credit') { 
+                cardData.credit.limit = parseFloat(document.getElementById('edit-card-limit').value) || 10000; 
+            }
+            
             localStorage.setItem('vault_cards', JSON.stringify(cardData)); 
-            renderCards(); updateHomeDashboard(); closeAllModals(); 
+            renderCards(); 
+            updateHomeDashboard(); 
+            closeAllModals(); 
         }
 
         window.renderCards = function() { 
-            const dEl = document.getElementById('debit-display'); const cEl = document.getElementById('credit-display'); const cpEl = document.getElementById('credit-pct'); const kEl = document.getElementById('kwsp-display');
-            if(dEl && cardData.debit) { dEl.innerText = cardData.debit.balance.toLocaleString(undefined, {minimumFractionDigits: 2}); document.getElementById('debit-name').innerText = cardData.debit.name; document.getElementById('debit-last4').innerText = cardData.debit.last4; }
-            if(cEl && cardData.credit) { cEl.innerText = cardData.credit.balance.toLocaleString(undefined, {minimumFractionDigits: 2}); document.getElementById('credit-name').innerText = cardData.credit.name; document.getElementById('credit-last4').innerText = cardData.credit.last4; }
+            const dEl = document.getElementById('debit-display'); 
+            const cEl = document.getElementById('credit-display'); 
+            const cpEl = document.getElementById('credit-pct'); 
+            const kEl = document.getElementById('kwsp-display');
+
+            if(dEl && cardData.debit) { 
+                dEl.innerText = (cardData.debit.balance || 0).toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                document.getElementById('debit-name').innerText = cardData.debit.name || 'Debit Card'; 
+                document.getElementById('debit-last4').innerText = cardData.debit.last4 || '1234'; 
+            }
+            if(cEl && cardData.credit) { 
+                cEl.innerText = (cardData.credit.balance || 0).toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                document.getElementById('credit-name').innerText = cardData.credit.name || 'Credit Card'; 
+                document.getElementById('credit-last4').innerText = cardData.credit.last4 || '8888'; 
+            }
             if(kEl && cardData.kwsp) {
-                let totalKwsp = cardData.kwsp.balance || 0;
+                let baseKwsp = typeof cardData.kwsp === 'object' ? (cardData.kwsp.balance || 0) : (parseFloat(cardData.kwsp) || 0);
+                let totalKwsp = baseKwsp;
                 let annualEpf = 0;
+                
                 payrollHistory.forEach(p => { 
                     let gross = p.basic + p.allowance + p.bonus; let empEpf = 0;
-                    if (p.empEpf) { empEpf = p.empEpf; } else { if(gross > 0 && gross <= 5000) { empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13); } else if(gross > 5000) { empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12); } }
+                    if (p.empEpf) { empEpf = p.empEpf; } 
+                    else { 
+                        if(gross > 0 && gross <= 5000) { empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13); } 
+                        else if(gross > 5000) { empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12); } 
+                    }
                     totalKwsp += p.epf + empEpf; 
                 });
-                kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); document.getElementById('kwsp-name').innerText = cardData.kwsp.name; document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4;
+                
+                kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); 
+                if (typeof cardData.kwsp === 'object') {
+                    document.getElementById('kwsp-name').innerText = cardData.kwsp.name || 'Retirement Fund'; 
+                    document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4 || '0000';
+                }
                 
                 if(payrollHistory.length > 0) {
                     let totalEpfContributed = payrollHistory.reduce((sum, p) => sum + p.epf + (p.empEpf || 0), 0);
@@ -1803,8 +1862,10 @@
                 if(projEl) projEl.innerText = projected.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
             }
             if(cpEl && cardData.credit) {
-                const maxLimit = cardData.credit.limit || 10000; const currentBalance = cardData.credit.balance;
-                const usedPercentage = Math.round((currentBalance / maxLimit) * 100); cpEl.innerText = usedPercentage;
+                const maxLimit = cardData.credit.limit || 10000; 
+                const currentBalance = cardData.credit.balance || 0;
+                const usedPercentage = Math.round((currentBalance / maxLimit) * 100); 
+                cpEl.innerText = usedPercentage;
             }
         }
 
