@@ -235,23 +235,39 @@
                                 </div>
                             </div>
 
-                            <!-- Back of KWSP Card -->
-                            <div class="absolute inset-0 backface-hidden rotate-y-180 card-kwsp-back rounded-[24px] border border-blue-500/30 overflow-hidden p-5 md:p-7 flex flex-col justify-between text-white shadow-inner">
-                                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
+							<!-- Back of KWSP Card (3-Account Breakdown + AI Projector) -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 card-kwsp-back rounded-[24px] border border-blue-500/30 overflow-hidden p-4 md:p-5 flex flex-col justify-between text-white shadow-inner">
                                 <div class="relative z-10 flex flex-col h-full justify-between">
-                                    <div class="flex justify-between items-start">
+                                    <div class="flex justify-between items-center border-b border-white/10 pb-2">
                                         <div>
-                                            <div class="font-bold text-lg text-white drop-shadow-md tracking-tight">AI Projector</div>
-                                            <div class="text-blue-300 text-[9px] font-medium tracking-widest uppercase mt-0.5">Est. 5.5% Dividend</div>
+                                            <div class="font-bold text-sm text-white tracking-tight">KWSP 3-Account Split</div>
+                                            <div class="text-blue-300 text-[8px] font-medium tracking-widest uppercase">75% • 15% • 10%</div>
                                         </div>
-                                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20"><svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div>
+                                        <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center border border-white/20"><svg class="w-3.5 h-3.5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div>
                                     </div>
-                                    <div class="mt-1">
-                                        <p class="text-[9px] font-semibold text-blue-200 uppercase tracking-widest mb-0.5">Projected Nest Egg @ Age 55</p>
-                                        <div class="font-display font-black text-4xl tracking-tight leading-none text-brand drop-shadow-[0_0_15px_rgba(255,214,0,0.5)]"><span class="text-sm font-bold opacity-80 pr-1 text-white">MYR</span><span id="kwsp-projected">0.00</span></div>
+
+                                    <div class="grid grid-cols-3 gap-1.5 my-1 text-center">
+                                        <div class="bg-white/5 p-1.5 rounded-lg border border-white/10">
+                                            <p class="text-[7px] text-blue-200 uppercase font-bold tracking-wider">Persaraan (75%)</p>
+                                            <p class="text-[10px] font-bold text-white font-display mt-0.5" id="kwsp-persaraan">RM 0</p>
+                                        </div>
+                                        <div class="bg-white/5 p-1.5 rounded-lg border border-white/10">
+                                            <p class="text-[7px] text-blue-200 uppercase font-bold tracking-wider">Sejahtera (15%)</p>
+                                            <p class="text-[10px] font-bold text-white font-display mt-0.5" id="kwsp-sejahtera">RM 0</p>
+                                        </div>
+                                        <div class="bg-white/5 p-1.5 rounded-lg border border-white/10">
+                                            <p class="text-[7px] text-brand uppercase font-bold tracking-wider">Fleksibel (10%)</p>
+                                            <p class="text-[10px] font-bold text-brand font-display mt-0.5" id="kwsp-fleksibel">RM 0</p>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-between items-end text-blue-100/70 text-[8px] font-semibold uppercase tracking-wider">
-                                        <p>Based on logged income</p>
+
+                                    <div class="border-t border-white/10 pt-1.5">
+                                        <p class="text-[8px] font-semibold text-blue-200 uppercase tracking-widest mb-0.5">Projected @ Age 55 (Est. 5.5%)</p>
+                                        <div class="font-display font-black text-2xl tracking-tight text-brand drop-shadow-[0_0_10px_rgba(255,214,0,0.5)]"><span class="text-xs font-bold opacity-80 pr-1 text-white">MYR</span><span id="kwsp-projected">0.00</span></div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center text-blue-100/60 text-[7px] font-semibold uppercase tracking-wider">
+                                        <p>Auto-calculated from logged salary</p>
                                         <p>Tap to return</p>
                                     </div>
                                 </div>
