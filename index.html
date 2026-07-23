@@ -1222,22 +1222,62 @@
         }
 
         // Data Models
-        let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
-        let debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
-        let bills = JSON.parse(localStorage.getItem('vault_bills')) || [ { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi", amount: 129, dueDate: "2026-07-28" } ];
-        let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
-        let payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
-        let commitments = JSON.parse(localStorage.getItem('vault_commitments')) || [ { name: "Car Loan (JND7218)", type: "Hire Purchase", amount: 500 } ];
+		// Safe Robust Data Models Initialization
+        let transactions = [];
+        try {
+            transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
+            if (!Array.isArray(transactions)) transactions = [];
+        } catch(e) { transactions = []; }
 
-        let goalsData = JSON.parse(localStorage.getItem('vault_goals'));
-        if (!goalsData) {
+        let debts = [];
+        try {
+            debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
+            if (!Array.isArray(debts)) debts = [];
+        } catch(e) { debts = []; }
+
+        let bills = [];
+        try {
+            bills = JSON.parse(localStorage.getItem('vault_bills')) || [ { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi", amount: 129, dueDate: "2026-07-28" } ];
+            if (!Array.isArray(bills)) bills = [];
+        } catch(e) { bills = []; }
+
+        let utilHistory = [];
+        try {
+            utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
+            if (!Array.isArray(utilHistory)) utilHistory = [];
+        } catch(e) { utilHistory = []; }
+
+        let payrollHistory = [];
+        try {
+            payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
+            if (!Array.isArray(payrollHistory)) payrollHistory = [];
+        } catch(e) { payrollHistory = []; }
+
+        let commitments = [];
+        try {
+            commitments = JSON.parse(localStorage.getItem('vault_commitments')) || [ { name: "Car Loan (JND7218)", type: "Hire Purchase", amount: 500 } ];
+            if (!Array.isArray(commitments)) commitments = [];
+        } catch(e) { commitments = []; }
+
+        let goalsData = [];
+        try {
+            goalsData = JSON.parse(localStorage.getItem('vault_goals'));
+            if (!Array.isArray(goalsData) || goalsData.length === 0) {
+                goalsData = [{name: "Emergency Fund", current: 1250, target: 10000, isLifecycle: false}];
+                localStorage.setItem('vault_goals', JSON.stringify(goalsData));
+            }
+        } catch(e) {
             goalsData = [{name: "Emergency Fund", current: 1250, target: 10000, isLifecycle: false}];
-            localStorage.setItem('vault_goals', JSON.stringify(goalsData));
         }
 
-        let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
-            name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: ""
-        };
+        // Robust Profile Loader (Prevents blank profile bug)
+        let profile = JSON.parse(localStorage.getItem('vault_profile'));
+        if (!profile || typeof profile !== 'object' || !profile.name) {
+            profile = {
+                name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: ""
+            };
+            localStorage.setItem('vault_profile', JSON.stringify(profile));
+        }
 
         // Dynamic KWSP 3-Account Card Initialization
         let cardData = JSON.parse(localStorage.getItem('vault_cards')) || {};
