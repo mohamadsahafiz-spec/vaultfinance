@@ -1838,6 +1838,7 @@
 
         // Card Rendering Engine
 		// Dynamic Card Rendering Engine (Filters Payslips by Cutoff Date)
+		// Dynamic Card Rendering Engine (With 3% Annual Increment Compound Projector)
         window.renderCards = function() { 
             const dEl = document.getElementById('debit-display'); 
             const cEl = document.getElementById('credit-display'); 
@@ -1865,9 +1866,8 @@
                 let addPersaraan = 0;
                 let addSejahtera = 0;
                 let addFleksibel = 0;
-                let annualEpf = 0;
 
-                // ONLY accumulate payslips that occur STRICTLY AFTER the baseline cutoff month
+                // Accumulate payslips logged AFTER cutoff month
                 payrollHistory.forEach(p => { 
                     if (p.month && p.month > baseAsOf) {
                         let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
@@ -1885,12 +1885,12 @@
                 let totalFleksibel = baseFleksibel + addFleksibel;
                 let totalKwsp = totalPersaraan + totalSejahtera + totalFleksibel;
 
-                // Set Front Card Total
+                // Display Total on Front of Card
                 kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); 
                 document.getElementById('kwsp-name').innerText = cardData.kwsp.name || 'Retirement Fund'; 
                 document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4 || '1234';
 
-                // Set Back Card Account Splits
+                // Display 3-Account Splits on Back of Card
                 const persEl = document.getElementById('kwsp-persaraan');
                 const sejEl = document.getElementById('kwsp-sejahtera');
                 const fleEl = document.getElementById('kwsp-fleksibel');
@@ -1899,22 +1899,35 @@
                 if (sejEl) sejEl.innerText = 'RM ' + totalSejahtera.toLocaleString(undefined, {minimumFractionDigits: 2});
                 if (fleEl) fleEl.innerText = 'RM ' + totalFleksibel.toLocaleString(undefined, {minimumFractionDigits: 2});
                 
-                // Age 55 Projector Calculation
-                if(payrollHistory.length > 0) {
-                    let totalEpfContributed = payrollHistory.reduce((sum, p) => {
-                        let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0);
-                        let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
-                        return sum + (parseFloat(p.epf) || 0) + parseFloat(empEpf);
-                    }, 0);
-                    annualEpf = (totalEpfContributed / payrollHistory.length) * 12;
-                } else {
-                    annualEpf = 5000; 
+                // =========================================================
+                // KWSP OFFICIAL COMPOUND PROJECTOR (Age 55)
+                // =========================================================
+                // 1. Detect latest logged base salary (defaults to RM 5,158 if no payslips exist)
+                let currentMonthlySalary = 5158; 
+                if (payrollHistory && payrollHistory.length > 0) {
+                    let sortedPayroll = [...payrollHistory].sort((a, b) => new Date(b.month) - new Date(a.month));
+                    let latestPay = sortedPayroll[0];
+                    let latestGross = (parseFloat(latestPay.basic) || 0) + (parseFloat(latestPay.allowance) || 0);
+                    if (latestGross > 0) currentMonthlySalary = latestGross;
                 }
-                const yearsTo55 = 19; 
-                const estDiv = 0.055; 
-                const projected = totalKwsp * Math.pow(1 + estDiv, yearsTo55) + annualEpf * ((Math.pow(1 + estDiv, yearsTo55) - 1) / estDiv);
+
+                // 2. Multi-year compounding loop (3% annual salary increment + 5.5% KWSP dividend)
+                let projectedBalance = totalKwsp;
+                const yearsTo55 = 19; // Current age 36 to 55
+                const annualDividendRate = 0.055;
+                const salaryIncrementRate = 0.03;
+
+                for (let yr = 1; yr <= yearsTo55; yr++) {
+                    let yrSalary = currentMonthlySalary * Math.pow(1 + salaryIncrementRate, yr - 1);
+                    let epfContribRate = yrSalary > 5000 ? 0.23 : 0.24; // 11% + 12% (>RM5k) or 11% + 13% (<=RM5k)
+                    let yrAnnualContribution = yrSalary * 12 * epfContribRate;
+
+                    // Compounding formula: 5.5% on opening balance + 2.75% mid-year avg yield on new monthly deposits
+                    projectedBalance = (projectedBalance * (1 + annualDividendRate)) + (yrAnnualContribution * (1 + (annualDividendRate / 2)));
+                }
+
                 const projEl = document.getElementById('kwsp-projected');
-                if(projEl) projEl.innerText = projected.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+                if(projEl) projEl.innerText = projectedBalance.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
             }
             if(cpEl && cardData.credit) {
                 const maxLimit = cardData.credit.limit || 10000; 
