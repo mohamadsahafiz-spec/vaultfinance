@@ -6,7 +6,6 @@
     <title>Vault - Smart Finance</title>
     
     <link rel="manifest" href="manifest.json">
-    <!-- Dynamic Theme Color Meta Tag for Mobile Status Bar -->
     <meta name="theme-color" content="#0A0A0A" id="meta-theme-color">
     <link rel="icon" type="image/png" href="favicon.png?v=11">
     <link rel="apple-touch-icon" href="favicon.png?v=11">
@@ -120,16 +119,13 @@
             </button>
         </header>
 
-        <!-- ========================================== -->
-        <!-- TAB 1: HOME DASHBOARD (NATIVE SPACING)     -->
-        <!-- ========================================== -->
+        <!-- TAB 1: HOME DASHBOARD -->
         <div id="tab-home" class="tab-enter flex flex-col w-full min-h-[100dvh] relative">
             
             <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center items-start pt-12">
                 <div class="absolute w-[120vw] h-[120vw] sm:w-[80vw] sm:h-[80vw] bg-[radial-gradient(circle_at_center,_#FFD600_0%,_transparent_55%)] blur-[70px] opacity-15 dark:opacity-[0.08]"></div>
             </div>
 
-            <!-- THRONE ZONE -->
             <div class="w-full relative flex flex-col z-10 shrink-0 mt-2 mb-2">
                 <div class="px-6 sm:px-[calc(50%-200px)] mb-3 flex justify-between items-center w-full">
                     <p class="text-[11px] font-black text-brand uppercase tracking-widest drop-shadow-md opacity-90 font-display">My Wallet</p>
@@ -144,7 +140,7 @@
                 <div class="flex overflow-x-auto snap-x snap-mandatory gap-5 px-[7vw] sm:px-[calc(50%-200px)] hide-scrollbar w-full items-center relative z-20 pb-6 pt-1">
                     
                     <!-- DEBIT CARD -->
-                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(190,18,60,0.25)]" onclick="vibrate(20); openCardModal('debit')">
+                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(190,18,60,0.25)] cursor-pointer" onclick="vibrate(20); openCardModal('debit')">
                        <div class="card-debit-bg w-full h-full p-5 md:p-7 flex flex-col justify-between relative">
                            <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-500/20 to-transparent mix-blend-overlay pointer-events-none"></div>
                            <div class="relative z-10 flex flex-col h-full justify-between">
@@ -171,7 +167,7 @@
                     </div>
 
                     <!-- CREDIT CARD -->
-                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(245,158,11,0.2)]" onclick="vibrate(20); openCardModal('credit')">
+                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] bg-panel-light dark:bg-panel-dark rounded-[24px] border border-gray-200 dark:border-white/10 relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(245,158,11,0.2)] cursor-pointer" onclick="vibrate(20); openCardModal('credit')">
                         <div class="card-gold-bg w-full h-full p-5 md:p-7 flex flex-col justify-between relative">
                             <div class="absolute bottom-8 left-[-20%] right-[-20%] h-8 bg-gradient-to-r from-purple-800 via-green-600 to-green-400 opacity-80 transform -skew-y-6 drop-shadow-lg"></div>
                             <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDIwTDEwIDEwbDEwLTEwIDEwIDEwLTIwIDIweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-40 pointer-events-none"></div>
@@ -201,18 +197,15 @@
                         </div>
                     </div>
 
-                    <!-- KWSP CARD (With Native Edit Icon) -->
+                    <!-- KWSP CARD (With Dedicated Edit Icon) -->
                     <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] group perspective-1000 cursor-pointer relative" onclick="vibrate(30); document.getElementById('kwsp-inner').classList.toggle('rotate-y-180')">
                         <div id="kwsp-inner" class="relative w-full h-full transition-transform duration-700 transform-style-3d shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.15)] rounded-[24px]">
                             
                             <!-- Front of KWSP Card -->
                             <div class="absolute inset-0 backface-hidden card-kwsp-bg rounded-[24px] border border-gray-300 overflow-hidden p-5 md:p-7 flex flex-col justify-between text-gray-900">
-                                
-                                <!-- EDIT ICON -->
                                 <div class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/5 flex items-center justify-center cursor-pointer hover:bg-black/10 transition-colors shadow-sm" onclick="event.stopPropagation(); vibrate(20); openCardModal('kwsp')" title="Edit KWSP Details">
                                     <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                 </div>
-
                                 <div class="absolute -right-10 -top-10 w-48 h-48 bg-white rounded-full blur-2xl pointer-events-none opacity-80"></div>
                                 <div class="relative z-10 flex flex-col h-full justify-between">
                                     <div class="flex justify-between items-start">
@@ -223,7 +216,7 @@
                                     </div>
                                     <div class="mt-2">
                                         <div class="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1 ml-1">Member Number</div>
-                                        <div class="font-mono text-base tracking-[0.15em] text-gray-700 font-semibold">**** **** <span id="kwsp-last4">0000</span></div>
+                                        <div class="font-mono text-base tracking-[0.15em] text-gray-700 font-semibold">**** **** <span id="kwsp-last4">1234</span></div>
                                     </div>
                                     <div class="flex justify-between items-end mt-1">
                                         <div>
@@ -235,7 +228,7 @@
                                 </div>
                             </div>
 
-							<!-- Back of KWSP Card (3-Account Breakdown + AI Projector) -->
+                            <!-- Back of KWSP Card (3-Account Split + AI Projector) -->
                             <div class="absolute inset-0 backface-hidden rotate-y-180 card-kwsp-back rounded-[24px] border border-blue-500/30 overflow-hidden p-4 md:p-5 flex flex-col justify-between text-white shadow-inner">
                                 <div class="relative z-10 flex flex-col h-full justify-between">
                                     <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -305,7 +298,6 @@
 
             <!-- LOWER CONTEXT PANEL -->
             <div class="relative z-20 px-5 md:px-6 flex flex-col gap-4 flex-1 w-full pb-32">
-                
                 <div class="bg-gradient-to-r from-green-500/20 to-brand/10 border border-green-500/30 dark:border-green-400/20 p-4 rounded-xl shadow-sm flex flex-col transition-colors duration-300 relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 w-16 h-16 bg-green-500/20 rounded-full blur-2xl pointer-events-none"></div>
                     <p class="text-green-700 dark:text-green-400 text-[9px] font-bold tracking-wider uppercase drop-shadow-sm flex items-center gap-1.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Safe to Spend</p>
@@ -341,9 +333,7 @@
             
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 2: OVERALL ANALYTICS                   -->
-        <!-- ========================================== -->
+        <!-- TAB 2: OVERALL ANALYTICS -->
         <div id="tab-overall" class="tab-enter px-5 md:px-6 hidden flex-col gap-4 pb-24">
             <div class="flex justify-between items-center mt-1">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider shrink-0 mr-2">Analytics</p>
@@ -403,14 +393,12 @@
                 <div class="flex justify-between items-center mb-3">
                     <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Ledger (Swipe Left to Delete)</p>
                 </div>
-                
                 <div class="mb-4 relative">
                     <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-brand drop-shadow-[0_0_4px_rgba(255,214,0,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </div>
                     <input type="text" id="search-tx" onkeyup="updateOverallDashboard()" placeholder="Search lifetime transactions..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-medium text-xs pl-10 pr-3 py-3 rounded-xl border border-gray-200 dark:border-white/10 outline-none focus:ring-1 focus:ring-brand transition shadow-inner">
                 </div>
-
                 <div class="flex flex-col gap-2" id="overall-transaction-list"></div>
             </div>
         </div>
@@ -639,7 +627,7 @@
                 </form>
             </div>
 
-            <!-- NATIVE FAIL-PROOF DATA MANAGEMENT -->
+            <!-- DATA MANAGEMENT -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm mt-4">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
                 
@@ -684,12 +672,8 @@
 
     </main>
 
-    <!-- ========================================== -->
-    <!-- PERFECT 3-1-3 BOTTOM NAV DOCK              -->
-    <!-- ========================================== -->
+    <!-- BOTTOM NAV DOCK -->
     <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-6 py-3 shadow-2xl z-[90]">
-        
-        <!-- Left Side Icons -->
         <div class="flex items-center gap-3 sm:gap-4 pointer-events-auto">
             <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -702,10 +686,8 @@
             </button>
         </div>
         
-        <!-- EMPTY MIDDLE SPACE -->
         <div class="w-14 h-1 px-2 pointer-events-none"></div>
 
-        <!-- Right Side Icons -->
         <div class="flex items-center gap-3 sm:gap-4 pointer-events-auto">
             <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
@@ -717,36 +699,14 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
             </button>
         </div>
-        
     </nav>
 
-    <!-- ========================================== -->
-    <!-- THE NATIVE, HIGH-CONTRAST V BUTTON         -->
-    <!-- ========================================== -->
+    <!-- HIGH-CONTRAST V BUTTON (z-[100] hides under overlays) -->
     <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[44px] left-1/2 -translate-x-1/2 w-[54px] h-[54px] bg-[#111111] rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_8px_20px_rgba(255,214,0,0.3)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[100] pointer-events-auto">
         <span class="font-black text-[22px] text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display leading-none mt-0.5">V</span>
     </button>
 
-    <!-- ADD TO HOME SCREEN PROMPT (A2HS) -->
-    <div id="a2hs-prompt" class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-[#1A1A1A]/95 backdrop-blur-xl border border-brand/50 rounded-2xl p-4 shadow-[0_10px_30px_rgba(255,214,0,0.2)] z-[100] hidden transform transition-all duration-500 translate-y-10 opacity-0">
-        <div class="flex justify-between items-start mb-2">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-gray-900 font-bold text-xl shadow-inner font-display">V</div>
-                <div>
-                    <h4 class="font-bold text-sm tracking-tight font-display">Install Vault App</h4>
-                    <p class="text-[9px] text-textMuted-light dark:text-textMuted-dark font-medium mt-0.5">Run natively without the browser</p>
-                </div>
-            </div>
-            <button onclick="vibrate(20); dismissA2HS()" class="w-6 h-6 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark flex items-center justify-center text-[10px] font-bold">✕</button>
-        </div>
-        <button id="a2hs-btn" class="w-full bg-brand text-gray-900 font-bold text-xs py-2.5 rounded-xl shadow-sm mt-2 hover:scale-[1.02] transition-transform">Install Now</button>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- ALL MODALS (Standardized Z-Index Ladder)   -->
-    <!-- ========================================== -->
-    
-    <!-- MASTER ACTION SHEET MODAL -->
+    <!-- MODALS -->
     <div id="action-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[200] flex-col justify-end sm:justify-center items-center sm:p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 action-sheet-enter pb-10 sm:pb-6 relative z-[10000]">
             <div class="flex justify-between items-center mb-6">
@@ -790,7 +750,7 @@
         </div>
     </div>
 
-    <!-- LIFETIME STATS MODAL -->
+    <!-- STATS MODAL -->
     <div id="stats-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter relative">
             <button onclick="vibrate(20); closeAllModals()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
@@ -823,7 +783,7 @@
         </div>
     </div>
 
-	<!-- CARD EDIT MODAL -->
+    <!-- CARD EDIT MODAL (Dynamic 3-Account Support) -->
     <div id="card-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display" id="edit-card-title">Update Card</h3>
@@ -846,7 +806,6 @@
                     </div>
                 </div>
 
-                <!-- KWSP SPECIFIC 3-ACCOUNT INPUTS -->
                 <div id="kwsp-card-fields" class="hidden space-y-2.5 pt-1 border-t border-gray-200 dark:border-white/10">
                     <p class="text-[9px] font-bold text-brand uppercase tracking-wider">Base Account Balances</p>
                     <div class="grid grid-cols-3 gap-2">
@@ -972,7 +931,7 @@
         </div>
     </div>
     
-    <!-- GOAL & LIFECYCLE MODAL -->
+    <!-- GOAL MODAL -->
     <div id="goal-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
         <div class="bg-panel-light dark:bg-panel-dark p-5 rounded-2xl shadow-xl w-full max-w-md border border-gray-200 dark:border-white/5 modal-enter">
             <h3 class="text-xl font-bold tracking-tight mb-4 font-display" id="goal-modal-title">Add New Goal / Asset</h3>
@@ -1204,9 +1163,7 @@
             </form>
         </div>
     </div>
-
-    <!-- SCRIPT ENGINE IN PART 2 -->
-    <!-- ========================================== -->
+	<!-- ========================================== -->
     <!-- MASTER SCRIPT ENGINE                       -->
     <!-- ========================================== -->
     <script>
@@ -1258,7 +1215,7 @@
             return `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20 shrink-0">${SVG_OTHER}</div>`;
         }
 
-        // Data Models & Safe Initialization
+        // Data Models
         let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
         let debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
         let bills = JSON.parse(localStorage.getItem('vault_bills')) || [ { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi", amount: 129, dueDate: "2026-07-28" } ];
@@ -1276,7 +1233,7 @@
             name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: ""
         };
 
-		// Dynamic KWSP Card Data Initialization with Your Real Balances
+        // Dynamic KWSP 3-Account Card Initialization
         let cardData = JSON.parse(localStorage.getItem('vault_cards')) || {};
         if (!cardData.kwsp || typeof cardData.kwsp !== 'object' || cardData.kwsp.persaraan === undefined) {
             let oldDebit = cardData.debit;
@@ -1298,7 +1255,61 @@
         let comparisonChart, categoryChart, foodChart, utilChart, salaryChart, familyChart;
         let currentEditCard = ''; window.selectedMonth = ""; window.selectedYear = ""; window.selectedSalaryYear = ""; window.selectedFamilyMonth = "";
 
-        // Open Card Modal Engine
+        // Status Bar Meta Theme Sync
+        function syncMetaThemeColor() {
+            let isDark = document.documentElement.classList.contains('dark');
+            const metaThemeColor = document.getElementById('meta-theme-color');
+            if (metaThemeColor) { metaThemeColor.setAttribute('content', isDark ? '#0A0A0A' : '#F4F5F7'); }
+        }
+
+        // Confetti Engine
+        function fireConfetti() {
+            vibrate([50, 100, 150, 100, 200]);
+            for(let i=0; i<60; i++) {
+                let conf = document.createElement('div');
+                conf.className = 'absolute w-2 h-2 rounded-sm z-[10000] opacity-90 pointer-events-none';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.top = '-20px';
+                conf.style.backgroundColor = ['#FFD600', '#10B981', '#3B82F6', '#A855F7', '#EF4444'][Math.floor(Math.random()*5)];
+                conf.style.transition = 'all ' + (Math.random() * 1.5 + 1) + 's cubic-bezier(.37,0,.63,1)';
+                document.body.appendChild(conf);
+                setTimeout(() => { conf.style.top = '110vh'; conf.style.transform = `rotate(${Math.random()*720}deg) scale(${Math.random() + 0.5})`; }, 50);
+                setTimeout(() => conf.remove(), 2500);
+            }
+        }
+
+        // MASTER MODAL "KILL SWITCH"
+        window.closeAllModals = function() {
+            const allModals = ['action-modal', 'stats-modal', 'card-modal', 'tx-modal', 'commitment-modal', 'goal-modal', 'debt-modal', 'bill-modal', 'util-history-modal', 'payroll-modal', 'field-modal'];
+            allModals.forEach(id => {
+                const m = document.getElementById(id);
+                if(m) {
+                    m.classList.add('hidden');
+                    m.style.display = ''; 
+                }
+            });
+        };
+
+        // Modal Openers
+        window.openActionModal = function() { closeAllModals(); vibrate(50); const m = document.getElementById('action-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } };
+        window.closeActionModal = function() { vibrate(20); closeAllModals(); };
+        
+        window.openStatsModal = function() {
+            closeAllModals();
+            let totalSpent = 0;
+            transactions.forEach(t => { if (t.type === 'expense' && !t.reimbursable) totalSpent += parseFloat(t.amount); });
+            let totalSalary = 0; let totalBonus = 0; let totalTax = 0;
+            payrollHistory.forEach(p => { totalSalary += (p.basic + p.allowance); totalBonus += p.bonus; totalTax += p.tax; });
+
+            document.getElementById('stat-total-spent').innerText = 'MYR ' + totalSpent.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-salary').innerText = 'MYR ' + totalSalary.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-bonus').innerText = 'MYR ' + totalBonus.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-tax').innerText = 'MYR ' + totalTax.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stat-total-tx').innerText = transactions.length;
+
+            const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
+        }
+        
         window.openCardModal = function(type) { 
             closeAllModals();
             currentEditCard = type; 
@@ -1339,7 +1350,6 @@
             if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
 
-        // Save Card Edits Function
         window.saveCardEdit = function(e) { 
             e.preventDefault(); 
             if (!currentEditCard) return;
@@ -1376,7 +1386,444 @@
             closeAllModals(); 
         }
 
-        // Dynamic Card Rendering Engine
+        window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        
+        window.openGoalModal = function(index = -1) { 
+            closeAllModals();
+            document.getElementById('goal-index').value = index;
+            const checkLC = document.getElementById('goal-is-lifecycle'); const lifeDiv = document.getElementById('lifecycle-months-div'); const lifeInput = document.getElementById('goal-lifespan');
+            if (index >= 0) { 
+                document.getElementById('goal-modal-title').innerText = "Update Tracker"; 
+                document.getElementById('goal-name-input').value = goalsData[index].name; 
+                document.getElementById('goal-current-input').value = goalsData[index].current; 
+                document.getElementById('goal-target-input').value = goalsData[index].target;
+                if(checkLC) checkLC.checked = goalsData[index].isLifecycle || false;
+                if(lifeInput) lifeInput.value = goalsData[index].lifespan || '';
+                if(lifeDiv) goalsData[index].isLifecycle ? lifeDiv.classList.remove('hidden') : lifeDiv.classList.add('hidden');
+            } else { 
+                document.getElementById('goal-modal-title').innerText = "Add New Goal / Asset"; 
+                document.getElementById('goal-form').reset(); 
+                if(checkLC) checkLC.checked = false;
+                if(lifeDiv) lifeDiv.classList.add('hidden');
+            }
+            const m = document.getElementById('goal-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
+        }
+
+        window.openDebtModal = function() { closeAllModals(); const m = document.getElementById('debt-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openBillModal = function() { closeAllModals(); const m = document.getElementById('bill-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openUtilHistoryModal = function() { closeAllModals(); const now = new Date(); document.getElementById('util-hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('util-history-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+        window.openPayrollModal = function() { closeAllModals(); const now = new Date(); document.getElementById('pay-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`; const m = document.getElementById('payroll-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+
+        window.deleteTransaction = function(index) {
+            if(confirm('Delete this transaction?')) { 
+                vibrate([30, 50, 30]);
+                transactions.splice(index, 1); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+                populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard();
+            }
+        };
+
+        function formatDisplayDate(dateStr) {
+            if (!dateStr) return ''; const parts = dateStr.split('-'); if (parts.length !== 3) return dateStr;
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${months[parseInt(parts[1], 10) - 1]} ${parseInt(parts[2], 10)}, ${parts[0].slice(-2)}`;
+        }
+
+        window.toggleTheme = function() {
+            document.documentElement.classList.toggle('dark');
+            let isDark = document.documentElement.classList.contains('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            
+            syncMetaThemeColor(); 
+            
+            document.getElementById('theme-icon').innerHTML = isDark 
+                ? '<svg class="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>'
+                : '<svg class="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+            
+            let tc = isDark ? '#8E8E93' : '#6B7280'; let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; Chart.defaults.color = tc;
+            [categoryChart, comparisonChart, salaryChart, foodChart, utilChart, familyChart].forEach(c => {
+                if(c && c.options.scales) {
+                    if(c.options.scales.x) { if(c.options.scales.x.grid) c.options.scales.x.grid.color = gc; if(c.options.scales.x.ticks) c.options.scales.x.ticks.color = tc; }
+                    if(c.options.scales.y) { if(c.options.scales.y.grid) c.options.scales.y.grid.color = gc; if(c.options.scales.y.ticks) c.options.scales.y.ticks.color = tc; }
+                    c.update();
+                }
+            });
+            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); updateUtilDashboard(); updateCareerDashboard();
+        }
+
+        window.switchTab = function(tabId) {
+            closeAllModals(); 
+            const tabs = ['home', 'overall', 'food', 'family', 'bills', 'salary', 'profile'];
+            tabs.forEach(id => {
+                let tabEl = document.getElementById(`tab-${id}`);
+                if(tabEl) { tabEl.classList.add('hidden'); tabEl.classList.remove('flex'); }
+                
+                let mobBtn = document.getElementById(`nav-mob-${id}`); 
+                if(mobBtn) { mobBtn.classList.remove('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); mobBtn.classList.add('text-gray-400', 'dark:text-gray-500'); }
+                let deskBtn = document.getElementById(`nav-desk-${id}`); 
+                if(deskBtn) { deskBtn.classList.remove('bg-brand', 'text-gray-900', 'shadow-sm'); deskBtn.classList.add('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); }
+            });
+
+            let activeTab = document.getElementById(`tab-${tabId}`);
+            if(activeTab) { activeTab.classList.remove('hidden'); activeTab.classList.add('flex'); }
+            
+            let activeMob = document.getElementById(`nav-mob-${tabId}`); 
+            if(activeMob) { activeMob.classList.remove('text-gray-400', 'dark:text-gray-500'); activeMob.classList.add('text-brand', 'drop-shadow-[0_0_8px_rgba(255,214,0,0.8)]', 'scale-110'); }
+            let activeDesk = document.getElementById(`nav-desk-${tabId}`); 
+            if(activeDesk) { activeDesk.classList.remove('text-textMuted-light', 'dark:text-textMuted-dark', 'hover:bg-surface-light', 'dark:hover:bg-surface-dark'); activeDesk.classList.add('bg-brand', 'text-gray-900', 'shadow-sm'); }
+
+            const hour = new Date().getHours();
+            let greeting = "Welcome";
+            if (hour < 12) greeting = "Good morning";
+            else if (hour < 17) greeting = "Good afternoon";
+            else if (hour < 21) greeting = "Good evening";
+            else greeting = "Late night ledger";
+
+            const headerTitles = { 
+                'home': `${greeting}, ${profile.name.split(' ')[0]}`, 
+                'overall': 'Overall Analytics', 
+                'food': 'Food & Dining', 
+                'family': 'Family & Edu', 
+                'bills': 'Utility History', 
+                'salary': 'Payroll & Wealth', 
+                'profile': 'Profile Settings' 
+            };
+            const headEl = document.getElementById('header-title');
+            if(headEl) headEl.innerText = headerTitles[tabId] || 'Vault'; 
+            document.getElementById('main-scroll').scrollTo(0,0);
+        }
+
+        window.checkPayday = function() {
+            const today = new Date(); const commitmentsCard = document.getElementById('commitments-card'); const paydayBadge = document.getElementById('payday-badge');
+            if (commitmentsCard) {
+                if (today.getDate() === 27) { commitmentsCard.classList.add('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]'); commitmentsCard.classList.remove('border-gray-200', 'dark:border-white/5'); if (paydayBadge) paydayBadge.classList.remove('hidden'); } 
+                else { commitmentsCard.classList.remove('border-brand', 'shadow-[0_0_15px_rgba(255,214,0,0.3)]'); commitmentsCard.classList.add('border-gray-200', 'dark:border-white/5'); if (paydayBadge) paydayBadge.classList.add('hidden'); }
+            }
+        }
+
+        window.populateTimelines = function() {
+            let txMonths = new Set(); const now = new Date(); const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}`; txMonths.add(currentMonthStr);
+            transactions.forEach(t => { if(t.date && t.date.includes('-')) { txMonths.add(t.date.split('-').slice(0,2).join('-')); } });
+            let txArr = Array.from(txMonths).sort().reverse(); const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            if (!window.selectedMonth || !txArr.includes(window.selectedMonth)) { window.selectedMonth = txArr[0]; }
+            if (!window.selectedFamilyMonth || !txArr.includes(window.selectedFamilyMonth)) { window.selectedFamilyMonth = txArr[0]; }
+
+            let monthHTML = ''; txArr.forEach(m => {
+                const [y, mo] = m.split('-'); const display = `${mNames[parseInt(mo, 10)-1]} ${y}`; const isActive = (m === window.selectedMonth);
+                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                monthHTML += `<button onclick="vibrate(10); selectMonth('${m}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${display}</button>`;
+            });
+            ['overall-timeline', 'food-timeline'].forEach(id => { const el = document.getElementById(id); if(el) { el.innerHTML = monthHTML; } });
+
+            let famHTML = ''; txArr.forEach(m => {
+                const [y, mo] = m.split('-'); const display = `${mNames[parseInt(mo, 10)-1]} ${y}`; const isActive = (m === window.selectedFamilyMonth);
+                const activeClass = isActive ? 'bg-purple-500 text-white shadow-[0_0_10px_rgba(168,85,247,0.8)] font-bold border-purple-500' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-purple-500 transition-colors duration-300';
+                famHTML += `<button onclick="vibrate(10); selectFamilyMonth('${m}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${display}</button>`;
+            });
+            const fEl = document.getElementById('family-timeline'); if (fEl) fEl.innerHTML = famHTML;
+
+            let uYears = new Set(); uYears.add(now.getFullYear().toString());
+            utilHistory.forEach(u => { if(u.month) { uYears.add(u.month.split('-')[0]); } }); let uArr = Array.from(uYears).sort().reverse();
+            if (!window.selectedYear || !uArr.includes(window.selectedYear)) { window.selectedYear = uArr[0]; }
+            let yearHTML = ''; uArr.forEach(y => {
+                const isActive = (y === window.selectedYear);
+                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                yearHTML += `<button onclick="vibrate(10); selectYear('${y}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${y}</button>`;
+            });
+            const uEl = document.getElementById('util-timeline'); if(uEl) { uEl.innerHTML = yearHTML; }
+
+            let sYears = new Set(); sYears.add(now.getFullYear().toString());
+            payrollHistory.forEach(p => { if(p.month) { sYears.add(p.month.split('-')[0]); } }); let sArr = Array.from(sYears).sort().reverse();
+            if (!window.selectedSalaryYear || !sArr.includes(window.selectedSalaryYear)) { window.selectedSalaryYear = sArr[0]; }
+            let sHTML = ''; sArr.forEach(y => {
+                const isActive = (y === window.selectedSalaryYear);
+                const activeClass = isActive ? 'bg-brand text-gray-900 shadow-[0_0_10px_rgba(255,214,0,0.8)] font-bold border-brand' : 'bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark border-gray-200 dark:border-white/10 hover:text-brand transition-colors duration-300';
+                sHTML += `<button onclick="vibrate(10); selectSalaryYear('${y}')" class="whitespace-nowrap px-3 py-1.5 rounded-full border text-[10px] ${activeClass}">${y}</button>`;
+            });
+            const sEl = document.getElementById('salary-timeline'); if(sEl) { sEl.innerHTML = sHTML; }
+        }
+
+        window.selectMonth = function(m) { window.selectedMonth = m; populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); }
+        window.selectFamilyMonth = function(m) { window.selectedFamilyMonth = m; populateTimelines(); updateFamilyDashboard(); }
+        window.selectYear = function(y) { window.selectedYear = y; populateTimelines(); updateUtilDashboard(); }
+        window.selectSalaryYear = function(y) { window.selectedSalaryYear = y; populateTimelines(); updateCareerDashboard(); }
+
+        window.updateHomeDashboard = function() {
+            const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
+            let runningBalance = 0; let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            let streak = 0; let today = new Date(); today.setHours(0,0,0,0);
+            let txByDate = {};
+            transactions.forEach(t => {
+                if(t.type === 'expense' && !t.reimbursable) { txByDate[t.date] = true; }
+            });
+            for(let i=0; i<365; i++) {
+                let d = new Date(today); d.setDate(d.getDate() - i);
+                let dStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+                if(txByDate[dStr]) break;
+                streak++;
+            }
+            const badge = document.getElementById('streak-badge'); const count = document.getElementById('streak-count');
+            if(badge && count) {
+                if(streak > 0) { badge.classList.remove('hidden'); count.innerText = streak; } 
+                else { badge.classList.add('hidden'); }
+            }
+
+            chronoTxs.forEach(t => {
+                if (!t.date) return; const txDate = new Date(t.date); if (isNaN(txDate.getTime())) return; const amt = parseFloat(t.amount);
+                if (txDate.getFullYear() < currY || (txDate.getFullYear() === currY && txDate.getMonth() <= currM)) {
+                    if (t.type === 'income') runningBalance += amt; else if (!t.reimbursable) runningBalance -= amt;
+                }
+            });
+
+            let basePersaraan = parseFloat(cardData.kwsp.persaraan) || 89575.38;
+            let baseSejahtera = parseFloat(cardData.kwsp.sejahtera) || 5589.44;
+            let baseFleksibel = parseFloat(cardData.kwsp.fleksibel) || 336.90;
+            let totalKwsp = basePersaraan + baseSejahtera + baseFleksibel;
+
+            payrollHistory.forEach(p => { 
+                let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
+                let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
+                totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
+            });
+            
+            let currentDebit = (cardData.debit && typeof cardData.debit === 'object') ? (parseFloat(cardData.debit.balance) || 0) : 0;
+            let currentCreditUsed = (cardData.credit && typeof cardData.credit === 'object') ? (parseFloat(cardData.credit.balance) || 0) : 0;
+            
+            const totalNetWealth = (currentDebit + totalKwsp) - currentCreditUsed;
+            const tnwEl = document.getElementById('total-net-worth'); if(tnwEl) tnwEl.innerText = totalNetWealth.toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            let totalCommits = commitments.reduce((sum, c) => sum + parseFloat(c.amount || 0), 0);
+            let totalMinDebts = debts.reduce((sum, d) => sum + parseFloat(d.minPayment || 0), 0);
+            let safeToSpend = currentDebit - totalCommits - totalMinDebts; if (safeToSpend < 0) safeToSpend = 0;
+            const safeEl = document.getElementById('safe-to-spend-display'); if (safeEl) safeEl.innerText = safeToSpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+        }
+
+        window.updateOverallDashboard = function() {
+            const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
+            const searchInput = document.getElementById('search-tx'); const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : "";
+            const list = document.getElementById('overall-transaction-list'); if(list) list.innerHTML = '';
+            
+            let txCount = 0; let monthlySpend = 0; let foodSpend = 0; let utilSpend = 0; let famSpend = 0; let otherSpend = 0;
+            let currYearMonthly = new Array(12).fill(0); let lastYearMonthly = new Array(12).fill(0);
+
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
+                if(!t.date) return; const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
+                const catMatch = ((t.category||'')+" "+(t.desc||'')+" "+t.amount+" "+t.date).toLowerCase();
+                
+                if(t.type !== 'income' && !t.reimbursable) {
+                    if(txY === currY) currYearMonthly[txM] += amt; if(txY === currY - 1) lastYearMonthly[txM] += amt;
+                    if(txM === currM && txY === currY) {
+                        monthlySpend += amt; 
+                        if(catMatch.match(/food|lunch|dinner|eat|cafe/)) foodSpend += amt; 
+                        else if(catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/)) famSpend += amt;
+                        else if(catMatch.match(/util|bill|water|electric|internet|phone/)) utilSpend += amt; 
+                        else otherSpend += amt;
+                    }
+                }
+
+                let showTx = false;
+                if (searchTerm !== "") {
+                    if (catMatch.includes(searchTerm)) showTx = true;
+                } else {
+                    if (txM === currM && txY === currY) showTx = true;
+                }
+
+                if (showTx) {
+                    const c = t.type === 'income' ? 'text-green-600 dark:text-brand' : 'text-gray-900 dark:text-white'; 
+                    const sign = t.type === 'income' ? '+' : '-';
+                    const tagReimb = t.reimbursable ? `<span class="bg-blue-500/20 text-blue-500 text-[8px] px-1 py-0.5 rounded ml-1 uppercase tracking-widest border border-blue-500/30">Claimable</span>` : '';
+                    const tagShared = t.shared ? `<span class="bg-purple-500/20 text-purple-500 text-[8px] px-1 py-0.5 rounded ml-1 uppercase tracking-widest border border-purple-500/30">Split 50/50</span>` : '';
+
+                    if(list) {
+                        list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-9 h-9">${getIconWrap(t.type, catMatch)}</div><div><p class="font-bold text-xs">${t.desc}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)} • ${t.category}${tagReimb}${tagShared}</p></div></div><div class="text-right font-bold text-sm ${c} pr-2">${sign}${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</div></div><button onclick="deleteTransaction(${i})" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
+                    }
+                    txCount++;
+                }
+            });
+            
+            if(txCount === 0 && list) { list.innerHTML = `<p class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">${searchTerm ? 'No results found in lifetime history.' : 'No transactions found.'}</p>`; }
+            const msEl = document.getElementById('monthly-spend'); if(msEl) msEl.innerText = monthlySpend.toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            if(monthlySpend > 0) {
+                const pf = Math.round((foodSpend/monthlySpend)*100); const pu = Math.round((utilSpend/monthlySpend)*100); const pFam = Math.round((famSpend/monthlySpend)*100); const po = 100-pf-pu-pFam;
+                const bf = document.getElementById('bar-food'); if(bf) bf.style.width = pf+'%'; const bu = document.getElementById('bar-util'); if(bu) bu.style.width = pu+'%'; const bFam = document.getElementById('bar-family'); if(bFam) bFam.style.width = pFam+'%'; const bo = document.getElementById('bar-other'); if(bo) bo.style.width = po+'%';
+                const pfEl = document.getElementById('pct-food'); if(pfEl) pfEl.innerText = pf; const puEl = document.getElementById('pct-util'); if(puEl) puEl.innerText = pu; const pFamEl = document.getElementById('pct-family'); if(pFamEl) pFamEl.innerText = pFam; const poEl = document.getElementById('pct-other'); if(poEl) poEl.innerText = po;
+            } else {
+                ['bar-food','bar-util','bar-family','bar-other'].forEach(id => { const el = document.getElementById(id); if(el) el.style.width='0%'; });
+                ['pct-food','pct-util','pct-family','pct-other'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText='0'; });
+            }
+            if(comparisonChart) { comparisonChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; comparisonChart.data.datasets[0].data = currYearMonthly; comparisonChart.data.datasets[1].data = lastYearMonthly; comparisonChart.update(); }
+        }
+
+        window.updateFoodDashboard = function() {
+            const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1; const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
+            const list = document.getElementById('food-transaction-list'); if(list) list.innerHTML = ''; let txCount = 0; let cSum = 0; let lSum = 0; let currYearFood = new Array(12).fill(0); let lastYearFood = new Array(12).fill(0);
+
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
+                if(!t.date || t.type === 'income') return; const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
+                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase(); if(!catMatch.match(/food|lunch|dinner|eat|cafe/)) return;
+                if(txY === currY) currYearFood[txM] += amt; if(txY === currY - 1) lastYearFood[txM] += amt;
+                if(txM === currM && txY === currY) {
+                    cSum += amt; 
+                    if(list) {
+                        list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-9 h-9">${getIconWrap('expense', catMatch)}</div><div><p class="font-bold text-xs">${t.desc}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}</p></div></div><div class="text-right font-bold text-sm pr-2">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</div></div><button onclick="deleteTransaction(${i})" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
+                    }
+                    txCount++;
+                } else if(txM === lastM && txY === lastY) { lSum += amt; }
+            });
+            if(txCount === 0 && list) { list.innerHTML = `<p class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">No food logs found.</p>`; }
+            const ftEl = document.getElementById('food-total-display'); if(ftEl) ftEl.innerText = cSum.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const fiEl = document.getElementById('food-insight');
+            if(fiEl) {
+                let fHtml = `<div class="text-[9px] font-semibold uppercase tracking-wider">Prev: <span class="font-bold text-xs">MYR ${lSum.toFixed(0)}</span></div>`;
+                if (cSum > lSum && lSum > 0) { fHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`; } 
+                else if (lSum > 0) { fHtml += `<div class="text-brand font-bold text-[10px]">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`; }
+                fiEl.innerHTML = fHtml;
+            }
+            if(foodChart) { foodChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; foodChart.data.datasets[0].data = currYearFood; foodChart.data.datasets[1].data = lastYearFood; foodChart.update(); }
+        }
+
+        window.updateFamilyDashboard = function() {
+            const filter = window.selectedFamilyMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1; const lastM = currM === 0 ? 11 : currM - 1; const lastY = currM === 0 ? currY - 1 : currY;
+            const list = document.getElementById('family-transaction-list'); if(list) list.innerHTML = ''; let txCount = 0; let cSum = 0; let lSum = 0; let currYearFam = new Array(12).fill(0); let lastYearFam = new Array(12).fill(0);
+            
+            let sharedTotal = 0;
+
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
+                if(!t.date || t.type === 'income') return; const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
+                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase(); if(!catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/)) return;
+                
+                if(txY === currY) currYearFam[txM] += amt; if(txY === currY - 1) lastYearFam[txM] += amt;
+                if(txM === currM && txY === currY) {
+                    cSum += amt; 
+                    if(t.shared) sharedTotal += amt;
+
+                    if(list) {
+                        const tagShared = t.shared ? `<span class="bg-purple-500/20 text-purple-500 text-[8px] px-1 py-0.5 rounded ml-1 uppercase tracking-widest border border-purple-500/30">Split 50/50</span>` : '';
+                        list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-9 h-9">${getIconWrap('expense', catMatch)}</div><div><p class="font-bold text-xs">${t.desc}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${formatDisplayDate(t.date)}${tagShared}</p></div></div><div class="text-right font-bold text-sm pr-2">-${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</div></div><button onclick="deleteTransaction(${i})" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
+                    }
+                    txCount++;
+                } else if(txM === lastM && txY === lastY) { lSum += amt; }
+            });
+
+            const yoursEl = document.getElementById('fam-split-yours'); if(yoursEl) yoursEl.innerText = (sharedTotal / 2).toLocaleString(undefined, {minimumFractionDigits: 2});
+            const owedEl = document.getElementById('fam-split-owed'); if(owedEl) owedEl.innerText = (sharedTotal / 2).toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            if(txCount === 0 && list) { list.innerHTML = `<p class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">No family logs found.</p>`; }
+            const ftEl = document.getElementById('family-total-display'); if(ftEl) ftEl.innerText = cSum.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const fiEl = document.getElementById('family-insight');
+            if(fiEl) {
+                let fHtml = `<div class="text-[9px] font-semibold uppercase tracking-wider">Prev: <span class="font-bold text-xs">MYR ${lSum.toFixed(0)}</span></div>`;
+                if (cSum > lSum && lSum > 0) fHtml += `<div class="text-red-500 font-bold text-[10px] bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">⚠️ Over by MYR ${(cSum - lSum).toFixed(0)}</div>`;
+                else if (lSum > 0) fHtml += `<div class="text-brand font-bold text-[10px]">✨ MYR ${(lSum - cSum).toFixed(0)} remaining</div>`;
+                fiEl.innerHTML = fHtml;
+            }
+            if(familyChart) { familyChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; familyChart.data.datasets[0].data = currYearFam; familyChart.data.datasets[1].data = lastYearFam; familyChart.update(); }
+        }
+
+        window.updateUtilDashboard = function() {
+            const yr = window.selectedYear; if(!yr) return;
+            const list = document.getElementById('util-history-list'); if(list) list.innerHTML = '';
+            let histThisYear = utilHistory.filter(u => u.month && u.month.startsWith(yr)).sort((a, b) => new Date(b.month) - new Date(a.month));
+            let monthlyElec = new Array(12).fill(0); let monthlyWater = new Array(12).fill(0); let monthlyComms = new Array(12).fill(0); let monthlyOther = new Array(12).fill(0);
+            
+            histThisYear.forEach((u, i) => {
+                const amt = parseFloat(u.amount); const mIdx = parseInt(u.month.split('-')[1]) - 1;
+                if(u.type === 'Electricity') monthlyElec[mIdx] += amt; else if(u.type === 'Water') monthlyWater[mIdx] += amt; else if(u.type === 'Internet' || u.type === 'Phone') monthlyComms[mIdx] += amt; else monthlyOther[mIdx] += amt;
+                const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                
+                if(list) {
+                    list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-9 h-9">${getIconWrap('expense', '', u.type)}</div><div><p class="font-bold text-xs">${u.type}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${mNames[mIdx]} ${yr}</p></div></div><div class="text-right font-bold text-sm pr-2">MYR ${amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</div></div><button onclick="deleteUtilLog(${utilHistory.indexOf(u)})" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
+                }
+            });
+            if(histThisYear.length === 0 && list) { list.innerHTML = `<p class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">No utility data for ${yr}.</p>`; }
+
+            if(utilChart) {
+                utilChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                utilChart.data.datasets = [
+                    { label: 'Electricity', data: monthlyElec, borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' },
+                    { label: 'Water', data: monthlyWater, borderColor: '#3B82F6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#3B82F6' },
+                    { label: 'Internet/Phone', data: monthlyComms, borderColor: '#10B981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#10B981' },
+                    { label: 'Other', data: monthlyOther, borderColor: '#9CA3AF', backgroundColor: 'rgba(156, 163, 175, 0.1)', fill: true, borderWidth: 3, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#9CA3AF' }
+                ];
+                utilChart.update();
+            }
+        }
+        
+        window.deleteUtilLog = function(globalIndex) {
+            if(confirm('Delete this utility log?')) { vibrate([30, 50, 30]); utilHistory.splice(globalIndex, 1); localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); }
+        }
+
+        window.updateCareerDashboard = function() {
+            const yr = window.selectedSalaryYear; if(!yr) return;
+            const list = document.getElementById('payroll-history-list'); if(list) list.innerHTML = '';
+            
+            let grossArr = new Array(12).fill(0); let netArr = new Array(12).fill(0); let dedArr = new Array(12).fill(0); 
+            let currBase = 0; let currBonus = 0; let currTax = 0; let prevBase = 0; let prevBonus = 0; let prevTax = 0;
+            let histThisYear = payrollHistory.filter(p => p.month && p.month.startsWith(yr)).sort((a,b) => new Date(b.month) - new Date(a.month));
+
+            payrollHistory.forEach(p => {
+                let pYear = p.month.split('-')[0]; let pMonthIdx = parseInt(p.month.split('-')[1]) - 1; let baseAllow = p.basic + p.allowance;
+                if (pYear === yr) {
+                    currBase += baseAllow; currBonus += p.bonus; currTax += p.tax;
+                    grossArr[pMonthIdx] += (baseAllow + p.bonus); netArr[pMonthIdx] += p.net; dedArr[pMonthIdx] += (p.epf + p.socso + p.eis + p.tax);
+                } else if (pYear === (parseInt(yr) - 1).toString()) {
+                    prevBase += baseAllow; prevBonus += p.bonus; prevTax += p.tax;
+                }
+            });
+
+            const renderWidget = (id, curr, prev, invertColors = false) => {
+                const totalEl = document.getElementById(`widget-${id}-total`); const pctEl = document.getElementById(`widget-${id}-pct`); const valEl = document.getElementById(`widget-${id}-val`);
+                if(totalEl) totalEl.innerText = curr.toLocaleString(undefined, {minimumFractionDigits: 2});
+                if (!pctEl || !valEl) return;
+
+                if (prev === 0 && curr === 0) { pctEl.innerText = "NO DATA"; valEl.innerText = ""; pctEl.className = "text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-500/20 text-gray-500 uppercase tracking-widest"; return; } 
+                else if (prev === 0 && curr > 0) { pctEl.innerText = "NEW"; valEl.innerText = ""; pctEl.className = "text-[9px] font-bold px-1.5 py-0.5 rounded bg-brand/20 text-brand uppercase tracking-widest"; return; }
+
+                let diff = curr - prev; let pct = (diff / prev) * 100; let sign = diff >= 0 ? '+' : '';
+                pctEl.innerText = `${sign}${pct.toFixed(1)}%`; valEl.innerText = `${sign} RM ${Math.abs(diff).toLocaleString(undefined, {minimumFractionDigits: 0})}`;
+                
+                if (diff > 0) { pctEl.className = `text-[10px] font-bold px-1.5 py-0.5 rounded ${invertColors ? 'bg-red-500/20 text-red-500' : 'bg-green-500/20 text-green-500'}`; valEl.className = `text-[10px] font-semibold ${invertColors ? 'text-red-500' : 'text-green-500'}`; } 
+                else if (diff < 0) { pctEl.className = `text-[10px] font-bold px-1.5 py-0.5 rounded ${invertColors ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'}`; valEl.className = `text-[10px] font-semibold ${invertColors ? 'text-green-500' : 'text-red-500'}`; } 
+                else { pctEl.className = "text-[10px] font-bold px-1.5 py-0.5 rounded bg-gray-500/20 text-gray-500"; valEl.className = "text-[10px] font-semibold text-gray-500"; }
+            };
+
+            renderWidget('base', currBase, prevBase); renderWidget('bonus', currBonus, prevBonus); renderWidget('tax', currTax, prevTax, true);
+            
+            const iconWrap = `<div class="w-9 h-9 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>`;
+
+            histThisYear.forEach((c) => {
+                const totalGross = c.basic + c.allowance + c.bonus; const totalDeds = c.epf + c.socso + c.eis + c.tax;
+                if(list) {
+                    list.innerHTML += `<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-xl bg-surface-light dark:bg-[#151515] group border border-transparent dark:border-white/5"><div class="min-w-full shrink-0 snap-start p-3 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-9 h-9">${iconWrap}</div><div><p class="font-bold text-xs">Net: MYR ${c.net.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[9px] font-medium text-textMuted-light dark:text-textMuted-dark mt-0.5">${c.month} • Gross: ${totalGross.toLocaleString()}</p></div></div><div class="text-right pr-2"><p class="font-bold text-[9px] text-red-500 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded border border-red-100 dark:border-red-900/50 inline-block">-MYR ${totalDeds.toLocaleString(undefined, {minimumFractionDigits: 2})}</p><p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark mt-1 uppercase tracking-wider">EPF: ${c.epf} | Tax: ${c.tax}</p></div></div><button onclick="deletePayslip('${c.month}')" class="min-w-[70px] shrink-0 snap-end bg-red-500 text-white flex flex-col items-center justify-center gap-1 shadow-inner"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg><span class="text-[8px] font-bold uppercase tracking-wider">Delete</span></button></div>`;
+                }
+            });
+            if(histThisYear.length === 0 && list) { list.innerHTML = `<p class="py-5 text-center text-textMuted-light dark:text-textMuted-dark text-[10px] font-semibold uppercase tracking-wider">No payslips logged for ${yr}.</p>`; }
+
+            if(salaryChart) {
+                salaryChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                salaryChart.data.datasets = [
+                    { label: 'Gross Income', data: grossArr, borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.15)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#FFD600' },
+                    { label: 'Net Pay', data: netArr, borderColor: '#10B981', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 3, pointBackgroundColor: '#10B981', fill: false },
+                    { label: 'Deductions', data: dedArr, borderColor: '#EF4444', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 3, pointBackgroundColor: '#EF4444', fill: false }
+                ];
+                salaryChart.update();
+            }
+        }
+
+        window.deletePayslip = function(monthStr) {
+            if(confirm('Delete this payslip?')) { 
+                vibrate([30, 50, 30]);
+                payrollHistory = payrollHistory.filter(p => p.month !== monthStr);
+                localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
+                populateTimelines(); updateCareerDashboard(); updateHomeDashboard(); renderCards(); 
+            }
+        }
+
+        // Card Rendering Engine
         window.renderCards = function() { 
             const dEl = document.getElementById('debit-display'); 
             const cEl = document.getElementById('credit-display'); 
@@ -1458,6 +1905,14 @@
                 const usedPercentage = Math.round((currentBalance / maxLimit) * 100); 
                 cpEl.innerText = usedPercentage;
             }
+        }
+
+        window.applyMacro = function(desc, category, amount) {
+            vibrate(15);
+            document.getElementById('tx-desc').value = desc;
+            document.getElementById('tx-category').value = category;
+            if(amount) document.getElementById('tx-amount').value = amount;
+            document.getElementById('tx-type').value = 'expense';
         }
 
         window.saveTransaction = function(e) { 
@@ -1613,6 +2068,46 @@
         window.saveUtilHistory = function(e) { 
             e.preventDefault(); utilHistory.push({ month: document.getElementById('util-hist-month').value, type: document.getElementById('util-hist-type').value, amount: parseFloat(document.getElementById('util-hist-amount').value) }); 
             localStorage.setItem('vault_util_hist', JSON.stringify(utilHistory)); populateTimelines(); updateUtilDashboard(); closeAllModals(); 
+        }
+
+        window.autoCalcPayroll = function() {
+            let basic = parseFloat(document.getElementById('pay-basic').value) || 0; let allow = parseFloat(document.getElementById('pay-allow').value) || 0; let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
+            let epfBase = basic + allow + bonus; let socsoEisBase = basic + allow; 
+            let epf = 0; let empEpf = 0; let socso = 0; let eis = 0;
+
+            if (epfBase > 0) {
+                if (epfBase <= 5000) { epf = Math.ceil((Math.ceil(epfBase / 20) * 20) * 0.11); empEpf = Math.ceil((Math.ceil(epfBase / 20) * 20) * 0.13); } 
+                else if (epfBase <= 20000) { epf = Math.ceil((Math.ceil(epfBase / 100) * 100) * 0.11); empEpf = Math.ceil((Math.ceil(epfBase / 100) * 100) * 0.12); } 
+                else { epf = Math.ceil(epfBase * 0.11); empEpf = Math.ceil(epfBase * 0.12); }
+            }
+            if (socsoEisBase > 0) { let socsoGross = Math.min(socsoEisBase, 6000); let socsoBase = Math.ceil(socsoGross / 100) * 100 - 50; socso = socsoBase * 0.005; eis = socsoBase * 0.002; }
+            
+            document.getElementById('pay-epf').value = epf > 0 ? epf : ''; document.getElementById('pay-socso').value = socso > 0 ? socso.toFixed(2) : ''; document.getElementById('pay-eis').value = eis > 0 ? eis.toFixed(2) : '';
+            document.getElementById('pay-epf').setAttribute('data-employer', empEpf); calcNetPay();
+        }
+
+        window.calcNetPay = function() {
+            let basic = parseFloat(document.getElementById('pay-basic').value) || 0; let allow = parseFloat(document.getElementById('pay-allow').value) || 0; let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
+            let epf = parseFloat(document.getElementById('pay-epf').value) || 0; let socso = parseFloat(document.getElementById('pay-socso').value) || 0; let eis = parseFloat(document.getElementById('pay-eis').value) || 0; let tax = parseFloat(document.getElementById('pay-tax').value) || 0;
+            let gross = basic + allow + bonus; let deds = epf + socso + eis + tax;
+            document.getElementById('pay-net-display').innerText = (gross - deds).toFixed(2);
+        }
+
+        window.savePayrollRecord = function(e) { 
+            e.preventDefault(); 
+            const month = document.getElementById('pay-month').value; const basic = parseFloat(document.getElementById('pay-basic').value) || 0; const allow = parseFloat(document.getElementById('pay-allow').value) || 0; const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
+            const epf = parseFloat(document.getElementById('pay-epf').value) || 0; const empEpf = parseFloat(document.getElementById('pay-epf').getAttribute('data-employer')) || 0; const socso = parseFloat(document.getElementById('pay-socso').value) || 0; const eis = parseFloat(document.getElementById('pay-eis').value) || 0; const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
+            const net = (basic + allow + bonus) - (epf + socso + eis + tax);
+
+            payrollHistory = payrollHistory.filter(p => p.month !== month); 
+            payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
+            
+            cardData.debit.balance += net; localStorage.setItem('vault_cards', JSON.stringify(cardData));
+            transactions = transactions.filter(t => !(t.date === month + '-01' && t.category === 'Payroll'));
+            transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
+            localStorage.setItem('vault_transactions', JSON.stringify(transactions));
+
+            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closeAllModals(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
         }
 
         window.renderProfile = function() {
