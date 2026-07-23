@@ -1327,6 +1327,26 @@
             const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
         
+        // EPF Accumulator Helper
+        function getAccumulatedPayrollEpf() {
+            let totalEpf = 0;
+            if (Array.isArray(payrollHistory)) {
+                payrollHistory.forEach(p => { 
+                    let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
+                    let empEpf = 0;
+                    if (p.empEpf) { 
+                        empEpf = p.empEpf; 
+                    } else { 
+                        if(gross > 0 && gross <= 5000) { empEpf = Math.ceil((Math.ceil(gross / 20) * 20) * 0.13); } 
+                        else if(gross > 5000) { empEpf = Math.ceil((Math.ceil(gross / 100) * 100) * 0.12); } 
+                    }
+                    totalEpf += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
+                });
+            }
+            return totalEpf;
+        }
+
+        // Fail-Safe Open Card Modal
         window.openCardModal = function(type) { 
             closeAllModals();
             currentEditCard = type; 
@@ -1347,7 +1367,11 @@
             document.getElementById('edit-card-name').value = data.name || ''; 
             document.getElementById('edit-card-last4').value = data.last4 || ''; 
             
-            let rawBal = data.balance !== undefined && data.balance !== null ? data.balance : 0;
+            // For KWSP, show the total current balance (Base + Payroll EPF) in the modal input
+            let rawBal = data.balance !== undefined && data.balance !== null ? parseFloat(data.balance) || 0 : 0;
+            if (type === 'kwsp') {
+                rawBal += getAccumulatedPayrollEpf();
+            }
             document.getElementById('edit-card-balance').value = rawBal;
             
             const limitContainer = document.getElementById('edit-card-limit-container');
@@ -1364,6 +1388,7 @@
             if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
 
+        // Fail-Safe Save Card Edit
         window.saveCardEdit = function(e) { 
             e.preventDefault(); 
             if (!currentEditCard) return;
@@ -1372,13 +1397,21 @@
                 cardData[currentEditCard] = {};
             }
             
-            // Strip commas before parsing
+            // Strip commas before parsing numeric input
             let cleanBalStr = String(document.getElementById('edit-card-balance').value).replace(/,/g, '').trim();
-            let parsedBal = parseFloat(cleanBalStr);
+            let userTargetBal = parseFloat(cleanBalStr);
+            if (isNaN(userTargetBal)) userTargetBal = 0;
+            
+            // Calculate base balance offset for KWSP
+            if (currentEditCard === 'kwsp') {
+                let accumulatedEpf = getAccumulatedPayrollEpf();
+                cardData.kwsp.balance = userTargetBal - accumulatedEpf;
+            } else {
+                cardData[currentEditCard].balance = userTargetBal;
+            }
             
             cardData[currentEditCard].name = document.getElementById('edit-card-name').value; 
             cardData[currentEditCard].last4 = document.getElementById('edit-card-last4').value; 
-            cardData[currentEditCard].balance = isNaN(parsedBal) ? 0 : parsedBal;
             
             if (currentEditCard === 'credit') { 
                 let cleanLimitStr = String(document.getElementById('edit-card-limit').value).replace(/,/g, '').trim();
