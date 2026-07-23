@@ -1250,6 +1250,7 @@
                 kwsp: { 
                     name: "Retirement Fund", 
                     last4: "1234",
+                    asOf: "2026-07",
                     persaraan: 89575.38,
                     sejahtera: 5589.44,
                     fleksibel: 336.90
@@ -1562,8 +1563,8 @@
         window.selectFamilyMonth = function(m) { window.selectedFamilyMonth = m; populateTimelines(); updateFamilyDashboard(); }
         window.selectYear = function(y) { window.selectedYear = y; populateTimelines(); updateUtilDashboard(); }
         window.selectSalaryYear = function(y) { window.selectedSalaryYear = y; populateTimelines(); updateCareerDashboard(); }
-
-        window.updateHomeDashboard = function() {
+			
+		window.updateHomeDashboard = function() {
             const filter = window.selectedMonth; if(!filter) return; const [yStr, mStr] = filter.split('-'); const currY = parseInt(yStr, 10); const currM = parseInt(mStr, 10) - 1;
             let runningBalance = 0; let chronoTxs = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
             
@@ -1594,12 +1595,16 @@
             let basePersaraan = parseFloat(cardData.kwsp.persaraan) || 89575.38;
             let baseSejahtera = parseFloat(cardData.kwsp.sejahtera) || 5589.44;
             let baseFleksibel = parseFloat(cardData.kwsp.fleksibel) || 336.90;
+            let baseAsOf = cardData.kwsp.asOf || '2026-07';
             let totalKwsp = basePersaraan + baseSejahtera + baseFleksibel;
 
+            // Apply baseAsOf cutoff to match renderCards() calculation
             payrollHistory.forEach(p => { 
-                let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
-                let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
-                totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
+                if (p.month && p.month > baseAsOf) {
+                    let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
+                    let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
+                    totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
+                }
             });
             
             let currentDebit = (cardData.debit && typeof cardData.debit === 'object') ? (parseFloat(cardData.debit.balance) || 0) : 0;
@@ -2123,11 +2128,17 @@
             document.getElementById('pay-net-display').innerText = (gross - deds).toFixed(2);
         }
 
-        window.savePayrollRecord = function(e) { 
+		window.savePayrollRecord = function(e) { 
             e.preventDefault(); 
             const month = document.getElementById('pay-month').value; const basic = parseFloat(document.getElementById('pay-basic').value) || 0; const allow = parseFloat(document.getElementById('pay-allow').value) || 0; const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             const epf = parseFloat(document.getElementById('pay-epf').value) || 0; const empEpf = parseFloat(document.getElementById('pay-epf').getAttribute('data-employer')) || 0; const socso = parseFloat(document.getElementById('pay-socso').value) || 0; const eis = parseFloat(document.getElementById('pay-eis').value) || 0; const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             const net = (basic + allow + bonus) - (epf + socso + eis + tax);
+
+            // Deduct old net pay if modifying an existing month
+            let existingRecord = payrollHistory.find(p => p.month === month);
+            if (existingRecord) {
+                cardData.debit.balance -= (existingRecord.net || 0);
+            }
 
             payrollHistory = payrollHistory.filter(p => p.month !== month); 
             payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
@@ -2136,6 +2147,31 @@
             transactions = transactions.filter(t => !(t.date === month + '-01' && t.category === 'Payroll'));
             transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
+
+            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closeAllModals(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
+        }
+
+        window.deletePayslip = function(monthStr) {
+            if(confirm('Delete this payslip?')) { 
+                vibrate([30, 50, 30]);
+                
+                // Subtract net pay from debit balance and clean up auto-sync transaction
+                let existingRecord = payrollHistory.find(p => p.month === monthStr);
+                if (existingRecord) {
+                    cardData.debit.balance -= (existingRecord.net || 0);
+                    if (cardData.debit.balance < 0) cardData.debit.balance = 0;
+                    localStorage.setItem('vault_cards', JSON.stringify(cardData));
+                }
+
+                transactions = transactions.filter(t => !(t.date === monthStr + '-01' && t.category === 'Payroll'));
+                localStorage.setItem('vault_transactions', JSON.stringify(transactions));
+
+                payrollHistory = payrollHistory.filter(p => p.month !== monthStr);
+                localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
+                
+                populateTimelines(); updateCareerDashboard(); updateHomeDashboard(); renderCards(); 
+            }
+        }
 
             updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closeAllModals(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
         }
