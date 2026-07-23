@@ -1,0 +1,9 @@
+{
+  "vault_profile": "{\"name\":\"Sahafiz\",\"role\":\"Field Service Engineer\",\"industry\":\"Semiconductor\",\"address\":\"Malaysia\",\"email\":\"\",\"phone\":\"\",\"emergency\":\"\",\"tenure\":\"\",\"skills\":\"Hardware Diagnostic, Maintenance\",\"avatar\":\"\",\"cover\":\"\"}",
+  "vault_commitments": "[{\"name\":\"Car Loan (JND7218)\",\"type\":\"Hire Purchase\",\"amount\":500}]",
+  "vault_debts": "[{\"name\":\"Car Loan (JND7218)\",\"balance\":17244,\"minPayment\":500}]",
+  "vault_cards": "{\"debit\":{\"balance\":2500,\"name\":\"Debit Card\",\"last4\":\"1234\"},\"credit\":{\"balance\":0,\"name\":\"Ikhwan CC\",\"last4\":\"8888\",\"limit\":10000},\"kwsp\":{\"name\":\"Retirement Fund\",\"last4\":\"1234\",\"asOf\":\"2026-07\",\"persaraan\":89575.38,\"sejahtera\":5589.44,\"fleksibel\":336.90}}",
+  "vault_goals": "[{\"name\":\"PC Gaming / Hardware Upgrade\",\"current\":0,\"target\":3000,\"isLifecycle\":false}]",
+  "vault_payroll": "[{\"month\":\"2026-07\",\"basic\":5158,\"allowance\":0,\"bonus\":0,\"epf\":568,\"empEpf\":619,\"socso\":25.75,\"eis\":10.30,\"tax\":0,\"net\":4553.95}]",
+  "vault_transactions": "[{\"date\":\"2026-07-01\",\"desc\":\"Net Salary (Auto-Sync)\",\"type\":\"income\",\"category\":\"Payroll\",\"amount\":4553.95,\"reimbursable\":false,\"shared\":false},{\"date\":\"2026-07-05\",\"desc\":\"Playschool Fee\",\"type\":\"expense\",\"category\":\"Family\",\"amount\":350,\"reimbursable\":false,\"shared\":false}]"
+}
