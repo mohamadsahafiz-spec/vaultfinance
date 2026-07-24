@@ -626,7 +626,30 @@
                     <button type="submit" class="w-full bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 px-4 py-2.5 rounded-xl font-bold text-sm shadow-[0_0_10px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] mt-1 transition-all duration-300">Save Profile</button>
                 </form>
             </div>
-
+			<!-- GITHUB GIST CLOUD SYNC -->
+            <div class="bg-panel-light dark:bg-panel-dark border border-brand/30 p-5 rounded-2xl shadow-sm mt-4 relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-16 h-16 bg-brand/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex justify-between items-center mb-3">
+                    <p class="text-[9px] font-semibold text-brand uppercase tracking-wider">GitHub Cloud Auto-Sync</p>
+                    <span id="sync-status-badge" class="text-[8px] font-bold px-2 py-0.5 rounded bg-gray-500/20 text-gray-400 uppercase tracking-widest">Offline</span>
+                </div>
+                
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wider">Gist ID</label>
+                        <input type="text" id="sync-gist-id" placeholder="e.g. a1b2c3d4e5f67890..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-mono text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wider">GitHub Personal Token (PAT)</label>
+                        <input type="password" id="sync-token" placeholder="ghp_..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-mono text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                    </div>
+                    
+                    <div class="flex gap-2 pt-1">
+                        <button onclick="vibrate(30); saveSyncCredentials()" class="flex-1 bg-brand text-gray-900 px-3 py-2 rounded-xl font-bold text-xs shadow-sm hover:scale-[1.02] transition-transform">Save Credentials</button>
+                        <button onclick="vibrate(30); syncFromCloud()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-brand text-brand hover:bg-brand hover:text-gray-900 px-3 py-2 rounded-xl font-bold text-xs transition">Force Sync</button>
+                    </div>
+                </div>
+            </div>
             <!-- DATA MANAGEMENT -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm mt-4">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
@@ -2222,7 +2245,130 @@
         };
         
         window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
+		// ==========================================
+        // GITHUB GIST CLOUD SYNC ENGINE
+        // ==========================================
+        window.saveSyncCredentials = function() {
+            const gistId = document.getElementById('sync-gist-id').value.trim();
+            const token = document.getElementById('sync-token').value.trim();
 
+            if (!gistId || !token) {
+                alert("Please enter both your Gist ID and Personal Access Token.");
+                return;
+            }
+
+            localStorage.setItem('vault_gist_id', gistId);
+            localStorage.setItem('vault_gist_token', token);
+            alert("Credentials saved! Attemping cloud sync...");
+            syncFromCloud();
+        };
+
+        window.renderSyncStatus = function(status, colorClass) {
+            const badge = document.getElementById('sync-status-badge');
+            if (badge) {
+                badge.innerText = status;
+                badge.className = `text-[8px] font-bold px-2 py-0.5 rounded uppercase tracking-widest ${colorClass}`;
+            }
+        };
+
+        // Pull latest data from GitHub Gist on startup
+        window.syncFromCloud = async function() {
+            const gistId = localStorage.getItem('vault_gist_id');
+            const token = localStorage.getItem('vault_gist_token');
+
+            if (!gistId || !token) {
+                renderSyncStatus("Offline (No Keys)", "bg-gray-500/20 text-gray-400");
+                return;
+            }
+
+            renderSyncStatus("Syncing...", "bg-yellow-500/20 text-yellow-500 animate-pulse");
+
+            try {
+                const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Cloud connection failed');
+
+                const data = await response.json();
+                const jsonContent = JSON.parse(data.files['vault_data.json'].content);
+
+                // Update LocalStorage with Cloud Data
+                Object.keys(jsonContent).forEach(key => {
+                    if (jsonContent[key]) localStorage.setItem(key, typeof jsonContent[key] === 'string' ? jsonContent[key] : JSON.stringify(jsonContent[key]));
+                });
+
+                // Reload local in-memory variables
+                transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
+                debts = JSON.parse(localStorage.getItem('vault_debts')) || [];
+                bills = JSON.parse(localStorage.getItem('vault_bills')) || [];
+                utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
+                payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
+                commitments = JSON.parse(localStorage.getItem('vault_commitments')) || [];
+                goalsData = JSON.parse(localStorage.getItem('vault_goals')) || [];
+                profile = JSON.parse(localStorage.getItem('vault_profile')) || profile;
+                cardData = JSON.parse(localStorage.getItem('vault_cards')) || cardData;
+
+                // Re-render UI
+                renderCards(); renderBills(); renderDebts(); renderGoals(); renderCommitments(); renderProfile();
+                populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); updateUtilDashboard(); updateCareerDashboard();
+
+                renderSyncStatus("Synced", "bg-green-500/20 text-green-500");
+            } catch (err) {
+                console.error("Cloud Sync Error:", err);
+                renderSyncStatus("Sync Error", "bg-red-500/20 text-red-500");
+            }
+        };
+
+        // Push local changes to GitHub Gist
+        window.pushToCloud = async function() {
+            const gistId = localStorage.getItem('vault_gist_id');
+            const token = localStorage.getItem('vault_gist_token');
+
+            if (!gistId || !token) return;
+
+            renderSyncStatus("Saving...", "bg-blue-500/20 text-blue-500 animate-pulse");
+
+            const payload = {
+                vault_transactions: localStorage.getItem('vault_transactions'),
+                vault_goals: localStorage.getItem('vault_goals'),
+                vault_debts: localStorage.getItem('vault_debts'),
+                vault_cards: localStorage.getItem('vault_cards'),
+                vault_bills: localStorage.getItem('vault_bills'),
+                vault_profile: localStorage.getItem('vault_profile'),
+                vault_util_hist: localStorage.getItem('vault_util_hist'),
+                vault_payroll: localStorage.getItem('vault_payroll'),
+                vault_commitments: localStorage.getItem('vault_commitments')
+            };
+
+            try {
+                const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        files: {
+                            'vault_data.json': { content: JSON.stringify(payload, null, 2) }
+                        }
+                    })
+                });
+
+                if (!response.ok) throw new Error('Cloud push failed');
+
+                renderSyncStatus("Synced", "bg-green-500/20 text-green-500");
+            } catch (err) {
+                console.error("Cloud Push Error:", err);
+                renderSyncStatus("Sync Error", "bg-red-500/20 text-red-500");
+            }
+        };
+		// Fill saved keys into input boxes if they exist
+            if (localStorage.getItem('vault_gist_id')) document.getElementById('sync-gist-id').value = localStorage.getItem('vault_gist_id');
+            if (localStorage.getItem('vault_gist_token')) document.getElementById('sync-token').value = localStorage.getItem('vault_gist_token');
+
+            // Trigger cloud pull on boot
+            syncFromCloud();
         window.onload = function() {
             checkPayday();
             populateTimelines();
