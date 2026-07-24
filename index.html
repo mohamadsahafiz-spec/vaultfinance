@@ -2130,14 +2130,118 @@
             document.getElementById('pay-epf').setAttribute('data-employer', empEpf); calcNetPay();
         }
 
-        window.calcNetPay = function() {
+window.calcNetPay = function() {
             let basic = parseFloat(document.getElementById('pay-basic').value) || 0; let allow = parseFloat(document.getElementById('pay-allow').value) || 0; let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             let epf = parseFloat(document.getElementById('pay-epf').value) || 0; let socso = parseFloat(document.getElementById('pay-socso').value) || 0; let eis = parseFloat(document.getElementById('pay-eis').value) || 0; let tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             let gross = basic + allow + bonus; let deds = epf + socso + eis + tax;
             document.getElementById('pay-net-display').innerText = (gross - deds).toFixed(2);
         }
 
-        window.onload = function() {
+        window.savePayrollRecord = function(e) { 
+            e.preventDefault(); 
+            const month = document.getElementById('pay-month').value; const basic = parseFloat(document.getElementById('pay-basic').value) || 0; const allow = parseFloat(document.getElementById('pay-allow').value) || 0; const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
+            const epf = parseFloat(document.getElementById('pay-epf').value) || 0; const empEpf = parseFloat(document.getElementById('pay-epf').getAttribute('data-employer')) || 0; const socso = parseFloat(document.getElementById('pay-socso').value) || 0; const eis = parseFloat(document.getElementById('pay-eis').value) || 0; const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
+            const net = (basic + allow + bonus) - (epf + socso + eis + tax);
+
+            // Deduct old net pay if modifying an existing month
+            let existingRecord = payrollHistory.find(p => p.month === month);
+            if (existingRecord) {
+                cardData.debit.balance -= (existingRecord.net || 0);
+            }
+
+            payrollHistory = payrollHistory.filter(p => p.month !== month); 
+            payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
+            
+            cardData.debit.balance += net; localStorage.setItem('vault_cards', JSON.stringify(cardData));
+            transactions = transactions.filter(t => !(t.date === month + '-01' && t.category === 'Payroll'));
+            transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
+            localStorage.setItem('vault_transactions', JSON.stringify(transactions));
+
+            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closeAllModals(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
+        }
+
+        window.renderProfile = function() {
+            document.getElementById('prof-name').value = profile.name; document.getElementById('prof-role').value = profile.role; document.getElementById('prof-industry').value = profile.industry; document.getElementById('prof-address').value = profile.address; document.getElementById('prof-email').value = profile.email || ""; document.getElementById('prof-phone').value = profile.phone || ""; document.getElementById('prof-emergency').value = profile.emergency || ""; document.getElementById('prof-tenure').value = profile.tenure; document.getElementById('prof-skills').value = profile.skills || "";
+            document.getElementById('li-name').innerText = profile.name; document.getElementById('li-role').innerText = `${profile.role} • ${profile.industry}`; document.getElementById('li-location').innerText = profile.address; document.getElementById('li-email').innerText = profile.email || "email@example.com"; document.getElementById('li-phone').innerText = profile.phone || "+60 00-000 0000"; document.getElementById('li-emergency').innerText = profile.emergency || "Emergency Ctc";
+            
+            const skillsDiv = document.getElementById('li-skills'); skillsDiv.innerHTML = '';
+            if(profile.skills) { profile.skills.split(',').forEach(s => { if(s.trim()) skillsDiv.innerHTML += `<span class="bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark text-[9px] font-bold px-2.5 py-1 rounded-full border border-gray-200 dark:border-white/10 shadow-sm">${s.trim()}</span>`; }); }
+
+            if(profile.avatar) { 
+                document.getElementById('profile-avatar-img').src = profile.avatar; document.getElementById('profile-avatar-img').classList.remove('hidden'); document.getElementById('profile-avatar-initial').classList.add('hidden'); 
+                document.getElementById('header-avatar-img').src = profile.avatar; document.getElementById('header-avatar-img').classList.remove('hidden'); document.getElementById('header-avatar-initial').classList.add('hidden');
+            } else { 
+                document.getElementById('profile-avatar-initial').innerText = profile.name.charAt(0); 
+                document.getElementById('header-avatar-initial').innerText = profile.name.charAt(0);
+            }
+            if(profile.cover) { document.getElementById('profile-cover-img').src = profile.cover; document.getElementById('profile-cover-img').classList.remove('hidden'); }
+        }
+        
+        window.saveProfile = function(e) { 
+            e.preventDefault(); 
+            profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.email = document.getElementById('prof-email').value; profile.phone = document.getElementById('prof-phone').value; profile.emergency = document.getElementById('prof-emergency').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
+            localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
+        }
+        
+        window.handleImageUpload = function(e, type) {
+            const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
+            reader.onload = function(event) { if(type === 'avatar') { profile.avatar = event.target.result; } else { profile.cover = event.target.result; } localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); };
+            reader.readAsDataURL(file);
+        }
+
+        window.exportBackup = function() { 
+            const backupData = { vault_transactions: localStorage.getItem('vault_transactions'), vault_goals: localStorage.getItem('vault_goals'), vault_debts: localStorage.getItem('vault_debts'), vault_cards: localStorage.getItem('vault_cards'), vault_bills: localStorage.getItem('vault_bills'), vault_profile: localStorage.getItem('vault_profile'), vault_util_hist: localStorage.getItem('vault_util_hist'), vault_payroll: localStorage.getItem('vault_payroll'), vault_commitments: localStorage.getItem('vault_commitments') }; 
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "vault_backup.json"); document.body.appendChild(a); a.click(); a.remove(); 
+            
+            let csvContent = "data:text/csv;charset=utf-8,Date,Month,Year,Description,Category,Type,Amount,Reimbursable,Shared\n";
+            transactions.forEach(t => {
+                let m = "N/A", y = "N/A";
+                if(t.date) { let p = t.date.split('-'); if(p.length===3) { y=p[0]; m=`${p[0]}-${p[1]}`; } }
+                let cleanDesc = (t.desc || "").replace(/,/g, ''); let cleanCat = (t.category || "").replace(/,/g, '');
+                let rFlag = t.reimbursable ? "Yes" : "No"; let sFlag = t.shared ? "Yes" : "No";
+                csvContent += `${t.date},${m},${y},${cleanDesc},${cleanCat},${t.type},${t.amount},${rFlag},${sFlag}\n`;
+            });
+            const c = document.createElement('a'); c.setAttribute("href", encodeURI(csvContent)); c.setAttribute("download", "vault_pivot_data.csv"); document.body.appendChild(c); c.click(); c.remove();
+        }
+
+        window.handleJsonImport = function(e) { 
+            const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                try { 
+                    const data = JSON.parse(event.target.result); 
+                    Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); 
+                    alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); 
+                } catch(err) { alert("Invalid backup file."); } 
+            }; 
+            reader.readAsText(file); 
+        };
+
+        window.handleCsvImport = function(e) { 
+            const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
+                if (rows.length <= 1) return alert("File is empty or invalid. Make sure it has headers."); 
+                const headers = rows[0].split(',').map(h => h.trim().toLowerCase()); const monthMap = { 'jan':'01', 'feb':'02', 'mar':'03', 'apr':'04', 'may':'05', 'jun':'06', 'jul':'07', 'aug':'08', 'sep':'09', 'oct':'10', 'nov':'11', 'dec':'12' }; 
+                const importedData = rows.slice(1).map(row => { 
+                    const values = row.split(','); let obj = {}; 
+                    headers.forEach((h, i) => { 
+                        let val = values[i] ? values[i].trim() : ''; if (h === 'type') val = val.toLowerCase(); 
+                        if (h === 'date') { 
+                            if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
+                            else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
+                        } 
+                        obj[h] = val; 
+                    }); 
+                    if(obj.amount) obj.amount = parseFloat(obj.amount.toString().replace(/[^0-9.-]+/g,"")); return obj; 
+                }); 
+                const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
+                transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
+                transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); e.target.value = ''; 
+            }; 
+            reader.readAsText(file); 
+        };
+        
+        window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
             checkPayday();
             populateTimelines();
             
