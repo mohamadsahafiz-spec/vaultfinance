@@ -1221,52 +1221,39 @@
             return `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20 shrink-0">${SVG_OTHER}</div>`;
         }
 
-		// =========================================================
-        // SAFE & ROBUST DATA INITIALIZATION ENGINE
-        // =========================================================
-        const safeParse = (key, fallback) => {
-            try { 
-                let data = localStorage.getItem(key);
-                return data ? JSON.parse(data) : fallback; 
-            } catch(e) { 
-                console.error(`Vault: Corrupted data caught in ${key}. Resetting to safe defaults.`);
-                return fallback; 
-            }
-        };
+        // Data Models
+        let transactions = JSON.parse(localStorage.getItem('vault_transactions')) || [];
+        let debts = JSON.parse(localStorage.getItem('vault_debts')) || [{ name: "Credit Card", balance: 3250, minPayment: 150 }];
+        let bills = JSON.parse(localStorage.getItem('vault_bills')) || [ { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi", amount: 129, dueDate: "2026-07-28" } ];
+        let utilHistory = JSON.parse(localStorage.getItem('vault_util_hist')) || [];
+        let payrollHistory = JSON.parse(localStorage.getItem('vault_payroll')) || [];
+        let commitments = JSON.parse(localStorage.getItem('vault_commitments')) || [ { name: "Car Loan (JND7218)", type: "Hire Purchase", amount: 500 } ];
 
-        let transactions = safeParse('vault_transactions', []);
-        if (!Array.isArray(transactions)) transactions = [];
-
-        let debts = safeParse('vault_debts', [{ name: "Credit Card", balance: 3250, minPayment: 150 }]);
-        if (!Array.isArray(debts)) debts = [];
-
-        let bills = safeParse('vault_bills', [ { name: "TNB Electricity", amount: 120, dueDate: "2026-07-25" }, { name: "Unifi", amount: 129, dueDate: "2026-07-28" } ]);
-        if (!Array.isArray(bills)) bills = [];
-
-        let utilHistory = safeParse('vault_util_hist', []);
-        if (!Array.isArray(utilHistory)) utilHistory = [];
-
-        let payrollHistory = safeParse('vault_payroll', []);
-        if (!Array.isArray(payrollHistory)) payrollHistory = [];
-
-        let commitments = safeParse('vault_commitments', [ { name: "Car Loan (JND7218)", type: "Hire Purchase", amount: 500 } ]);
-        if (!Array.isArray(commitments)) commitments = [];
-
-        let goalsData = safeParse('vault_goals', [{name: "Emergency Fund", current: 1250, target: 10000, isLifecycle: false}]);
-        if (!Array.isArray(goalsData) || goalsData.length === 0) goalsData = [{name: "Emergency Fund", current: 1250, target: 10000, isLifecycle: false}];
-
-        let profile = safeParse('vault_profile', {});
-        if (!profile || typeof profile !== 'object' || !profile.name) {
-            profile = { name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: "" };
-            localStorage.setItem('vault_profile', JSON.stringify(profile));
+        let goalsData = JSON.parse(localStorage.getItem('vault_goals'));
+        if (!goalsData) {
+            goalsData = [{name: "Emergency Fund", current: 1250, target: 10000, isLifecycle: false}];
+            localStorage.setItem('vault_goals', JSON.stringify(goalsData));
         }
 
-        let cardData = safeParse('vault_cards', {});
+        let profile = JSON.parse(localStorage.getItem('vault_profile')) || {
+            name: "Sahafiz", role: "Field Service Engineer", industry: "Semiconductor", address: "Malaysia", email: "sahafiz@example.com", phone: "+60 12-345 6789", emergency: "Wife - 0123456789", tenure: "7", skills: "Hardware Diagnostic, Maintenance", avatar: "", cover: ""
+        };
+
+        // Dynamic KWSP 3-Account Card Initialization
+        let cardData = JSON.parse(localStorage.getItem('vault_cards')) || {};
         if (!cardData.kwsp || typeof cardData.kwsp !== 'object' || cardData.kwsp.persaraan === undefined) {
+            let oldDebit = cardData.debit;
+            let oldCredit = cardData.credit;
             cardData = {
-                debit: cardData.debit || { balance: 2500, name: "Debit Card", last4: "1234" },
-                credit: cardData.credit || { balance: 0, name: "Ikhwan CC", last4: "8888", limit: 10000 },
-                kwsp: { name: "Retirement Fund", last4: "1234", asOf: "2026-07", persaraan: 89575.38, sejahtera: 5589.44, fleksibel: 336.90 }
+                debit: (oldDebit && typeof oldDebit === 'object') ? oldDebit : { balance: 2500, name: "Debit Card", last4: "1234" },
+                credit: (oldCredit && typeof oldCredit === 'object') ? oldCredit : { balance: 5000, name: "Ikhwan CC", last4: "8888", limit: 10000 },
+                kwsp: { 
+                    name: "Retirement Fund", 
+                    last4: "1234",
+                    persaraan: 89575.38,
+                    sejahtera: 5589.44,
+                    fleksibel: 336.90
+                }
             };
             localStorage.setItem('vault_cards', JSON.stringify(cardData));
         }
@@ -1329,6 +1316,7 @@
             const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
         
+		// Open Card Modal Engine (With As-Of Month for KWSP)
         window.openCardModal = function(type) { 
             closeAllModals();
             currentEditCard = type; 
@@ -1373,6 +1361,7 @@
             if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
 
+        // Save Card Edits Function (Saves As-Of Month)
         window.saveCardEdit = function(e) { 
             e.preventDefault(); 
             if (!currentEditCard) return;
@@ -1605,15 +1594,12 @@
             let basePersaraan = parseFloat(cardData.kwsp.persaraan) || 89575.38;
             let baseSejahtera = parseFloat(cardData.kwsp.sejahtera) || 5589.44;
             let baseFleksibel = parseFloat(cardData.kwsp.fleksibel) || 336.90;
-            let baseAsOf = cardData.kwsp.asOf || '2026-07';
             let totalKwsp = basePersaraan + baseSejahtera + baseFleksibel;
 
             payrollHistory.forEach(p => { 
-                if (p.month && p.month > baseAsOf) {
-                    let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
-                    let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
-                    totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
-                }
+                let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
+                let empEpf = p.empEpf ? p.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
+                totalKwsp += (parseFloat(p.epf) || 0) + (parseFloat(empEpf) || 0); 
             });
             
             let currentDebit = (cardData.debit && typeof cardData.debit === 'object') ? (parseFloat(cardData.debit.balance) || 0) : 0;
@@ -1844,24 +1830,15 @@
         window.deletePayslip = function(monthStr) {
             if(confirm('Delete this payslip?')) { 
                 vibrate([30, 50, 30]);
-                let existingRecord = payrollHistory.find(p => p.month === monthStr);
-                if (existingRecord) {
-                    cardData.debit.balance -= (existingRecord.net || 0);
-                    if (cardData.debit.balance < 0) cardData.debit.balance = 0;
-                    localStorage.setItem('vault_cards', JSON.stringify(cardData));
-                }
-
-                transactions = transactions.filter(t => !(t.date === monthStr + '-01' && t.category === 'Payroll'));
-                localStorage.setItem('vault_transactions', JSON.stringify(transactions));
-
                 payrollHistory = payrollHistory.filter(p => p.month !== monthStr);
                 localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
-                
                 populateTimelines(); updateCareerDashboard(); updateHomeDashboard(); renderCards(); 
             }
         }
 
         // Card Rendering Engine
+		// Dynamic Card Rendering Engine (Filters Payslips by Cutoff Date)
+		// Dynamic Card Rendering Engine (With 3% Annual Increment Compound Projector)
         window.renderCards = function() { 
             const dEl = document.getElementById('debit-display'); 
             const cEl = document.getElementById('credit-display'); 
@@ -1890,6 +1867,7 @@
                 let addSejahtera = 0;
                 let addFleksibel = 0;
 
+                // Accumulate payslips logged AFTER cutoff month
                 payrollHistory.forEach(p => { 
                     if (p.month && p.month > baseAsOf) {
                         let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
@@ -1907,10 +1885,12 @@
                 let totalFleksibel = baseFleksibel + addFleksibel;
                 let totalKwsp = totalPersaraan + totalSejahtera + totalFleksibel;
 
+                // Display Total on Front of Card
                 kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); 
                 document.getElementById('kwsp-name').innerText = cardData.kwsp.name || 'Retirement Fund'; 
                 document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4 || '1234';
 
+                // Display 3-Account Splits on Back of Card
                 const persEl = document.getElementById('kwsp-persaraan');
                 const sejEl = document.getElementById('kwsp-sejahtera');
                 const fleEl = document.getElementById('kwsp-fleksibel');
@@ -1919,6 +1899,10 @@
                 if (sejEl) sejEl.innerText = 'RM ' + totalSejahtera.toLocaleString(undefined, {minimumFractionDigits: 2});
                 if (fleEl) fleEl.innerText = 'RM ' + totalFleksibel.toLocaleString(undefined, {minimumFractionDigits: 2});
                 
+                // =========================================================
+                // KWSP OFFICIAL COMPOUND PROJECTOR (Age 55)
+                // =========================================================
+                // 1. Detect latest logged base salary (defaults to RM 5,158 if no payslips exist)
                 let currentMonthlySalary = 5158; 
                 if (payrollHistory && payrollHistory.length > 0) {
                     let sortedPayroll = [...payrollHistory].sort((a, b) => new Date(b.month) - new Date(a.month));
@@ -1927,16 +1911,18 @@
                     if (latestGross > 0) currentMonthlySalary = latestGross;
                 }
 
+                // 2. Multi-year compounding loop (3% annual salary increment + 5.5% KWSP dividend)
                 let projectedBalance = totalKwsp;
-                const yearsTo55 = 19; 
+                const yearsTo55 = 19; // Current age 36 to 55
                 const annualDividendRate = 0.055;
                 const salaryIncrementRate = 0.03;
 
                 for (let yr = 1; yr <= yearsTo55; yr++) {
                     let yrSalary = currentMonthlySalary * Math.pow(1 + salaryIncrementRate, yr - 1);
-                    let epfContribRate = yrSalary > 5000 ? 0.23 : 0.24; 
+                    let epfContribRate = yrSalary > 5000 ? 0.23 : 0.24; // 11% + 12% (>RM5k) or 11% + 13% (<=RM5k)
                     let yrAnnualContribution = yrSalary * 12 * epfContribRate;
 
+                    // Compounding formula: 5.5% on opening balance + 2.75% mid-year avg yield on new monthly deposits
                     projectedBalance = (projectedBalance * (1 + annualDividendRate)) + (yrAnnualContribution * (1 + (annualDividendRate / 2)));
                 }
 
@@ -2130,7 +2116,7 @@
             document.getElementById('pay-epf').setAttribute('data-employer', empEpf); calcNetPay();
         }
 
-window.calcNetPay = function() {
+        window.calcNetPay = function() {
             let basic = parseFloat(document.getElementById('pay-basic').value) || 0; let allow = parseFloat(document.getElementById('pay-allow').value) || 0; let bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             let epf = parseFloat(document.getElementById('pay-epf').value) || 0; let socso = parseFloat(document.getElementById('pay-socso').value) || 0; let eis = parseFloat(document.getElementById('pay-eis').value) || 0; let tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             let gross = basic + allow + bonus; let deds = epf + socso + eis + tax;
@@ -2142,12 +2128,6 @@ window.calcNetPay = function() {
             const month = document.getElementById('pay-month').value; const basic = parseFloat(document.getElementById('pay-basic').value) || 0; const allow = parseFloat(document.getElementById('pay-allow').value) || 0; const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             const epf = parseFloat(document.getElementById('pay-epf').value) || 0; const empEpf = parseFloat(document.getElementById('pay-epf').getAttribute('data-employer')) || 0; const socso = parseFloat(document.getElementById('pay-socso').value) || 0; const eis = parseFloat(document.getElementById('pay-eis').value) || 0; const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             const net = (basic + allow + bonus) - (epf + socso + eis + tax);
-
-            // Deduct old net pay if modifying an existing month
-            let existingRecord = payrollHistory.find(p => p.month === month);
-            if (existingRecord) {
-                cardData.debit.balance -= (existingRecord.net || 0);
-            }
 
             payrollHistory = payrollHistory.filter(p => p.month !== month); 
             payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
@@ -2242,6 +2222,8 @@ window.calcNetPay = function() {
         };
         
         window.clearData = function() { if(confirm("Delete ALL app data? This cannot be undone.")) { localStorage.clear(); location.reload(); } }
+
+        window.onload = function() {
             checkPayday();
             populateTimelines();
             
