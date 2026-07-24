@@ -1419,6 +1419,7 @@
             localStorage.setItem('vault_cards', JSON.stringify(cardData)); 
             renderCards(); 
             updateHomeDashboard(); 
+			pushToCloud();
             closeAllModals(); 
         }
 
@@ -2003,7 +2004,7 @@
             transactions.push({ date, desc, type, category, amount, reimbursable: isReimbursable, shared: isShared }); 
             localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
             
-            populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); renderCards(); closeAllModals(); 
+            populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); renderCards(); pushToCloud(); closeAllModals(); 
         }
 
         window.calcFieldClaim = function() {
@@ -2160,7 +2161,7 @@
             transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
 
-            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); closeAllModals(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
+            updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); pushToCloud(); closeAllModals(); setTimeout(() => alert("Payslip Saved! Net Pay injected into your Debit Card."), 100);
         }
 
         window.renderProfile = function() {
@@ -2184,6 +2185,7 @@
             e.preventDefault(); 
             profile.name = document.getElementById('prof-name').value; profile.role = document.getElementById('prof-role').value; profile.industry = document.getElementById('prof-industry').value; profile.address = document.getElementById('prof-address').value; profile.email = document.getElementById('prof-email').value; profile.phone = document.getElementById('prof-phone').value; profile.emergency = document.getElementById('prof-emergency').value; profile.tenure = document.getElementById('prof-tenure').value; profile.skills = document.getElementById('prof-skills').value;
             localStorage.setItem('vault_profile', JSON.stringify(profile)); renderProfile(); alert("Profile updated successfully!"); 
+			pushToCloud();
         }
         
         window.handleImageUpload = function(e, type) {
@@ -2320,7 +2322,7 @@
             }
         };
 
-        // Push local changes to GitHub Gist
+		// Push local changes to GitHub Gist
         window.pushToCloud = async function() {
             const gistId = localStorage.getItem('vault_gist_id');
             const token = localStorage.getItem('vault_gist_token');
@@ -2363,13 +2365,55 @@
                 renderSyncStatus("Sync Error", "bg-red-500/20 text-red-500");
             }
         };
-		// Fill saved keys into input boxes if they exist
+
+        window.onload = function() {
+            // Fill saved keys into input boxes if they exist
             if (localStorage.getItem('vault_gist_id')) document.getElementById('sync-gist-id').value = localStorage.getItem('vault_gist_id');
             if (localStorage.getItem('vault_gist_token')) document.getElementById('sync-token').value = localStorage.getItem('vault_gist_token');
 
             // Trigger cloud pull on boot
             syncFromCloud();
+
+            checkPayday();
+            populateTimelines();
+            
+            Chart.defaults.font.family = 'Inter'; 
+            let isDark = document.documentElement.classList.contains('dark'); 
+            let tc = isDark ? '#8E8E93' : '#6B7280'; 
+            let gc = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'; 
+            Chart.defaults.color = tc;
+            const lineConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { color: gc }, ticks: { color: tc } } } };
+
+            const catCanvas = document.getElementById('categoryChart');
+            if(catCanvas) categoryChart = new Chart(catCanvas, { type: 'bar', data: { labels: Array.from({length: 31}, (_, i) => i + 1), datasets: [{ label: 'Daily Spend', data: [], backgroundColor: isDark ? '#FFFFFF' : '#111827', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } } } } });
+
+            const compCanvas = document.getElementById('comparisonChart');
+            if(compCanvas) comparisonChart = new Chart(compCanvas, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
+            
+            const foodCanvas = document.getElementById('foodChart');
+            if(foodCanvas) foodChart = new Chart(foodCanvas, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#FFD600', backgroundColor: 'rgba(255, 214, 0, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#FFD600' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
+
+            const famCanvas = document.getElementById('familyChart');
+            if(famCanvas) familyChart = new Chart(famCanvas, { type: 'line', data: { labels: [], datasets: [ { label: 'Selected Year', borderColor: '#A855F7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, borderWidth: 4, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#A855F7' }, { label: 'Previous Year', borderColor: '#9CA3AF', borderWidth: 2, borderDash: [5, 5], tension: 0.4, pointRadius: 0 } ] }, options: lineConfig });
+            
+            const utilCanvas = document.getElementById('utilChart');
+            if(utilCanvas) utilChart = new Chart(utilCanvas, { type: 'line', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } });
+            
+            const salCanvas = document.getElementById('salaryChart');
+            if(salCanvas) salaryChart = new Chart(salCanvas, { type: 'line', data: { labels: [], datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { grid: { color: gc }, ticks: { color: tc } }, y: { display: false } } } });
+
+            renderCards(); renderBills(); renderDebts(); renderGoals(); renderCommitments(); renderProfile();
+            switchTab('home'); 
+            updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); updateUtilDashboard(); updateCareerDashboard();
+        };
+
         window.onload = function() {
+			// Fill saved keys into input boxes if they exist
+            if (localStorage.getItem('vault_gist_id')) document.getElementById('sync-gist-id').value = localStorage.getItem('vault_gist_id');
+            if (localStorage.getItem('vault_gist_token')) document.getElementById('sync-token').value = localStorage.getItem('vault_gist_token');
+
+            // Trigger cloud pull on boot
+            syncFromCloud();
             checkPayday();
             populateTimelines();
             
