@@ -2248,9 +2248,9 @@
             });
             const c = document.createElement('a'); c.setAttribute("href", encodeURI(csvContent)); c.setAttribute("download", "vault_pivot_data.csv"); document.body.appendChild(c); c.click(); c.remove();
         }
-			window.handleJsonImport = function(e) { 
+		window.handleJsonImport = function(e) { 
             const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
-            reader.onload = function(event) { 
+            reader.onload = async function(event) { 
                 try { 
                     const data = JSON.parse(event.target.result); 
                     Object.keys(data).forEach(key => { 
@@ -2260,13 +2260,22 @@
                             localStorage.setItem(key, val); 
                         }
                     }); 
-                    alert("Sync Backup restored successfully! Refreshing app..."); 
+                    
+                    alert("Backup restored! Securing to cloud before refreshing..."); 
+                    
+                    // Push the newly imported data to GitHub BEFORE the page reloads
+                    if (typeof pushToCloud === 'function') {
+                        await pushToCloud();
+                    }
+                    
                     location.reload(); 
                 } catch(err) { 
                     console.error(err);
                     alert("Invalid backup file format."); 
                 } 
             }; 
+            reader.readAsText(file); 
+        };
             reader.readAsText(file); 
         };
 
