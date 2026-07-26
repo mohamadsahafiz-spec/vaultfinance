@@ -296,6 +296,59 @@
                 </div>
             </div>
 
+					<!-- CTOS SCORE CARD -->
+                    <div class="snap-center shrink-0 w-[82vw] sm:w-[360px] aspect-[1.586/1] group perspective-1000 cursor-pointer relative" onclick="vibrate(30); document.getElementById('ctos-inner').classList.toggle('rotate-y-180')">
+                        <div id="ctos-inner" class="relative w-full h-full transition-transform duration-700 transform-style-3d shadow-[0_15px_35px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(16,185,129,0.15)] rounded-[24px]">
+                            
+                            <!-- Front of CTOS Card -->
+                            <div class="absolute inset-0 backface-hidden bg-panel-light dark:bg-[#0A0A0A] rounded-[24px] border border-gray-200 dark:border-green-500/20 overflow-hidden p-5 md:p-7 flex flex-col justify-between text-gray-900 dark:text-white">
+                                <div class="absolute -right-10 -top-10 w-48 h-48 bg-green-500/20 rounded-full blur-3xl pointer-events-none opacity-40"></div>
+                                <div class="relative z-10 flex flex-col h-full justify-between">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/30 text-green-600 dark:text-green-500 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            </div>
+                                            <span class="text-[13px] font-bold text-gray-900 dark:text-white uppercase tracking-widest font-display">CTOS Score</span>
+                                        </div>
+                                        <span id="ctos-status-badge" class="text-[9px] font-bold px-2 py-0.5 rounded bg-gray-500/20 text-gray-500 uppercase tracking-widest border border-gray-500/30">No Data</span>
+                                    </div>
+                                    
+                                    <div class="mt-3 flex flex-col items-center justify-center relative">
+                                        <h2 class="font-display font-black text-6xl tracking-tighter text-gray-900 dark:text-white drop-shadow-md z-10" id="ctos-display">---</h2>
+                                        <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest mt-1 z-10">Out of 850</p>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-end mt-2">
+                                        <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-widest">Last Pulled: <span id="ctos-date-display" class="text-gray-900 dark:text-white font-bold">---</span></p>
+                                        <div class="w-6 h-6 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-gray-500 dark:text-gray-400"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Back of CTOS Card (The Input Form) -->
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-panel-light dark:bg-[#0A0A0A] rounded-[24px] border border-gray-200 dark:border-white/10 overflow-hidden p-5 flex flex-col justify-between text-gray-900 dark:text-white shadow-inner" onclick="event.stopPropagation()">
+                                <div class="flex justify-between items-center border-b border-gray-200 dark:border-white/10 pb-2 mb-2">
+                                    <div class="font-bold text-sm tracking-tight font-display">Update CTOS Data</div>
+                                    <button onclick="vibrate(20); document.getElementById('ctos-inner').classList.remove('rotate-y-180')" class="w-7 h-7 rounded-full bg-surface-light dark:bg-white/10 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-white/20 transition"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                                </div>
+                                
+                                <div class="space-y-3 flex-1 flex flex-col justify-center">
+                                    <div>
+                                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Latest Score (300-850)</label>
+                                        <input type="number" id="edit-ctos-score" min="300" max="850" class="w-full bg-surface-light dark:bg-[#151515] text-textMain-light dark:text-white font-bold text-sm px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-green-500 transition text-center tracking-widest shadow-inner">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 pl-1 uppercase tracking-wider">Date Pulled</label>
+                                        <input type="month" id="edit-ctos-date" class="w-full bg-surface-light dark:bg-[#151515] text-textMain-light dark:text-white font-medium text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-green-500 transition text-center shadow-inner">
+                                    </div>
+                                </div>
+                                
+                                <button onclick="saveCtosScore()" class="w-full mt-2 bg-green-500 text-white px-3 py-3 rounded-xl font-bold text-xs shadow-[0_4px_14px_rgba(16,185,129,0.3)] hover:scale-[1.02] transition-transform">Save Score</button>
+                            </div>
+                        </div>
+                    </div>
+
             <!-- LOWER CONTEXT PANEL -->
             <div class="relative z-20 px-5 md:px-6 flex flex-col gap-4 flex-1 w-full pb-32">
                 <div class="bg-gradient-to-r from-green-500/20 to-brand/10 border border-green-500/30 dark:border-green-400/20 p-4 rounded-xl shadow-sm flex flex-col transition-colors duration-300 relative overflow-hidden">
@@ -1481,6 +1534,29 @@
             closeAllModals(); 
         }
 
+		// Dedicated Save Function for the CTOS Back-Card
+        window.saveCtosScore = function() {
+            vibrate([30, 50, 30]);
+            let newScore = parseInt(document.getElementById('edit-ctos-score').value);
+            let newDate = document.getElementById('edit-ctos-date').value;
+            
+            if (newScore < 300 || newScore > 850 || isNaN(newScore)) { 
+                alert("Please enter a valid CTOS score between 300 and 850."); 
+                return; 
+            }
+            
+            if (!cardData.ctos) cardData.ctos = {};
+            cardData.ctos.score = newScore;
+            cardData.ctos.date = newDate;
+            
+            localStorage.setItem('vault_cards', JSON.stringify(cardData));
+            renderCards();
+            pushToCloud();
+            document.getElementById('ctos-inner').classList.remove('rotate-y-180');
+        }
+
+        window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
+
         window.openTxModal = function() { closeAllModals(); document.getElementById('tx-date').valueAsDate = new Date(); const m = document.getElementById('tx-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
         window.openFieldModal = function() { closeAllModals(); document.getElementById('field-date').valueAsDate = new Date(); const m = document.getElementById('field-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
         window.openCommitmentModal = function() { closeAllModals(); const m = document.getElementById('commitment-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; } }
@@ -2053,6 +2129,27 @@
                 cpEl.innerText = usedPercentage;
             }
         }
+
+			// ==========================================
+            // PASTE THE STEP 3 CTOS CODE RIGHT HERE!
+            // ==========================================
+            // CTOS Card Rendering Logic
+            const ctosEl = document.getElementById('ctos-display');
+            if (ctosEl) {
+                if (!cardData.ctos) cardData.ctos = { score: 0, date: "" };
+                
+                let sc = cardData.ctos.score || 0;
+                let dt = cardData.ctos.date || '';
+                // ... (the rest of the CTOS code) ...
+                if (dateInput) {
+                    if (dt) {
+                        dateInput.value = dt;
+                    } else {
+                        let d = new Date();
+                        dateInput.value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+                    }
+                }
+            }
 
         window.applyMacro = function(desc, category, amount) {
             vibrate(15);
