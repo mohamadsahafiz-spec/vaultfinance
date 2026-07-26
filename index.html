@@ -2333,8 +2333,8 @@
                 inlineBadge.className = `text-[7px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest ${colorClass}`;
             }
         };
-
-        // Pull latest data from GitHub Gist on startup
+		
+		// Pull latest data from GitHub Gist on startup
         window.syncFromCloud = async function() {
             const gistId = localStorage.getItem('vault_gist_id');
             const token = localStorage.getItem('vault_gist_token');
@@ -2358,11 +2358,10 @@
                 
                 let rawText = fileObj.content;
                 
-                // FIX: If GitHub truncates the file because it's too large (e.g., massive HD profile pictures), fetch the direct raw URL!
+                // FIX: If truncated, fetch the raw URL directly WITHOUT the authorization header to prevent GitHub CORS blocking.
                 if (fileObj.truncated) {
-                    const rawResponse = await fetch(fileObj.raw_url, {
-                        headers: { 'Authorization': `token ${token}` }
-                    });
+                    const rawResponse = await fetch(fileObj.raw_url);
+                    if (!rawResponse.ok) throw new Error('Raw fetch failed');
                     rawText = await rawResponse.text();
                 }
 
