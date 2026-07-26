@@ -2354,7 +2354,19 @@
                 if (!response.ok) throw new Error('Cloud connection failed');
 
                 const data = await response.json();
-                const jsonContent = JSON.parse(data.files['vault_data.json'].content);
+                const fileObj = data.files['vault_data.json'];
+                
+                let rawText = fileObj.content;
+                
+                // FIX: If GitHub truncates the file because it's too large (e.g., massive HD profile pictures), fetch the direct raw URL!
+                if (fileObj.truncated) {
+                    const rawResponse = await fetch(fileObj.raw_url, {
+                        headers: { 'Authorization': `token ${token}` }
+                    });
+                    rawText = await rawResponse.text();
+                }
+
+                const jsonContent = JSON.parse(rawText);
 
                 // Update LocalStorage with Cloud Data
                 Object.keys(jsonContent).forEach(key => {
