@@ -1487,8 +1487,22 @@
 		window.deleteTransaction = function(index) {
             if(confirm('Delete this transaction?')) { 
                 vibrate([30, 50, 30]);
-                transactions.splice(index, 1); localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
-                populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard();
+                let t = transactions[index];
+                
+                // Refund the wallet balance!
+                if (t.type === 'expense') {
+                    if (t.method === 'debit' || !t.method) cardData.debit.balance += parseFloat(t.amount); 
+                    else if (t.method === 'credit') cardData.credit.balance -= parseFloat(t.amount);
+                } else if (t.type === 'income') {
+                    if (t.method === 'debit' || !t.method) cardData.debit.balance -= parseFloat(t.amount); 
+                    else if (t.method === 'credit') cardData.credit.balance += parseFloat(t.amount);
+                }
+                localStorage.setItem('vault_cards', JSON.stringify(cardData));
+
+                transactions.splice(index, 1); 
+                localStorage.setItem('vault_transactions', JSON.stringify(transactions)); 
+                
+                populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); renderCards();
                 pushToCloud();
             }
         };
@@ -1892,8 +1906,21 @@
 		window.deletePayslip = function(monthStr) {
             if(confirm('Delete this payslip?')) { 
                 vibrate([30, 50, 30]);
+                
+                // Reverse the wallet injection
+                let existing = payrollHistory.find(p => p.month === monthStr);
+                if (existing) {
+                    cardData.debit.balance -= parseFloat(existing.net);
+                    localStorage.setItem('vault_cards', JSON.stringify(cardData));
+                }
+
                 payrollHistory = payrollHistory.filter(p => p.month !== monthStr);
                 localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
+                
+                // Remove the auto-generated transaction
+                transactions = transactions.filter(t => !(t.date === monthStr + '-01' && t.category === 'Payroll'));
+                localStorage.setItem('vault_transactions', JSON.stringify(transactions));
+
                 populateTimelines(); updateCareerDashboard(); updateHomeDashboard(); renderCards(); 
                 pushToCloud(); 
             }
@@ -2192,6 +2219,14 @@
             const month = document.getElementById('pay-month').value; const basic = parseFloat(document.getElementById('pay-basic').value) || 0; const allow = parseFloat(document.getElementById('pay-allow').value) || 0; const bonus = parseFloat(document.getElementById('pay-bonus').value) || 0;
             const epf = parseFloat(document.getElementById('pay-epf').value) || 0; const empEpf = parseFloat(document.getElementById('pay-epf').getAttribute('data-employer')) || 0; const socso = parseFloat(document.getElementById('pay-socso').value) || 0; const eis = parseFloat(document.getElementById('pay-eis').value) || 0; const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             const net = (basic + allow + bonus) - (epf + socso + eis + tax);
+			
+			// Check if updating an existing payslip and refund the old net amount first
+            let existing = payrollHistory.find(p => p.month === month);
+            if (existing) {
+                cardData.debit.balance -= parseFloat(existing.net);
+            }
+            
+            // (Keep your existing payrollHistory.filter code here...)
 
             payrollHistory = payrollHistory.filter(p => p.month !== month); 
             payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
@@ -2355,6 +2390,9 @@
 
                 const data = await response.json();
                 const fileObj = data.files['vault_data.json'];
+
+				// Add this safety check!
+                if (!fileObj) throw new Error('vault_data.json is missing from the connected Gist');
                 
                 let rawText = fileObj.content;
                 
