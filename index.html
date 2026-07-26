@@ -338,7 +338,7 @@
                             <div class="mt-4">
                                 <p class="text-[10px] font-semibold text-gray-400 mb-1.5 uppercase tracking-widest">Accumulated Assets</p>
                             </div>
-                            <div class="flex justify-between items-end mt-1">
+							<div class="flex justify-between items-end mt-1">
                                 <div class="font-display font-black text-3xl tracking-tight leading-none drop-shadow-md text-white flex items-end">
                                     <span class="text-sm font-bold opacity-60 pr-1.5 pb-0.5">MYR</span><span id="total-net-worth">0.00</span>
                                 </div>
@@ -346,6 +346,10 @@
                         </div>
                     </div>
 
+                </div> <!-- Ends the Swiper Carousel -->
+            </div> <!-- Ends the Dashboard Wrapper -->
+
+            <!-- LOWER CONTEXT PANEL -->
             <!-- LOWER CONTEXT PANEL -->
             <div class="relative z-20 px-5 md:px-6 flex flex-col gap-4 flex-1 w-full pb-32">
                 <div class="bg-gradient-to-r from-green-500/20 to-brand/10 border border-green-500/30 dark:border-green-400/20 p-4 rounded-xl shadow-sm flex flex-col transition-colors duration-300 relative overflow-hidden">
@@ -2029,7 +2033,7 @@
         // Card Rendering Engine
 		// Dynamic Card Rendering Engine (Filters Payslips by Cutoff Date)
 		// Dynamic Card Rendering Engine (With 3% Annual Increment Compound Projector)
-        window.renderCards = function() { 
+			window.renderCards = function() { 
             const dEl = document.getElementById('debit-display'); 
             const cEl = document.getElementById('credit-display'); 
             const cpEl = document.getElementById('credit-pct'); 
@@ -2057,7 +2061,6 @@
                 let addSejahtera = 0;
                 let addFleksibel = 0;
 
-                // Accumulate payslips logged AFTER cutoff month
                 payrollHistory.forEach(p => { 
                     if (p.month && p.month > baseAsOf) {
                         let gross = (p.basic || 0) + (p.allowance || 0) + (p.bonus || 0); 
@@ -2075,12 +2078,10 @@
                 let totalFleksibel = baseFleksibel + addFleksibel;
                 let totalKwsp = totalPersaraan + totalSejahtera + totalFleksibel;
 
-                // Display Total on Front of Card
                 kEl.innerText = totalKwsp.toLocaleString(undefined, {minimumFractionDigits: 2}); 
                 document.getElementById('kwsp-name').innerText = cardData.kwsp.name || 'Retirement Fund'; 
                 document.getElementById('kwsp-last4').innerText = cardData.kwsp.last4 || '1234';
 
-                // Display 3-Account Splits on Back of Card
                 const persEl = document.getElementById('kwsp-persaraan');
                 const sejEl = document.getElementById('kwsp-sejahtera');
                 const fleEl = document.getElementById('kwsp-fleksibel');
@@ -2089,10 +2090,6 @@
                 if (sejEl) sejEl.innerText = 'RM ' + totalSejahtera.toLocaleString(undefined, {minimumFractionDigits: 2});
                 if (fleEl) fleEl.innerText = 'RM ' + totalFleksibel.toLocaleString(undefined, {minimumFractionDigits: 2});
                 
-                // =========================================================
-                // KWSP OFFICIAL COMPOUND PROJECTOR (Age 55)
-                // =========================================================
-                // 1. Detect latest logged base salary (defaults to RM 5,158 if no payslips exist)
                 let currentMonthlySalary = 5158; 
                 if (payrollHistory && payrollHistory.length > 0) {
                     let sortedPayroll = [...payrollHistory].sort((a, b) => new Date(b.month) - new Date(a.month));
@@ -2101,18 +2098,15 @@
                     if (latestGross > 0) currentMonthlySalary = latestGross;
                 }
 
-                // 2. Multi-year compounding loop (3% annual salary increment + 5.5% KWSP dividend)
                 let projectedBalance = totalKwsp;
-                const yearsTo55 = 19; // Current age 36 to 55
+                const yearsTo55 = 19; 
                 const annualDividendRate = 0.055;
                 const salaryIncrementRate = 0.03;
 
                 for (let yr = 1; yr <= yearsTo55; yr++) {
                     let yrSalary = currentMonthlySalary * Math.pow(1 + salaryIncrementRate, yr - 1);
-                    let epfContribRate = yrSalary > 5000 ? 0.23 : 0.24; // 11% + 12% (>RM5k) or 11% + 13% (<=RM5k)
+                    let epfContribRate = yrSalary > 5000 ? 0.23 : 0.24; 
                     let yrAnnualContribution = yrSalary * 12 * epfContribRate;
-
-                    // Compounding formula: 5.5% on opening balance + 2.75% mid-year avg yield on new monthly deposits
                     projectedBalance = (projectedBalance * (1 + annualDividendRate)) + (yrAnnualContribution * (1 + (annualDividendRate / 2)));
                 }
 
@@ -2125,12 +2119,8 @@
                 const usedPercentage = Math.round((currentBalance / maxLimit) * 100); 
                 cpEl.innerText = usedPercentage;
             }
-        }
 
-			// ==========================================
-            // PASTE THE STEP 3 CTOS CODE RIGHT HERE!
-            // ==========================================
-			// CTOS Card Rendering Logic
+            // CTOS Card Rendering Logic
             const ctosEl = document.getElementById('ctos-display');
             if (ctosEl) {
                 if (!cardData.ctos) cardData.ctos = { score: 0, date: "" };
@@ -2181,6 +2171,7 @@
                     }
                 }
             }
+        }; // <-- This correctly closes the renderCards function!
 
         window.applyMacro = function(desc, category, amount) {
             vibrate(15);
