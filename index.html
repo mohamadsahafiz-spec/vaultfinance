@@ -650,6 +650,14 @@
                     </div>
                 </div>
             </div>
+			<!-- SECURE CLOUD SYNC TRIGGER BUTTON -->
+            <button onclick="vibrate(30); openSyncModal()" class="w-full mb-3 flex justify-between items-center bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-gray-900 px-4 py-3 rounded-xl shadow-[0_0_8px_rgba(255,214,0,0.2)] hover:shadow-[0_0_15px_rgba(255,214,0,0.6)] transition-all duration-300 group">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 drop-shadow-[0_0_5px_rgba(255,214,0,0.8)] group-hover:drop-shadow-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+                    <span class="text-xs font-bold uppercase tracking-wider">Cloud Sync Settings (Secure)</span>
+                </div>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
             <!-- DATA MANAGEMENT -->
             <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm mt-4">
                 <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-4">Data Management</p>
@@ -802,6 +810,34 @@
             <div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl border border-gray-200 dark:border-white/5 flex justify-between items-center">
                 <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Transactions Logged</p>
                 <p class="font-black text-xl text-gray-900 dark:text-white font-display" id="stat-total-tx">0</p>
+            </div>
+        </div>
+    </div>
+
+	<!-- SECURE SYNC CREDENTIALS MODAL -->
+    <div id="sync-modal" class="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm hidden z-[250] flex-col items-center justify-center p-4">
+        <div class="bg-panel-light dark:bg-panel-dark p-6 rounded-3xl shadow-2xl w-full max-w-md border border-brand/30 modal-enter relative">
+            <button onclick="vibrate(20); closeAllModals()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-light dark:bg-surface-dark text-textMuted-light dark:text-textMuted-dark hover:text-brand transition flex items-center justify-center font-bold text-sm">✕</button>
+            <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-xl font-bold tracking-tight font-display text-brand">GitHub Cloud Auto-Sync</h3>
+                <span id="sync-status-badge" class="text-[8px] font-bold px-2 py-0.5 rounded bg-gray-500/20 text-gray-400 uppercase tracking-widest">Offline</span>
+            </div>
+            <p class="text-[10px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-5">Protected App Security Keys</p>
+            
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wider">Gist ID</label>
+                    <input type="text" id="sync-gist-id" placeholder="e.g. a1b2c3d4e5f67890..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-mono text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                <div>
+                    <label class="block text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark mb-1 uppercase tracking-wider">GitHub Personal Token (PAT)</label>
+                    <input type="password" id="sync-token" placeholder="ghp_..." class="w-full bg-surface-light dark:bg-surface-dark text-textMain-light dark:text-textMain-dark font-mono text-xs px-3 py-2.5 rounded-xl border border-gray-200 dark:border-transparent outline-none focus:ring-1 focus:ring-brand transition">
+                </div>
+                
+                <div class="flex gap-2.5 pt-2">
+                    <button onclick="vibrate(30); saveSyncCredentials()" class="flex-1 bg-brand text-gray-900 px-3 py-2.5 rounded-xl font-bold text-xs shadow-sm hover:scale-[1.02] transition-transform">Save Credentials</button>
+                    <button onclick="vibrate(30); syncFromCloud()" class="flex-1 bg-surface-light dark:bg-surface-dark border border-brand text-brand hover:bg-brand hover:text-gray-900 px-3 py-2.5 rounded-xl font-bold text-xs transition">Force Sync</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1308,8 +1344,8 @@
         }
 
         // MASTER MODAL "KILL SWITCH"
-        window.closeAllModals = function() {
-            const allModals = ['action-modal', 'stats-modal', 'card-modal', 'tx-modal', 'commitment-modal', 'goal-modal', 'debt-modal', 'bill-modal', 'util-history-modal', 'payroll-modal', 'field-modal'];
+		window.closeAllModals = function() {
+            const allModals = ['action-modal', 'stats-modal', 'card-modal', 'tx-modal', 'commitment-modal', 'goal-modal', 'debt-modal', 'bill-modal', 'util-history-modal', 'payroll-modal', 'field-modal', 'sync-modal'];
             allModals.forEach(id => {
                 const m = document.getElementById(id);
                 if(m) {
@@ -1338,6 +1374,19 @@
 
             const m = document.getElementById('stats-modal'); if(m){ m.classList.remove('hidden'); m.style.display = 'flex'; }
         }
+
+		window.openSyncModal = function() {
+            closeAllModals();
+            vibrate(30);
+            if (localStorage.getItem('vault_gist_id')) document.getElementById('sync-gist-id').value = localStorage.getItem('vault_gist_id');
+            if (localStorage.getItem('vault_gist_token')) document.getElementById('sync-token').value = localStorage.getItem('vault_gist_token');
+            
+            const m = document.getElementById('sync-modal');
+            if (m) {
+                m.classList.remove('hidden');
+                m.style.display = 'flex';
+            }
+        };
         
 		// Open Card Modal Engine (With As-Of Month for KWSP)
         window.openCardModal = function(type) { 
@@ -2208,15 +2257,24 @@
             });
             const c = document.createElement('a'); c.setAttribute("href", encodeURI(csvContent)); c.setAttribute("download", "vault_pivot_data.csv"); document.body.appendChild(c); c.click(); c.remove();
         }
-
-        window.handleJsonImport = function(e) { 
+			window.handleJsonImport = function(e) { 
             const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); 
             reader.onload = function(event) { 
                 try { 
                     const data = JSON.parse(event.target.result); 
-                    Object.keys(data).forEach(key => { if(data[key]) localStorage.setItem(key, data[key]); }); 
-                    alert("Sync Backup restored successfully! Refreshing app..."); location.reload(); 
-                } catch(err) { alert("Invalid backup file."); } 
+                    Object.keys(data).forEach(key => { 
+                        if(data[key]) {
+                            let val = data[key];
+                            if (typeof val === 'object') val = JSON.stringify(val);
+                            localStorage.setItem(key, val); 
+                        }
+                    }); 
+                    alert("Sync Backup restored successfully! Refreshing app..."); 
+                    location.reload(); 
+                } catch(err) { 
+                    console.error(err);
+                    alert("Invalid backup file format."); 
+                } 
             }; 
             reader.readAsText(file); 
         };
