@@ -2061,9 +2061,9 @@
             setTimeout(() => alert("Field Log Saved & Tagged as Claimable!"), 100);
         }
 
-        window.renderGoals = function() {
+		window.renderGoals = function() {
             const gl = document.getElementById('goals-list'); if(!gl) return; gl.innerHTML = '';
-            if (goalsData.length === 0) { gl.innerHTML = `<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-3 uppercase tracking-wider">No active goals or lifecycles.</p>`; return; }
+            if (!goalsData || goalsData.length === 0) { gl.innerHTML = `<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark text-center py-3 uppercase tracking-wider">No active goals or lifecycles.</p>`; return; }
             
             let totalHistIncome = transactions.reduce((sum, t) => t.type === 'income' ? sum + parseFloat(t.amount) : sum, 0);
             let activeMonths = Array.from(new Set(transactions.map(t => t.date.substring(0,7)))).length || 1;
@@ -2073,11 +2073,14 @@
                 let pct = (g.current / g.target) * 100; let isComplete = pct >= 100; if(pct > 100) pct = 100;
                 let completeBadge = isComplete ? `<span class="px-1.5 py-0.5 bg-brand/20 text-brand border border-brand/30 rounded text-[7px] uppercase font-bold tracking-widest shadow-[0_0_5px_rgba(255,214,0,0.5)]">Achieved</span>` : '';
                 let progressColor = isComplete ? 'bg-brand shadow-[0_0_8px_rgba(255,214,0,0.8)]' : 'bg-brand shadow-[0_0_5px_rgba(255,214,0,0.4)]';
-                let tagLC = g.isLifecycle ? `<span class="bg-blue-500/20 text-blue-500 border border-blue-500/30 rounded text-[7px] px-1 py-0.5 uppercase tracking-widest font-bold">Lifecycle</span>` : '';
+                
+                // FIXED: Safety check for older JSON files that don't have isLifecycle
+                let isLC = g.isLifecycle === true; 
+                let tagLC = isLC ? `<span class="bg-blue-500/20 text-blue-500 border border-blue-500/30 rounded text-[7px] px-1 py-0.5 uppercase tracking-widest font-bold">Lifecycle</span>` : '';
 
                 let forecastText = "";
                 if(!isComplete) {
-                    if(g.isLifecycle && g.lifespan > 0) {
+                    if(isLC && g.lifespan && g.lifespan > 0) {
                         let reqMonthly = ((g.target - g.current) / g.lifespan).toFixed(0);
                         forecastText = `<p class="text-[8px] text-blue-400 font-bold uppercase tracking-widest mt-2">Needs MYR ${reqMonthly}/mo depreciation</p>`;
                     } else {
