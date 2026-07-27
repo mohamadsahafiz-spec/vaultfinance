@@ -1342,7 +1342,7 @@
             
             if (catMatch.match(/food|lunch|dinner|eat|cafe|groceries|mart|lotus|mydin|grabfood|foodpanda|snack/)) return `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20 shrink-0">${SVG_FOOD}</div>`;
             if (catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition|klinik|medical|pharmacy|diaper/)) return `<div class="w-9 h-9 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 shrink-0">${SVG_FAM}</div>`;
-            if (catMatch.match(/util|bill|water|electric|internet|phone|fuel|petrol|toll|parking|car|service|loan|insurance|jnd7218/mae/tng)) return `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">${SVG_UTIL}</div>`;
+            if (catMatch.match(/util|bill|water|electric|internet|phone|fuel|petrol|toll|parking|car|service|loan|insurance|jnd7218|mae|tng/)) return `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">${SVG_UTIL}</div>`;
             return `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20 shrink-0">${SVG_OTHER}</div>`;
         }
 
@@ -1809,7 +1809,7 @@
                         monthlySpend += amt; 
                         if(catMatch.match(/food|lunch|dinner|eat|cafe|groceries|mart|lotus|mydin|grabfood|foodpanda|snack/)) foodSpend += amt; 
                         else if(catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition|klinik|medical|pharmacy|diaper/)) famSpend += amt;
-                        else if(catMatch.match(/util|bill|water|electric|internet|phone|fuel|petrol|toll|parking|car|service|loan|insurance|jnd7218/mae/tng)) utilSpend += amt; 
+                        else if(catMatch.match(/util|bill|water|electric|internet|phone|fuel|petrol|toll|parking|car|service|loan|insurance|jnd7218|mae|tng/)) utilSpend += amt; 
                         else otherSpend += amt;
                     }
                 }
