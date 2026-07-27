@@ -1488,6 +1488,98 @@
             }
         }
 
+		window.renderCards = function() {
+            // Debit Card
+            const debit = cardData.debit || { balance: 2500, name: "Debit Card", last4: "1234" };
+            const debitNameEl = document.getElementById('debit-name');
+            if(debitNameEl) debitNameEl.innerText = debit.name || "Debit Card";
+            const debitLast4El = document.getElementById('debit-last4');
+            if(debitLast4El) debitLast4El.innerText = debit.last4 || "1234";
+            const debitDispEl = document.getElementById('debit-display');
+            if(debitDispEl) debitDispEl.innerText = parseFloat(debit.balance || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            // Credit Card
+            const credit = cardData.credit || { balance: 5000, name: "Ikhwan CC", last4: "8888", limit: 10000 };
+            const creditNameEl = document.getElementById('credit-name');
+            if(creditNameEl) creditNameEl.innerText = credit.name || "Credit Card";
+            const creditLast4El = document.getElementById('credit-last4');
+            if(creditLast4El) creditLast4El.innerText = credit.last4 || "8888";
+            const creditDispEl = document.getElementById('credit-display');
+            if(creditDispEl) creditDispEl.innerText = parseFloat(credit.balance || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
+            let pct = credit.limit ? ((credit.balance / credit.limit) * 100).toFixed(0) : 0;
+            const creditPctEl = document.getElementById('credit-pct');
+            if(creditPctEl) creditPctEl.innerText = pct;
+
+            // KWSP (EPF)
+            const kwsp = cardData.kwsp || { name: "Retirement Fund", last4: "1234", persaraan: 89575.38, sejahtera: 5589.44, fleksibel: 336.90 };
+            let p = parseFloat(kwsp.persaraan || 0);
+            let s = parseFloat(kwsp.sejahtera || 0);
+            let f = parseFloat(kwsp.fleksibel || 0);
+            let totalEpf = p + s + f;
+            
+            payrollHistory.forEach(pay => {
+                let gross = (pay.basic || 0) + (pay.allowance || 0) + (pay.bonus || 0);
+                let empEpf = pay.empEpf ? pay.empEpf : (gross > 5000 ? Math.ceil(gross * 0.12) : Math.ceil(gross * 0.13));
+                let totalMonthEpf = (parseFloat(pay.epf) || 0) + (parseFloat(empEpf) || 0);
+                
+                p += (totalMonthEpf * 0.75);
+                s += (totalMonthEpf * 0.15);
+                f += (totalMonthEpf * 0.10);
+                totalEpf += totalMonthEpf;
+            });
+
+            const kwspNameEl = document.getElementById('kwsp-name');
+            if(kwspNameEl) kwspNameEl.innerText = kwsp.name || "Retirement Fund";
+            const kwspLast4El = document.getElementById('kwsp-last4');
+            if(kwspLast4El) kwspLast4El.innerText = kwsp.last4 || "1234";
+            const kwspDispEl = document.getElementById('kwsp-display');
+            if(kwspDispEl) kwspDispEl.innerText = totalEpf.toLocaleString(undefined, {minimumFractionDigits: 2});
+            const kwspPEl = document.getElementById('kwsp-persaraan');
+            if(kwspPEl) kwspPEl.innerText = "RM " + p.toLocaleString(undefined, {minimumFractionDigits: 0});
+            const kwspSEl = document.getElementById('kwsp-sejahtera');
+            if(kwspSEl) kwspSEl.innerText = "RM " + s.toLocaleString(undefined, {minimumFractionDigits: 0});
+            const kwspFEl = document.getElementById('kwsp-fleksibel');
+            if(kwspFEl) kwspFEl.innerText = "RM " + f.toLocaleString(undefined, {minimumFractionDigits: 0});
+            
+            let yearsLeft = 55 - 36;
+            let projected = totalEpf * Math.pow(1.055, yearsLeft);
+            const kwspProjEl = document.getElementById('kwsp-projected');
+            if(kwspProjEl) kwspProjEl.innerText = projected.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+
+            // CTOS
+            const ctos = cardData.ctos || { score: 0, date: "" };
+            const score = parseInt(ctos.score) || 0;
+            const cDisp = document.getElementById('ctos-display');
+            const cDate = document.getElementById('ctos-date-display');
+            const cBadge = document.getElementById('ctos-status-badge');
+            
+            if (cDisp && cDate && cBadge) {
+                if (score > 0) {
+                    cDisp.innerText = score;
+                    cDate.innerText = ctos.date || "Unknown";
+                    let baseBadgeClass = "text-[9px] font-bold px-2 py-0.5 rounded border border-white/30 shadow-inner uppercase tracking-widest backdrop-blur-sm text-white ";
+                    if (score >= 743) {
+                        cBadge.innerText = "Excellent";
+                        cBadge.className = baseBadgeClass + "bg-white/20";
+                    } else if (score >= 697) {
+                        cBadge.innerText = "Good";
+                        cBadge.className = baseBadgeClass + "bg-white/20";
+                    } else if (score >= 651) {
+                        cBadge.innerText = "Fair";
+                        cBadge.className = baseBadgeClass + "bg-yellow-500/40";
+                    } else {
+                        cBadge.innerText = "Poor";
+                        cBadge.className = baseBadgeClass + "bg-red-500/40";
+                    }
+                } else {
+                    cDisp.innerText = "---";
+                    cDate.innerText = "---";
+                    cBadge.innerText = "No Data";
+                    cBadge.className = "text-[9px] font-bold px-2 py-0.5 rounded border border-white/30 shadow-inner uppercase tracking-widest bg-white/20 backdrop-blur-sm text-white";
+                }
+            }
+        };
+
         // MASTER MODAL "KILL SWITCH"
         window.closeAllModals = function() {
             const allModals = ['action-modal', 'stats-modal', 'card-modal', 'tx-modal', 'commitment-modal', 'goal-modal', 'debt-modal', 'bill-modal', 'util-history-modal', 'payroll-modal', 'field-modal', 'sync-modal'];
