@@ -2470,7 +2470,7 @@
             reader.readAsText(file); 
         };
 
-        window.handleCsvImport = function(e) { 
+		window.handleCsvImport = function(e) { 
             const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
             reader.onload = function(event) { 
                 const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
@@ -2479,7 +2479,12 @@
                 const importedData = rows.slice(1).map(row => { 
                     const values = row.split(','); let obj = {}; 
                     headers.forEach((h, i) => { 
-                        let val = values[i] ? values[i].trim() : ''; if (h === 'type') val = val.toLowerCase(); 
+                        let val = values[i] ? values[i].trim() : ''; 
+                        if (h === 'type') val = val.toLowerCase(); 
+                        
+                        /* 🚨 THIS IS THE FIX: Maps 'Description' to 'desc' 🚨 */
+                        if (h === 'description') h = 'desc'; 
+                        
                         if (h === 'date') { 
                             if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
                             else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
@@ -2491,6 +2496,9 @@
                 const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
                 transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
                 transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); e.target.value = ''; 
+                
+                // Silently sync to cloud after a successful CSV import
+                if (typeof window.pushToCloud === 'function') window.pushToCloud();
             }; 
             reader.readAsText(file); 
         };
