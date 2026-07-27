@@ -1408,46 +1408,6 @@
                 setTimeout(() => conf.remove(), 2500);
             }
         }
-
-		window.autoUpdateBalances = function(desc, amount) {
-            if (!desc || !amount) return;
-            
-            const txDesc = desc.toLowerCase().trim();
-            const txAmount = parseFloat(amount);
-            let uiNeedsRefresh = false;
-
-            // 1. Auto-Deduct Debts & Loans (e.g., Credit Cards, Hire Purchase)
-            let debts = JSON.parse(localStorage.getItem('vault_debts')) || [];
-            let debtUpdated = false;
-            debts.forEach(debt => {
-                if (txDesc.includes(debt.name.toLowerCase().trim())) {
-                    debt.balance = Math.max(0, debt.balance - txAmount);
-                    debtUpdated = true;
-                    uiNeedsRefresh = true;
-                }
-            });
-            if (debtUpdated) localStorage.setItem('vault_debts', JSON.stringify(debts));
-
-            // 2. Auto-Add to Goals & Savings
-            let goals = JSON.parse(localStorage.getItem('vault_goals')) || [];
-            let goalsUpdated = false;
-            goals.forEach(goal => {
-                if (txDesc.includes(goal.name.toLowerCase().trim())) {
-                    goal.current = (parseFloat(goal.current) || 0) + txAmount;
-                    goalsUpdated = true;
-                    uiNeedsRefresh = true;
-                }
-            });
-            if (goalsUpdated) localStorage.setItem('vault_goals', JSON.stringify(goals));
-
-            // Silently refresh the UI & Cloud if balances were changed
-            if (uiNeedsRefresh) {
-                if (typeof renderDebts === 'function') renderDebts();
-                if (typeof renderGoals === 'function') renderGoals();
-                if (typeof updateHomeDashboard === 'function') updateHomeDashboard();
-                if (typeof window.pushToCloud === 'function') window.pushToCloud();
-            }
-        };
 		
         // MASTER MODAL "KILL SWITCH"
 		window.closeAllModals = function() {
