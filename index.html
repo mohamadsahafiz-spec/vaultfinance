@@ -432,8 +432,73 @@
                 </div>
             </div>
 
-            <div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col">
-                <div class="flex justify-between items-end mb-4">
+			<!-- SWIPEABLE HUB CAROUSEL -->
+			<div class="w-full overflow-x-auto snap-x snap-mandatory flex flex-nowrap gap-4 pb-6 pt-2 px-1 touch-pan-x" style="-webkit-overflow-scrolling: touch;">
+				
+				<!-- Swipe Card 1: FOOD -->
+				<div class="snap-center shrink-0 w-[82vw] max-w-[340px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col max-h-[65vh]">
+					<div class="flex items-center gap-2 mb-4 shrink-0">
+						<div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center border border-brand/20 shrink-0">
+							<svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+						</div>
+						<div>
+							<h4 class="font-bold text-sm tracking-wide">Food & Dining</h4>
+							<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Monthly Footprint</p>
+						</div>
+					</div>
+					<h3 class="text-2xl font-bold tracking-tight mb-3 font-display shrink-0"><span class="text-sm font-medium opacity-70 pr-1">MYR</span><span id="food-total-display">0.00</span></h3>
+					<div id="food-insight" class="bg-surface-light dark:bg-surface-dark p-2.5 rounded-xl mb-4 flex justify-between items-center gap-2 border border-gray-100 dark:border-transparent shrink-0"></div>
+					<div class="w-full h-32 relative shrink-0 drop-shadow-[0_4px_6px_rgba(255,214,0,0.25)]"><canvas id="foodChart"></canvas></div>
+					<div class="mt-4 pt-4 border-t border-gray-200 dark:border-white/5 flex-1 overflow-y-auto">
+						<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-3">Ledger</p>
+						<div id="food-transaction-list" class="flex flex-col gap-2"></div>
+					</div>
+				</div>
+
+				<!-- Swipe Card 2: FAMILY & EDU -->
+				<div class="snap-center shrink-0 w-[82vw] max-w-[340px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col max-h-[65vh]">
+					<div class="flex items-center gap-2 mb-4 shrink-0">
+						<div class="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 shrink-0">
+							<svg class="w-4 h-4 text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+						</div>
+						<div>
+							<h4 class="font-bold text-sm tracking-wide">Family & Edu</h4>
+							<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Household Spend</p>
+						</div>
+					</div>
+					<h3 class="text-2xl font-bold tracking-tight mb-3 font-display shrink-0"><span class="text-sm font-medium opacity-70 pr-1">MYR</span><span id="family-total-display">0.00</span></h3>
+					<div id="family-insight" class="bg-surface-light dark:bg-surface-dark p-2.5 rounded-xl mb-4 flex justify-between items-center gap-2 border border-gray-100 dark:border-transparent shrink-0"></div>
+					<div class="w-full h-32 relative shrink-0 drop-shadow-[0_4px_6px_rgba(168,85,247,0.25)]"><canvas id="familyChart"></canvas></div>
+					<div class="mt-4 pt-4 border-t border-gray-200 dark:border-white/5 flex-1 overflow-y-auto">
+						<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-3">Ledger</p>
+						<div id="family-transaction-list" class="flex flex-col gap-2"></div>
+					</div>
+				</div>
+
+				<!-- Swipe Card 3: UTILITIES -->
+				<div class="snap-center shrink-0 w-[82vw] max-w-[340px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col max-h-[65vh]">
+					<div class="flex items-center gap-2 mb-4 shrink-0">
+						<div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">
+							<svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+						</div>
+						<div>
+							<h4 class="font-bold text-sm tracking-wide">Utilities & Bills</h4>
+							<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider">Yearly Pacing</p>
+						</div>
+					</div>
+					<div class="w-full h-40 relative mt-2 shrink-0 drop-shadow-[0_4px_6px_rgba(59,130,246,0.25)]"><canvas id="utilChart"></canvas></div>
+					<div class="mt-4 pt-4 border-t border-gray-200 dark:border-white/5 flex-1 overflow-y-auto">
+						<p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-3">Ledger & Reminders</p>
+						<div id="util-history-list" class="flex flex-col gap-2 mb-4"></div>
+						<div id="bill-list" class="flex flex-col gap-2"></div>
+					</div>
+				</div> <!-- Closes Swipe Card 3 (Utilities) -->
+
+			</div> <!-- Closes SWIPEABLE HUB CAROUSEL -->
+
+					<!-- ANNUAL TREND CARD -->
+					<div class="bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm transition-colors duration-300 flex flex-col mt-4">
+						<div class="flex justify-between items-end mb-4">
                     <div>
                         <p class="text-[9px] font-semibold text-textMuted-light dark:text-textMuted-dark uppercase tracking-wider mb-0.5">Annual Trend</p>
                         <h4 class="font-bold text-sm">Selected vs Previous</h4>
@@ -769,37 +834,35 @@
         </div>
     </main>
 
-    <!-- BOTTOM NAV DOCK -->
-    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-2xl flex justify-between items-center px-6 py-3 shadow-2xl z-[90]">
-        <div class="flex items-center gap-3 sm:gap-4 pointer-events-auto">
-            <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+	<!-- BOTTOM NAV DOCK (Symmetrical 4 Tabs) -->
+    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-[28px] flex justify-between items-center px-6 py-3.5 shadow-2xl z-[90]">
+        
+        <!-- LEFT SIDE: Home & Analytics -->
+        <div class="flex items-center gap-5 pointer-events-auto">
+            <button onclick="vibrate(30); switchTab('home')" id="nav-mob-home" class="p-1.5 transition-all duration-300 text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.8)] scale-110">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </button>
-            <button onclick="vibrate(30); switchTab('overall')" id="nav-mob-overall" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-            </button>
-            <button onclick="vibrate(30); switchTab('family')" id="nav-mob-family" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <button onclick="vibrate(30); switchTab('overall')" id="nav-mob-overall" class="p-1.5 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
             </button>
         </div>
         
-        <div class="w-14 h-1 px-2 pointer-events-none"></div>
+        <!-- CENTER SPACER FOR V BUTTON -->
+        <div class="w-12 h-1 pointer-events-none shrink-0"></div>
 
-        <div class="flex items-center gap-3 sm:gap-4 pointer-events-auto">
-            <button onclick="vibrate(30); switchTab('food')" id="nav-mob-food" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+        <!-- RIGHT SIDE: Salary & Profile -->
+        <div class="flex items-center gap-5 pointer-events-auto">
+            <button onclick="vibrate(30); switchTab('salary')" id="nav-mob-salary" class="p-1.5 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
             </button>
-            <button onclick="vibrate(30); switchTab('bills')" id="nav-mob-bills" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            </button>
-            <button onclick="vibrate(30); switchTab('salary')" id="nav-mob-salary" class="p-1 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            <button onclick="vibrate(30); switchTab('profile')" id="nav-mob-profile" class="p-1.5 transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             </button>
         </div>
     </nav>
 
-    <!-- HIGH-CONTRAST V BUTTON (z-[100] hides under overlays) -->
-    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[44px] left-1/2 -translate-x-1/2 w-[54px] h-[54px] bg-[#111111] rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_8px_20px_rgba(255,214,0,0.3)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[100] pointer-events-auto">
+    <!-- FLOATING V BUTTON (Restored to Dead Center) -->
+    <button type="button" onclick="openActionModal()" class="md:hidden fixed bottom-[40px] left-1/2 -translate-x-1/2 w-[56px] h-[56px] bg-[#111111] rounded-full flex items-center justify-center border-[3px] border-brand shadow-[0_8px_20px_rgba(255,214,0,0.3)] active:scale-95 hover:scale-105 transition-transform outline-none cursor-pointer z-[100] pointer-events-auto">
         <span class="font-black text-[22px] text-brand drop-shadow-[0_0_8px_rgba(255,214,0,0.9)] pointer-events-none font-display leading-none mt-0.5">V</span>
     </button>
 
@@ -1340,9 +1403,9 @@
             if (isUtilSpecific === 'Water') return `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">${SVG_WATER}</div>`;
             if (isUtilSpecific === 'Internet') return `<div class="w-9 h-9 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 shrink-0">${SVG_NET}</div>`;
             
-            if (catMatch.match(/food|lunch|dinner|eat|cafe|groceries|mart|lotus|mydin|grabfood|foodpanda|snack/)) return `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20 shrink-0">${SVG_FOOD}</div>`;
-            if (catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition|klinik|medical|pharmacy|diaper/)) return `<div class="w-9 h-9 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 shrink-0">${SVG_FAM}</div>`;
-            if (catMatch.match(/util|bill|water|electric|internet|phone|fuel|petrol|toll|parking|car|service|loan|insurance|jnd7218|mae|tng/)) return `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">${SVG_UTIL}</div>`;
+            if (catMatch.match(/food|lunch|dinner|eat|cafe/)) return `<div class="w-9 h-9 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/20 shrink-0">${SVG_FOOD}</div>`;
+            if (catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/)) return `<div class="w-9 h-9 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 shrink-0">${SVG_FAM}</div>`;
+            if (catMatch.match(/util|bill|water|electric|internet|phone/)) return `<div class="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">${SVG_UTIL}</div>`;
             return `<div class="w-9 h-9 rounded-full bg-gray-500/10 flex items-center justify-center border border-gray-500/20 shrink-0">${SVG_OTHER}</div>`;
         }
 
@@ -1408,7 +1471,7 @@
                 setTimeout(() => conf.remove(), 2500);
             }
         }
-		
+
         // MASTER MODAL "KILL SWITCH"
 		window.closeAllModals = function() {
             const allModals = ['action-modal', 'stats-modal', 'card-modal', 'tx-modal', 'commitment-modal', 'goal-modal', 'debt-modal', 'bill-modal', 'util-history-modal', 'payroll-modal', 'field-modal', 'sync-modal'];
@@ -1807,9 +1870,9 @@
                     if(txY === currY) currYearMonthly[txM] += amt; if(txY === currY - 1) lastYearMonthly[txM] += amt;
                     if(txM === currM && txY === currY) {
                         monthlySpend += amt; 
-                        if(catMatch.match(/food|lunch|dinner|eat|cafe|groceries|mart|lotus|mydin|grabfood|foodpanda|snack/)) foodSpend += amt; 
-                        else if(catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition|klinik|medical|pharmacy|diaper/)) famSpend += amt;
-                        else if(catMatch.match(/util|bill|water|electric|internet|phone|fuel|petrol|toll|parking|car|service|loan|insurance|jnd7218|mae|tng/)) utilSpend += amt; 
+                        if(catMatch.match(/food|lunch|dinner|eat|cafe/)) foodSpend += amt; 
+                        else if(catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/)) famSpend += amt;
+                        else if(catMatch.match(/util|bill|water|electric|internet|phone/)) utilSpend += amt; 
                         else otherSpend += amt;
                     }
                 }
@@ -1854,7 +1917,7 @@
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
                 if(!t.date || t.type === 'income') return; const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
-                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase(); if(!catMatch.match(/food|lunch|dinner|eat|cafe|groceries|mart|lotus|mydin|grabfood|foodpanda|snack/)) return;
+                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase(); if(!catMatch.match(/food|lunch|dinner|eat|cafe/)) return;
                 if(txY === currY) currYearFood[txM] += amt; if(txY === currY - 1) lastYearFood[txM] += amt;
                 if(txM === currM && txY === currY) {
                     cSum += amt; 
@@ -1884,7 +1947,7 @@
 
             transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((t, i) => {
                 if(!t.date || t.type === 'income') return; const txDate = new Date(t.date); const amt = parseFloat(t.amount); const txM = txDate.getMonth(); const txY = txDate.getFullYear();
-                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase(); if(!catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition|klinik|medical|pharmacy|diaper/)) return;
+                const catMatch = ((t.category||'')+" "+(t.desc||'')).toLowerCase(); if(!catMatch.match(/family|edu|school|kid|child|toy|baby|playschool|tuition/)) return;
                 
                 if(txY === currY) currYearFam[txM] += amt; if(txY === currY - 1) lastYearFam[txM] += amt;
                 if(txM === currM && txY === currY) {
@@ -2470,7 +2533,7 @@
             reader.readAsText(file); 
         };
 
-		window.handleCsvImport = function(e) { 
+        window.handleCsvImport = function(e) { 
             const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); 
             reader.onload = function(event) { 
                 const rawText = event.target.result; const cleanText = rawText.replace(/"/g, ''); const rows = cleanText.split(/\r?\n/).filter(row => row.trim() !== ''); 
@@ -2479,12 +2542,7 @@
                 const importedData = rows.slice(1).map(row => { 
                     const values = row.split(','); let obj = {}; 
                     headers.forEach((h, i) => { 
-                        let val = values[i] ? values[i].trim() : ''; 
-                        if (h === 'type') val = val.toLowerCase(); 
-                        
-                        /* 🚨 THIS IS THE FIX: Maps 'Description' to 'desc' 🚨 */
-                        if (h === 'description') h = 'desc'; 
-                        
+                        let val = values[i] ? values[i].trim() : ''; if (h === 'type') val = val.toLowerCase(); 
                         if (h === 'date') { 
                             if (val.includes('/')) { const parts = val.split('/'); if (parts.length === 3) { let d = parts[0].padStart(2, '0'); let m = parts[1].padStart(2, '0'); let y = parts[2]; if (parts[0].length === 4) { y = parts[0]; m = parts[1]; d = parts[2]; } else if (y.length === 2) { y = '20' + y; } val = `${y}-${m}-${d}`; } } 
                             else if (val.includes('-')) { const parts = val.split('-'); if (parts.length === 2 && monthMap[parts[0].toLowerCase()]) { let m = monthMap[parts[0].toLowerCase()]; let y = parts[1].length === 2 ? '20' + parts[1] : parts[1]; val = `${y}-${m}-01`; } else if (parts.length === 3) { if (parts[1].length === 3 && monthMap[parts[1].toLowerCase()]) { let d = parts[0].padStart(2, '0'); let m = monthMap[parts[1].toLowerCase()]; let y = parts[2].length === 2 ? '20' + parts[2] : parts[2]; val = `${y}-${m}-${d}`; } else if (parts[0].length === 4) { val = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`; } } } 
@@ -2496,9 +2554,6 @@
                 const validData = importedData.filter(d => !isNaN(d.amount) && d.date && d.date.includes('-') && d.date.split('-').length === 3); 
                 transactions = transactions.filter(t => { if (!t.date || typeof t.date !== 'string') return false; return t.date.split('-').length === 3 && !isNaN(new Date(t.date).getTime()); }); 
                 transactions = [...transactions, ...validData]; localStorage.setItem('vault_transactions', JSON.stringify(transactions)); alert(`Successfully imported ${validData.length} records!`); populateTimelines(); updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); e.target.value = ''; 
-                
-                // Silently sync to cloud after a successful CSV import
-                if (typeof window.pushToCloud === 'function') window.pushToCloud();
             }; 
             reader.readAsText(file); 
         };
