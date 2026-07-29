@@ -408,32 +408,48 @@
                     <div id="bar-other" class="bg-gray-400 dark:bg-gray-600 h-full transition-all duration-1000" style="width: 0%"></div>
                 </div>
                 
-                <div class="grid grid-cols-4 gap-2">
-                    <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-brand border border-transparent transition flex flex-col items-center" onclick="vibrate(20); switchTab('food')">
-                        <div class="mb-1"><svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div>
-                        <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-food">0</span>%</p>
-                        <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Food</p>
-                    </div>
-                    <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-blue-500 border border-transparent transition flex flex-col items-center" onclick="vibrate(20); switchTab('bills')">
-                        <div class="mb-1"><svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
-                        <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-util">0</span>%</p>
-                        <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Util</p>
-                    </div>
-                    <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-purple-500 border border-transparent transition flex flex-col items-center" onclick="vibrate(20); switchTab('family')">
-                        <div class="mb-1"><svg class="w-4 h-4 text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
-                        <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-family">0</span>%</p>
-                        <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Fam</p>
-                    </div>
-                    <div class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-gray-400 border border-transparent transition flex flex-col items-center">
-                        <div class="mb-1"><svg class="w-4 h-4 text-gray-500 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
-                        <p class="font-bold text-[10px] leading-none mb-1"><span id="pct-other">0</span>%</p>
-                        <p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Other</p>
-                    </div>
-                </div>
+                <!-- 4 CATEGORY BUTTONS -->
+				<div class="grid grid-cols-4 gap-2">
+					<!-- Food Button -->
+					<div onclick="openSlideOver('Food & Dining', 'food-transaction-list')" class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-brand border border-transparent transition flex flex-col items-center">
+						<div class="mb-1">
+							<svg class="w-4 h-4 text-brand drop-shadow-[0_0_6px_rgba(255,214,0,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+						</div>
+						<p class="font-bold text-[10px] leading-none mb-1"><span id="pct-food">0</span>%</p>
+						<p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Food</p>
+					</div>
+
+					<!-- Util Button -->
+					<div onclick="openSlideOver('Utilities & Bills', 'util-history-list')" class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-blue-500 border border-transparent transition flex flex-col items-center">
+						<div class="mb-1">
+							<svg class="w-4 h-4 text-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+						</div>
+						<p class="font-bold text-[10px] leading-none mb-1"><span id="pct-util">0</span>%</p>
+						<p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Util</p>
+					</div>
+
+					<!-- Family Button -->
+					<div onclick="openSlideOver('Family & Edu', 'family-transaction-list')" class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-purple-500 border border-transparent transition flex flex-col items-center">
+						<div class="mb-1">
+							<svg class="w-4 h-4 text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+						</div>
+						<p class="font-bold text-[10px] leading-none mb-1"><span id="pct-family">0</span>%</p>
+						<p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Fam</p>
+					</div>
+
+					<!-- Misc Button -->
+					<div onclick="openSlideOver('Auto & Misc', 'other-transaction-list')" class="bg-surface-light dark:bg-surface-dark p-2 rounded-xl text-center cursor-pointer hover:border-gray-400 border border-transparent transition flex flex-col items-center">
+						<div class="mb-1">
+							<svg class="w-4 h-4 text-gray-500 drop-shadow-[0_0_6px_rgba(156,163,175,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+						</div>
+						<p class="font-bold text-[10px] leading-none mb-1"><span id="pct-other">0</span>%</p>
+						<p class="text-[8px] font-semibold text-textMuted-light dark:text-textMuted-dark leading-tight uppercase tracking-wider">Other</p>
+					</div>
+				</div>
             </div>
 
 			<!-- SWIPEABLE HUB CAROUSEL -->
-			<div class="w-full overflow-x-auto snap-x snap-mandatory flex flex-nowrap gap-4 pb-6 pt-2 px-1 touch-pan-x" style="-webkit-overflow-scrolling: touch;">
+			<div class="w-full overflow-x-auto snap-x snap-mandatory flex flex-nowrap gap-4 pb-6 pt-2 px-1" style="-webkit-overflow-scrolling: touch;">
 				
 				<!-- Swipe Card 1: FOOD -->
 				<div class="snap-center shrink-0 w-[82vw] max-w-[340px] bg-panel-light dark:bg-panel-dark border border-gray-200 dark:border-white/5 p-5 rounded-2xl shadow-sm flex flex-col max-h-[65vh]">
@@ -1677,6 +1693,48 @@
             }
         };
 
+	// --- SLIDE-OVER UX LOGIC ---
+    function openSlideOver(categoryTitle, sourceId) {
+        vibrate(15);
+        const panel = document.getElementById('category-slide-over');
+        const title = document.getElementById('slide-over-title');
+        const contentArea = document.getElementById('slide-over-content');
+        
+        // 1. Update the header title
+        title.innerText = categoryTitle;
+        
+        // 2. Fetch the ledger data from your existing lists and clone it
+        if (sourceId) {
+            const sourceElement = document.getElementById(sourceId);
+            if (sourceElement && sourceElement.innerHTML.trim() !== "") {
+                 contentArea.innerHTML = sourceElement.innerHTML;
+            } else {
+                 contentArea.innerHTML = '<p class="text-center text-textMuted-light dark:text-textMuted-dark text-xs mt-10 uppercase tracking-widest font-semibold">No transactions found.</p>';
+            }
+        }
+        
+        // 3. Slide it in from the right edge
+        panel.classList.remove('translate-x-full');
+        panel.classList.add('translate-x-0');
+        
+        // 4. Lock the main app body so you can't accidentally scroll the background
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSlideOver() {
+        vibrate(10);
+        const panel = document.getElementById('category-slide-over');
+        
+        // Slide it back out to the right
+        panel.classList.remove('translate-x-0');
+        panel.classList.add('translate-x-full');
+        
+        // Wait for the slide animation to finish (300ms) before unlocking the background
+        setTimeout(() => {
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
         function formatDisplayDate(dateStr) {
             if (!dateStr) return ''; const parts = dateStr.split('-'); if (parts.length !== 3) return dateStr;
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -2737,5 +2795,30 @@
             updateHomeDashboard(); updateOverallDashboard(); updateFoodDashboard(); updateFamilyDashboard(); updateUtilDashboard(); updateCareerDashboard();
         };
     </script>
+	<!-- FULL-SCREEN SLIDE-OVER (Apple Native Style) -->
+    <div id="category-slide-over" class="fixed inset-0 bg-bg-light dark:bg-bg-dark z-[150] transform translate-x-full transition-transform duration-300 ease-out flex flex-col shadow-2xl">
+        
+        <!-- Header (iOS Settings Style) -->
+        <div class="flex items-center justify-between px-4 py-4 border-b border-gray-200 dark:border-white/10 shrink-0 bg-panel-light/95 dark:bg-panel-dark/95 backdrop-blur-md relative z-10">
+            <!-- Back Button -->
+            <button type="button" onclick="closeSlideOver()" class="flex items-center gap-1 text-brand font-semibold active:opacity-70 transition-opacity z-20">
+                <svg class="w-6 h-6 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M15 18l-6-6 6-6"></path></svg>
+                <span class="text-sm mt-0.5">Back</span>
+            </button>
+            
+            <!-- Dynamic Title perfectly centered -->
+            <h2 id="slide-over-title" class="text-[15px] font-bold tracking-wide absolute left-1/2 -translate-x-1/2 font-display">Category Name</h2>
+            
+            <!-- Invisible Spacer to keep flexbox balanced -->
+            <div class="w-16 shrink-0 z-20"></div> 
+        </div>
+
+        <!-- Scrollable Content Body -->
+        <div id="slide-over-content" class="flex-1 overflow-y-auto hide-scrollbar p-5 bg-bg-light dark:bg-bg-dark relative">
+            <!-- Content will go here -->
+            <p class="text-center text-textMuted-light dark:text-textMuted-dark text-xs mt-10 uppercase tracking-widest font-semibold">Data loading...</p>
+        </div>
+        
+    </div>
 </body>
 </html>
