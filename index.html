@@ -2135,10 +2135,13 @@
             if(confirm('Delete this payslip?')) { 
                 vibrate([30, 50, 30]);
                 
-                // Reverse the wallet injection
+                // 1. STRICT FLOAT PARSING
+                cardData.debit.balance = parseFloat(cardData.debit.balance) || 0;
+
+                // 2. Reverse the wallet injection securely
                 let existing = payrollHistory.find(p => p.month === monthStr);
                 if (existing) {
-                    cardData.debit.balance -= parseFloat(existing.net);
+                    cardData.debit.balance -= (parseFloat(existing.net) || 0);
                     localStorage.setItem('vault_cards', JSON.stringify(cardData));
                 }
 
@@ -2497,21 +2500,27 @@
             const tax = parseFloat(document.getElementById('pay-tax').value) || 0;
             const net = (basic + allow + bonus) - (epf + socso + eis + tax);
 
-            // BUG FIX: Check if updating an existing payslip and refund the old net amount first
+            // 1. STRICT FLOAT PARSING: Prevent text concatenation 
+            cardData.debit.balance = parseFloat(cardData.debit.balance) || 0;
+
+            // 2. Refund the OLD payslip amount if updating an existing month
             let existing = payrollHistory.find(p => p.month === month);
             if (existing) {
-                cardData.debit.balance -= parseFloat(existing.net);
+                cardData.debit.balance -= (parseFloat(existing.net) || 0);
             }
 
+            // 3. Save new payroll data
             payrollHistory = payrollHistory.filter(p => p.month !== month); 
             payrollHistory.push({ month, basic, allowance: allow, bonus, epf, empEpf, socso, eis, tax, net }); 
             localStorage.setItem('vault_payroll', JSON.stringify(payrollHistory)); 
             
-            cardData.debit.balance += net; 
+            // 4. Inject the NEW net pay mathematically
+            cardData.debit.balance += parseFloat(net); 
             localStorage.setItem('vault_cards', JSON.stringify(cardData));
             
+            // 5. Create mirror transaction tagged correctly with method
             transactions = transactions.filter(t => !(t.date === month + '-01' && t.category === 'Payroll'));
-            transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net });
+            transactions.push({ date: month + '-01', desc: 'Net Salary (Auto-Sync)', type: 'income', category: 'Payroll', amount: net, method: 'debit', reimbursable: false, shared: false });
             localStorage.setItem('vault_transactions', JSON.stringify(transactions));
 
             updateCareerDashboard(); populateTimelines(); updateHomeDashboard(); renderCards(); pushToCloud(); closeAllModals(); 
